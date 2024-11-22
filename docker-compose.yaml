@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  app:
+    image: binar:1.0
+    
+    ports:
+      - "3000:3000"
+
+    tty: true
+
+    network_mode: bridge
+    restart: always

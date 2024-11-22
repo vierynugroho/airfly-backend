@@ -1,65 +1,75 @@
-import jwt from "jsonwebtoken"
-import { prisma } from "../database/db.js"
-import dotenv from "dotenv"
-import bcrypt from "bcrypt"
+import { ErrorHandler } from "../middlewares/error.js";
+import { JWT } from "../utils/jwt.js";
+import { AuthRepository } from "../repositories/auth.js";
+import { Bcrypt } from "../utils/bcrypt.js";
 
-dotenv.config()
+export class AuthService {
+  /**
+   *
+   * @param {string} email
+   * @param {string} password
+   *
+   * @returns {Promise<string|null>}
+   */
+  static async auth(email, password) {
+    const user = await AuthRepository.findByEmail(email);
 
-const DEFAULT_SECRET_KEY = "JS"
-
-export class Authentication{
-    /**
-     * 
-     * @param {string} email 
-     * @param {string} password
-     * 
-     * @returns {Promise<string|null>}
-     */
-    static async auth(email, password){
-        const user = await prisma.user.findFirst({
-            where: {
-                email
-            }
-        })
-
-        if(!user){
-            return false
-            // Harusnya Throw Error
-        }
-
-        if(!(await bcrypt.compare(password, user.password))){
-            return false
-            // Harusnya Throw Error
-        }
-
-        const token = this.jwtSign(user.id)
-        return token        
+    if (!user) {
+      throw new ErrorHandler(404, "user is not registered");
     }
 
-    /**
-     * 
-     * @param {string} userId
-     * 
-     * @returns {string}
-     */
+    const comparePassword = Bcrypt.compare(password, user.password);
 
-    static jwtSign(id){
-        const token = jwt.sign(
-            {id}, 
-            process.env.JWT_SECRET || DEFAULT_SECRET_KEY, 
-            { algorithm: "HS256", expiresIn: "24h" }
-        )
-
-        return token
+    if (!comparePassword) {
+      throw new ErrorHandler(401, "wrong credential");
     }
 
-    /**
-     * 
-     * @param {string} token 
-     */
-    static jwtVerify(token){
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || DEFAULT_SECRET_KEY)
+    const token = JWT.sign(user.id);
 
-        return decoded
+    return token;
+  }
+
+  /**
+   *
+   * @param {string} firstName
+   * @param {string} lastName
+   * @param {string} phone
+   * @param {string} email
+   * @param {string} password
+   */
+
+  static async register(firstName, lastName, phone, email, password) {
+    const user = await AuthRepository.findByEmail(email);
+    const userStatus = await AuthRepository.getUserStatusEnum();
+    let newUser;
+
+    if (user && user.status == userStatus.VERIFIED) {
+      throw new ErrorHandler(409, "email has registered");
     }
+
+    if (user) {
+      await AuthRepository.update(
+        firstName,
+        lastName,
+        phone,
+        password,
+        user.id,
+      );
+    } else {
+      newUser = await AuthRepository.newUser(
+        firstName,
+        lastName,
+        phone,
+        email,
+        password,
+      );
+    }
+
+    const id = newUser?.id || user?.id;
+    const token = JWT.sign(id);
+
+    await AuthRepository.setSecretKey(token, id);
+
+    return token;
+  }
 }
