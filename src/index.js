@@ -1,5 +1,8 @@
 import express from 'express'
-import { authRouter } from './routes/auth'
+import { authRouter } from './routes/auth.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app = express()
 
@@ -13,3 +16,5 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/v1/auth', authRouter)
+
+app.listen(process.env.PORT || 3000, () => console.log(`Run at port ${process.env.PORT || 3000}`))
