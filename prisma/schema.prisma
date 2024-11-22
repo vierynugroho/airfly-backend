@@ -85,7 +85,7 @@ model Seat {
   seatNumber Int        @map("seat_number")
   status     SeatStatus
 
-  flight Flight @relation(fields: [flightId], references: [id])
+  flight    Flight      @relation(fields: [flightId], references: [id])
   passenger Passenger[]
 
   @@map("seats")
@@ -102,8 +102,8 @@ model Booking {
   createdAt   DateTime      @map("created_at")
   updateAt    DateTime      @map("update_at")
 
-  flight  Flight   @relation(fields: [flightId], references: [id])
-  payment Payment?
+  flight    Flight      @relation(fields: [flightId], references: [id])
+  payment   Payment?
   passenger Passenger[]
 
   @@map("bookings")
@@ -123,22 +123,22 @@ model Payment {
 }
 
 model Passenger {
-  id Int @id @default(autoincrement())
-  bookingId Int @map("booking_id")
-  name String
-  familyName String
-  gender Gender
-  identityNumber String
-  citizenship String
-  countryOfIssue String
-  title PassengerTitle
-  dob DateTime
-  expiredDate DateTime
-  type PassengerType
-  seatId Int
+  id             Int            @id @default(autoincrement())
+  bookingId      Int            @map("booking_id")
+  name           String
+  familyName     String         @map("family_name")
+  gender         Gender
+  identityNumber String         @map("identity_number")
+  citizenship    String
+  countryOfIssue String         @map("country_of_issue")
+  title          PassengerTitle
+  dob            DateTime
+  expiredDate    DateTime       @map("expired_Date")
+  type           PassengerType
+  seatId         Int            @map("seat_id")
 
   booking Booking @relation(fields: [bookingId], references: [id])
-  seat Seat @relation(fields: [seatId], references: [id])
+  seat    Seat    @relation(fields: [seatId], references: [id])
 
   @@map("passengers")
 }
