@@ -1,65 +1,31 @@
-import jwt from "jsonwebtoken"
-import { prisma } from "../database/db.js"
-import dotenv from "dotenv"
-import bcrypt from "bcrypt"
+import { ErrorHandler } from '../middlewares/error.js';
+import { JWT } from '../utils/jwt.js';
+import { AuthRepository } from '../repositories/auth.js';
+import { Bcrypt } from '../utils/bcrypt.js';
 
-dotenv.config()
+export class AuthService {
+	/**
+	 *
+	 * @param {string} email
+	 * @param {string} password
+	 *
+	 * @returns {Promise<string|null>}
+	 */
+	static async auth(email, password) {
+		const user = await AuthRepository.findByEmail(email);
 
-const DEFAULT_SECRET_KEY = "JS"
+		if (!user) {
+			throw new ErrorHandler(404, 'user is not registered');
+		}
 
-export class Authentication{
-    /**
-     * 
-     * @param {string} email 
-     * @param {string} password
-     * 
-     * @returns {Promise<string|null>}
-     */
-    static async auth(email, password){
-        const user = await prisma.user.findFirst({
-            where: {
-                email
-            }
-        })
+		const comparePassword = Bcrypt.compare(password, user.password);
 
-        if(!user){
-            return false
-            // Harusnya Throw Error
-        }
+		if (!comparePassword) {
+			throw new ErrorHandler(401, 'wrong credential');
+		}
 
-        if(!(await bcrypt.compare(password, user.password))){
-            return false
-            // Harusnya Throw Error
-        }
+		const token = JWT.sign(user.id);
 
-        const token = this.jwtSign(user.id)
-        return token        
-    }
-
-    /**
-     * 
-     * @param {string} userId
-     * 
-     * @returns {string}
-     */
-
-    static jwtSign(id){
-        const token = jwt.sign(
-            {id}, 
-            process.env.JWT_SECRET || DEFAULT_SECRET_KEY, 
-            { algorithm: "HS256", expiresIn: "24h" }
-        )
-
-        return token
-    }
-
-    /**
-     * 
-     * @param {string} token 
-     */
-    static jwtVerify(token){
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || DEFAULT_SECRET_KEY)
-
-        return decoded
-    }
+		return token;
+	}
 }

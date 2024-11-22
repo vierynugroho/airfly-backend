@@ -1,37 +1,29 @@
-import { Authentication } from '../services/auth.js'
+import { AuthService } from '../services/auth.js';
 
 /**
- * 
- * @param {import('express').Request} req 
- * @param {import('express').Response} res 
+ *
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
  */
-export async function authHandler(req, res, next){
-	try{
-		const { email, password } = req.body
 
-		const token = await Authentication.auth(email, password)
+export class AuthController {
+	static async login(req, res, next) {
+		try {
+			const { email, password } = req.body;
 
-		if(token){
+			const token = await AuthService.auth(email, password);
+
 			return res.json({
 				meta: {
 					statusCode: 200,
-					message: "OK"
+					message: 'login successfully',
 				},
 				data: {
-					token
-				}
-			})
+					token,
+				},
+			});
+		} catch (e) {
+			next(e);
 		}
-
-		return res.status(401).json({
-			meta: {
-				statusCode: 401,
-				message: "Invalid username or password"
-			},
-			data: {}
-		})
-	}
-	catch(e){
-		next(e)
 	}
 }
