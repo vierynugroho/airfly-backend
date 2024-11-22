@@ -12,7 +12,7 @@ export class ErrorHandler extends Error {
   }
 }
 
-export const errorMiddleware = (err, req, res) => {
+export const errorMiddleware = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.message = err.message || "Internal Server Error";
   const NODE_ENV = process.env.NODE_ENV || "development";
@@ -33,14 +33,14 @@ export const errorMiddleware = (err, req, res) => {
 
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
     if (err.code === "P2002") {
-      res.status(409).json({
+      return res.status(409).json({
         error: {
           statusCode: 409,
           message: "Duplicate field, constraint violation",
         },
       });
     } else if (err.code === "P2003") {
-      res.status(409).json({
+      return res.status(409).json({
         error: {
           statusCode: 409,
           message: "Key Constraint",
@@ -48,7 +48,7 @@ export const errorMiddleware = (err, req, res) => {
         },
       });
     } else if (err.code === "P2005") {
-      res.status(409).json({
+      return res.status(409).json({
         error: {
           statusCode: 409,
           message: "Resource not found",
@@ -56,7 +56,7 @@ export const errorMiddleware = (err, req, res) => {
         },
       });
     } else {
-      res.status(500).json({
+      return res.status(500).json({
         error: {
           statusCode: 500,
           message: "something went wrong",
@@ -65,7 +65,7 @@ export const errorMiddleware = (err, req, res) => {
       });
     }
   } else if (err instanceof jwt.JsonWebTokenError) {
-    res.status(401).json({
+    return res.status(401).json({
       error: {
         statusCode: 401,
         message: `${err.message}, please re-login`,
@@ -73,7 +73,7 @@ export const errorMiddleware = (err, req, res) => {
       },
     });
   } else if (err instanceof jwt.NotBeforeError) {
-    res.status(401).json({
+    return res.status(401).json({
       error: {
         statusCode: 401,
         message: "token not active, please re-login",
@@ -81,7 +81,7 @@ export const errorMiddleware = (err, req, res) => {
       },
     });
   } else if (err instanceof jwt.TokenExpiredError) {
-    res.status(401).json({
+    return res.status(401).json({
       error: {
         statusCode: 401,
         message: "token is expired, please re-login",
@@ -89,7 +89,7 @@ export const errorMiddleware = (err, req, res) => {
       },
     });
   } else if (err instanceof MulterError) {
-    res.status(400).json({
+    return res.status(400).json({
       error: {
         statusCode: 400,
         title: `${err.code}: ${err.name}`,
@@ -98,14 +98,14 @@ export const errorMiddleware = (err, req, res) => {
       },
     });
   } else if (err instanceof ErrorHandler) {
-    res.status(err.statusCode).json({
+    return res.status(err.statusCode).json({
       error: {
         statusCode: err.statusCode,
         message: err.message,
       },
     });
   } else {
-    res.status(500).json({
+    return res.status(500).json({
       error: {
         statusCode: 500,
         message: "something went wrong",
@@ -114,4 +114,5 @@ export const errorMiddleware = (err, req, res) => {
       },
     });
   }
+  next();
 };
