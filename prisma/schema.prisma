@@ -20,7 +20,7 @@ model User {
   email         String
   phone         String
   password      String
-  secret_key    String
+  secretKey     String     @map("secret_key")
   otpToken      String     @map("otp_token")
   otpExpiration DateTime   @map("otp_expiration")
   status        UserStatus
