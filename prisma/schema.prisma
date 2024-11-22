@@ -14,18 +14,17 @@ datasource db {
 }
 
 model User {
-  id            Int        @id @default(autoincrement())
-  firstName     String     @map("first_name")
-  lastName      String     @map("last_name")
-  email         String
-  phone         String
-  password      String
-  secretKey     String     @map("secret_key")
-  otpToken      String     @map("otp_token")
-  otpExpiration DateTime   @map("otp_expiration")
-  status        UserStatus
-  role          UserRole
-  booking       Booking[]
+  id        Int        @id @default(autoincrement())
+  firstName String     @map("first_name")
+  lastName  String     @map("last_name")
+  email     String
+  phone     String
+  password  String
+  secretKey String     @default("") @map("secret_key")
+  otpToken  String     @default("") @map("otp_token")
+  status    UserStatus
+  role      UserRole
+  booking   Booking[]
 
   @@map("users")
 }
