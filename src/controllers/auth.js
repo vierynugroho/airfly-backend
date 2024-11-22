@@ -1,29 +1,60 @@
-import { AuthService } from '../services/auth.js';
-
-/**
- *
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- */
-
+import { AuthService } from "../services/auth.js";
 export class AuthController {
-	static async login(req, res, next) {
-		try {
-			const { email, password } = req.body;
+  /**
+   *
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   * @param {import('express').NextFunction} next
+   */
+  static async login(req, res, next) {
+    try {
+      const { email, password } = req.body;
 
-			const token = await AuthService.auth(email, password);
+      const token = await AuthService.auth(email, password);
 
-			return res.json({
-				meta: {
-					statusCode: 200,
-					message: 'login successfully',
-				},
-				data: {
-					token,
-				},
-			});
-		} catch (e) {
-			next(e);
-		}
-	}
+      return res.json({
+        meta: {
+          statusCode: 200,
+          message: "login successfully",
+        },
+        data: {
+          token,
+        },
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  /**
+   *
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   * @param {import('express').NextFunction} next
+   */
+  static async register(req, res, next) {
+    try {
+      const { firstName, lastName, phone, email, password } = req.body;
+
+      const token = await AuthService.register(
+        firstName,
+        lastName,
+        phone,
+        email,
+        password,
+      );
+
+      return res.json({
+        meta: {
+          statusCode: 201,
+          message: "user has created, let's verify",
+        },
+        data: {
+          redirect: `/api/v1/auth/verify?token=${token}`,
+        },
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
