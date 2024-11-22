@@ -1,0 +1,61 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "API Documentation - Flight Ticketing",
+		"description": "Final Project - Flight Ticketing Team 1 FSW x BE\n\n  \n    Created by Team 1 FSW x BE",
+		"version": "1.0.0",
+		"contact": {
+			"name": "Github Organization",
+			"url": "https://github.com/TIM1-FSW-BE-BINAR/"
+		}
+	},
+	"externalDocs": {
+		"description": "Postman API Documentation",
+		"url": "#"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:3000/api/v1",
+			"description": "development (v1)"
+		},
+		{
+			"url": "https://euphoric-world-440804-k1.et.r.appspot.com/api/v1",
+			"description": "production - (v1)"
+		}
+	],
+	"components": {
+		"securitySchemes": {
+			"bearerToken": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		}
+	},
+	"tags": [
+		{
+			"name": "Authentication"
+		},
+		{
+			"name": "Seat"
+		},
+		{
+			"name": "Flight"
+		},
+		{
+			"name": "Booking"
+		},
+		{
+			"name": "Airport"
+		},
+		{
+			"name": "Airline"
+		},
+		{
+			"name": "Notification"
+		},
+		{
+			"name": "Passenger"
+		}
+	]
+}
