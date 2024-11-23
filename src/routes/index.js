@@ -1,5 +1,6 @@
 import express from 'express';
 import authRoute from './auth.js';
+import seatRoute from './seat.js';
 import * as swaggerUI from 'swagger-ui-express';
 import { readFileSync } from 'fs';
 const swaggerDoc = JSON.parse(readFileSync('./public/docs/swagger.json'));
@@ -23,5 +24,6 @@ router.use(
 	})
 );
 router.use('/api/v1/auth', authRoute);
+router.use('/api/v1/seat', seatRoute);
 
 export default router;
