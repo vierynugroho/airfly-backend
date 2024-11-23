@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node .",
     "dev": "nodemon .",
-    "prepare": "npx husky",
+    "prepare": "husky",
     "lint": "eslint .",
     "format": "prettier --write .",
     "prisma:migrate": "prisma migrate dev",
@@ -28,7 +28,8 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --write",
-      "eslint  --fix"
+      "eslint  --fix",
+      "git add"
     ],
     "**/*": "prettier --write --ignore-unknown"
   },
