@@ -79,41 +79,25 @@ export class SeatService {
   }
 
   static async findByFlight(flightID) {
-    const seats = await prisma.seat.findFirst({
-      where: {
-        flightId: flightID,
-      },
-    });
+    const seats = await SeatRepository.findByFlight(flightID);
 
     return seats;
   }
 
   static async findBySeatNumber(seatNumber) {
-    const seats = await prisma.seat.findFirst({
-      where: {
-        seatNumber,
-      },
-    });
+    const seats = await SeatRepository.findBySeatNumber(seatNumber);
 
     return seats;
   }
 
   static async findByClass(seatClass) {
-    const seats = await prisma.seat.findFirst({
-      where: {
-        class: seatClass,
-      },
-    });
+    const seats = await SeatRepository.findByClass(seatClass);
 
     return seats;
   }
 
   static async findByStatus(seatStatus) {
-    const seats = await prisma.seat.findFirst({
-      where: {
-        status: seatStatus,
-      },
-    });
+    const seats = await SeatRepository.findByStatus(seatStatus);
 
     return seats;
   }
