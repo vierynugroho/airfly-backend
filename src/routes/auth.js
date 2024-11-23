@@ -7,5 +7,6 @@ const router = express.Router();
 
 router.post("/login", validation(loginSchema), AuthController.login);
 router.post("/register", validation(registerSchema), AuthController.register);
+router.post("/otp", AuthController.OTP);
 
 export default router;

@@ -1,56 +1,57 @@
 {
-	"name": "binarfinalproject",
-	"version": "1.0.0",
-	"main": "src/index.js",
-	"type": "module",
-	"scripts": {
-		"start": "node .",
-		"dev": "nodemon .",
-		"prepare": "npx husky",
-		"lint": "eslint .",
-		"prisma:migrate": "prisma migrate dev",
-		"prisma:db": "npx prisma db push",
-		"prisma:reset": "npx prisma migrate reset",
-		"prisma:seed": "node ./prisma/seeders/seeder.js",
-		"prisma:studio": "npx prisma studio",
-		"prisma:refresh": "npm run prisma:reset && npm run prisma:migrate && npx prisma generate && npm run prisma:seed"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"description": "",
-	"husky": {
-		"hooks": {
-			"pre-commit": "npx lint-staged"
-		}
-	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx,json,css,scss,md}": [
-			"prettier --write",
-			"eslint  --fix"
-		]
-	},
-	"dependencies": {
-		"@prisma/client": "^5.22.0",
-		"bcrypt": "^5.1.1",
-		"cors": "^2.8.5",
-		"dotenv": "^16.4.5",
-		"express": "^4.21.1",
-		"googleapis": "^144.0.0",
-		"imagekit": "^5.2.0",
-		"joi": "^17.13.3",
-		"jsonwebtoken": "^9.0.2",
-		"morgan": "^1.10.0",
-		"multer": "^1.4.5-lts.1",
-		"nodemailer": "^6.9.16",
-		"otpauth": "^9.3.5",
-		"prisma": "^5.22.0",
-		"swagger-ui-express": "^5.0.1"
-	},
-	"devDependencies": {
-		"eslint": "^9.15.0",
-		"husky": "^9.1.7",
-		"lint-staged": "^15.2.10",
-		"nodemon": "^3.1.7"
-	}
+  "name": "binarfinalproject",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon .",
+    "prepare": "npx husky",
+    "lint": "eslint .",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:db": "npx prisma db push",
+    "prisma:reset": "npx prisma migrate reset",
+    "prisma:seed": "node ./prisma/seeders/seeder.js",
+    "prisma:studio": "npx prisma studio",
+    "prisma:refresh": "npm run prisma:reset && npm run prisma:migrate && npx prisma generate && npm run prisma:seed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "eslint  --fix"
+    ]
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "googleapis": "^144.0.0",
+    "imagekit": "^5.2.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.16",
+    "otpauth": "^9.3.5",
+    "prisma": "^5.22.0",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.15.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
+    "nodemon": "^3.1.7"
+  }
 }
