@@ -66,4 +66,23 @@ export class AuthRepository {
       },
     });
   }
+
+  static async findUserById(id) {
+    return await prisma.user.findFirst({
+      where: {
+        id,
+      },
+    });
+  }
+
+  static async setOtp(otp, id) {
+    await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        otpToken: otp,
+      },
+    });
+  }
 }

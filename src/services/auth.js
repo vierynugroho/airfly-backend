@@ -2,6 +2,8 @@ import { ErrorHandler } from "../middlewares/error.js";
 import { JWT } from "../utils/jwt.js";
 import { AuthRepository } from "../repositories/auth.js";
 import { Bcrypt } from "../utils/bcrypt.js";
+import { sendOTP } from "../utils/email.js";
+import { generate } from "../utils/otp.js";
 
 export class AuthService {
   /**
@@ -71,5 +73,19 @@ export class AuthService {
     await AuthRepository.setSecretKey(token, id);
 
     return token;
+  }
+
+  static async otp(token) {
+    const jwtVerify = JWT.verify(token);
+    const user = await AuthRepository.findUserById(jwtVerify.id);
+
+    if (user.secretKey != token) {
+      throw new ErrorHandler(400, "invalid token");
+    }
+
+    const otp_token = generate();
+
+    AuthRepository.setOtp(otp_token, user.id);
+    await sendOTP(otp_token, user.email, `${user.firstName} ${user.lastName}`);
   }
 }
