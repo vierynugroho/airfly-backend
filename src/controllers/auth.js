@@ -1,4 +1,4 @@
-import { AuthService } from "../services/auth.js";
+import { AuthService } from '../services/auth.js';
 export class AuthController {
   /**
    *
@@ -15,7 +15,7 @@ export class AuthController {
       return res.json({
         meta: {
           statusCode: 200,
-          message: "login successfully",
+          message: 'login successfully',
         },
         data: {
           token,
@@ -41,7 +41,7 @@ export class AuthController {
         lastName,
         phone,
         email,
-        password,
+        password
       );
 
       return res.json({
@@ -51,6 +51,28 @@ export class AuthController {
         },
         data: {
           redirect: `/api/v1/auth/verify?token=${token}`,
+          token,
+        },
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  /**
+   *
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   * @param {import('express').NextFunction} next
+   */
+
+  static async OTP(req, res, next) {
+    try {
+      await AuthService.otp(req.body.token);
+      res.json({
+        meta: {
+          statusCode: 200,
+          message: 'OTP sent',
         },
       });
     } catch (e) {

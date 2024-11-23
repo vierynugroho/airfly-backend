@@ -11,13 +11,15 @@ const __dirname = process.cwd();
 const PORT = process.env.PORT || 3000;
 
 app.use(
-	cors({
-		origin: '*',
-		methods: 'GET, POST, PUT, DELETE, PATCH',
-		allowedHeaders: 'Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding',
-		exposedHeaders: 'Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding',
-		maxAge: 3600,
-	})
+  cors({
+    origin: '*',
+    methods: 'GET, POST, PUT, DELETE, PATCH',
+    allowedHeaders:
+      'Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding',
+    exposedHeaders:
+      'Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding',
+    maxAge: 3600,
+  })
 );
 
 app.set('view engine', 'ejs');
@@ -34,18 +36,18 @@ app.use(errorMiddleware);
 
 // 404 Response Handler
 app.use((req, res) => {
-	const url = req.url;
-	const method = req.method;
-	res.status(404).json({
-		error: {
-			statusCode: 404,
-			message: `${method} - ${url} is not found!`,
-		},
-	});
+  const url = req.url;
+  const method = req.method;
+  res.status(404).json({
+    error: {
+      statusCode: 404,
+      message: `${method} - ${url} is not found!`,
+    },
+  });
 });
 
 app.listen(PORT, () => {
-	console.log('----------------------------------------------');
-	console.log(`Server is running on http://localhost:${PORT}`);
-	console.log('----------------------------------------------');
+  console.log('----------------------------------------------');
+  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log('----------------------------------------------');
 });

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .header {
+            background-color: #007BFF;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .content {
+            padding: 20px;
+            color: #333333;
+        }
+        .otp-code {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007BFF;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #666666;
+            padding: 20px;
+            background-color: #f1f1f1;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Verifikasi Akun Anda</h1>
+        </div>
+        <div class="content">
+            <p>Halo <strong><%=name%></strong>,</p>
+            <p>Terima kasih telah mendaftar di <strong>Binar Tiketku</strong>. Untuk melanjutkan, masukkan kode OTP berikut:</p>
+            <div class="otp-code"><%=otp%></div>
+            <p>Kode ini berlaku selama <strong>5 menit</strong>. Jangan bagikan kode ini kepada siapa pun, termasuk pihak yang mengaku dari <strong>Binar Tiketku</strong>.</p>
+            <p>Jika Anda tidak meminta kode ini, abaikan email ini.</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 Binar Tiketku. All rights reserved.</p>
+            <p><a href="#">Kebijakan Privasi</a> | <a href="#">Bantuan</a></p>
+        </div>
+    </div>
+</body>
+</html>
