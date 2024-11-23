@@ -1,6 +1,6 @@
-import nodemailer from "nodemailer";
-import dotenv from "dotenv";
-import ejs from "ejs";
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+import ejs from 'ejs';
 
 dotenv.config();
 
@@ -19,11 +19,11 @@ const transport = nodemailer.createTransport({
  * @param {target} target
  */
 export async function sendOTP(otp, target, name) {
-  const html = await ejs.renderFile("src/views/email.ejs", { name, otp });
+  const html = await ejs.renderFile('src/views/email.ejs', { name, otp });
   await transport.sendMail({
     from: process.env.NODEMAILER_USERNAME,
     to: target,
-    subject: "Verification Code",
+    subject: 'Verification Code',
     html,
   });
 }

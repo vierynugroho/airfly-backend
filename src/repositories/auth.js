@@ -1,6 +1,6 @@
-import { prisma } from "../database/db.js";
-import { UserStatus, UserRole } from "@prisma/client";
-import { Bcrypt } from "../utils/bcrypt.js";
+import { prisma } from '../database/db.js';
+import { UserStatus, UserRole } from '@prisma/client';
+import { Bcrypt } from '../utils/bcrypt.js';
 
 export class AuthRepository {
   /**

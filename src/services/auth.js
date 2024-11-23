@@ -1,9 +1,9 @@
-import { ErrorHandler } from "../middlewares/error.js";
-import { JWT } from "../utils/jwt.js";
-import { AuthRepository } from "../repositories/auth.js";
-import { Bcrypt } from "../utils/bcrypt.js";
-import { sendOTP } from "../utils/email.js";
-import { generate } from "../utils/otp.js";
+import { ErrorHandler } from '../middlewares/error.js';
+import { JWT } from '../utils/jwt.js';
+import { AuthRepository } from '../repositories/auth.js';
+import { Bcrypt } from '../utils/bcrypt.js';
+import { sendOTP } from '../utils/email.js';
+import { generate } from '../utils/otp.js';
 
 export class AuthService {
   /**
@@ -17,13 +17,13 @@ export class AuthService {
     const user = await AuthRepository.findByEmail(email);
 
     if (!user) {
-      throw new ErrorHandler(404, "user is not registered");
+      throw new ErrorHandler(404, 'user is not registered');
     }
 
     const comparePassword = Bcrypt.compare(password, user.password);
 
     if (!comparePassword) {
-      throw new ErrorHandler(401, "wrong credential");
+      throw new ErrorHandler(401, 'wrong credential');
     }
 
     const token = JWT.sign(user.id);
@@ -46,7 +46,7 @@ export class AuthService {
     let newUser;
 
     if (user && user.status == userStatus.VERIFIED) {
-      throw new ErrorHandler(409, "email has registered");
+      throw new ErrorHandler(409, 'email has registered');
     }
 
     if (user) {
@@ -55,7 +55,7 @@ export class AuthService {
         lastName,
         phone,
         password,
-        user.id,
+        user.id
       );
     } else {
       newUser = await AuthRepository.newUser(
@@ -63,7 +63,7 @@ export class AuthService {
         lastName,
         phone,
         email,
-        password,
+        password
       );
     }
 
@@ -80,7 +80,7 @@ export class AuthService {
     const user = await AuthRepository.findUserById(jwtVerify.id);
 
     if (user.secretKey != token) {
-      throw new ErrorHandler(400, "invalid token");
+      throw new ErrorHandler(400, 'invalid token');
     }
 
     const otp_token = generate();

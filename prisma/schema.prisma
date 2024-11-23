@@ -22,17 +22,18 @@ model User {
   password  String
   secretKey String     @default("") @map("secret_key")
   otpToken  String     @default("") @map("otp_token")
-  status    UserStatus
-  role      UserRole
+  status    UserStatus @default(UNVERIFIED)
+  role      UserRole   @default(BUYER)
   booking   Booking[]
 
   @@map("users")
 }
 
 model Airline {
-  id    Int    @id @default(autoincrement())
-  name  String
-  image String @default("")
+  id       Int    @id @default(autoincrement())
+  name     String
+  imageUrl String @default("")
+  imageId  String @default("")
 
   flight Flight[]
 
@@ -47,9 +48,11 @@ model Airport {
   state     String
   country   String
   timezone  String
-  latitude  Int
-  longitude Int
-  elevation Int
+  latitude  String
+  longitude String
+  elevation String
+  imageUrl  String   @default("")
+  imageId   String   @default("")
   createdAt DateTime @map("created_at")
 
   departure Flight[] @relation("departure")
@@ -66,14 +69,14 @@ model Flight {
   arrivalAirport   Int      @map("arrival_airport")
   departureTime    DateTime @map("departure_time")
   arrivalTime      DateTime @map("arrival_time")
-  price            Int
 
   airline   Airline @relation(fields: [airlineId], references: [id])
   departure Airport @relation(fields: [departureAirport], references: [id], name: "departure")
   arrival   Airport @relation(fields: [arrivalAirport], references: [id], name: "arrival")
 
-  seat    Seat[]
-  booking Booking[]
+  seat          Seat[]
+  booking       Booking[] @relation("flight")
+  returnBooking Booking[] @relation("ReturnFlight")
 
   @@map("flights")
 }
@@ -81,8 +84,10 @@ model Flight {
 model Seat {
   id         Int        @id @default(autoincrement())
   flightId   Int        @map("flight_id")
-  seatNumber Int        @map("seat_number")
-  status     SeatStatus
+  seatNumber String     @map("seat_number")
+  price      Float
+  status     SeatStatus @default(AVAILABLE)
+  class      SeatClass  @default(ECONOMY)
 
   flight    Flight      @relation(fields: [flightId], references: [id])
   passenger Passenger[]
@@ -91,19 +96,21 @@ model Seat {
 }
 
 model Booking {
-  id          Int           @id @default(autoincrement())
-  user        User          @relation(fields: [userId], references: [id])
-  userId      Int           @map("user_id")
-  flightId    Int           @map("flight_id")
-  bookingDate DateTime      @map("booking_date")
-  totalPrice  Decimal       @map("total_price")
-  status      BookingStatus
-  createdAt   DateTime      @map("created_at")
-  updateAt    DateTime      @map("update_at")
+  id             Int           @id @default(autoincrement())
+  user           User          @relation(fields: [userId], references: [id])
+  userId         Int           @map("user_id")
+  flightId       Int           @map("flight_id")
+  returnFlightId Int?          @map("return_flight_id")
+  bookingDate    DateTime      @map("booking_date")
+  totalPrice     Decimal       @map("total_price")
+  status         BookingStatus @default(ACTIVE)
+  createdAt      DateTime      @map("created_at")
+  updateAt       DateTime      @map("update_at")
 
-  flight    Flight      @relation(fields: [flightId], references: [id])
-  payment   Payment?
-  passenger Passenger[]
+  flight       Flight      @relation("flight", fields: [flightId], references: [id])
+  returnFlight Flight?     @relation("ReturnFlight", fields: [returnFlightId], references: [id])
+  payment      Payment?
+  passenger    Passenger[]
 
   @@map("bookings")
 }
@@ -111,10 +118,10 @@ model Booking {
 model Payment {
   id            Int           @id @default(autoincrement())
   bookingId     Int           @unique @map("booking_id")
-  paymentMethod PaymenMethod  @map("payment_method")
+  paymentMethod String        @map("payment_method")
   paymentDate   DateTime      @map("payment_date")
   paymentAmount Decimal       @map("payment_amount")
-  paymentStatus PaymentStatus @map("payment_status")
+  paymentStatus PaymentStatus @default(UNPAID) @map("payment_status")
 
   booking Booking @relation(fields: [bookingId], references: [id])
 
@@ -126,14 +133,14 @@ model Passenger {
   bookingId      Int            @map("booking_id")
   name           String
   familyName     String         @map("family_name")
-  gender         Gender
+  gender         Gender         @default(MALE)
   identityNumber String         @map("identity_number")
   citizenship    String
   countryOfIssue String         @map("country_of_issue")
-  title          PassengerTitle
+  title          PassengerTitle @default(Mr)
   dob            DateTime
   expiredDate    DateTime       @map("expired_Date")
-  type           PassengerType
+  type           PassengerType  @default(ADULT)
   seatId         Int            @map("seat_id")
 
   booking Booking @relation(fields: [bookingId], references: [id])
@@ -158,17 +165,16 @@ enum SeatStatus {
   LOCKED
 }
 
+enum SeatClass {
+  ECONOMY
+  FIRST
+  BUSINESS
+}
+
 enum BookingStatus {
   ACTIVE
   CANCELED
   EXPIRED
-}
-
-enum PaymenMethod {
-  QRIS
-  VIRTUAL_ACCOUNT
-  CREDIT_CARD
-  E_WALLET
 }
 
 enum PaymentStatus {

@@ -1,4 +1,4 @@
-import { AuthService } from "../services/auth.js";
+import { AuthService } from '../services/auth.js';
 export class AuthController {
   /**
    *
@@ -15,7 +15,7 @@ export class AuthController {
       return res.json({
         meta: {
           statusCode: 200,
-          message: "login successfully",
+          message: 'login successfully',
         },
         data: {
           token,
@@ -41,7 +41,7 @@ export class AuthController {
         lastName,
         phone,
         email,
-        password,
+        password
       );
 
       return res.json({
@@ -72,7 +72,7 @@ export class AuthController {
       res.json({
         meta: {
           statusCode: 200,
-          message: "OTP sent",
+          message: 'OTP sent',
         },
       });
     } catch (e) {

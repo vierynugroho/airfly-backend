@@ -1,12 +1,12 @@
-import * as OTPAuth from "otpauth";
-import dotenv from "dotenv";
+import * as OTPAuth from 'otpauth';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 const totp = new OTPAuth.TOTP({
-  issuer: "ACME",
-  label: "Alice",
-  algorithm: "SHA256",
+  issuer: 'ACME',
+  label: 'Alice',
+  algorithm: 'SHA256',
   digits: 6,
   period: 60 * 5,
   secret: process.env.JWT_SECRET,
