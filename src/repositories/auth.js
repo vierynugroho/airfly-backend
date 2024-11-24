@@ -85,23 +85,4 @@ export class AuthRepository {
       },
     });
   }
-
-  static async getUserBySecret(secret) {
-    return await prisma.user.findFirst({
-      where: {
-        secretKey: secret,
-      },
-    });
-  }
-
-  static async setUserVerified(id) {
-    await prisma.user.update({
-      where: {
-        id,
-      },
-      data: {
-        status: UserStatus.VERIFIED,
-      },
-    });
-  }
 }

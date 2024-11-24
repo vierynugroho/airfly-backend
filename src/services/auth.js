@@ -3,7 +3,7 @@ import { JWT } from '../utils/jwt.js';
 import { AuthRepository } from '../repositories/auth.js';
 import { Bcrypt } from '../utils/bcrypt.js';
 import { sendOTP } from '../utils/email.js';
-import { generate, validate } from '../utils/otp.js';
+import { generate } from '../utils/otp.js';
 
 export class AuthService {
   /**
@@ -83,34 +83,9 @@ export class AuthService {
       throw new ErrorHandler(400, 'invalid token');
     }
 
-    const otp_token = generate(
-      Buffer.from(user.id.toString()).toString('base64')
-    );
+    const otp_token = generate();
 
     AuthRepository.setOtp(otp_token, user.id);
-    console.log(otp_token);
     await sendOTP(otp_token, user.email, `${user.firstName} ${user.lastName}`);
-  }
-
-  static async verify(otp, token) {
-    const jwtVerify = JWT.verify(token);
-    const isValid = validate(
-      otp,
-      Buffer.from(jwtVerify.id.toString()).toString('base64')
-    );
-
-    console.log(isValid);
-
-    if (isValid === null) {
-      throw new ErrorHandler(400, 'Invalid OTP');
-    }
-
-    const user = await AuthRepository.getUserBySecret(token);
-
-    if (!user) {
-      throw new ErrorHandler(404, 'User not registered');
-    }
-
-    await AuthRepository.setUserVerified(parseInt(jwtVerify.id));
   }
 }
