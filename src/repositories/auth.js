@@ -67,6 +67,11 @@ export class AuthRepository {
     });
   }
 
+  /**
+   *
+   * @param {number} id
+   */
+
   static async findUserById(id) {
     return await prisma.user.findFirst({
       where: {
@@ -74,6 +79,12 @@ export class AuthRepository {
       },
     });
   }
+
+  /**
+   *
+   * @param {string} otp
+   * @param {number} id
+   */
 
   static async setOtp(otp, id) {
     await prisma.user.update({
@@ -86,6 +97,10 @@ export class AuthRepository {
     });
   }
 
+  /**
+   *
+   * @param {string} secret
+   */
   static async getUserBySecret(secret) {
     return await prisma.user.findFirst({
       where: {
@@ -94,6 +109,11 @@ export class AuthRepository {
     });
   }
 
+  /**
+   *
+   * @param {number} id
+   */
+
   static async setUserVerified(id) {
     await prisma.user.update({
       where: {
@@ -101,6 +121,17 @@ export class AuthRepository {
       },
       data: {
         status: UserStatus.VERIFIED,
+      },
+    });
+  }
+
+  static async setNewPassword(id, password) {
+    await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        password: await Bcrypt.hash(password),
       },
     });
   }

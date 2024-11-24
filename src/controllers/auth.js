@@ -101,4 +101,36 @@ export class AuthController {
       next(e);
     }
   }
+
+  static async resetPassword(req, res, next) {
+    try {
+      const { email, otp, password } = req.body;
+
+      await AuthService.resetPassword(email, otp, password);
+
+      res.json({
+        meta: {
+          statusCode: 200,
+          message: 'Password has been reset',
+        },
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async sendResetOtp(req, res, next) {
+    try {
+      const { email } = req.body;
+      await AuthService.sendResetOtp(email);
+      res.json({
+        meta: {
+          statusCode: 200,
+          message: 'OTP has been sent',
+        },
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
