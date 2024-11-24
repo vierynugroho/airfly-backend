@@ -79,4 +79,26 @@ export class AuthController {
       next(e);
     }
   }
+
+  /**
+   *
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   * @param {import('express').NextFunction} next
+   */
+
+  static async verify(req, res, next) {
+    try {
+      const { otp, token } = req.body;
+      await AuthService.verify(otp, token);
+      res.json({
+        meta: {
+          statusCode: 200,
+          message: 'User has been verified',
+        },
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
