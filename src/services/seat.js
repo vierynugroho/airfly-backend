@@ -1,8 +1,15 @@
 import { ErrorHandler } from '../middlewares/error.js';
+import { FlightRepository } from '../repositories/flight.js';
 import { SeatRepository } from '../repositories/seat.js';
 
 export class SeatService {
   static async create(data) {
+    const flight = await FlightRepository.findByID(data.flightId);
+
+    if (!flight) {
+      throw new ErrorHandler(404, 'flight id is not found');
+    }
+
     const existingSeat = await SeatRepository.findBySeatNumber(data.seatNumber);
 
     if (existingSeat) {
@@ -28,6 +35,12 @@ export class SeatService {
 
     if (!seat) {
       throw new ErrorHandler(404, 'seat is not found');
+    }
+
+    const flight = await FlightRepository.findByID(data.flightId);
+
+    if (!flight) {
+      throw new ErrorHandler(404, 'flight id is not found');
     }
 
     const isSameFlight = data.flightId === seat.flightId;
@@ -62,6 +75,17 @@ export class SeatService {
   }
 
   static async findMany(pagination, filter, sorter) {
+    if (filter.class) {
+      const seatClassEnum = await SeatRepository.getClassEnum();
+      const upperCaseClass = filter.class.trim().toUpperCase();
+      if (!Object.keys(seatClassEnum).includes(upperCaseClass)) {
+        throw new ErrorHandler(
+          422,
+          `Invalid seat class. Available classes: ${Object.keys(seatClassEnum).join(', ')}`
+        );
+      }
+    }
+
     const seats = await SeatRepository.findMany(pagination, filter, sorter);
     const totalSeats = await SeatRepository.count(filter);
 

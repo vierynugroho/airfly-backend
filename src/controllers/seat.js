@@ -1,3 +1,4 @@
+import { ErrorHandler } from '../middlewares/error.js';
 import { SeatService } from '../services/seat.js';
 
 export class SeatController {
@@ -26,6 +27,10 @@ export class SeatController {
       const data = req.body;
       const seatID = parseInt(req.params.id);
 
+      if (isNaN(seatID)) {
+        throw new ErrorHandler(422, 'seat ID is not a number');
+      }
+
       const seat = await SeatService.update(seatID, data);
 
       return res.json({
@@ -45,6 +50,10 @@ export class SeatController {
   static async delete(req, res, next) {
     try {
       const seatID = parseInt(req.params.id);
+
+      if (isNaN(seatID)) {
+        throw new ErrorHandler(422, 'seat ID is not a number');
+      }
 
       const seat = await SeatService.delete(seatID);
 
@@ -88,7 +97,7 @@ export class SeatController {
       }
 
       if (seatClass) {
-        condition.class = seatClass || {};
+        condition.class = seatClass.toUpperCase() || {};
       }
 
       if (priceMax) {
@@ -132,6 +141,10 @@ export class SeatController {
   static async getByID(req, res, next) {
     try {
       const seatID = parseInt(req.params.id);
+
+      if (isNaN(seatID)) {
+        throw new ErrorHandler(422, 'seat ID is not a number');
+      }
 
       const seat = await SeatService.findById(seatID);
 

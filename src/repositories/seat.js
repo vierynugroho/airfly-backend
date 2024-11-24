@@ -1,3 +1,4 @@
+import { SeatClass } from '@prisma/client';
 import { prisma } from '../database/db.js';
 
 export class SeatRepository {
@@ -51,6 +52,10 @@ export class SeatRepository {
     });
 
     return totalSeats;
+  }
+
+  static async getClassEnum() {
+    return SeatClass;
   }
 
   static async findById(id) {

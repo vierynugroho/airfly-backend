@@ -69,6 +69,8 @@ model Flight {
   arrivalAirport   Int      @map("arrival_airport")
   departureTime    DateTime @map("departure_time")
   arrivalTime      DateTime @map("arrival_time")
+  terminal         String
+  information      String
 
   airline   Airline @relation(fields: [airlineId], references: [id])
   departure Airport @relation(fields: [departureAirport], references: [id], name: "departure")
