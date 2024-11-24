@@ -74,7 +74,7 @@ export class SeatService {
     return deletedSeat;
   }
 
-  static async findMany(pagination, filter, sorter) {
+  static async findMany(pagination, filter) {
     if (filter.class) {
       const seatClassEnum = await SeatRepository.getClassEnum();
       const upperCaseClass = filter.class.trim().toUpperCase();
@@ -86,7 +86,7 @@ export class SeatService {
       }
     }
 
-    const seats = await SeatRepository.findMany(pagination, filter, sorter);
+    const seats = await SeatRepository.findMany(pagination, filter);
     const totalSeats = await SeatRepository.count(filter);
 
     return { seats, totalSeats };

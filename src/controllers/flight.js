@@ -3,26 +3,18 @@ import { FlightService } from '../services/flight.js';
 
 export class FlightController {
   static async getAll(req, res, next) {
-    //TODO: filtering & Sorting
-    /*
-    1. Harga Termurah
-    2. Durasi Terpendek
-    3. Keberangkatan - paling awal
-    4. Keberangkatan - paling akhir
-    5. kedatangan - paling awal
-    6. kedatangan - paling akhir
-    7. Class
-
-    TODO: fix
-    1. not found relation (on create and update): airport, flight, airline | butuh repository airline sama airport
-    2. class filtering invalid enum value ✅
-    */
-
     try {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || null;
+
       const isCheapest = req.query.isCheapest || 'false';
-      const { priceMin, priceMax, flightId, seatClass } = req.query;
+      const shortest = req.query.shortest || 'false';
+      const earliestDeparture = req.query.earliestDeparture || 'false';
+      const latestDeparture = req.query.latestDeparture || 'false';
+      const earliestArrival = req.query.earliestArrival || 'false';
+      const latestArrival = req.query.latestArrival || 'false';
+
+      const { priceMin, priceMax, flightNumber, seatClass } = req.query;
 
       let sort = {};
       let condition = {};
@@ -33,29 +25,40 @@ export class FlightController {
         pagination.limit = limit;
       }
 
-      if (isCheapest) {
+      if (isCheapest === 'true') {
         sort = { price: 'asc' };
       }
-
+      if (shortest === 'true') {
+        sort = { duration: 'asc' };
+      }
+      if (earliestDeparture === 'true') {
+        sort = { departureTime: 'asc' };
+      }
+      if (latestDeparture === 'true') {
+        sort = { departureTime: 'desc' };
+      }
+      if (earliestArrival === 'true') {
+        sort = { arrivalTime: 'asc' };
+      }
+      if (latestArrival === 'true') {
+        sort = { arrivalTime: 'desc' };
+      }
       if (priceMin) {
         condition.price = condition.price || {};
         condition.price.gte = parseFloat(priceMin);
       }
-
       if (seatClass) {
         condition.class = seatClass.toUpperCase() || {};
       }
-
       if (priceMax) {
         condition.price = condition.price || {};
         condition.price.lte = parseFloat(priceMax);
       }
-
-      if (flightId) {
-        condition.flightId = parseInt(flightId);
+      if (flightNumber) {
+        condition.flightNumber = flightNumber;
       }
 
-      const { seats, totalSeats } = await SeatService.findMany(
+      const { flights, totalFlights } = await FlightService.getAll(
         pagination,
         condition,
         sort
@@ -68,16 +71,16 @@ export class FlightController {
           pagination:
             page && limit
               ? {
-                  totalPage: Math.ceil(totalSeats / limit),
+                  totalPage: Math.ceil(totalFlights / limit),
                   currentPage: page,
-                  pageItems: seats.length,
+                  pageItems: flights.length,
                   nextPage:
-                    page < Math.ceil(totalSeats / limit) ? page + 1 : null,
+                    page < Math.ceil(totalFlights / limit) ? page + 1 : null,
                   prevPage: page > 1 ? page - 1 : null,
                 }
               : null,
         },
-        data: seats,
+        data: flights,
       });
     } catch (error) {
       next(error);

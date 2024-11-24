@@ -75,10 +75,8 @@ export class SeatController {
     try {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || null;
-      const isCheapest = req.query.isCheapest || 'false';
-      const { priceMin, priceMax, flightId, seatClass } = req.query;
+      const { flightId } = req.query;
 
-      let sort = {};
       let condition = {};
       const pagination = {};
 
@@ -87,32 +85,13 @@ export class SeatController {
         pagination.limit = limit;
       }
 
-      if (isCheapest) {
-        sort = { price: 'asc' };
-      }
-
-      if (priceMin) {
-        condition.price = condition.price || {};
-        condition.price.gte = parseFloat(priceMin);
-      }
-
-      if (seatClass) {
-        condition.class = seatClass.toUpperCase() || {};
-      }
-
-      if (priceMax) {
-        condition.price = condition.price || {};
-        condition.price.lte = parseFloat(priceMax);
-      }
-
       if (flightId) {
         condition.flightId = parseInt(flightId);
       }
 
       const { seats, totalSeats } = await SeatService.findMany(
         pagination,
-        condition,
-        sort
+        condition
       );
 
       res.json({

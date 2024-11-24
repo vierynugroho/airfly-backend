@@ -14,17 +14,18 @@ datasource db {
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
-  firstName String     @map("first_name")
-  lastName  String     @map("last_name")
-  email     String
-  phone     String
-  password  String
-  secretKey String     @default("") @map("secret_key")
-  otpToken  String     @default("") @map("otp_token")
-  status    UserStatus @default(UNVERIFIED)
-  role      UserRole   @default(BUYER)
-  booking   Booking[]
+  id           Int            @id @default(autoincrement())
+  firstName    String         @map("first_name")
+  lastName     String         @map("last_name")
+  email        String
+  phone        String
+  password     String
+  secretKey    String         @default("") @map("secret_key")
+  otpToken     String         @default("") @map("otp_token")
+  status       UserStatus     @default(UNVERIFIED)
+  role         UserRole       @default(BUYER)
+  booking      Booking[]
+  Notification Notification[]
 
   @@map("users")
 }
@@ -76,6 +77,9 @@ model Flight {
   departure Airport @relation(fields: [departureAirport], references: [id], name: "departure")
   arrival   Airport @relation(fields: [arrivalAirport], references: [id], name: "arrival")
 
+  price Float
+  class SeatClass @default(ECONOMY)
+
   seat          Seat[]
   booking       Booking[] @relation("flight")
   returnBooking Booking[] @relation("ReturnFlight")
@@ -87,9 +91,7 @@ model Seat {
   id         Int        @id @default(autoincrement())
   flightId   Int        @map("flight_id")
   seatNumber String     @map("seat_number")
-  price      Float
   status     SeatStatus @default(AVAILABLE)
-  class      SeatClass  @default(ECONOMY)
 
   flight    Flight      @relation(fields: [flightId], references: [id])
   passenger Passenger[]
@@ -104,7 +106,7 @@ model Booking {
   flightId       Int           @map("flight_id")
   returnFlightId Int?          @map("return_flight_id")
   bookingDate    DateTime      @map("booking_date")
-  totalPrice     Decimal       @map("total_price")
+  totalPrice     Float         @map("total_price")
   status         BookingStatus @default(ACTIVE)
   createdAt      DateTime      @map("created_at")
   updateAt       DateTime      @map("update_at")
@@ -122,7 +124,7 @@ model Payment {
   bookingId     Int           @unique @map("booking_id")
   paymentMethod String        @map("payment_method")
   paymentDate   DateTime      @map("payment_date")
-  paymentAmount Decimal       @map("payment_amount")
+  paymentAmount Float         @map("payment_amount")
   paymentStatus PaymentStatus @default(UNPAID) @map("payment_status")
 
   booking Booking @relation(fields: [bookingId], references: [id])
@@ -151,9 +153,27 @@ model Passenger {
   @@map("passengers")
 }
 
+model Notification {
+  id          Int              @id @default(autoincrement())
+  type        NotificationType @default(INFO)
+  title       String
+  description String
+  user        User             @relation(fields: [userId], references: [id])
+  userId      Int              @map("user_id")
+}
+
 enum UserStatus {
   VERIFIED
   UNVERIFIED
+}
+
+enum NotificationType {
+  INFO
+  DISCOUNT
+  PROMO
+  EVENT
+  TRAVEL
+  BOOKING
 }
 
 enum UserRole {

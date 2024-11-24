@@ -31,12 +31,11 @@ export class SeatRepository {
     return seat;
   }
 
-  static async findMany(pagination, where, orderBy) {
+  static async findMany(pagination, where) {
     const seats = await prisma.seat.findMany({
       skip: pagination.offset,
       take: pagination.limit,
       where,
-      orderBy,
       include: {
         _count: true,
         flight: true,

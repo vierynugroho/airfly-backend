@@ -41,7 +41,6 @@ export class FlightRepository {
         airline: true,
         arrival: true,
         departure: true,
-        seat: true,
       },
     });
 

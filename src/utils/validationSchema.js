@@ -26,12 +26,12 @@ export const registerSchema = Joi.object({
 export const seatSchema = Joi.object({
   flightId: Joi.number().required(),
   seatNumber: Joi.string().required(),
-  price: Joi.number().min(0).required(),
-  class: Joi.string().valid('ECONOMY', 'FIRST', 'BUSINESS').required(),
   status: Joi.string().valid('AVAILABLE', 'UNAVAILABLE', 'LOCKED').required(),
 });
 
 export const flightSchema = Joi.object({
+  price: Joi.number().min(0).required(),
+  class: Joi.string().valid('ECONOMY', 'FIRST', 'BUSINESS').required(),
   flightNumber: Joi.string().required(),
   airlineId: Joi.number().positive().required(),
   departureAirport: Joi.number().positive().required(),
