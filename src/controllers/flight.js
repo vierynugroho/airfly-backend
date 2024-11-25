@@ -14,6 +14,13 @@ export class FlightController {
       const departureAirport = parseInt(req.query.departureAirport);
       const arrivalAirport = parseInt(req.query.arrivalAirport);
 
+      if (isNaN(departureAirport) || isNaN(arrivalAirport)) {
+        throw new ErrorHandler(
+          422,
+          'invalid value for departure airport or arrival airport'
+        );
+      }
+
       const isCheapest = req.query.isCheapest || 'false';
       const shortest = req.query.shortest || 'false';
       const earliestDeparture = req.query.earliestDeparture || 'false';
