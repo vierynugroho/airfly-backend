@@ -50,7 +50,7 @@ export class AuthController {
           message: "user has created, let's verify",
         },
         data: {
-          redirect: `/api/v1/auth/verify?token=${token}`,
+          //redirect: `/api/v1/auth/verify?token=${token}`,
           token,
         },
       });
