@@ -1,3 +1,4 @@
+import { ErrorHandler } from '../middlewares/error.js';
 import { SeatService } from '../services/seat.js';
 
 export class SeatController {
@@ -26,6 +27,10 @@ export class SeatController {
       const data = req.body;
       const seatID = parseInt(req.params.id);
 
+      if (isNaN(seatID)) {
+        throw new ErrorHandler(422, 'seat ID is not a number');
+      }
+
       const seat = await SeatService.update(seatID, data);
 
       return res.json({
@@ -45,6 +50,10 @@ export class SeatController {
   static async delete(req, res, next) {
     try {
       const seatID = parseInt(req.params.id);
+
+      if (isNaN(seatID)) {
+        throw new ErrorHandler(422, 'seat ID is not a number');
+      }
 
       const seat = await SeatService.delete(seatID);
 
@@ -66,10 +75,8 @@ export class SeatController {
     try {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || null;
-      const isCheapest = req.query.isCheapest || 'false';
-      const { priceMin, priceMax, flightId, seatClass } = req.query;
+      const { flightId } = req.query;
 
-      let sort = {};
       let condition = {};
       const pagination = {};
 
@@ -78,32 +85,13 @@ export class SeatController {
         pagination.limit = limit;
       }
 
-      if (isCheapest) {
-        sort = { price: 'asc' };
-      }
-
-      if (priceMin) {
-        condition.price = condition.price || {};
-        condition.price.gte = parseFloat(priceMin);
-      }
-
-      if (seatClass) {
-        condition.class = seatClass || {};
-      }
-
-      if (priceMax) {
-        condition.price = condition.price || {};
-        condition.price.lte = parseFloat(priceMax);
-      }
-
       if (flightId) {
         condition.flightId = parseInt(flightId);
       }
 
       const { seats, totalSeats } = await SeatService.findMany(
         pagination,
-        condition,
-        sort
+        condition
       );
 
       res.json({
@@ -132,6 +120,10 @@ export class SeatController {
   static async getByID(req, res, next) {
     try {
       const seatID = parseInt(req.params.id);
+
+      if (isNaN(seatID)) {
+        throw new ErrorHandler(422, 'seat ID is not a number');
+      }
 
       const seat = await SeatService.findById(seatID);
 
