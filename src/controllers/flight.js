@@ -3,9 +3,16 @@ import { FlightService } from '../services/flight.js';
 
 export class FlightController {
   static async getAll(req, res, next) {
+    /*
+    TODO: validation create and update by airport & airline | available or not
+    */
     try {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || null;
+
+      const departureDate = req.query.departureDate;
+      const departureAirport = parseInt(req.query.departureAirport);
+      const arrivalAirport = parseInt(req.query.arrivalAirport);
 
       const isCheapest = req.query.isCheapest || 'false';
       const shortest = req.query.shortest || 'false';
@@ -46,6 +53,17 @@ export class FlightController {
       if (priceMin) {
         condition.price = condition.price || {};
         condition.price.gte = parseFloat(priceMin);
+      }
+      if (departureDate) {
+        condition.departureTime = {
+          gte: new Date(departureDate),
+        };
+      }
+      if (departureAirport) {
+        condition.departureAirport = departureAirport;
+      }
+      if (arrivalAirport) {
+        condition.arrivalAirport = arrivalAirport;
       }
       if (seatClass) {
         condition.class = seatClass.toUpperCase() || {};
