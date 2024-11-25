@@ -67,3 +67,21 @@ export const flightSchema = Joi.object({
   terminal: Joi.string().required(),
   information: Joi.string().required(),
 });
+
+export const airportSchema = Joi.object({
+  code: Joi.string().max(10).required(),
+  name: Joi.string().required(),
+  city: Joi.string().required(),
+  state: Joi.string().optional(),
+  country: Joi.string().required(),
+  timezone: Joi.string().required(),
+  latitude: Joi.string().regex(/^-?\d+(\.\d+)?$/).required().messages({
+    'string.pattern.base': 'Latitude must be a valid decimal number.',
+  }),
+  longitude: Joi.string().regex(/^-?\d+(\.\d+)?$/).required().messages({
+    'string.pattern.base': 'Longitude must be a valid decimal number.',
+  }),
+  elevation: Joi.string().optional().regex(/^\d+(\.\d+)?$/).messages({
+    'string.pattern.base': 'Elevation must be a valid decimal number.',
+  }),
+});
