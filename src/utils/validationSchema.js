@@ -26,7 +26,62 @@ export const registerSchema = Joi.object({
 export const seatSchema = Joi.object({
   flightId: Joi.number().required(),
   seatNumber: Joi.string().required(),
+  status: Joi.string().valid('AVAILABLE', 'UNAVAILABLE', 'LOCKED').required(),
+});
+
+export const flightSchema = Joi.object({
   price: Joi.number().min(0).required(),
   class: Joi.string().valid('ECONOMY', 'FIRST', 'BUSINESS').required(),
-  status: Joi.string().valid('AVAILABLE', 'UNAVAILABLE', 'LOCKED').required(),
+  flightNumber: Joi.string().required(),
+  airlineId: Joi.number().positive().required(),
+  departureAirport: Joi.number().positive().required(),
+  arrivalAirport: Joi.number()
+    .positive()
+    .required()
+    .custom((value, helpers) => {
+      const departureAirport = helpers.state.ancestors[0].departureAirport;
+      if (value === departureAirport) {
+        return helpers.error('arrivalAirport.sameAsDeparture');
+      }
+      return value;
+    }, 'Arrival airport validation')
+    .messages({
+      'arrivalAirport.sameAsDeparture':
+        'Arrival airport must be different from departure airport.',
+    }),
+  departureTime: Joi.date().iso().required(),
+  arrivalTime: Joi.date()
+    .iso()
+    .required()
+    .custom((value, helpers) => {
+      const departureTime = helpers.state.ancestors[0].departureTime;
+      if (value <= departureTime) {
+        return helpers.error('arrivalTime.beforeDeparture');
+      }
+      return value;
+    }, 'Arrival time validation')
+    .messages({
+      'arrivalTime.beforeDeparture':
+        'Arrival time must be after departure time.',
+    }),
+  terminal: Joi.string().required(),
+  information: Joi.string().required(),
+});
+
+export const airportSchema = Joi.object({
+  code: Joi.string().max(10).required(),
+  name: Joi.string().required(),
+  city: Joi.string().required(),
+  state: Joi.string().optional(),
+  country: Joi.string().required(),
+  timezone: Joi.string().required(),
+  latitude: Joi.string().regex(/^-?\d+(\.\d+)?$/).required().messages({
+    'string.pattern.base': 'Latitude must be a valid decimal number.',
+  }),
+  longitude: Joi.string().regex(/^-?\d+(\.\d+)?$/).required().messages({
+    'string.pattern.base': 'Longitude must be a valid decimal number.',
+  }),
+  elevation: Joi.string().optional().regex(/^\d+(\.\d+)?$/).messages({
+    'string.pattern.base': 'Elevation must be a valid decimal number.',
+  }),
 });
