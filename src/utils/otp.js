@@ -1,7 +1,4 @@
 import * as OTPAuth from 'otpauth';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const totp = new OTPAuth.TOTP({
   issuer: 'ACME',
