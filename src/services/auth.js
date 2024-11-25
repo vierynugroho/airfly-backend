@@ -26,6 +26,10 @@ export class AuthService {
       throw new ErrorHandler(401, 'wrong credential');
     }
 
+    if (user.status != (await AuthRepository.getUserStatusEnum()).VERIFIED) {
+      throw new ErrorHandler(403, 'user not verified');
+    }
+
     const token = JWT.sign(user.id);
 
     return token;
