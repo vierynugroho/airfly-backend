@@ -3,7 +3,7 @@ import { JWT } from '../utils/jwt.js';
 import { AuthRepository } from '../repositories/auth.js';
 import { Bcrypt } from '../utils/bcrypt.js';
 import { sendOTP } from '../utils/email.js';
-import { generate } from '../utils/otp.js';
+import { generate, validate } from '../utils/otp.js';
 
 export class AuthService {
   /**
@@ -20,10 +20,14 @@ export class AuthService {
       throw new ErrorHandler(404, 'user is not registered');
     }
 
-    const comparePassword = Bcrypt.compare(password, user.password);
+    const comparePassword = await Bcrypt.compare(password, user.password);
 
     if (!comparePassword) {
       throw new ErrorHandler(401, 'wrong credential');
+    }
+
+    if (user.status != (await AuthRepository.getUserStatusEnum()).VERIFIED) {
+      throw new ErrorHandler(403, 'user not verified');
     }
 
     const token = JWT.sign(user.id);
@@ -75,17 +79,70 @@ export class AuthService {
     return token;
   }
 
-  static async otp(token) {
-    const jwtVerify = JWT.verify(token);
-    const user = await AuthRepository.findUserById(jwtVerify.id);
+  static async otp(token = null, id = -1) {
+    let user;
+    if (token != null) {
+      const jwtVerify = JWT.verify(token);
+      user = await AuthRepository.findUserById(jwtVerify.id);
 
-    if (user.secretKey != token) {
-      throw new ErrorHandler(400, 'invalid token');
+      if (user.secretKey != token) {
+        throw new ErrorHandler(400, 'invalid token');
+      }
+
+      id = user.id;
+    } else {
+      user = await AuthRepository.findUserById(id);
     }
 
-    const otp_token = generate();
+    const otp_token = generate(Buffer.from(id.toString()).toString('base64'));
 
-    AuthRepository.setOtp(otp_token, user.id);
+    await AuthRepository.setOtp(otp_token, user.id);
     await sendOTP(otp_token, user.email, `${user.firstName} ${user.lastName}`);
+  }
+
+  static async verify(otp, token) {
+    const jwtVerify = JWT.verify(token);
+    const isValid = validate(
+      otp,
+      Buffer.from(jwtVerify.id.toString()).toString('base64')
+    );
+
+    if (isValid === null) {
+      throw new ErrorHandler(400, 'Invalid OTP');
+    }
+
+    const user = await AuthRepository.getUserBySecret(token);
+
+    if (!user) {
+      throw new ErrorHandler(404, 'User not registered');
+    }
+
+    await AuthRepository.setUserVerified(parseInt(jwtVerify.id));
+  }
+
+  static async sendResetOtp(email) {
+    const user = await AuthRepository.findByEmail(email);
+    if (!user) {
+      throw new ErrorHandler(404, 'User not found');
+    }
+    await this.otp(null, user.id);
+  }
+
+  static async resetPassword(email, otp, password) {
+    const user = await AuthRepository.findByEmail(email);
+    const isValid = validate(
+      otp,
+      Buffer.from(user.id.toString()).toString('base64')
+    );
+
+    if (isValid == null) {
+      throw new ErrorHandler(400, 'Invalid OTP Code 1');
+    }
+
+    if (user.otpToken != otp) {
+      throw new ErrorHandler(400, 'Invalid OTP Code');
+    }
+
+    await AuthRepository.setNewPassword(user.id, password);
   }
 }
