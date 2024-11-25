@@ -82,7 +82,6 @@ export class AuthService {
   static async otp(token = null, id = -1) {
     let user;
     if (token != null) {
-      console.log('error');
       const jwtVerify = JWT.verify(token);
       user = await AuthRepository.findUserById(jwtVerify.id);
 
@@ -98,7 +97,6 @@ export class AuthService {
     const otp_token = generate(Buffer.from(id.toString()).toString('base64'));
 
     await AuthRepository.setOtp(otp_token, user.id);
-    console.log(otp_token);
     await sendOTP(otp_token, user.email, `${user.firstName} ${user.lastName}`);
   }
 
@@ -108,8 +106,6 @@ export class AuthService {
       otp,
       Buffer.from(jwtVerify.id.toString()).toString('base64')
     );
-
-    console.log(isValid);
 
     if (isValid === null) {
       throw new ErrorHandler(400, 'Invalid OTP');
@@ -126,6 +122,9 @@ export class AuthService {
 
   static async sendResetOtp(email) {
     const user = await AuthRepository.findByEmail(email);
+    if (!user) {
+      throw new ErrorHandler(404, 'User not found');
+    }
     await this.otp(null, user.id);
   }
 
