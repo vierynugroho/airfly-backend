@@ -81,8 +81,8 @@ export class FlightService {
     return createdFlight;
   }
 
-  static async update(id, data) {
-    const flight = await FlightRepository.findByID(id);
+  static async update(flightID, data) {
+    const flight = await FlightRepository.findByID(flightID);
 
     if (!flight) {
       throw new ErrorHandler(404, 'Flight is not found');
@@ -108,7 +108,7 @@ export class FlightService {
         data.flightNumber
       );
 
-      if (existingFlight && existingFlight.id !== id) {
+      if (existingFlight && existingFlight.id !== flightID) {
         throw new ErrorHandler(
           409,
           'Flight number is already used by another flight'
@@ -116,7 +116,7 @@ export class FlightService {
       }
     }
 
-    const updatedFlight = await FlightRepository.update(id, data);
+    const updatedFlight = await FlightRepository.update(flightID, data);
 
     return updatedFlight;
   }
