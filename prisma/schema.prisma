@@ -93,7 +93,7 @@ model Seat {
   seatNumber String     @map("seat_number")
   status     SeatStatus @default(AVAILABLE)
 
-  flight    Flight      @relation(fields: [flightId], references: [id])
+  flight        Flight          @relation(fields: [flightId], references: [id])
   bookingDetail BookingDetail[]
 
   @@map("seats")
@@ -130,7 +130,7 @@ model BookingDetail {
 
   booking   Booking   @relation(fields: [bookingId], references: [id])
   passenger Passenger @relation(fields: [passengerId], references: [id])
-  seat  Seat @relation(fields: [seatId], references: [id])
+  seat      Seat      @relation(fields: [seatId], references: [id])
 
   @@map("booking_details")
 }

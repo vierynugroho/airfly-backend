@@ -24,7 +24,7 @@ export function authorization(role) {
     try {
       const authorization = req.headers.authorization;
       if (!authorization) {
-        throw new ErrorHandler(403, 'unauthorized');
+        throw new ErrorHandler(401, 'unauthorized');
       }
       const bearer = authorization.replace('Bearer ', '');
 
@@ -37,7 +37,7 @@ export function authorization(role) {
       const user = await AuthRepository.findUserById(parseInt(jwtVerify.id));
 
       if (user.role != role) {
-        throw new ErrorHandler(403, 'unauthorized, Go Back ! >:(');
+        throw new ErrorHandler(403, 'forbidden, Go Back ! >:(');
       }
 
       req.user = {

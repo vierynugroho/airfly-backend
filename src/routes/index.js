@@ -1,5 +1,6 @@
 import express from 'express';
 import authRoute from './auth.js';
+import userRoute from './user.js';
 import seatRoute from './seat.js';
 import flightRoute from './flight.js';
 import airportRoute from './airport.js';
@@ -31,6 +32,7 @@ router.use(
   })
 );
 router.use('/api/v1/auth', authRoute);
+router.use('/api/v1/users', userRoute);
 router.use('/api/v1/seats', seatRoute);
 router.use('/api/v1/flights', flightRoute);
 router.use('/api/v1/airports', airportRoute);

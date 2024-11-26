@@ -18,9 +18,28 @@ export const loginSchema = Joi.object({
 export const registerSchema = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
-  email: Joi.string().email().required(),
+  email: Joi.string().email({
+    tlds: {
+      allow: ['com', 'net', 'id'],
+    },
+  }),
   phone: Joi.string().min(10).required(),
   password: Joi.string().min(8).required(),
+});
+
+export const updateProfileSchema = Joi.object({
+  firstName: Joi.string().optional(),
+  lastName: Joi.string().optional(),
+  familyName: Joi.string().optional(),
+  phone: Joi.string().min(10).optional(),
+  role: Joi.string().valid('ADMIN', 'BUYER').optional(),
+});
+
+export const updateUserSchema = Joi.object({
+  firstName: Joi.string().optional(),
+  lastName: Joi.string().optional(),
+  familyName: Joi.string().optional(),
+  phone: Joi.string().min(10).optional(),
 });
 
 export const seatSchema = Joi.object({
@@ -75,13 +94,22 @@ export const airportSchema = Joi.object({
   state: Joi.string().optional(),
   country: Joi.string().required(),
   timezone: Joi.string().required(),
-  latitude: Joi.string().regex(/^-?\d+(\.\d+)?$/).required().messages({
-    'string.pattern.base': 'Latitude must be a valid decimal number.',
-  }),
-  longitude: Joi.string().regex(/^-?\d+(\.\d+)?$/).required().messages({
-    'string.pattern.base': 'Longitude must be a valid decimal number.',
-  }),
-  elevation: Joi.string().optional().regex(/^\d+(\.\d+)?$/).messages({
-    'string.pattern.base': 'Elevation must be a valid decimal number.',
-  }),
+  latitude: Joi.string()
+    .regex(/^-?\d+(\.\d+)?$/)
+    .required()
+    .messages({
+      'string.pattern.base': 'Latitude must be a valid decimal number.',
+    }),
+  longitude: Joi.string()
+    .regex(/^-?\d+(\.\d+)?$/)
+    .required()
+    .messages({
+      'string.pattern.base': 'Longitude must be a valid decimal number.',
+    }),
+  elevation: Joi.string()
+    .optional()
+    .regex(/^\d+(\.\d+)?$/)
+    .messages({
+      'string.pattern.base': 'Elevation must be a valid decimal number.',
+    }),
 });

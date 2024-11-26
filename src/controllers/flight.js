@@ -3,9 +3,6 @@ import { FlightService } from '../services/flight.js';
 
 export class FlightController {
   static async getAll(req, res, next) {
-    /*
-    TODO: validation create and update by airport & airline | available or not
-    */
     try {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || null;
