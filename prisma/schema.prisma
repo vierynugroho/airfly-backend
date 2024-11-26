@@ -94,7 +94,7 @@ model Seat {
   status     SeatStatus @default(AVAILABLE)
 
   flight    Flight      @relation(fields: [flightId], references: [id])
-  passenger Passenger[]
+  bookingDetail BookingDetail[]
 
   @@map("seats")
 }
@@ -108,15 +108,31 @@ model Booking {
   bookingDate    DateTime      @map("booking_date")
   totalPrice     Float         @map("total_price")
   status         BookingStatus @default(ACTIVE)
-  createdAt      DateTime      @map("created_at")
-  updateAt       DateTime      @map("update_at")
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updateAt       DateTime      @updatedAt @map("update_at")
 
-  flight       Flight      @relation("flight", fields: [flightId], references: [id])
-  returnFlight Flight?     @relation("ReturnFlight", fields: [returnFlightId], references: [id])
-  payment      Payment?
-  passenger    Passenger[]
+  flight        Flight          @relation("flight", fields: [flightId], references: [id])
+  returnFlight  Flight?         @relation("ReturnFlight", fields: [returnFlightId], references: [id])
+  payment       Payment?
+  bookingDetail BookingDetail[]
 
   @@map("bookings")
+}
+
+model BookingDetail {
+  id          Int      @id @default(autoincrement())
+  bookingId   Int      @map("booking_id")
+  passengerId Int      @unique @map("passenger_id")
+  seatId      Int      @map("seat_id")
+  price       Float
+  createdAt   DateTime @default(now()) @map("createdAt")
+  updateAt    DateTime @default(now()) @updatedAt
+
+  booking   Booking   @relation(fields: [bookingId], references: [id])
+  passenger Passenger @relation(fields: [passengerId], references: [id])
+  seat  Seat @relation(fields: [seatId], references: [id])
+
+  @@map("booking_details")
 }
 
 model Payment {
@@ -134,7 +150,6 @@ model Payment {
 
 model Passenger {
   id             Int            @id @default(autoincrement())
-  bookingId      Int            @map("booking_id")
   name           String
   familyName     String         @map("family_name")
   gender         Gender         @default(MALE)
@@ -145,10 +160,8 @@ model Passenger {
   dob            DateTime
   expiredDate    DateTime       @map("expired_Date")
   type           PassengerType  @default(ADULT)
-  seatId         Int            @map("seat_id")
 
-  booking Booking @relation(fields: [bookingId], references: [id])
-  seat    Seat    @relation(fields: [seatId], references: [id])
+  bookingDetail BookingDetail?
 
   @@map("passengers")
 }
