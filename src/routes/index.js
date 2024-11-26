@@ -5,6 +5,7 @@ import flightRoute from './flight.js';
 import airportRoute from './airport.js';
 import * as swaggerUI from 'swagger-ui-express';
 import { readFileSync } from 'fs';
+import { bookingRoute } from './booking.js';
 const swaggerDoc = JSON.parse(readFileSync('./public/docs/swagger.json'));
 
 const router = express.Router();
@@ -33,5 +34,6 @@ router.use('/api/v1/auth', authRoute);
 router.use('/api/v1/seats', seatRoute);
 router.use('/api/v1/flights', flightRoute);
 router.use('/api/v1/airports', airportRoute);
+router.use('/api/v1/booking', bookingRoute);
 
 export default router;
