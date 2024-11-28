@@ -88,10 +88,12 @@ model Flight {
 }
 
 model Seat {
-  id         Int        @id @default(autoincrement())
-  flightId   Int        @map("flight_id")
-  seatNumber String     @map("seat_number")
-  status     SeatStatus @default(AVAILABLE)
+  id            Int        @id @default(autoincrement())
+  flightId      Int        @map("flight_id")
+  seatNumber    String     @map("seat_number")
+  status        SeatStatus @default(AVAILABLE)
+  departureTime DateTime?  @default(now())
+  arrivalTime   DateTime?  @default(now())
 
   flight        Flight          @relation(fields: [flightId], references: [id])
   bookingDetail BookingDetail[]
