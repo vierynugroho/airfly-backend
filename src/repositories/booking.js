@@ -38,7 +38,9 @@ export class BookingRepository {
         id: {
           in: seatsId,
         },
-        flightId,
+        flightId: {
+          in: flightId,
+        },
         status: SeatStatus.AVAILABLE,
       },
     });

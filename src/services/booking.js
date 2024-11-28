@@ -47,7 +47,15 @@ export class BookingService {
       seatsId.push(booking.bookingDetail[i].seatId);
     }
 
-    await BookingRepository.isSeatAvailable(booking.flightId, seatsId);
+    let flightId = [];
+
+    if (booking.returnFlightId && booking.returnFlightId != booking.flightId) {
+      flightId = [booking.flightId, booking.returnFlightId];
+    } else {
+      flightId = [booking.flightId];
+    }
+
+    await BookingRepository.isSeatAvailable(flightId, seatsId);
 
     const created = new Date().toISOString();
     let totalPrice = 0;
