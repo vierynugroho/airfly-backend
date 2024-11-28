@@ -8,8 +8,12 @@ export class FlightController {
       const limit = parseInt(req.query.limit) || null;
 
       const departureDate = req.query.departureDate;
-      const departureAirport = parseInt(req.query.departureAirport);
-      const arrivalAirport = parseInt(req.query.arrivalAirport);
+      const departureAirport = req.query.departureAirport
+        ? parseInt(req.query.departureAirport)
+        : null;
+      const arrivalAirport = req.query.arrivalAirport
+        ? parseInt(req.query.arrivalAirport)
+        : null;
 
       if (isNaN(departureAirport) || isNaN(arrivalAirport)) {
         throw new ErrorHandler(

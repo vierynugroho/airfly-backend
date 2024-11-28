@@ -46,6 +46,21 @@ export const seatSchema = Joi.object({
   flightId: Joi.number().required(),
   seatNumber: Joi.string().required(),
   status: Joi.string().valid('AVAILABLE', 'UNAVAILABLE', 'LOCKED').required(),
+  departureTime: Joi.date().iso().required(),
+  arrivalTime: Joi.date()
+    .iso()
+    .required()
+    .custom((value, helpers) => {
+      const departureTime = helpers.state.ancestors[0].departureTime;
+      if (value <= departureTime) {
+        return helpers.error('arrivalTime.beforeDeparture');
+      }
+      return value;
+    }, 'Arrival time validation')
+    .messages({
+      'arrivalTime.beforeDeparture':
+        'Arrival time must be after departure time.',
+    }),
 });
 
 export const flightSchema = Joi.object({

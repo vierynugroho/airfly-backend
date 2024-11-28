@@ -77,6 +77,10 @@ export class SeatController {
       const limit = parseInt(req.query.limit) || null;
       const { flightId } = req.query;
 
+      const departureTime = req.query.departureTime;
+      const arrivalTime = req.query.arrivalTime;
+      const seatStatus = req.query.seatStatus;
+
       let condition = {};
       const pagination = {};
 
@@ -87,6 +91,18 @@ export class SeatController {
 
       if (flightId) {
         condition.flightId = parseInt(flightId);
+      }
+
+      if (departureTime) {
+        condition.departureTime = new Date(departureTime);
+      }
+
+      if (arrivalTime) {
+        condition.arrivalTime = new Date(arrivalTime);
+      }
+
+      if (seatStatus) {
+        condition.status = seatStatus;
       }
 
       const { seats, totalSeats } = await SeatService.findMany(
