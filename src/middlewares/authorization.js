@@ -8,12 +8,7 @@ import { AuthRepository } from '../repositories/auth.js';
  * https://euphoric-world-440804-k1.et.r.appspot.com/api/v1/docs/#/users/get_users
  */
 
-/**
- *
- * @param {string} role
- */
-
-export function authorization(role) {
+export function authorization(allowedRoles) {
   /**
    *
    * @param {import('express').Request} req
@@ -36,7 +31,7 @@ export function authorization(role) {
 
       const user = await AuthRepository.findUserById(parseInt(jwtVerify.id));
 
-      if (user.role != role) {
+      if (!allowedRoles.includes(user.role)) {
         throw new ErrorHandler(403, 'forbidden, Go Back ! >:(');
       }
 

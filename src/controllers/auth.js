@@ -1,4 +1,6 @@
 import { AuthService } from '../services/auth.js';
+import { UserService } from '../services/user.js';
+
 export class AuthController {
   /**
    *
@@ -101,6 +103,28 @@ export class AuthController {
       });
     } catch (e) {
       next(e);
+    }
+  }
+
+  static async getUserLoggedIn(req, res, next) {
+    try {
+      const userID = parseInt(req.user.id);
+
+      if (isNaN(userID)) {
+        throw new ErrorHandler(422, 'user ID is not a number');
+      }
+
+      const user = await UserService.getByID(userID);
+
+      res.json({
+        meta: {
+          statusCode: 200,
+          message: 'user logged in data retrieved successfully',
+        },
+        data: user,
+      });
+    } catch (error) {
+      next(error);
     }
   }
 }
