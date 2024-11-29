@@ -3,6 +3,7 @@ import authRoute from './auth.js';
 import seatRoute from './seat.js';
 import flightRoute from './flight.js';
 import airportRoute from './airport.js';
+import airlineRoute from './airline.js';
 import * as swaggerUI from 'swagger-ui-express';
 import { readFileSync } from 'fs';
 const swaggerDoc = JSON.parse(readFileSync('./public/docs/swagger.json'));
@@ -29,9 +30,11 @@ router.use(
     ],
   })
 );
+
 router.use('/api/v1/auth', authRoute);
 router.use('/api/v1/seats', seatRoute);
 router.use('/api/v1/flights', flightRoute);
 router.use('/api/v1/airports', airportRoute);
+router.use('/api/v1/airline', airlineRoute);
 
 export default router;
