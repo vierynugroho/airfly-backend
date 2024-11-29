@@ -4,19 +4,36 @@ import imagekit from '../config/imagekit.js';
 export class AirlineController {
   static async getAll(req, res, next) {
     try {
+      // Ambil nilai offset dan limit dari query string
       const { offset = 0, limit = 10 } = req.query;
+
+      // Konversi ke angka
       const pagination = { offset: Number(offset), limit: Number(limit) };
 
+      // Dapatkan data airlines dan total airlines
       const { airlines, totalAirlines } =
         await AirlineService.findMany(pagination);
 
+      // Hitung total halaman dan halaman sebelumnya/berikutnya
+      const totalPages = Math.ceil(totalAirlines / limit);
+      const currentPage = Math.floor(offset / limit) + 1;
+      const nextPage = currentPage < totalPages ? currentPage + 1 : null;
+      const prevPage = currentPage > 1 ? currentPage - 1 : null;
+
+      // Kirim response
       res.json({
         meta: {
           statusCode: 200,
           message: 'Airlines fetched successfully',
+          pagination: {
+            totalAirlines,
+            totalPages,
+            currentPage,
+            nextPage,
+            prevPage,
+          },
         },
         data: airlines,
-        total: totalAirlines,
       });
     } catch (error) {
       next(error);

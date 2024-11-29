@@ -7,6 +7,21 @@ export class FlightController {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || null;
 
+      const departureDate = req.query.departureDate;
+      const departureAirport = req.query.departureAirport
+        ? parseInt(req.query.departureAirport)
+        : null;
+      const arrivalAirport = req.query.arrivalAirport
+        ? parseInt(req.query.arrivalAirport)
+        : null;
+
+      if (isNaN(departureAirport) || isNaN(arrivalAirport)) {
+        throw new ErrorHandler(
+          422,
+          'invalid value for departure airport or arrival airport'
+        );
+      }
+
       const isCheapest = req.query.isCheapest || 'false';
       const shortest = req.query.shortest || 'false';
       const earliestDeparture = req.query.earliestDeparture || 'false';
@@ -46,6 +61,17 @@ export class FlightController {
       if (priceMin) {
         condition.price = condition.price || {};
         condition.price.gte = parseFloat(priceMin);
+      }
+      if (departureDate) {
+        condition.departureTime = {
+          gte: new Date(departureDate),
+        };
+      }
+      if (departureAirport) {
+        condition.departureAirport = departureAirport;
+      }
+      if (arrivalAirport) {
+        condition.arrivalAirport = arrivalAirport;
       }
       if (seatClass) {
         condition.class = seatClass.toUpperCase() || {};

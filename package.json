@@ -12,7 +12,7 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:db": "npx prisma db push",
     "prisma:reset": "npx prisma migrate reset",
-    "prisma:seed": "node ./prisma/seeders/seeder.js",
+    "prisma:seed": "node ./prisma/seeder.js",
     "prisma:studio": "npx prisma studio",
     "prisma:refresh": "npm run prisma:reset && npm run prisma:migrate && npx prisma generate && npm run prisma:seed"
   },
@@ -37,6 +37,7 @@
     "@prisma/client": "^5.22.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
