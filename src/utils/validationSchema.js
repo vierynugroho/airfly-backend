@@ -129,22 +129,8 @@ export const airportSchema = Joi.object({
     }),
 });
 
-export const validateAirlineData = (req, res, next) => {
-  const schema = Joi.object({
-    name: Joi.string().min(3).max(255).required(),
-    imageUrl: Joi.string().uri().required(),
-    imageId: Joi.string().required(),
-  });
-
-  const { error } = schema.validate(req.body);
-  if (error) {
-    return res.status(400).json({
-      meta: {
-        statusCode: 400,
-        message: error.details[0].message,
-      },
-    });
-  }
-
-  next();
-};
+export const airlineSchema = Joi.object({
+  name: Joi.string().required(),
+  imageUrl: Joi.string().optional(),
+  imageId: Joi.string().optional(),
+});
