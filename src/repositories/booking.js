@@ -33,20 +33,46 @@ export class BookingRepository {
   }
 
   static async isSeatAvailable(flightId, seatsId) {
-    const seats = await prisma.seat.findMany({
-      where: {
-        id: {
-          in: seatsId,
+    if (flightId.length == 2) {
+      const departureSeats = await prisma.seat.count({
+        where: {
+          id: {
+            in: seatsId,
+          },
+          flightId: flightId[0],
+          status: SeatStatus.AVAILABLE,
         },
-        flightId: {
-          in: flightId,
-        },
-        status: SeatStatus.AVAILABLE,
-      },
-    });
+      });
 
-    if (seats.length != seatsId) {
-      throw new ErrorHandler(404, 'Seats not available');
+      const arrivalSeats = await prisma.seat.count({
+        where: {
+          id: {
+            in: seatsId,
+          },
+          flightId: flightId[1],
+          status: SeatStatus.AVAILABLE,
+        },
+      });
+
+      if (departureSeats + arrivalSeats != seatsId.length) {
+        throw new ErrorHandler(404, 'Seats not available');
+      }
+    } else {
+      const seats = await prisma.seat.findMany({
+        where: {
+          id: {
+            in: seatsId,
+          },
+          flightId: {
+            in: flightId,
+          },
+          status: SeatStatus.AVAILABLE,
+        },
+      });
+
+      if (seats.length != seatsId.length) {
+        throw new ErrorHandler(404, 'Seats not available');
+      }
     }
   }
 
@@ -60,6 +86,22 @@ export class BookingRepository {
       data: {
         status,
       },
+    });
+  }
+
+  static async findBooking(condition, pagination, orderBy) {
+    return await prisma.booking.findMany({
+      where: condition,
+      orderBy,
+      skip: pagination.offset,
+      take: pagination.limit,
+    });
+  }
+
+  static async totalBooking(condition, orderBy) {
+    return await prisma.booking.count({
+      where: condition,
+      orderBy,
     });
   }
 }

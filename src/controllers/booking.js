@@ -1,25 +1,69 @@
 import { BookingService } from '../services/booking.js';
 
-/**
- *
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
- */
-export async function createBooking(req, res, next) {
-  try {
-    await BookingService.createBooking({
-      ...req.body,
-      userId: req.user.id,
-    });
+export class BookingController {
+  /**
+   *
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   * @param {import('express').NextFunction} next
+   */
+  static async createBooking(req, res, next) {
+    try {
+      await BookingService.createBooking({
+        ...req.body,
+        userId: req.user.id,
+      });
 
-    return res.json({
-      meta: {
-        statusCode: 201,
-        message: 'booking created',
-      },
-    });
-  } catch (err) {
-    next(err);
+      return res.json({
+        meta: {
+          statusCode: 201,
+          message: 'booking created',
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+  /**
+   *
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   * @param {import('express').NextFunction} next
+   */
+  static async getAll(req, res, next) {
+    try {
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || null;
+      const sort = req.query.sort?.toLowerCase() || null;
+      const userId = req.user.id;
+
+      const { booking, totalBooking } = await BookingService.findBooking({
+        page,
+        limit,
+        sort,
+        userId,
+      });
+
+      return res.json({
+        meta: {
+          status: 200,
+          message: 'success',
+          pagination:
+            page && limit
+              ? {
+                  totalPage: Math.ceil(totalBooking / limit),
+                  currentPage: page,
+                  pageItems: booking.length,
+                  nextPage:
+                    page < Math.ceil(totalBooking / limit) ? page + 1 : null,
+                  prevPage: page > 1 ? page - 1 : null,
+                }
+              : null,
+        },
+        data: booking,
+      });
+    } catch (err) {
+      next(err);
+    }
   }
 }
