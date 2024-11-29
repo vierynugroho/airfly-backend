@@ -1,6 +1,8 @@
 import express from 'express';
 import { AirlineController } from '../controllers/airline.js';
 import { airlineSchema } from '../utils/validationSchema.js';
+import { authorization } from '../middlewares/authorization.js';
+import { UserRole } from '@prisma/client';
 import validation from '../middlewares/validator.js';
 import upload from '../middlewares/multer.js';
 
