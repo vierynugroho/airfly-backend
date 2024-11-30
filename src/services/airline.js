@@ -6,6 +6,7 @@ export class AirlineService {
     const airlines = await AirlineRepository.findMany();
     return airlines;
   }
+
   static async create(data) {
     const existingAirline = await AirlineRepository.findByName(data.name);
 
@@ -28,6 +29,25 @@ export class AirlineService {
       throw new ErrorHandler(404, 'Airline not found');
     }
 
+    // Hapus gambar lama jika ada gambar baru diunggah
+    if (data.imageUrl && data.imageUrl !== airline.imageUrl) {
+      try {
+        if (airline.imageKitId) {
+          console.log(`Deleting old image: ${airline.imageKitId}`);
+          await AirlineRepository.deleteImage(airline.imageKitId);
+        }
+      } catch (err) {
+        console.error(
+          `Failed to delete old image for airline ID ${airlineId}:`,
+          err.message
+        );
+        throw new ErrorHandler(
+          500,
+          `Failed to delete old image: ${err.message}`
+        );
+      }
+    }
+
     const updatedAirline = await AirlineRepository.update(airlineId, data);
     return updatedAirline;
   }
@@ -41,6 +61,15 @@ export class AirlineService {
     const airline = await AirlineRepository.findByID(airlineId);
     if (!airline) {
       throw new ErrorHandler(404, 'Airline not found');
+    }
+
+    if (airline.imageKitId) {
+      try {
+        await AirlineRepository.deleteImage(airline.imageKitId);
+        // eslint-disable-next-line no-unused-vars
+      } catch (err) {
+        throw new ErrorHandler(500, 'Failed to delete associated image');
+      }
     }
 
     const deletedAirline = await AirlineRepository.delete(airlineId);

@@ -130,7 +130,12 @@ export const airportSchema = Joi.object({
 });
 
 export const airlineSchema = Joi.object({
-  name: Joi.string().required(),
-  imageUrl: Joi.string().optional(),
-  imageId: Joi.string().optional(),
+  name: Joi.string()
+    .pattern(/^(?!^\d+$).*$/, 'not only numbers') // Regex untuk memastikan string tidak hanya angka
+    .required()
+    .messages({
+      'string.empty': 'Airline name is required.',
+      'string.pattern.name': 'Airline name cannot contain only numbers.',
+      'any.required': 'Airline name is required.',
+    }),
 });

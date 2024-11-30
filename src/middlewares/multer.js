@@ -1,24 +1,23 @@
 import multer from 'multer';
-import path from 'path';
+import { ErrorHandler } from './error.js';
 
-const storage = multer.memoryStorage();
+const fileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
 
-const fileFilter = (req, file, cb) => {
-  const fileTypes = /jpeg|jpg|png/;
-  const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = fileTypes.test(file.mimetype);
+const MAX_FILE_SIZE = 2 * 1024 * 1024;
 
-  if (extname && mimetype) {
-    cb(null, true);
-  } else {
-    cb(new Error('Only images (jpeg, jpg, png) are allowed!'), false);
-  }
-};
-
-const upload = multer({
-  storage,
-  limits: { fileSize: 2 * 1024 * 1024 },
-  fileFilter,
+const multerConfig = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: MAX_FILE_SIZE,
+  },
+  fileFilter: (req, file, cb) => {
+    if (fileTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new ErrorHandler(422, 'Only images (jpeg, jpg, png) are allowed!'));
+    }
+  },
 });
 
-export default upload;
+const imageHandlerMiddleware = multerConfig.single('image');
+export default imageHandlerMiddleware;

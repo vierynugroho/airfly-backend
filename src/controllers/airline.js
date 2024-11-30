@@ -179,6 +179,7 @@ export class AirlineController {
       let imageId = '';
 
       if (req.file) {
+        console.log('Uploading new image...');
         const uploadResponse = await imagekit.upload({
           file: req.file.buffer,
           fileName: req.file.originalname,
@@ -187,21 +188,21 @@ export class AirlineController {
 
         imageUrl = uploadResponse.url;
         imageId = uploadResponse.fileId;
+        console.log(`Uploaded new image: ${imageUrl}`);
       }
 
       const data = { name, imageUrl, imageId };
-      const airline = await AirlineService.update(id, data);
+      const updatedAirline = await AirlineService.update(id, data);
 
-      return res.json({
+      res.json({
         meta: {
           statusCode: 200,
           message: 'Airline updated successfully with image',
         },
-        data: {
-          airline,
-        },
+        data: updatedAirline,
       });
     } catch (error) {
+      console.error('Error in updateWithImage:', error.message);
       next(error);
     }
   }
