@@ -9,7 +9,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(authorization([UserRole.BUYER, UserRole.ADMIN]), FlightController.getAll)
+  .get(FlightController.getAll)
   .post(
     authorization([UserRole.BUYER, UserRole.ADMIN]),
     validation(flightSchema),
@@ -17,10 +17,7 @@ router
   );
 router
   .route('/:id')
-  .get(
-    authorization([UserRole.BUYER, UserRole.ADMIN]),
-    FlightController.getByID
-  )
+  .get(FlightController.getByID)
   .put(
     authorization([UserRole.ADMIN]),
     validation(flightSchema),
