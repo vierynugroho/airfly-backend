@@ -128,3 +128,14 @@ export const airportSchema = Joi.object({
       'string.pattern.base': 'Elevation must be a valid decimal number.',
     }),
 });
+
+export const airlineSchema = Joi.object({
+  name: Joi.string()
+    .pattern(/^(?!^\d+$).*$/, 'not only numbers') // Regex untuk memastikan string tidak hanya angka
+    .required()
+    .messages({
+      'string.empty': 'Airline name is required.',
+      'string.pattern.name': 'Airline name cannot contain only numbers.',
+      'any.required': 'Airline name is required.',
+    }),
+});
