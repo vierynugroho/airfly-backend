@@ -42,6 +42,10 @@ export class BookingService {
       );
     }
 
+    if (booking.flightId == booking.returnFlightId) {
+      throw new ErrorHandler(400, "flightId and returnFlightId can't be same");
+    }
+
     const seatsId = [];
     for (let i = 0; i < booking.bookingDetail.length; i++) {
       seatsId.push(booking.bookingDetail[i].seatId);
@@ -89,5 +93,44 @@ export class BookingService {
 
     await BookingRepository.createPassengers(payload);
     await BookingRepository.setSeatStatus(seatsId, SeatStatus.LOCKED);
+  }
+
+  /**
+   * @typedef CriteriaBooking
+   * @property { number } page
+   * @property { number } limit
+   * @property { number } id
+   * @property { number } userId
+   * @property { string } sort
+   *
+   * @param {CriteriaBooking} criteria
+   */
+  static async findBooking(criteria) {
+    const condition = {};
+    const pagination = {};
+    const orderBy = {};
+
+    if (criteria.page && criteria.limit) {
+      pagination.offset = (criteria.page - 1) * criteria.limit;
+      pagination.limit = criteria.limit;
+    }
+
+    if (criteria.sort) {
+      orderBy.bookingDate = criteria.sort == 'asc' ? 'asc' : 'desc';
+    }
+
+    condition.userId = criteria.userId;
+
+    const booking = await BookingRepository.findBooking(
+      condition,
+      pagination,
+      orderBy
+    );
+    const totalBooking = await BookingRepository.totalBooking(
+      condition,
+      orderBy
+    );
+
+    return { booking, totalBooking };
   }
 }

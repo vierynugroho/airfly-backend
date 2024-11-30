@@ -76,7 +76,7 @@ export class AuthService {
     const id = newUser?.id || user?.id;
     const otp = generate(Buffer.from(id.toString()).toString('base64'));
 
-    await sendOTP(otp, email);
+    await sendOTP(otp, email, `${firstName} ${lastName}`);
   }
 
   static async verify(otp, email) {
