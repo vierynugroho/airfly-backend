@@ -2,6 +2,7 @@ import { ErrorHandler } from '../middlewares/error.js';
 import { AirportRepository } from '../repositories/airport.js';
 import { FlightRepository } from '../repositories/flight.js';
 import { SeatRepository } from '../repositories/seat.js';
+import { AirlineRepository } from '../repositories/airline.js';
 import { calculateDuration } from '../utils/calculateDuration.js';
 
 export class FlightService {
@@ -46,22 +47,25 @@ export class FlightService {
   }
 
   static async create(data) {
-    /*
-    TODO: validation create and update by airline | available or not
-    */
-    const checkArrivalAirport = await AirportRepository.findByID(
+    const arrivalAirport = await AirportRepository.findByID(
       data.arrivalAirport
     );
-    const checkDepartureAirport = await AirportRepository.findByID(
+    const departureAirport = await AirportRepository.findByID(
       data.departureAirport
     );
 
-    if (!checkArrivalAirport) {
+    if (!arrivalAirport) {
       throw new ErrorHandler(404, 'arrival airport is not found');
     }
 
-    if (!checkDepartureAirport) {
+    if (!departureAirport) {
       throw new ErrorHandler(404, 'departure airport is not found');
+    }
+
+    const airline = await AirlineRepository.findByID(data.airlineId);
+
+    if (!airline) {
+      throw new ErrorHandler(404, 'airline is not found');
     }
 
     if (data.flightNumber) {
@@ -91,6 +95,7 @@ export class FlightService {
     const checkArrivalAirport = await AirportRepository.findByID(
       data.arrivalAirport
     );
+
     const checkDepartureAirport = await AirportRepository.findByID(
       data.departureAirport
     );
@@ -101,6 +106,12 @@ export class FlightService {
 
     if (!checkDepartureAirport) {
       throw new ErrorHandler(404, 'departure airport is not found');
+    }
+
+    const airline = await AirlineRepository.findByID(data.airlineId);
+
+    if (!airline) {
+      throw new ErrorHandler(404, 'airline is not found');
     }
 
     if (data.flightNumber) {
