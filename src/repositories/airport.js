@@ -28,11 +28,19 @@ export class AirportRepository {
   }
 
   static async findMany(pagination, filter, sorter) {
+    if (!Array.isArray(sorter)) {
+      sorter = [sorter];
+    }
+
     const airports = await prisma.airport.findMany({
       skip: pagination.offset,
       take: pagination.limit,
       where: filter,
       orderBy: sorter,
+      include: {
+        departure: true,
+        arrival: true,
+      }
     });
     return airports;
   }
@@ -42,6 +50,10 @@ export class AirportRepository {
       where: {
         id: airportID,
       },
+      include: {
+        departure: true,
+        arrival: true,
+      }
     });
     return airport;
   }
@@ -59,6 +71,10 @@ export class AirportRepository {
       where: {
         code,
       },
+      include: {
+        departure: true,
+        arrival: true,
+      }
     });
     return airport;
   }

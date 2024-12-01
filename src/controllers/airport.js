@@ -1,3 +1,4 @@
+import { storagetransfer_v1 } from 'googleapis';
 import { ErrorHandler } from '../middlewares/error.js';
 import { AirportService } from '../services/airport.js';
 
@@ -75,10 +76,21 @@ export class AirportController {
     try {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || null;
-      const { name, city, country } = req.query;
+      const { name, city, country, state, sortBy, order } = req.query;
 
       const condition = {};
       const pagination = {};
+      const sorter = {};
+
+      const validSortFields = ['name', 'city', 'state', 'country', 'createdAt'];
+      const validOrders = ['asc', 'desc'];
+
+      if (sortBy && validSortFields.includes(sortBy)) {
+        sorter[sortBy] = validOrders.includes(order?.toLowerCase()) ? order.toLowerCase() : 'asc';
+      } else {
+        sorter.createdAt = 'desc';
+      }
+
 
       if (page && limit) {
         pagination.offset = (page - 1) * limit;
@@ -87,11 +99,13 @@ export class AirportController {
 
       if (name) condition.name = { contains: name, mode: 'insensitive' };
       if (city) condition.city = { contains: city, mode: 'insensitive' };
+      if (state) condition.state = { contains: state, mode: 'insensitive' };
       if (country) condition.country = { contains: country, mode: 'insensitive' };
 
       const { airports, totalAirports } = await AirportService.findMany(
         pagination,
-        condition
+        condition,
+        sorter
       );
 
       res.json({
