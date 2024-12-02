@@ -85,24 +85,52 @@ async function main() {
     data: [
       {
         name: 'Garuda Indonesia',
-        imageUrl: 'garuda.png',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025',
         imageId: 'garuda-logo',
       },
       {
         name: 'Singapore Airlines',
-        imageUrl: 'singapore-airlines.png',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/singapore-airline.png?updatedAt=1733030014987',
         imageId: 'sia-logo',
       },
       {
         name: 'Qatar Airways',
-        imageUrl: 'qatar-airways.png',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/qatar%20airways.png?updatedAt=1733030014946',
         imageId: 'qatar-logo',
       },
-      { name: 'Emirates', imageUrl: 'emirates.png', imageId: 'emirates-logo' },
-      { name: 'Qantas', imageUrl: 'qantas.png', imageId: 'qantas-logo' },
-      { name: 'Delta Airlines', imageUrl: 'delta.png', imageId: 'delta-logo' },
-      { name: 'Lion Air', imageUrl: 'lion-air.png', imageId: 'lion-logo' },
-      { name: 'AirAsia', imageUrl: 'airasia.png', imageId: 'airasia-logo' },
+      {
+        name: 'Emirates',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/emirates.png?updatedAt=1733030014808',
+        imageId: 'emirates-logo',
+      },
+      {
+        name: 'Qantas',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/qantas.jpg?updatedAt=1733030014904',
+        imageId: 'qantas-logo',
+      },
+      {
+        name: 'Delta Airlines',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/delta%20airlines.png?updatedAt=1733030297967',
+        imageId: 'delta-logo',
+      },
+      {
+        name: 'Lion Air',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/lion-air.png?updatedAt=1733030014852',
+        imageId: 'lion-logo',
+      },
+      {
+        name: 'AirAsia',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/air%20asia.png?updatedAt=1733030014916',
+        imageId: 'airasia-logo',
+      },
     ],
   });
 
