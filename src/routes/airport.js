@@ -4,29 +4,26 @@ import { AirportController } from '../controllers/airport.js';
 import { airportSchema } from '../utils/validationSchema.js';
 import { authorization } from '../middlewares/authorization.js';
 import { UserRole } from '@prisma/client';
+import fileHandlerMiddleware from '../middlewares/fileHandler.js';
 
 const router = express.Router();
 
 router
   .route('/')
-  .get(
-    authorization([UserRole.BUYER, UserRole.ADMIN]),
-    AirportController.getAll
-  )
+  .get(AirportController.getAll)
   .post(
     authorization([UserRole.ADMIN]),
+    fileHandlerMiddleware,
     validation(airportSchema),
     AirportController.create
   );
 
 router
   .route('/:id')
-  .get(
-    authorization([UserRole.BUYER, UserRole.ADMIN]),
-    AirportController.getByID
-  )
+  .get(AirportController.getByID)
   .put(
     authorization([UserRole.ADMIN]),
+    fileHandlerMiddleware,
     validation(airportSchema),
     AirportController.update
   )
