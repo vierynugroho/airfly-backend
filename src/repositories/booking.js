@@ -104,4 +104,22 @@ export class BookingRepository {
       orderBy,
     });
   }
+
+  static async findById(id) {
+    return await prisma.booking.findFirst({
+      where: {
+        id,
+      },
+      include: {
+        bookingDetail: {
+          include: {
+            passenger: true,
+            seat: true,
+          },
+        },
+        flight: true,
+        returnFlight: true,
+      },
+    });
+  }
 }
