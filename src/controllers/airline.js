@@ -1,3 +1,4 @@
+import { ErrorHandler } from '../middlewares/error.js';
 import { AirlineService } from '../services/airline.js';
 
 export class AirlineController {
