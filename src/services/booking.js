@@ -133,4 +133,8 @@ export class BookingService {
 
     return { booking, totalBooking };
   }
+
+  static async findById(id) {
+    return await BookingRepository.findById(id);
+  }
 }
