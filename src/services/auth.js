@@ -133,36 +133,26 @@ export class AuthService {
   }
 
   static async googleLogin(access_token) {
-    const { email, given_name, family_name } = await AuthRepository.googleLogin(
-      access_token
-    );
-
+    const { email, given_name, family_name } =
+      await AuthRepository.googleLogin(access_token);
 
     let user = await AuthRepository.findByEmail(email);
-  if (!user) {
-    // register the user
-    user = await AuthRepository.newUser({
-      firstName: given_name,
-      lastName: family_name,
-      email,
-      phone: "",
-      password: "",
-    });
-  }
-  
-    // const comparePassword = await Bcrypt.compare(password, user.password);
-
-    // if (!comparePassword) {
-    //   throw new ErrorHandler(401, 'wrong credential');
-    // }
-
-    // if (user.status != (await AuthRepository.getUserStatusEnum()).VERIFIED) {
-    //   throw new ErrorHandler(403, 'user not verified');
-    // }
+    if (!user) {
+      user = await AuthRepository.newGoogleUser(
+        given_name,
+        family_name,
+        '',
+        email,
+        '',
+      );
+    }
 
     const token = JWT.sign(user.id);
     delete user.password;
+    delete user.secretKey;
+    delete user.otpToken;
+    delete user.phone;
 
-    return {user, token};
+    return { user, token };
   }
 }

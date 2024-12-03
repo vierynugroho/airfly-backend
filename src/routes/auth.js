@@ -12,7 +12,7 @@ router.post('/register', validation(registerSchema), AuthController.register);
 router.post('/verify', AuthController.verify);
 router.post('/reset-otp', AuthController.sendResetOtp);
 router.post('/reset-password', AuthController.resetPassword);
-router.post('/login-oauth', AuthController.loginGoogle);
+router.post('/login-google', AuthController.loginGoogle);
 router.get(
   '/me',
   authorization([UserRole.ADMIN, UserRole.BUYER]),

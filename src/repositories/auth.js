@@ -1,7 +1,7 @@
 import { prisma } from '../database/db.js';
 import { UserStatus, UserRole } from '@prisma/client';
 import { Bcrypt } from '../utils/bcrypt.js';
-const axios = require("axios");
+import axios from 'axios';
 
 export class AuthRepository {
   /**
@@ -97,9 +97,6 @@ export class AuthRepository {
       },
     });
   }
-  
-  
-  
 
   /**
    *
@@ -146,4 +143,17 @@ export class AuthRepository {
     return response?.data;
   }
 
+  static async newGoogleUser(firstName, lastName, phone, email, password) {
+    return await prisma.user.create({
+      data: {
+        firstName,
+        lastName,
+        phone,
+        email,
+        password,
+        status: UserStatus.VERIFIED,
+        role: UserRole.BUYER,
+      },
+    });
+  }
 }
