@@ -127,4 +127,22 @@ export class AuthController {
       next(error);
     }
   }
+
+  static async loginGoogle(req, res, next) {
+    try {
+      const access_token = req.body.access_token
+     
+      const data = await AuthService.googleLogin(access_token);
+
+      res.json({
+        meta: {
+          statusCode: 200,
+          message: 'user logged in data retrieved successfully',
+        },
+        data: data,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }

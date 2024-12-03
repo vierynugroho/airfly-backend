@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 export class JWT {
 	static sign(id) {
-		const token = jwt.sign({ id }, process.env.JWT_SECRET || DEFAULT_SECRET_KEY, { algorithm: 'HS256', expiresIn: '24h' });
+		const token = jwt.sign({ id }, process.env.JWT_SECRET, { algorithm: 'HS256', expiresIn: '24h' });
 
 		return token;
 	}

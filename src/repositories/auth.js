@@ -1,6 +1,7 @@
 import { prisma } from '../database/db.js';
 import { UserStatus, UserRole } from '@prisma/client';
 import { Bcrypt } from '../utils/bcrypt.js';
+const axios = require("axios");
 
 export class AuthRepository {
   /**
@@ -138,4 +139,11 @@ export class AuthRepository {
       },
     });
   }
+  static async googleLogin(access_token) {
+    const response = await axios.get(
+      `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`
+    );
+    return response?.data;
+  }
+
 }
