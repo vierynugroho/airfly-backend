@@ -50,7 +50,8 @@
     "nodemailer": "^6.9.16",
     "otpauth": "^9.3.5",
     "prisma": "^5.22.0",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "eslint": "^9.15.0",

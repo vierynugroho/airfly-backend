@@ -37,7 +37,7 @@ export class BookingController {
       const sort = req.query.sort?.toLowerCase() || null;
       const userId = req.user.id;
 
-      const { booking, totalBooking } = await BookingService.findBooking({
+      const { bookings, totalBooking } = await BookingService.findBooking({
         page,
         limit,
         sort,
@@ -60,7 +60,7 @@ export class BookingController {
                 }
               : null,
         },
-        data: booking,
+        data: bookings,
       });
     } catch (err) {
       next(err);
@@ -83,7 +83,51 @@ export class BookingController {
           status: 200,
           message: 'successs',
         },
-        data: booking,
+        data: booking ? booking : [],
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  /**
+   *
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   * @param {import('express').NextFunction} next
+   */
+  static async getGroupedBy(req, res, next) {
+    try {
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || null;
+      const sort = req.query.sort?.toLowerCase() || null;
+      const userId = req.user.id;
+
+      const { groupedBookings, totalBooking, totalItems } =
+        await BookingService.findGrouped({
+          page,
+          limit,
+          sort,
+          userId,
+        });
+
+      return res.json({
+        meta: {
+          status: 200,
+          message: 'success',
+          pagination:
+            page && limit
+              ? {
+                  totalPage: Math.ceil(totalBooking / limit),
+                  currentPage: page,
+                  pageItems: totalItems,
+                  nextPage:
+                    page < Math.ceil(totalBooking / limit) ? page + 1 : null,
+                  prevPage: page > 1 ? page - 1 : null,
+                }
+              : null,
+        },
+        data: groupedBookings,
       });
     } catch (err) {
       next(err);
