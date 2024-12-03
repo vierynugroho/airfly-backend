@@ -121,7 +121,7 @@ export class BookingService {
 
     condition.userId = criteria.userId;
 
-    const booking = await BookingRepository.findBooking(
+    const bookings = await BookingRepository.findBooking(
       condition,
       pagination,
       orderBy
@@ -131,10 +131,44 @@ export class BookingService {
       orderBy
     );
 
-    return { booking, totalBooking };
+    return { bookings, totalBooking };
   }
 
   static async findById(id) {
     return await BookingRepository.findById(id);
+  }
+
+  static async findGrouped(criteria) {
+    const { bookings, totalBooking } = await this.findBooking(criteria);
+
+    const bulanMap = [
+      'Januari',
+      'Februari',
+      'Maret',
+      'April',
+      'Mei',
+      'Juni',
+      'Juli',
+      'Agustus',
+      'September',
+      'Oktober',
+      'November',
+      'Desember',
+    ];
+
+    const groupedBookings = {};
+
+    bookings.forEach((booking) => {
+      const date = new Date(booking.bookingDate);
+      const month = bulanMap[date.getMonth()];
+
+      if (!groupedBookings[month]) {
+        groupedBookings[month] = [];
+      }
+
+      groupedBookings[month].push(booking);
+    });
+
+    return { groupedBookings, totalBooking, totalItems: bookings.length };
   }
 }

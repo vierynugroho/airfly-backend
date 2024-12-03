@@ -18,7 +18,13 @@ bookingRoute.get(
 );
 
 bookingRoute.get(
-  '/:id',
+  '/group',
+  authorization([UserRole.BUYER]),
+  BookingController.getGroupedBy
+);
+
+bookingRoute.get(
+  '/id/:id',
   authorization([UserRole.BUYER]),
   BookingController.getById
 );
