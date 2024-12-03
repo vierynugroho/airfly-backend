@@ -133,4 +133,27 @@ export class BookingController {
       next(err);
     }
   }
+
+  /**
+   *
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   * @param {import('express').NextFunction} next
+   */
+  static async getByCode(req, res, next) {
+    try {
+      const { code } = req.params;
+      const booking = await BookingService.findByCode(code);
+
+      return res.json({
+        meta: {
+          status: 200,
+          message: 'successs',
+        },
+        data: booking ? booking : [],
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }

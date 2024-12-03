@@ -103,6 +103,7 @@ model Seat {
 
 model Booking {
   id             Int           @id @default(autoincrement())
+  bookingCode    String        @unique
   user           User          @relation(fields: [userId], references: [id])
   userId         Int           @map("user_id")
   flightId       Int           @map("flight_id")

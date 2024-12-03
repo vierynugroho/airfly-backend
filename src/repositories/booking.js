@@ -1,6 +1,7 @@
 import { SeatStatus } from '@prisma/client';
 import { prisma } from '../database/db.js';
 import { ErrorHandler } from '../middlewares/error.js';
+import { generateCode } from '../utils/generateCode.js';
 
 export class BookingRepository {
   /**
@@ -18,6 +19,7 @@ export class BookingRepository {
     return await prisma.booking.create({
       data: {
         userId: booking.userId,
+        bookingCode: generateCode(),
         flightId: booking.flightId,
         returnFlightId: booking.returnFlightId || null,
         bookingDate: booking.bookingDate,
@@ -109,6 +111,24 @@ export class BookingRepository {
     return await prisma.booking.findFirst({
       where: {
         id,
+      },
+      include: {
+        bookingDetail: {
+          include: {
+            passenger: true,
+            seat: true,
+          },
+        },
+        flight: true,
+        returnFlight: true,
+      },
+    });
+  }
+
+  static async findByCode(code) {
+    return await prisma.booking.findFirst({
+      where: {
+        bookingCode: code,
       },
       include: {
         bookingDetail: {

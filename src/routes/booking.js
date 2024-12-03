@@ -24,6 +24,12 @@ bookingRoute.get(
 );
 
 bookingRoute.get(
+  '/code/:code',
+  authorization([UserRole.BUYER]),
+  BookingController.getByCode
+);
+
+bookingRoute.get(
   '/id/:id',
   authorization([UserRole.BUYER]),
   BookingController.getById
