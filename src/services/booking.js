@@ -171,4 +171,8 @@ export class BookingService {
 
     return { groupedBookings, totalBooking, totalItems: bookings.length };
   }
+
+  static async findByCode(code) {
+    return await BookingRepository.findByCode(code);
+  }
 }
