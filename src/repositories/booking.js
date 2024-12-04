@@ -19,7 +19,7 @@ export class BookingRepository {
     return await prisma.booking.create({
       data: {
         userId: booking.userId,
-        bookingCode: generateCode(),
+        code: generateCode(),
         flightId: booking.flightId,
         returnFlightId: booking.returnFlightId || null,
         bookingDate: booking.bookingDate,
@@ -128,7 +128,7 @@ export class BookingRepository {
   static async findByCode(code) {
     return await prisma.booking.findFirst({
       where: {
-        bookingCode: code,
+        code,
       },
       include: {
         bookingDetail: {
