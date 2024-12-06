@@ -9,6 +9,7 @@
     "prepare": "husky",
     "lint": "eslint .",
     "format": "prettier --write .",
+    "docs:generate": "node public/docs/generate.js",
     "prisma:migrate": "prisma migrate dev",
     "prisma:db": "npx prisma db push",
     "prisma:reset": "npx prisma migrate reset",
@@ -51,10 +52,12 @@
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.16",
     "otpauth": "^9.3.5",
+    "postman-to-openapi": "^1.7.3",
     "prisma": "^5.22.0",
     "socket.io": "^4.8.1",
     "swagger-ui-express": "^5.0.1",
-    "uuid": "^11.0.3"
+    "uuid": "^11.0.3",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "eslint": "^9.15.0",
