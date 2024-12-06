@@ -7,9 +7,10 @@ import flightRoute from './flight.js';
 import airportRoute from './airport.js';
 import airlineRoute from './airline.js';
 import * as swaggerUI from 'swagger-ui-express';
-import { readFileSync } from 'fs';
 import { bookingRoute } from './booking.js';
-const swaggerDoc = JSON.parse(readFileSync('./public/docs/swagger.json'));
+import YAML from 'yamljs';
+
+const swaggerDoc = YAML.load('./public/docs/swagger.yml');
 
 const router = express.Router();
 

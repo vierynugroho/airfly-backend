@@ -1,0 +1,1053 @@
+openapi: 3.0.0
+info:
+  title: Flight Ticketing - BINAR KM7
+  description: >-
+    ## Created by Team 1 FSW x BE
+
+
+    **API URL**:
+    [https://binar.azumidev.web.id/api/v1/](https://binar.azumidev.web.id/api/v1/)
+
+
+    **Github Organization:**
+    [https://github.com/TIM1-FSW-BE-BINAR](https://github.com/TIM1-FSW-BE-BINAR)
+
+
+    **Team 1 FSW x BE**
+
+
+    ```
+
+    > {FSW} Dhiya Ul Faruq - @pentahead 
+
+    > {FSW} Michael Joenathan Darwin - @MichaelJD-MJD 
+
+    > {FSW} Naila Jinan Gaisani - @nellnelaa 
+
+    > {FSW} Muhammad Fadhillah Rahman - @FadPro77 
+
+    > {BE} Naufal Azmi Ginting - @BoboiAzumi 
+
+    > {BE} Viery Nugroho - @vierynugroho 
+
+    > {BE} Salsabilla Aulia - @chacabilla 
+
+    > {BE} Yogi Hafidh Maulana - @Yogihafidh 
+
+     ```
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api/v1
+    description: development
+  - url: https://binar.azumidev.web.id/api/v1
+    description: production
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+security:
+  - bearerAuth: []
+tags:
+  - name: Auth
+  - name: Users
+  - name: Airports
+  - name: Airlines
+  - name: Flights
+    description: Flight Resources
+  - name: Seats
+  - name: Booking
+  - name: Notification
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: login
+      description: |-
+        ``` json
+        {
+            "email": "jane.smith@example.com", // admin
+            // "email": "john.doe@example.com", // buyer
+            "password": "password"
+        }
+         ```
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: jane.smith@example.com
+                password: password
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                firstName: Kaguya
+                lastName: Shinomiya
+                phone: '086655446677'
+                email: kutakulu@gmail.com
+                password: bakashirogane
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /auth/verify:
+    post:
+      tags:
+        - Auth
+      summary: verify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: kutakulu@gmail.com
+                otp: '150428'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /auth/reset-otp:
+    post:
+      tags:
+        - Auth
+      summary: reset-otp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: kutakulu@gmail.com
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /auth/reset-password:
+    post:
+      tags:
+        - Auth
+      summary: reset-password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: kutakulu@gmail.com
+                otp: '150428'
+                password: shirogane123
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /auth/me:
+    get:
+      tags:
+        - Auth
+      summary: get user logged in
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users:
+    get:
+      tags:
+        - Users
+      summary: get all users
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: page number
+          example: '3'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: total item per page
+          example: '1'
+        - name: userStatus
+          in: query
+          schema:
+            type: string
+          description: user status [VERIFIED, UNVERIFIED]
+          example: VERIFIED
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/1:
+    get:
+      tags:
+        - Users
+      summary: get by user ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Users
+      summary: update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                firstName: Viery
+                lastName: Nugroho
+                phone: '628123456789'
+                role: ADMIN
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/2:
+    delete:
+      tags:
+        - Users
+      summary: delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/profile:
+    patch:
+      tags:
+        - Users
+      summary: update profile user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                firstName: Test Update
+                lastName: Shinomiya
+                phone: '086655446677'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Users
+      summary: delete user logged in account
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /airports:
+    post:
+      tags:
+        - Airports
+      summary: create
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Airports
+      summary: get all data
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: page number
+          example: '1'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: total item per page
+          example: '3'
+        - name: city
+          in: query
+          schema:
+            type: string
+          description: filter by city
+          example: Jakarta
+        - name: sortBy
+          in: query
+          schema:
+            type: string
+          description: sort by name
+          example: name
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /airports/10:
+    put:
+      tags:
+        - Airports
+      summary: update
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /airports/1:
+    get:
+      tags:
+        - Airports
+      summary: read by id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Airports
+      summary: delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /airlines:
+    get:
+      tags:
+        - Airlines
+      summary: Get All Airlines
+      description: >-
+        Endpoint untuk mengambil daftar semua maskapai penerbangan yang
+        terdaftar dalam sistem. Endpoint ini akan mengembalikan data dalam
+        bentuk array yang berisi objek maskapai, termasuk ID, nama, dan URL
+        gambar untuk setiap maskapai.
+
+
+        **Response yang Diharapkan**
+
+
+        - Array berisi objek maskapai:
+            
+            - `id`: ID unik maskapai (integer).
+                
+            - `name`: Nama maskapai penerbangan (string).
+                
+            - `image_url`: URL gambar maskapai (string).
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: page number
+          example: '3'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: total item per page
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Airlines
+      summary: Create Airline
+      description: >-
+        Endpoint untuk membuat data maskapai penerbangan baru. Anda harus
+        mengirimkan nama maskapai dan gambar maskapai dalam format `form-data`.
+        Gambar maskapai harus berupa file gambar (misalnya JPEG, PNG). Response
+        akan mengembalikan data maskapai yang baru dibuat, termasuk ID maskapai
+        dan URL gambar yang diunggah.
+
+
+        **Parameter (Body Request)**:
+
+
+        - `name` (required): Nama maskapai penerbangan (string).
+            
+        - `image` (required): Gambar maskapai dalam format file (form-data).
+            
+
+        **Response yang Diharapkan**:
+
+
+        - `id`: ID unik maskapai yang baru dibuat (integer).
+            
+        - `name`: Nama maskapai penerbangan (string).
+            
+        - `image_url`: URL gambar maskapai yang baru diunggah (string).
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /airlines/1:
+    get:
+      tags:
+        - Airlines
+      summary: Get Airlines by ID
+      description: >-
+        Endpoint untuk mengambil detail informasi tentang maskapai penerbangan
+        berdasarkan ID. Anda harus mengganti `{id}` dengan ID maskapai yang
+        ingin dicari. Response akan mengembalikan informasi lengkap maskapai,
+        termasuk nama dan gambar.
+
+
+        **Parameter**:
+
+
+        - `id`: ID maskapai yang ingin dicari (integer).
+            
+
+        **Response yang Diharapkan**:
+
+
+        - `id`: ID maskapai (integer).
+            
+        - `name`: Nama maskapai penerbangan (string).
+            
+        - `image_url`: URL gambar maskapai (string).
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/airlines/11:
+    put:
+      tags:
+        - Airlines
+      summary: Update Airline
+      description: >-
+        Endpoint untuk memperbarui data maskapai penerbangan berdasarkan ID.
+        Anda dapat mengirimkan data baru untuk nama maskapai dan gambar
+        maskapai. Pastikan untuk mengganti `{id}` dengan ID maskapai yang ingin
+        diperbarui. Response akan mengembalikan data maskapai yang telah
+        diperbarui.
+
+
+        **Parameter**:
+
+
+        - `id`: ID maskapai yang ingin diperbarui (integer).
+            
+
+        **Body Request**:
+
+
+        - `name`: Nama maskapai penerbangan baru (string).
+            
+        - `image` (optional): Gambar maskapai baru dalam format file
+        (form-data).
+            
+
+        **Response yang Diharapkan**:
+
+
+        - `id`: ID maskapai yang telah diperbarui (integer).
+            
+        - `name`: Nama maskapai yang telah diperbarui (string).
+            
+        - `image_url`: URL gambar maskapai yang telah diperbarui (string).
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /airlines/airlines/10:
+    delete:
+      tags:
+        - Airlines
+      summary: Delete Airline
+      description: >-
+        Endpoint untuk menghapus maskapai penerbangan berdasarkan ID. Anda harus
+        mengganti `{id}` dengan ID maskapai yang ingin dihapus. Jika berhasil,
+        server akan mengembalikan status sukses. Jika maskapai tidak ditemukan,
+        akan mengembalikan error dengan pesan yang sesuai.
+
+
+        **Parameter**:
+
+
+        - `id`: ID maskapai yang ingin dihapus (integer).
+            
+
+        **Response yang Diharapkan**:
+
+
+        - `message`: Pesan konfirmasi bahwa maskapai telah berhasil dihapus
+        (string).
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /flights:
+    post:
+      tags:
+        - Flights
+      summary: create
+      description: |-
+        ``` json
+        {
+            "flightNumber": "FE",
+            "airlineId": "1000",
+            "departureAirport": "1",
+            "arrivalAirport": "1",
+            "departureTime": "2024-01-01T00:00:00.000Z",
+            "arrivalTime": "2024-01-02T00:00:00.000Z",
+            "terminal": "terminal 2A",
+            "price": 8000,
+            "class": "FIRST",
+            "information":"free wifi-free inflight meals" // using - separator
+        }
+         ```
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                flightNumber: FE
+                airlineId: '1000'
+                departureAirport: '1'
+                arrivalAirport: '1'
+                departureTime: '2024-01-01T00:00:00.000Z'
+                arrivalTime: '2024-01-02T00:00:00.000Z'
+                terminal: terminal 2A
+                price: 8000
+                class: FIRST
+                information: free wifi-free inflight meals
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Flights
+      summary: get all
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: page number
+          example: '100'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: page items
+          example: '10'
+        - name: seatClass
+          in: query
+          schema:
+            type: string
+          description: seat class [BUSINESS, ECONOMY, FIRST]
+          example: business
+        - name: isCheapest
+          in: query
+          schema:
+            type: boolean
+          description: sort - string true or false
+          example: 'true'
+        - name: flightNumber
+          in: query
+          schema:
+            type: string
+          description: flight Number
+          example: CH2
+        - name: priceMin
+          in: query
+          schema:
+            type: integer
+          description: minimum price
+          example: '3000'
+        - name: priceMax
+          in: query
+          schema:
+            type: integer
+          description: maximum price
+          example: '1000'
+        - name: earliestDeparture
+          in: query
+          schema:
+            type: boolean
+          description: sort - string true or false
+          example: 'true'
+        - name: latestDeparture
+          in: query
+          schema:
+            type: boolean
+          description: sort - string true or false
+          example: 'true'
+        - name: earliestArrival
+          in: query
+          schema:
+            type: boolean
+          description: sort - string true or false
+          example: 'true'
+        - name: latestArrival
+          in: query
+          schema:
+            type: boolean
+          description: sort - string true or false
+          example: 'true'
+        - name: shortest
+          in: query
+          schema:
+            type: boolean
+          description: sort - string true or false
+          example: 'true'
+        - name: arrivalAirport
+          in: query
+          schema:
+            type: integer
+          description: filter - integer - airport ID
+          example: '1'
+        - name: departureAirport
+          in: query
+          schema:
+            type: integer
+          description: filter - integer - airport ID
+          example: '2'
+        - name: departureDate
+          in: query
+          schema:
+            type: number
+          description: filter - ISO DATE - departure date
+          example: '2024-01-31T00:00:00.000Z'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /flights/2:
+    put:
+      tags:
+        - Flights
+      summary: update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                flightNumber: CH2
+                airlineId: '2'
+                departureAirport: '1'
+                arrivalAirport: '22'
+                departureTime: '2024-01-01T00:00:00.000Z'
+                arrivalTime: '2024-01-02T00:00:00.000Z'
+                terminal: terminal 2A
+                price: 5000
+                class: BUSINESS
+                information: free wifi-free inflight meals
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Flights
+      summary: get by ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /flights/1:
+    delete:
+      tags:
+        - Flights
+      summary: delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /seats:
+    post:
+      tags:
+        - Seats
+      summary: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                flightId: 1
+                seatNumber: A3
+                status: UNAVAILABLE
+                departureTime: '2024-01-01T00:00:00.000Z'
+                arrivalTime: '2024-01-02T00:00:00.000Z'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Seats
+      summary: get all
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: page number
+          example: '1'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: page items
+          example: '5'
+        - name: seatClass
+          in: query
+          schema:
+            type: string
+          description: seat class [ECONOMY, BUSINESS, FIRST]
+          example: BUSINESS
+        - name: flightId
+          in: query
+          schema:
+            type: integer
+          description: flight ID
+          example: '1'
+        - name: departureTime
+          in: query
+          schema:
+            type: string
+          description: flight departure time [ISO date]
+          example: '2024-01-01T00:00:00Z'
+        - name: arrivalTime
+          in: query
+          schema:
+            type: string
+          description: flight arrival Time [ISO date]
+          example: '2024-01-01T00:00:00Z'
+        - name: seatStatus
+          in: query
+          schema:
+            type: string
+          description: seat status [AVAILABLE, LOCKED, UNAVAILABLE]
+          example: LOCKED
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /seats/1:
+    put:
+      tags:
+        - Seats
+      summary: update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                flightId: 1
+                seatNumber: B3
+                status: LOCKED
+                departureTime: '2024-01-01T00:00:00.000Z'
+                arrivalTime: '2024-01-02T00:00:00.000Z'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Seats
+      summary: deleted
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /seats/B:
+    get:
+      tags:
+        - Seats
+      summary: get by seat ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /booking:
+    post:
+      tags:
+        - Booking
+      summary: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                flightId: 3
+                returnFlightId: 1
+                bookingDate: '2024-11-26T00:00:00Z'
+                bookingDetail:
+                  - seatId: 70
+                    price: 200000
+                    passenger:
+                      name: Anton
+                      familyName: Wibowo
+                      gender: MALE
+                      identityNumber: '123456'
+                      citizenship: Indonesia
+                      countryOfIssue: Indonesia
+                      title: Mr
+                      dob: '1985-05-15T00:00:00Z'
+                      expiredDate: '2030-05-15T23:59:59Z'
+                      type: ADULT
+                  - seatId: 11
+                    price: 200000
+                    passenger:
+                      name: Anton
+                      familyName: Wibowo
+                      gender: MALE
+                      identityNumber: '123456'
+                      citizenship: Indonesia
+                      countryOfIssue: Indonesia
+                      title: Mr
+                      dob: '1985-05-15T00:00:00Z'
+                      expiredDate: '2030-05-15T23:59:59Z'
+                      type: ADULT
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMyODQ1MDY5LCJleHAiOjE3MzI5MzE0Njl9.S3ZJ2dl31HS0VsYV3AszgrFBwm82vxkEnZSUARDseP4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Booking
+      summary: get all booking
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: page number
+          example: '1'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: total item per page
+          example: '2'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /booking/12323:
+    get:
+      tags:
+        - Booking
+      summary: get booking by ID
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /notifications:
+    get:
+      tags:
+        - Notification
+      summary: check notification
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Notification
+      summary: create notification
+      description: |-
+        ``` json
+        {
+            "type": "ACCOUNT",
+            "title": "Info Aja",
+            "description": "info: test",
+            "isRead": false
+            // "userId": 1 // for specific user
+        }
+         ```
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                type: ACCOUNT
+                title: Info Aja
+                description: 'info: test'
+                isRead: false
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /notifications/user/user-notifications:
+    get:
+      tags:
+        - Notification
+      summary: get by user logged in
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: string
+          description: |-
+            valid value =  INFO
+              DISCOUNT
+              EVENT
+              PAYMENT
+              ACCOUNT
+          example: INFO
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: page number
+          example: '3'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: total item per page
+          example: '2'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /notifications/1:
+    get:
+      tags:
+        - Notification
+      summary: get by Notification ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /notifications/read/mark-as-read:
+    patch:
+      tags:
+        - Notification
+      summary: mark as read
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                notificationID: 1
+                isRead: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /notifications/34:
+    put:
+      tags:
+        - Notification
+      summary: update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                type: PAYMENT
+                title: Pembayaran Booking
+                description: Cepet bayar
+                isRead: false
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /notifications/3:
+    delete:
+      tags:
+        - Notification
+      summary: delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
