@@ -2,6 +2,7 @@ import express from 'express';
 import authRoute from './auth.js';
 import userRoute from './user.js';
 import seatRoute from './seat.js';
+import notificationRoute from './notification.js';
 import flightRoute from './flight.js';
 import airportRoute from './airport.js';
 import airlineRoute from './airline.js';
@@ -39,6 +40,7 @@ router.use('/api/v1/seats', seatRoute);
 router.use('/api/v1/flights', flightRoute);
 router.use('/api/v1/airports', airportRoute);
 router.use('/api/v1/booking', bookingRoute);
-router.use('/api/v1/airline', airlineRoute);
+router.use('/api/v1/airlines', airlineRoute);
+router.use('/api/v1/notifications', notificationRoute);
 
 export default router;

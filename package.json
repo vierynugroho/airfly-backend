@@ -43,6 +43,7 @@
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "googleapis": "^144.0.0",
+    "http": "^0.0.1-security",
     "imagekit": "^5.2.0",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
@@ -51,6 +52,7 @@
     "nodemailer": "^6.9.16",
     "otpauth": "^9.3.5",
     "prisma": "^5.22.0",
+    "socket.io": "^4.8.1",
     "swagger-ui-express": "^5.0.1",
     "uuid": "^11.0.3"
   },
