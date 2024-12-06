@@ -53,7 +53,7 @@ export class BookingController {
               ? {
                   totalPage: Math.ceil(totalBooking / limit),
                   currentPage: page,
-                  pageItems: booking.length,
+                  pageItems: bookings.length,
                   nextPage:
                     page < Math.ceil(totalBooking / limit) ? page + 1 : null,
                   prevPage: page > 1 ? page - 1 : null,

@@ -95,6 +95,10 @@ export class BookingRepository {
     return await prisma.booking.findMany({
       where: condition,
       orderBy,
+      include: {
+        flight: true,
+        returnFlight: true,
+      },
       skip: pagination.offset,
       take: pagination.limit,
     });
