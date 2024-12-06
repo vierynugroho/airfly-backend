@@ -103,7 +103,7 @@ model Seat {
 
 model Booking {
   id             Int           @id @default(autoincrement())
-  code    String        @unique
+  code           String        @unique
   user           User          @relation(fields: [userId], references: [id])
   userId         Int           @map("user_id")
   flightId       Int           @map("flight_id")
@@ -174,8 +174,10 @@ model Notification {
   type        NotificationType @default(INFO)
   title       String
   description String
-  user        User             @relation(fields: [userId], references: [id])
-  userId      Int              @map("user_id")
+  isRead      Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+  user        User?            @relation(fields: [userId], references: [id])
+  userId      Int?             @map("user_id")
 }
 
 enum UserStatus {
@@ -185,11 +187,10 @@ enum UserStatus {
 
 enum NotificationType {
   INFO
+  ACCOUNT
   DISCOUNT
-  PROMO
   EVENT
-  TRAVEL
-  BOOKING
+  PAYMENT
 }
 
 enum UserRole {

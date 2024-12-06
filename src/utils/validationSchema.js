@@ -163,3 +163,18 @@ export const airlineSchema = Joi.object({
       'any.noFileSelected': 'No file selected.',
     }),
 });
+
+export const notificationSchema = Joi.object({
+  type: Joi.string()
+    .valid('INFO', 'DISCOUNT', 'ACCOUNT', 'EVENT', 'PAYMENT')
+    .required(),
+  title: Joi.string().required(),
+  description: Joi.string().required(),
+  isRead: Joi.boolean().required(),
+  userId: Joi.number().optional(),
+});
+
+export const readNotificationSchema = Joi.object({
+  notificationID: Joi.number().required(),
+  isRead: Joi.boolean().required(),
+});
