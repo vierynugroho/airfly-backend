@@ -40,7 +40,7 @@ tags:
   - name: Flights
   - name: Seats
   - name: Booking
-  - name: Notification
+  - name: Notifications
 paths:
   /auth/me:
     get:
@@ -2810,30 +2810,7 @@ paths:
       responses:
         '200':
           description: Successful response
-          content:
-            application/json:
-              example:
-                meta:
-                  status: 200
-                  message: success
-                  pagination:
-                    totalPage: 1
-                    currentPage: 1
-                    pageItems: 1
-                    nextPage: null
-                    prevPage: null
-                data:
-                  Desember:
-                    - id: 16
-                      bookingCode: 2411026A6E
-                      userId: 1
-                      flightId: 3
-                      returnFlightId: 1
-                      bookingDate: '2024-12-03T13:37:05.394Z'
-                      totalPrice: 400000
-                      status: ACTIVE
-                      createdAt: '2024-12-03T13:37:05.424Z'
-                      updateAt: '2024-12-03T13:37:05.424Z'
+          content: {}
         '401':
           description: Response
           content:
@@ -2848,8 +2825,32 @@ paths:
   /notifications:
     get:
       tags:
-        - Notification
-      summary: show notification
+        - Notifications
+      summary: get all
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: string
+          description: |-
+            valid value =  INFO
+              DISCOUNT
+              EVENT
+              PAYMENT
+              ACCOUNT
+          example: DISCOUNT
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: page number
+          example: '3'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: total item per page
+          example: '2'
       responses:
         '200':
           description: Successful response
@@ -2934,12 +2935,11 @@ paths:
                 error:
                   statusCode: 422
                   message: 'Invalid notification type value. Allowed types: INFO, DISCOUNT, EVENT, PAYMENT'
-      parameters: []
       security:
         - bearerAuth: []
     post:
       tags:
-        - Notification
+        - Notifications
       summary: create notification
       description: |-
         ``` json
@@ -3023,7 +3023,7 @@ paths:
   /notifications/user/user-notifications:
     get:
       tags:
-        - Notification
+        - Notifications
       summary: get by user logged in
       parameters:
         - name: type
@@ -3100,10 +3100,145 @@ paths:
                   message: 'Invalid notification type value. Allowed types: INFO, DISCOUNT, EVENT, PAYMENT'
       security:
         - bearerAuth: []
+  /notifications/show-notifications:
+    get:
+      tags:
+        - Notifications
+      summary: show notification
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+              examples:
+                success:
+                  value: |
+                    <!doctype html><html><head><title>Notifications - Banking System</title><script src="/socket.io/socket.io.js"></script><script>
+                          const socket = io();
+                          socket.on('connect', () => {
+                            console.log('Connected to server');
+                          });
+                        </script></head><body><h1>Broadcast Notifications</h1><div id="notification-broadcast"></div><hr /><h1>General Notifications</h1><div id="notification-general"></div><hr /><h1>Info Notifications</h1><div id="notification-info"></div><hr /><h1>Account Notifications</h1><div id="notification-account"></div><hr /><h1>Discount Notifications</h1><div id="notification-discount"></div><hr /><h1>Event Notifications</h1><div id="notification-event"></div><hr /><h1>Payment Notifications</h1><div id="notification-payment"></div><hr /><h1>Specific User Notifications</h1><div id="notification-user"></div><hr /><script>
+                          socket.on('notification:broadcast', function (data) {
+                            console.log(data);
+                            var notificationContainer = document.getElementById(
+                              'notification-broadcast'
+                            );
+                            var notification = document.createElement('div');
+                            notification.textContent = `${data.title} - ${data.description}`;
+                            notification.style.backgroundColor = 'black';
+                            notification.style.color = 'white';
+                            notification.style.padding = '10px';
+                            notification.style.marginBottom = '10px';
+                            notificationContainer.appendChild(notification);
+                          });
+                        </script><script>
+                          socket.on('notification:general', function (data) {
+                            console.log(data);
+                            var notificationContainer = document.getElementById(
+                              'notification-general'
+                            );
+                            var notification = document.createElement('div');
+                            notification.textContent = `${data.title} - ${data.description}`;
+                            notification.style.backgroundColor = 'silver';
+                            notification.style.color = 'white';
+                            notification.style.padding = '10px';
+                            notification.style.marginBottom = '10px';
+                            notificationContainer.appendChild(notification);
+                          });
+                        </script><script>
+                          socket.on('notification:info', function (data) {
+                            console.log(data);
+                            var notificationContainer =
+                              document.getElementById('notification-info');
+                            var notification = document.createElement('div');
+                            notification.textContent = `${data.title} - ${data.description}`;
+                            notification.style.backgroundColor = 'cyan';
+                            notification.style.color = 'black';
+                            notification.style.padding = '10px';
+                            notification.style.marginBottom = '10px';
+                            notificationContainer.appendChild(notification);
+                          });
+                        </script><script>
+                          socket.on('notification:account', function (data) {
+                            console.log(data);
+                            var notificationContainer = document.getElementById(
+                              'notification-account'
+                            );
+                            var notification = document.createElement('div');
+                            notification.textContent = `${data.title} - ${data.description}`;
+                            notification.style.backgroundColor = 'purple';
+                            notification.style.color = 'white';
+                            notification.style.padding = '10px';
+                            notification.style.marginBottom = '10px';
+                            notificationContainer.appendChild(notification);
+                          });
+                        </script><script>
+                          socket.on('notification:discount', function (data) {
+                            console.log(data);
+                            var notificationContainer = document.getElementById(
+                              'notification-discount'
+                            );
+                            var notification = document.createElement('div');
+                            notification.textContent = `${data.title} - ${data.description}`;
+                            notification.style.backgroundColor = 'blue';
+                            notification.style.color = 'white';
+                            notification.style.padding = '10px';
+                            notification.style.marginBottom = '10px';
+                            notificationContainer.appendChild(notification);
+                          });
+                        </script><script>
+                          socket.on('notification:event', function (data) {
+                            console.log(data);
+                            var notificationContainer =
+                              document.getElementById('notification-event');
+                            var notification = document.createElement('div');
+                            notification.textContent = `${data.title} - ${data.description}`;
+                            notification.style.backgroundColor = 'yellow';
+                            notification.style.color = 'black';
+                            notification.style.padding = '10px';
+                            notification.style.marginBottom = '10px';
+                            notificationContainer.appendChild(notification);
+                          });
+                        </script><script>
+                          socket.on('notification:payment', function (data) {
+                            console.log(data);
+                            var notificationContainer = document.getElementById(
+                              'notification-payment'
+                            );
+                            var notification = document.createElement('div');
+                            notification.textContent = `${data.title} - ${data.description}`;
+                            notification.style.backgroundColor = 'green';
+                            notification.style.color = 'white';
+                            notification.style.padding = '10px';
+                            notification.style.marginBottom = '10px';
+                            notificationContainer.appendChild(notification);
+                          });
+                        </script><script>
+                          let userID = 1; // id user yang login - required
+                          /*
+                          data userID akan di oper ke src/index.js untuk room notif
+                          */
+
+                          socket.emit('user-room', userID);
+                          socket.on('notification:user', function (data) {
+                            console.log(data);
+                            var notificationContainer =
+                              document.getElementById('notification-user');
+                            var notification = document.createElement('div');
+                            notification.textContent = `${data.title} - ${data.description}`;
+                            notification.style.backgroundColor = 'green';
+                            notification.style.color = 'white';
+                            notification.style.padding = '10px';
+                            notification.style.marginBottom = '10px';
+                            notificationContainer.appendChild(notification);
+                          });
+                        </script></body></html>
+      parameters: []
   /notifications/read/mark-as-read:
     patch:
       tags:
-        - Notification
+        - Notifications
       summary: mark as read
       requestBody:
         content:
@@ -3343,7 +3478,7 @@ paths:
     get:
       tags:
         - Airports
-      summary: read by id
+      summary: get by ID
       responses:
         '200':
           description: Successful response
@@ -4442,7 +4577,7 @@ paths:
   /notifications/{notificationID}:
     get:
       tags:
-        - Notification
+        - Notifications
       summary: get by Notification ID
       responses:
         '200':
@@ -4479,7 +4614,7 @@ paths:
         - bearerAuth: []
     put:
       tags:
-        - Notification
+        - Notifications
       summary: update
       requestBody:
         content:
@@ -4550,7 +4685,7 @@ paths:
         - bearerAuth: []
     delete:
       tags:
-        - Notification
+        - Notifications
       summary: delete
       responses:
         '200':

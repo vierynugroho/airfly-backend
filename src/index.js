@@ -6,7 +6,6 @@ import logger from 'morgan';
 import { errorMiddleware } from './middlewares/error.js';
 import logger_format from './config/logger.js';
 import { Server } from 'socket.io';
-import { join } from 'node:path';
 import { createServer } from 'node:http';
 
 const app = express();
@@ -44,10 +43,6 @@ const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/src/views');
-
-app.get('/notifications', (req, res) => {
-  res.sendFile(join(__dirname, '/src/views/notification.html'));
-});
 
 app.use(logger(logger_format.MORGAN_FORMAT));
 

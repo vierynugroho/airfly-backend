@@ -3063,7 +3063,7 @@
           ]
         },
         {
-          "name": "read by id",
+          "name": "get by ID",
           "request": {
             "auth": {
               "type": "noauth"
@@ -5077,7 +5077,7 @@
           },
           "response": [
             {
-              "name": "Error response - Airline Not Found",
+              "name": "error - Airline Not Found",
               "originalRequest": {
                 "method": "GET",
                 "header": [],
@@ -11386,7 +11386,7 @@
       ]
     },
     {
-      "name": "Notification",
+      "name": "Notifications",
       "item": [
         {
           "name": "get all",
@@ -11394,14 +11394,15 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/notifications?type=DISCOUNT",
+              "raw": "{{local_base_url}}/notifications",
               "host": ["{{local_base_url}}"],
               "path": ["notifications"],
               "query": [
                 {
                   "key": "type",
                   "value": "DISCOUNT",
-                  "description": "valid value =  INFO\n  DISCOUNT\n  EVENT\n  PAYMENT\n  ACCOUNT"
+                  "description": "valid value =  INFO\n  DISCOUNT\n  EVENT\n  PAYMENT\n  ACCOUNT",
+                  "disabled": true
                 },
                 {
                   "key": "page",
@@ -12299,12 +12300,15 @@
         {
           "name": "show notification",
           "request": {
+            "auth": {
+              "type": "noauth"
+            },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/notifications",
+              "raw": "{{local_base_url}}/notifications/show-notifications",
               "host": ["{{local_base_url}}"],
-              "path": ["notifications"]
+              "path": ["notifications", "show-notifications"]
             }
           },
           "response": [
@@ -12314,10 +12318,9 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "localhost:3000/notifications",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["notifications"]
+                  "raw": "{{local_base_url}}/notifications/show-notifications",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["notifications", "show-notifications"]
                 }
               },
               "status": "OK",
@@ -12346,11 +12349,11 @@
                 },
                 {
                   "key": "Last-Modified",
-                  "value": "Fri, 06 Dec 2024 06:15:22 GMT"
+                  "value": "Fri, 06 Dec 2024 10:36:24 GMT"
                 },
                 {
                   "key": "ETag",
-                  "value": "W/\"17b8-1939a9bce76\""
+                  "value": "W/\"178d-1939b8ac957\""
                 },
                 {
                   "key": "Content-Type",
@@ -12358,11 +12361,11 @@
                 },
                 {
                   "key": "Content-Length",
-                  "value": "6072"
+                  "value": "6029"
                 },
                 {
                   "key": "Date",
-                  "value": "Fri, 06 Dec 2024 06:42:30 GMT"
+                  "value": "Sat, 07 Dec 2024 21:29:30 GMT"
                 },
                 {
                   "key": "Connection",
@@ -12374,7 +12377,7 @@
                 }
               ],
               "cookie": [],
-              "body": "<!doctype html><html><head><title>Notifications - Banking System</title><script src=\"/socket.io/socket.io.js\"></script><script>\r\n      const socket = io();\r\n      socket.on('connect', () => {\r\n        console.log('Connected to server');\r\n      });\r\n    </script></head><body><h1>Broadcast Notifications</h1><div id=\"notification-broadcast\"></div><hr /><h1>General Notifications</h1><div id=\"notification-general\"></div><hr /><h1>Info Notifications</h1><div id=\"notification-info\"></div><hr /><h1>Account Notifications</h1><div id=\"notification-account\"></div><hr /><h1>Discount Notifications</h1><div id=\"notification-discount\"></div><hr /><h1>Event Notifications</h1><div id=\"notification-event\"></div><hr /><h1>Payment Notifications</h1><div id=\"notification-payment\"></div><hr /><h1>Specific User Notifications</h1><div id=\"notification-user\"></div><hr /><script>\r\n      socket.on('notification:broadcast', function (data) {\r\n        console.log(data);\r\n        var notificationContainer = document.getElementById(\r\n          'notification-broadcast'\r\n        );\r\n        var notification = document.createElement('div');\r\n        notification.textContent = `${data.title} - ${data.description}`;\r\n        notification.style.backgroundColor = 'black';\r\n        notification.style.color = 'white';\r\n        notification.style.padding = '10px';\r\n        notification.style.marginBottom = '10px';\r\n        notificationContainer.appendChild(notification);\r\n      });\r\n    </script><script>\r\n      socket.on('notification:general', function (data) {\r\n        console.log(data);\r\n        var notificationContainer = document.getElementById(\r\n          'notification-general'\r\n        );\r\n        var notification = document.createElement('div');\r\n        notification.textContent = `${data.title} - ${data.description}`;\r\n        notification.style.backgroundColor = 'silver';\r\n        notification.style.color = 'white';\r\n        notification.style.padding = '10px';\r\n        notification.style.marginBottom = '10px';\r\n        notificationContainer.appendChild(notification);\r\n      });\r\n    </script><script>\r\n      socket.on('notification:info', function (data) {\r\n        console.log(data);\r\n        var notificationContainer =\r\n          document.getElementById('notification-info');\r\n        var notification = document.createElement('div');\r\n        notification.textContent = `${data.title} - ${data.description}`;\r\n        notification.style.backgroundColor = 'cyan';\r\n        notification.style.color = 'black';\r\n        notification.style.padding = '10px';\r\n        notification.style.marginBottom = '10px';\r\n        notificationContainer.appendChild(notification);\r\n      });\r\n    </script><script>\r\n      socket.on('notification:account', function (data) {\r\n        console.log(data);\r\n        var notificationContainer = document.getElementById(\r\n          'notification-account'\r\n        );\r\n        var notification = document.createElement('div');\r\n        notification.textContent = `${data.title} - ${data.description}`;\r\n        notification.style.backgroundColor = 'purple';\r\n        notification.style.color = 'white';\r\n        notification.style.padding = '10px';\r\n        notification.style.marginBottom = '10px';\r\n        notificationContainer.appendChild(notification);\r\n      });\r\n    </script><script>\r\n      socket.on('notification:discount', function (data) {\r\n        console.log(data);\r\n        var notificationContainer = document.getElementById(\r\n          'notification-discount'\r\n        );\r\n        var notification = document.createElement('div');\r\n        notification.textContent = `${data.title} - ${data.description}`;\r\n        notification.style.backgroundColor = 'blue';\r\n        notification.style.color = 'white';\r\n        notification.style.padding = '10px';\r\n        notification.style.marginBottom = '10px';\r\n        notificationContainer.appendChild(notification);\r\n      });\r\n    </script><script>\r\n      socket.on('notification:event', function (data) {\r\n        console.log(data);\r\n        var notificationContainer =\r\n          document.getElementById('notification-event');\r\n        var notification = document.createElement('div');\r\n        notification.textContent = `${data.title} - ${data.description}`;\r\n        notification.style.backgroundColor = 'yellow';\r\n        notification.style.color = 'black';\r\n        notification.style.padding = '10px';\r\n        notification.style.marginBottom = '10px';\r\n        notificationContainer.appendChild(notification);\r\n      });\r\n    </script><script>\r\n      socket.on('notification:payment', function (data) {\r\n        console.log(data);\r\n        var notificationContainer = document.getElementById(\r\n          'notification-payment'\r\n        );\r\n        var notification = document.createElement('div');\r\n        notification.textContent = `${data.title} - ${data.description}`;\r\n        notification.style.backgroundColor = 'green';\r\n        notification.style.color = 'white';\r\n        notification.style.padding = '10px';\r\n        notification.style.marginBottom = '10px';\r\n        notificationContainer.appendChild(notification);\r\n      });\r\n    </script><script>\r\n      let userID = 1;\r\n      socket.emit('user-room', userID);\r\n      socket.on('notification:user', function (data) {\r\n        console.log(data);\r\n        var notificationContainer =\r\n          document.getElementById('notification-user');\r\n        var notification = document.createElement('div');\r\n        notification.textContent = `${data.title} - ${data.description}`;\r\n        notification.style.backgroundColor = 'green';\r\n        notification.style.color = 'white';\r\n        notification.style.padding = '10px';\r\n        notification.style.marginBottom = '10px';\r\n        notificationContainer.appendChild(notification);\r\n      });\r\n    </script></body>\r\n</html>\r\n"
+              "body": "<!doctype html><html><head><title>Notifications - Banking System</title><script src=\"/socket.io/socket.io.js\"></script><script>\n      const socket = io();\n      socket.on('connect', () => {\n        console.log('Connected to server');\n      });\n    </script></head><body><h1>Broadcast Notifications</h1><div id=\"notification-broadcast\"></div><hr /><h1>General Notifications</h1><div id=\"notification-general\"></div><hr /><h1>Info Notifications</h1><div id=\"notification-info\"></div><hr /><h1>Account Notifications</h1><div id=\"notification-account\"></div><hr /><h1>Discount Notifications</h1><div id=\"notification-discount\"></div><hr /><h1>Event Notifications</h1><div id=\"notification-event\"></div><hr /><h1>Payment Notifications</h1><div id=\"notification-payment\"></div><hr /><h1>Specific User Notifications</h1><div id=\"notification-user\"></div><hr /><script>\n      socket.on('notification:broadcast', function (data) {\n        console.log(data);\n        var notificationContainer = document.getElementById(\n          'notification-broadcast'\n        );\n        var notification = document.createElement('div');\n        notification.textContent = `${data.title} - ${data.description}`;\n        notification.style.backgroundColor = 'black';\n        notification.style.color = 'white';\n        notification.style.padding = '10px';\n        notification.style.marginBottom = '10px';\n        notificationContainer.appendChild(notification);\n      });\n    </script><script>\n      socket.on('notification:general', function (data) {\n        console.log(data);\n        var notificationContainer = document.getElementById(\n          'notification-general'\n        );\n        var notification = document.createElement('div');\n        notification.textContent = `${data.title} - ${data.description}`;\n        notification.style.backgroundColor = 'silver';\n        notification.style.color = 'white';\n        notification.style.padding = '10px';\n        notification.style.marginBottom = '10px';\n        notificationContainer.appendChild(notification);\n      });\n    </script><script>\n      socket.on('notification:info', function (data) {\n        console.log(data);\n        var notificationContainer =\n          document.getElementById('notification-info');\n        var notification = document.createElement('div');\n        notification.textContent = `${data.title} - ${data.description}`;\n        notification.style.backgroundColor = 'cyan';\n        notification.style.color = 'black';\n        notification.style.padding = '10px';\n        notification.style.marginBottom = '10px';\n        notificationContainer.appendChild(notification);\n      });\n    </script><script>\n      socket.on('notification:account', function (data) {\n        console.log(data);\n        var notificationContainer = document.getElementById(\n          'notification-account'\n        );\n        var notification = document.createElement('div');\n        notification.textContent = `${data.title} - ${data.description}`;\n        notification.style.backgroundColor = 'purple';\n        notification.style.color = 'white';\n        notification.style.padding = '10px';\n        notification.style.marginBottom = '10px';\n        notificationContainer.appendChild(notification);\n      });\n    </script><script>\n      socket.on('notification:discount', function (data) {\n        console.log(data);\n        var notificationContainer = document.getElementById(\n          'notification-discount'\n        );\n        var notification = document.createElement('div');\n        notification.textContent = `${data.title} - ${data.description}`;\n        notification.style.backgroundColor = 'blue';\n        notification.style.color = 'white';\n        notification.style.padding = '10px';\n        notification.style.marginBottom = '10px';\n        notificationContainer.appendChild(notification);\n      });\n    </script><script>\n      socket.on('notification:event', function (data) {\n        console.log(data);\n        var notificationContainer =\n          document.getElementById('notification-event');\n        var notification = document.createElement('div');\n        notification.textContent = `${data.title} - ${data.description}`;\n        notification.style.backgroundColor = 'yellow';\n        notification.style.color = 'black';\n        notification.style.padding = '10px';\n        notification.style.marginBottom = '10px';\n        notificationContainer.appendChild(notification);\n      });\n    </script><script>\n      socket.on('notification:payment', function (data) {\n        console.log(data);\n        var notificationContainer = document.getElementById(\n          'notification-payment'\n        );\n        var notification = document.createElement('div');\n        notification.textContent = `${data.title} - ${data.description}`;\n        notification.style.backgroundColor = 'green';\n        notification.style.color = 'white';\n        notification.style.padding = '10px';\n        notification.style.marginBottom = '10px';\n        notificationContainer.appendChild(notification);\n      });\n    </script><script>\n      let userID = 1; // id user yang login - required\n      /*\n      data userID akan di oper ke src/index.js untuk room notif\n      */\n\n      socket.emit('user-room', userID);\n      socket.on('notification:user', function (data) {\n        console.log(data);\n        var notificationContainer =\n          document.getElementById('notification-user');\n        var notification = document.createElement('div');\n        notification.textContent = `${data.title} - ${data.description}`;\n        notification.style.backgroundColor = 'green';\n        notification.style.color = 'white';\n        notification.style.padding = '10px';\n        notification.style.marginBottom = '10px';\n        notificationContainer.appendChild(notification);\n      });\n    </script></body></html>\n"
             }
           ]
         },

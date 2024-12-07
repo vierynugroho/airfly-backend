@@ -153,49 +153,86 @@ class PostmanToOpenAPIConverter {
               content: {},
             };
 
-            if (responses.length > 1) {
-              method.responses[statusCode].content['application/json'] = {
-                examples: responses.reduce((examples, response) => {
-                  const exampleName = response.name
-                    ? response.name.replace(/[^a-zA-Z0-9-_]/g, '_')
-                    : 'example';
+            // Cek apakah ada JSON response di antara semua responses
+            const hasJsonResponse = responses.some((response) => {
+              const contentType = response.header?.find(
+                (h) => h.key.toLowerCase() === 'content-type'
+              )?.value;
+              return contentType?.includes('application/json');
+            });
+
+            responses.forEach((response) => {
+              const contentType = response.header?.find(
+                (h) => h.key.toLowerCase() === 'content-type'
+              )?.value;
+
+              if (contentType?.includes('text/html')) {
+                if (!method.responses[statusCode].content['text/html']) {
+                  method.responses[statusCode].content['text/html'] = {
+                    examples: {},
+                  };
+                }
+
+                const exampleName = response.name
+                  ? response.name.replace(/[^a-zA-Z0-9-_]/g, '_')
+                  : 'example';
+
+                method.responses[statusCode].content['text/html'].examples[
+                  exampleName
+                ] = {
+                  value: response.body,
+                };
+              } else if (contentType?.includes('application/json')) {
+                if (responses.length > 1) {
+                  method.responses[statusCode].content['application/json'] = {
+                    examples: responses.reduce((examples, response) => {
+                      const exampleName = response.name
+                        ? response.name.replace(/[^a-zA-Z0-9-_]/g, '_')
+                        : 'example';
+                      let responseBody = {};
+
+                      try {
+                        responseBody = response.body
+                          ? JSON.parse(response.body)
+                          : {};
+                      } catch (err) {
+                        console.log(err.message);
+                        console.warn(
+                          'Invalid JSON body in response:',
+                          response.body
+                        );
+                      }
+
+                      examples[exampleName] = { value: responseBody };
+                      return examples;
+                    }, {}),
+                  };
+                } else {
+                  const singleResponse = responses[0];
                   let responseBody = {};
 
                   try {
-                    responseBody = response.body
-                      ? JSON.parse(response.body)
+                    responseBody = singleResponse.body
+                      ? JSON.parse(singleResponse.body)
                       : {};
                   } catch (err) {
                     console.log(err.message);
                     console.warn(
                       'Invalid JSON body in response:',
-                      response.body
+                      singleResponse.body
                     );
                   }
 
-                  examples[exampleName] = { value: responseBody };
-                  return examples;
-                }, {}),
-              };
-            } else {
-              const singleResponse = responses[0];
-              let responseBody = {};
-
-              try {
-                responseBody = singleResponse.body
-                  ? JSON.parse(singleResponse.body)
-                  : {};
-              } catch (err) {
-                console.log(err.message);
-                console.warn(
-                  'Invalid JSON body in response:',
-                  singleResponse.body
-                );
+                  method.responses[statusCode].content['application/json'] = {
+                    example: responseBody,
+                  };
+                }
               }
+            });
 
-              method.responses[statusCode].content['application/json'] = {
-                example: responseBody,
-              };
+            // Hapus application/json jika hanya ada response HTML
+            if (!hasJsonResponse) {
+              delete method.responses[statusCode].content['application/json'];
             }
           });
         }
