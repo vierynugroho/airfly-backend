@@ -6,11 +6,11 @@
 
 */
 -- DropIndex
-DROP INDEX "bookings_bookingCode_key";
+-- DROP INDEX "bookings_bookingCode_key";
 
 -- AlterTable
-ALTER TABLE "bookings" DROP COLUMN "bookingCode",
-ADD COLUMN     "code" TEXT NOT NULL DEFAULT '';
+-- ALTER TABLE "bookings" DROP COLUMN "bookingCode",
+-- ADD COLUMN     "code" TEXT NOT NULL DEFAULT '';
 
 -- CreateIndex
-CREATE UNIQUE INDEX "bookings_code_key" ON "bookings"("code");
+-- CREATE UNIQUE INDEX "bookings_code_key" ON "bookings"("code");

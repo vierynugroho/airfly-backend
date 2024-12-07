@@ -22,6 +22,17 @@ async function main() {
         role: UserRole.BUYER,
       },
       {
+        firstName: 'admin',
+        lastName: 'uno legam',
+        email: 'admin@unolegam.com',
+        phone: '+62812345678',
+        password: defaultPasswordHash,
+        secretKey: '',
+        otpToken: '',
+        status: UserStatus.VERIFIED,
+        role: UserRole.ADMIN,
+      },
+      {
         firstName: 'Jane',
         lastName: 'Smith',
         email: 'jane.smith@example.com',
