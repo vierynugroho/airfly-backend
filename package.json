@@ -14,7 +14,8 @@
     "prisma:reset": "npx prisma migrate reset",
     "prisma:seed": "node ./prisma/seeder.js",
     "prisma:studio": "npx prisma studio",
-    "prisma:refresh": "npm run prisma:reset && npm run prisma:migrate && npx prisma generate && npm run prisma:seed"
+    "prisma:refresh": "npm run prisma:reset && npm run prisma:migrate && npx prisma generate && npm run prisma:seed",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -55,6 +56,11 @@
     "uuid": "^11.0.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.9",
+    "@babel/node": "^7.25.9",
+    "@babel/preset-env": "^7.25.9",
+    "@types/jest": "^29.5.14",
+    "babel-jest": "^29.7.0",
     "eslint": "^9.15.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
