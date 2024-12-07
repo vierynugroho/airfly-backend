@@ -66,6 +66,7 @@ app.use((req, res) => {
     error: {
       statusCode: 404,
       message: `${method} - ${url} is not found!`,
+      docs: '/api/v1/api-docs',
     },
   });
 });

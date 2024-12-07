@@ -8,6 +8,7 @@ export class FlightController {
       const limit = parseInt(req.query.limit) || null;
 
       const departureDate = req.query.departureDate;
+      const returnDate = req.query.returnDate;
       const departureAirport = req.query.departureAirport
         ? parseInt(req.query.departureAirport)
         : null;
@@ -65,6 +66,11 @@ export class FlightController {
       if (departureDate) {
         condition.departureTime = {
           gte: new Date(departureDate),
+        };
+      }
+      if (returnDate) {
+        condition.departureTime = {
+          gte: new Date(returnDate),
         };
       }
       if (departureAirport) {
