@@ -96,8 +96,18 @@ export class BookingRepository {
       where: condition,
       orderBy,
       include: {
-        flight: true,
-        returnFlight: true,
+        flight: {
+          include: {
+            departure: true,
+            arrival: true,
+          },
+        },
+        returnFlight: {
+          include: {
+            departure: true,
+            arrival: true,
+          },
+        },
       },
       skip: pagination.offset,
       take: pagination.limit,
@@ -123,8 +133,18 @@ export class BookingRepository {
             seat: true,
           },
         },
-        flight: true,
-        returnFlight: true,
+        flight: {
+          include: {
+            departure: true,
+            arrival: true,
+          },
+        },
+        returnFlight: {
+          include: {
+            departure: true,
+            arrival: true,
+          },
+        },
       },
     });
   }
@@ -141,8 +161,18 @@ export class BookingRepository {
             seat: true,
           },
         },
-        flight: true,
-        returnFlight: true,
+        flight: {
+          include: {
+            departure: true,
+            arrival: true,
+          },
+        },
+        returnFlight: {
+          include: {
+            departure: true,
+            arrival: true,
+          },
+        },
       },
     });
   }
