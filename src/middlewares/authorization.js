@@ -36,7 +36,8 @@ export function authorization(allowedRoles) {
       }
 
       req.user = {
-        id: jwtVerify.id,
+        id: user.id,
+        role: user.role,
       };
 
       next();

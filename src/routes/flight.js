@@ -11,7 +11,7 @@ router
   .route('/')
   .get(FlightController.getAll)
   .post(
-    authorization([UserRole.BUYER, UserRole.ADMIN]),
+    authorization([UserRole.ADMIN]),
     validation(flightSchema),
     FlightController.create
   );

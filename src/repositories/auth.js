@@ -1,6 +1,7 @@
 import { prisma } from '../database/db.js';
 import { UserStatus, UserRole } from '@prisma/client';
 import { Bcrypt } from '../utils/bcrypt.js';
+import axios from 'axios';
 
 export class AuthRepository {
   /**
@@ -96,9 +97,6 @@ export class AuthRepository {
       },
     });
   }
-  
-  
-  
 
   /**
    *
@@ -135,6 +133,26 @@ export class AuthRepository {
       },
       data: {
         password: await Bcrypt.hash(password),
+      },
+    });
+  }
+  static async googleLogin(access_token) {
+    const response = await axios.get(
+      `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`
+    );
+    return response?.data;
+  }
+
+  static async newGoogleUser(firstName, lastName, phone, email, password) {
+    return await prisma.user.create({
+      data: {
+        firstName,
+        lastName,
+        phone,
+        email,
+        password,
+        status: UserStatus.VERIFIED,
+        role: UserRole.BUYER,
       },
     });
   }

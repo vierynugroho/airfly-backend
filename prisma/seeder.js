@@ -85,24 +85,52 @@ async function main() {
     data: [
       {
         name: 'Garuda Indonesia',
-        imageUrl: 'garuda.png',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025',
         imageId: 'garuda-logo',
       },
       {
         name: 'Singapore Airlines',
-        imageUrl: 'singapore-airlines.png',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/singapore-airline.png?updatedAt=1733030014987',
         imageId: 'sia-logo',
       },
       {
         name: 'Qatar Airways',
-        imageUrl: 'qatar-airways.png',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/qatar%20airways.png?updatedAt=1733030014946',
         imageId: 'qatar-logo',
       },
-      { name: 'Emirates', imageUrl: 'emirates.png', imageId: 'emirates-logo' },
-      { name: 'Qantas', imageUrl: 'qantas.png', imageId: 'qantas-logo' },
-      { name: 'Delta Airlines', imageUrl: 'delta.png', imageId: 'delta-logo' },
-      { name: 'Lion Air', imageUrl: 'lion-air.png', imageId: 'lion-logo' },
-      { name: 'AirAsia', imageUrl: 'airasia.png', imageId: 'airasia-logo' },
+      {
+        name: 'Emirates',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/emirates.png?updatedAt=1733030014808',
+        imageId: 'emirates-logo',
+      },
+      {
+        name: 'Qantas',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/qantas.jpg?updatedAt=1733030014904',
+        imageId: 'qantas-logo',
+      },
+      {
+        name: 'Delta Airlines',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/delta%20airlines.png?updatedAt=1733030297967',
+        imageId: 'delta-logo',
+      },
+      {
+        name: 'Lion Air',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/lion-air.png?updatedAt=1733030014852',
+        imageId: 'lion-logo',
+      },
+      {
+        name: 'AirAsia',
+        imageUrl:
+          'https://ik.imagekit.io/vieryn/airlines/air%20asia.png?updatedAt=1733030014916',
+        imageId: 'airasia-logo',
+      },
     ],
   });
 
@@ -114,7 +142,7 @@ async function main() {
         code: 'CGK',
         name: 'Soekarno-Hatta International Airport',
         city: 'Jakarta',
-        state: 'DKI Jakarta',
+        state: 'Asia',
         country: 'Indonesia',
         timezone: 'Asia/Jakarta',
         latitude: '-6.1255',
@@ -126,7 +154,7 @@ async function main() {
         code: 'SUB',
         name: 'Juanda International Airport',
         city: 'Surabaya',
-        state: 'East Java',
+        state: 'Asia',
         country: 'Indonesia',
         timezone: 'Asia/Jakarta',
         latitude: '-7.3797',
@@ -138,7 +166,7 @@ async function main() {
         code: 'DPS',
         name: 'Ngurah Rai International Airport',
         city: 'Denpasar',
-        state: 'Bali',
+        state: 'Asia',
         country: 'Indonesia',
         timezone: 'Asia/Makassar',
         latitude: '-8.7487',
@@ -151,7 +179,7 @@ async function main() {
         code: 'SIN',
         name: 'Singapore Changi Airport',
         city: 'Singapore',
-        state: 'Central Singapore',
+        state: 'Asia',
         country: 'Singapore',
         timezone: 'Asia/Singapore',
         latitude: '1.3644',
@@ -163,7 +191,7 @@ async function main() {
         code: 'DOH',
         name: 'Hamad International Airport',
         city: 'Doha',
-        state: 'Qatar',
+        state: 'Asia',
         country: 'Qatar',
         timezone: 'Asia/Qatar',
         latitude: '25.2654',
@@ -175,7 +203,7 @@ async function main() {
         code: 'JED',
         name: 'King Abdulaziz International Airport',
         city: 'Jeddah',
-        state: 'Makkah',
+        state: 'Asia',
         country: 'Saudi Arabia',
         timezone: 'Asia/Riyadh',
         latitude: '21.6820',
@@ -187,7 +215,7 @@ async function main() {
         code: 'LAX',
         name: 'Los Angeles International Airport',
         city: 'Los Angeles',
-        state: 'California',
+        state: 'Amerika',
         country: 'United States',
         timezone: 'America/Los_Angeles',
         latitude: '33.9416',
@@ -199,7 +227,7 @@ async function main() {
         code: 'SYD',
         name: 'Sydney Kingsford Smith Airport',
         city: 'Sydney',
-        state: 'New South Wales',
+        state: 'Australia',
         country: 'Australia',
         timezone: 'Australia/Sydney',
         latitude: '-33.9399',
