@@ -79,12 +79,7 @@ class PostmanToOpenAPIConverter {
     });
 
     if (!hasAuthenticatedRequests) {
-      if (transformedSpec.components?.securitySchemes) {
-        delete transformedSpec.components.securitySchemes;
-      }
-      if (transformedSpec.security) {
-        delete transformedSpec.security;
-      }
+      delete transformedSpec.components?.securitySchemes;
     } else {
       transformedSpec.components = transformedSpec.components || {};
       transformedSpec.components.securitySchemes = transformedSpec.components
@@ -95,10 +90,6 @@ class PostmanToOpenAPIConverter {
           bearerFormat: 'JWT',
         },
       };
-
-      transformedSpec.security = transformedSpec.security || [
-        { bearerAuth: [] },
-      ];
     }
 
     return transformedSpec;
@@ -189,20 +180,15 @@ class PostmanToOpenAPIConverter {
         readFileSync(this.options.postmanCollection, 'utf8')
       );
 
-      if (spec.components && spec.components.securitySchemes) {
-        delete spec.components.securitySchemes;
-      }
-
-      if (spec.security) {
-        delete spec.security;
-      }
-
       let transformedSpec = this.transformPathParameters(spec);
       transformedSpec = this.enhanceAuthentication(transformedSpec);
       transformedSpec = this.addExampleResponses(
         transformedSpec,
         postmanCollection
       );
+
+      // Hapus global security
+      delete transformedSpec.security;
 
       const yamlOutput = dump(transformedSpec, {
         lineWidth: -1,

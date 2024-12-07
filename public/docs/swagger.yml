@@ -32,7 +32,6 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: JWT
 tags:
   - name: Auth
   - name: Users
@@ -1958,5 +1957,3 @@ paths:
             type: string
       security:
         - bearerAuth: []
-security:
-  - bearerAuth: []
