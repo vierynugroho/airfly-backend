@@ -381,6 +381,84 @@ async function main() {
     data: [
       // Jakarta to Singapore
       {
+        flightNumber: 'AH100',
+        airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
+          .id,
+        departureAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        departureTime: parseISO('2024-12-14T08:00:00Z'),
+        arrivalTime: parseISO('2024-12-14T11:00:00Z'),
+        terminal: 'A',
+        information: 'Direct flight from Jakarta to Surabaya',
+        price: 450.0,
+        class: 'ECONOMY',
+      },
+      {
+        flightNumber: 'AH101',
+        airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
+          .id,
+        departureAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        departureTime: parseISO('2024-12-14T09:00:00Z'),
+        arrivalTime: parseISO('2024-12-14T12:00:00Z'),
+        terminal: 'A',
+        information: 'Direct flight from Jakarta to Surabaya',
+        price: 450.0,
+        class: 'ECONOMY',
+      },
+      {
+        flightNumber: 'AH102',
+        airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
+          .id,
+        departureAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        departureTime: parseISO('2024-12-14T09:30:00Z'),
+        arrivalTime: parseISO('2024-12-14T12:30:00Z'),
+        terminal: 'A',
+        information: 'Direct flight from Jakarta to Surabaya',
+        price: 750.0,
+        class: 'FIRST',
+      },
+      {
+        flightNumber: 'AH107',
+        airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
+          .id,
+        departureAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        departureTime: parseISO('2024-12-14T09:30:00Z'),
+        arrivalTime: parseISO('2024-12-14T12:30:00Z'),
+        terminal: 'A',
+        information: 'Direct flight from Jakarta to Surabaya',
+        price: 600.0,
+        class: 'BUSINESS',
+      },
+      {
+        flightNumber: 'AH108',
+        airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
+          .id,
+        departureAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        departureTime: parseISO('2024-12-14T09:00:00Z'),
+        arrivalTime: parseISO('2024-12-14T12:00:00Z'),
+        terminal: 'A',
+        information: 'Direct flight from Jakarta to Surabaya',
+        price: 700.0,
+        class: 'BUSINESS',
+      },
+      {
+        flightNumber: 'AH118',
+        airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
+          .id,
+        departureAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        departureTime: parseISO('2024-12-15T09:00:00Z'),
+        arrivalTime: parseISO('2024-12-15T12:00:00Z'),
+        terminal: 'A',
+        information: 'Direct flight from Jakarta to Surabaya',
+        price: 500.0,
+        class: 'ECONOMY',
+      },
+      {
         flightNumber: 'HA113',
         airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
           .id,
@@ -1147,6 +1225,34 @@ async function main() {
         information: 'Paris to London flight with Singapore Airlines',
         price: 900.0,
         class: 'FIRST',
+      },
+      {
+        flightNumber: 'PD100',
+        airlineId: retrievedAirlines.find(
+          (a) => a.name === 'Singapore Airlines'
+        ).id,
+        departureAirport: retrievedAirports.find((a) => a.code === 'CDG').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'LHR').id,
+        departureTime: parseISO('2024-08-21T08:00:00Z'),
+        arrivalTime: parseISO('2024-08-21T14:45:00Z'),
+        terminal: 'B',
+        information: 'Paris to London flight with Singapore Airlines',
+        price: 500.0,
+        class: 'ECONOMY',
+      },
+      {
+        flightNumber: 'PD101',
+        airlineId: retrievedAirlines.find(
+          (a) => a.name === 'Singapore Airlines'
+        ).id,
+        departureAirport: retrievedAirports.find((a) => a.code === 'CDG').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'LHR').id,
+        departureTime: parseISO('2024-08-21T05:00:00Z'),
+        arrivalTime: parseISO('2024-08-21T11:45:00Z'),
+        terminal: 'B',
+        information: 'Paris to London flight with Singapore Airlines',
+        price: 500.0,
+        class: 'ECONOMY',
       },
       {
         flightNumber: 'PR2',
