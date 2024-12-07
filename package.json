@@ -9,7 +9,7 @@
     "prepare": "husky",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "docs:generate": "node public/docs/generate.js",
+    "docs:generate": "node src/utils/generate.js",
     "prisma:migrate": "prisma migrate dev",
     "prisma:db": "npx prisma db push",
     "prisma:reset": "npx prisma migrate reset",

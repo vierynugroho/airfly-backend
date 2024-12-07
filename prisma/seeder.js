@@ -405,6 +405,32 @@ async function main() {
         class: 'ECONOMY',
       },
       {
+        flightNumber: 'AH110',
+        airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
+          .id,
+        departureAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        departureTime: parseISO('2024-12-15T08:00:00Z'),
+        arrivalTime: parseISO('2024-12-15T11:00:00Z'),
+        terminal: 'A',
+        information: 'Direct flight from Jakarta to Surabaya',
+        price: 450.0,
+        class: 'ECONOMY',
+      },
+      {
+        flightNumber: 'AH111',
+        airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
+          .id,
+        departureAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
+        departureTime: parseISO('2024-12-15T15:30:00Z'),
+        arrivalTime: parseISO('2024-12-15T18:00:00Z'),
+        terminal: 'A',
+        information: 'Direct flight from Surabaya to Jakarta',
+        price: 450.0,
+        class: 'ECONOMY',
+      },
+      {
         flightNumber: 'AH101',
         airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
           .id,

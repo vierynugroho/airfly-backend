@@ -96,11 +96,13 @@ class PostmanToOpenAPIConverter {
   }
 
   findCorrespondingPostmanItem(postmanCollection, pathKey, methodName) {
+    const normalizePath = (path) => path.replace(/:([\w-]+)/g, '{$1}');
+
     const findItem = (items) => {
       for (const item of items) {
         if (
           item.request &&
-          item.request.url.path.join('/') ===
+          normalizePath(item.request.url.path.join('/')) ===
             pathKey.split('/').filter(Boolean).join('/') &&
           item.request.method.toLowerCase() === methodName.toLowerCase()
         ) {
@@ -157,18 +159,42 @@ class PostmanToOpenAPIConverter {
                   const exampleName = response.name
                     ? response.name.replace(/[^a-zA-Z0-9-_]/g, '_')
                     : 'example';
-                  examples[exampleName] = {
-                    value: response.body ? JSON.parse(response.body) : {},
-                  };
+                  let responseBody = {};
+
+                  try {
+                    responseBody = response.body
+                      ? JSON.parse(response.body)
+                      : {};
+                  } catch (err) {
+                    console.log(err.message);
+                    console.warn(
+                      'Invalid JSON body in response:',
+                      response.body
+                    );
+                  }
+
+                  examples[exampleName] = { value: responseBody };
                   return examples;
                 }, {}),
               };
             } else {
               const singleResponse = responses[0];
-              method.responses[statusCode].content['application/json'] = {
-                example: singleResponse.body
+              let responseBody = {};
+
+              try {
+                responseBody = singleResponse.body
                   ? JSON.parse(singleResponse.body)
-                  : {},
+                  : {};
+              } catch (err) {
+                console.log(err.message);
+                console.warn(
+                  'Invalid JSON body in response:',
+                  singleResponse.body
+                );
+              }
+
+              method.responses[statusCode].content['application/json'] = {
+                example: responseBody,
               };
             }
           });
@@ -213,10 +239,7 @@ class PostmanToOpenAPIConverter {
 
       delete transformedSpec.security;
 
-      const yamlOutput = dump(transformedSpec, {
-        lineWidth: -1,
-      });
-
+      const yamlOutput = dump(transformedSpec, { lineWidth: -1 });
       writeFileSync(this.options.outputFile, yamlOutput);
 
       console.log(

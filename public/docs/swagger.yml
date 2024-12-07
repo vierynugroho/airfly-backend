@@ -38,11 +38,43 @@ tags:
   - name: Airports
   - name: Airlines
   - name: Flights
-    description: Flight Resources
   - name: Seats
   - name: Booking
   - name: Notification
 paths:
+  /auth/me:
+    get:
+      tags:
+        - Auth
+      summary: get user logged in
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: user logged in data retrieved successfully
+                data:
+                  id: 4
+                  firstName: Sarah
+                  lastName: Williams
+                  email: sarah.williams@example.com
+                  phone: '+62822334455'
+                  status: VERIFIED
+                  role: BUYER
+        '401':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 401
+                  message: unauthorized
+      parameters: []
+      security:
+        - bearerAuth: []
   /auth/login:
     post:
       tags:
@@ -217,39 +249,6 @@ paths:
                       statusCode: 400
                       message: Invalid OTP Code 1
       parameters: []
-  /auth/me:
-    get:
-      tags:
-        - Auth
-      summary: get user logged in
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              example:
-                meta:
-                  statusCode: 200
-                  message: user logged in data retrieved successfully
-                data:
-                  id: 4
-                  firstName: Sarah
-                  lastName: Williams
-                  email: sarah.williams@example.com
-                  phone: '+62822334455'
-                  status: VERIFIED
-                  role: BUYER
-        '401':
-          description: Response
-          content:
-            application/json:
-              example:
-                error:
-                  statusCode: 401
-                  message: unauthorized
-      parameters: []
-      security:
-        - bearerAuth: []
   /users:
     get:
       tags:
@@ -490,88 +489,6 @@ paths:
       security:
         - bearerAuth: []
   /airports:
-    post:
-      tags:
-        - Airports
-      summary: create
-      requestBody:
-        content: {}
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              example:
-                meta:
-                  statusCode: 200
-                  message: Airport created successfully
-                data:
-                  airport:
-                    id: 9
-                    code: HLP
-                    name: Halim Perdanakusuma International Airport
-                    city: DKI Jakarta
-                    state: Asia Tenggara
-                    country: '1'
-                    timezone: Asia/Jakarta
-                    latitude: '1'
-                    longitude: '1'
-                    elevation: '1'
-                    imageUrl: https://ik.imagekit.io/vieryn/airports/image-1733114851306_xJxBmViPM.jpeg
-                    imageId: 674d3be7e375273f60c23a27
-                    createdAt: '2024-12-02T04:47:37.509Z'
-        '400':
-          description: Response
-          content:
-            application/json:
-              examples:
-                file_too_large:
-                  value:
-                    error:
-                      statusCode: 400
-                      title: 'LIMIT_FILE_SIZE: MulterError'
-                      message: MulterError - File too large
-                      fields: image
-                no_file_selected:
-                  value:
-                    error:
-                      statusCode: 400
-                      message: no file selected
-        '401':
-          description: Response
-          content:
-            application/json:
-              example:
-                error:
-                  statusCode: 401
-                  message: unauthorized
-        '403':
-          description: Response
-          content:
-            application/json:
-              example:
-                error:
-                  statusCode: 403
-                  message: forbidden, Go Back ! >:(
-        '409':
-          description: Response
-          content:
-            application/json:
-              example:
-                error:
-                  statusCode: 409
-                  message: Airport code already exists
-        '422':
-          description: Response
-          content:
-            application/json:
-              example:
-                error:
-                  statusCode: 422
-                  message: '"image" is not allowed'
-      parameters: []
-      security:
-        - bearerAuth: []
     get:
       tags:
         - Airports
@@ -1397,6 +1314,88 @@ paths:
                       message: Airports data retrieved successfully
                       pagination: null
                     data: []
+    post:
+      tags:
+        - Airports
+      summary: create
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: Airport created successfully
+                data:
+                  airport:
+                    id: 9
+                    code: HLP
+                    name: Halim Perdanakusuma International Airport
+                    city: DKI Jakarta
+                    state: Asia Tenggara
+                    country: '1'
+                    timezone: Asia/Jakarta
+                    latitude: '1'
+                    longitude: '1'
+                    elevation: '1'
+                    imageUrl: https://ik.imagekit.io/vieryn/airports/image-1733114851306_xJxBmViPM.jpeg
+                    imageId: 674d3be7e375273f60c23a27
+                    createdAt: '2024-12-02T04:47:37.509Z'
+        '400':
+          description: Response
+          content:
+            application/json:
+              examples:
+                file_too_large:
+                  value:
+                    error:
+                      statusCode: 400
+                      title: 'LIMIT_FILE_SIZE: MulterError'
+                      message: MulterError - File too large
+                      fields: image
+                no_file_selected:
+                  value:
+                    error:
+                      statusCode: 400
+                      message: no file selected
+        '401':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 401
+                  message: unauthorized
+        '403':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
+        '409':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 409
+                  message: Airport code already exists
+        '422':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 422
+                  message: '"image" is not allowed'
+      parameters: []
+      security:
+        - bearerAuth: []
   /airlines:
     get:
       tags:
@@ -1576,122 +1575,6 @@ paths:
       security:
         - bearerAuth: []
   /flights:
-    post:
-      tags:
-        - Flights
-      summary: create
-      description: |-
-        ``` json
-        {
-            "flightNumber": "FE",
-            "airlineId": "1000",
-            "departureAirport": "1",
-            "arrivalAirport": "1",
-            "departureTime": "2024-01-01T00:00:00.000Z",
-            "arrivalTime": "2024-01-02T00:00:00.000Z",
-            "terminal": "terminal 2A",
-            "price": 8000,
-            "class": "FIRST",
-            "information":"free wifi-free inflight meals" // using - separator
-        }
-         ```
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                flightNumber: FE
-                airlineId: '1000'
-                departureAirport: '1'
-                arrivalAirport: '1'
-                departureTime: '2024-01-01T00:00:00.000Z'
-                arrivalTime: '2024-01-02T00:00:00.000Z'
-                terminal: terminal 2A
-                price: 8000
-                class: FIRST
-                information: free wifi-free inflight meals
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              example:
-                meta:
-                  statusCode: 200
-                  message: flight created successfully
-                data:
-                  flight:
-                    id: 1
-                    flightNumber: CH1
-                    airlineId: 2
-                    departureAirport: 1
-                    arrivalAirport: 2
-                    departureTime: '2024-01-01T00:00:00.000Z'
-                    arrivalTime: '2024-01-02T00:00:00.000Z'
-                    terminal: terminal 2A
-                    information: free wifi-free inflight meals
-                    price: 5000
-                    class: BUSINESS
-        '403':
-          description: Response
-          content:
-            application/json:
-              example:
-                error:
-                  statusCode: 403
-                  message: forbidden, Go Back ! >:(
-        '404':
-          description: Response
-          content:
-            application/json:
-              examples:
-                arrival_airport_is_not_found:
-                  value:
-                    error:
-                      statusCode: 404
-                      message: arrival airport is not found
-                departure_airport_is_not_found:
-                  value:
-                    error:
-                      statusCode: 404
-                      message: departure airport is not found
-                airline_not_found:
-                  value:
-                    error:
-                      statusCode: 404
-                      message: airline is not found
-        '409':
-          description: Response
-          content:
-            application/json:
-              example:
-                error:
-                  statusCode: 409
-                  message: Flight number is already used by another flight
-        '422':
-          description: Response
-          content:
-            application/json:
-              examples:
-                invalid_arrival_airport:
-                  value:
-                    error:
-                      statusCode: 422
-                      message: Arrival airport must be different from departure airport.
-                invalid_arrival_time:
-                  value:
-                    error:
-                      statusCode: 422
-                      message: Arrival time must be after departure time.
-                invalid_input:
-                  value:
-                    error:
-                      statusCode: 422
-                      message: '"airlineId" must be a number'
-      parameters: []
-      security:
-        - bearerAuth: []
     get:
       tags:
         - Flights
@@ -1781,12 +1664,18 @@ paths:
             type: integer
           description: filter - integer - airport ID
           example: '2'
-        - name: departureDate
+        - name: returnTime
           in: query
           schema:
-            type: number
-          description: filter - ISO DATE - departure date
-          example: '2024-01-31T00:00:00.000Z'
+            type: string
+          description: flight departure time [ISO date]
+          example: '2024-01-01T00:00:00Z'
+        - name: departureTime
+          in: query
+          schema:
+            type: string
+          description: flight departure time [ISO date]
+          example: '2026-01-01T00:00:00Z'
       responses:
         '200':
           description: Successful response
@@ -2243,22 +2132,41 @@ paths:
                     error:
                       statusCode: 422
                       message: invalid value for departure airport or arrival airport
-  /seats:
     post:
       tags:
-        - Seats
+        - Flights
       summary: create
+      description: |-
+        ``` json
+        {
+            "flightNumber": "FE",
+            "airlineId": "1000",
+            "departureAirport": "1",
+            "arrivalAirport": "1",
+            "departureTime": "2024-01-01T00:00:00.000Z",
+            "arrivalTime": "2024-01-02T00:00:00.000Z",
+            "terminal": "terminal 2A",
+            "price": 8000,
+            "class": "FIRST",
+            "information":"free wifi-free inflight meals" // using - separator
+        }
+         ```
       requestBody:
         content:
           application/json:
             schema:
               type: object
               example:
-                flightId: 1
-                seatNumber: A3
-                status: UNAVAILABLE
+                flightNumber: FE
+                airlineId: '1000'
+                departureAirport: '1'
+                arrivalAirport: '1'
                 departureTime: '2024-01-01T00:00:00.000Z'
                 arrivalTime: '2024-01-02T00:00:00.000Z'
+                terminal: terminal 2A
+                price: 8000
+                class: FIRST
+                information: free wifi-free inflight meals
       responses:
         '200':
           description: Successful response
@@ -2267,15 +2175,20 @@ paths:
               example:
                 meta:
                   statusCode: 200
-                  message: seat created successfully
+                  message: flight created successfully
                 data:
-                  seat:
+                  flight:
                     id: 1
-                    flightId: 1
-                    seatNumber: B3
-                    status: UNAVAILABLE
+                    flightNumber: CH1
+                    airlineId: 2
+                    departureAirport: 1
+                    arrivalAirport: 2
                     departureTime: '2024-01-01T00:00:00.000Z'
                     arrivalTime: '2024-01-02T00:00:00.000Z'
+                    terminal: terminal 2A
+                    information: free wifi-free inflight meals
+                    price: 5000
+                    class: BUSINESS
         '403':
           description: Response
           content:
@@ -2288,10 +2201,22 @@ paths:
           description: Response
           content:
             application/json:
-              example:
-                error:
-                  statusCode: 404
-                  message: flight id is not found
+              examples:
+                arrival_airport_is_not_found:
+                  value:
+                    error:
+                      statusCode: 404
+                      message: arrival airport is not found
+                departure_airport_is_not_found:
+                  value:
+                    error:
+                      statusCode: 404
+                      message: departure airport is not found
+                airline_not_found:
+                  value:
+                    error:
+                      statusCode: 404
+                      message: airline is not found
         '409':
           description: Response
           content:
@@ -2299,18 +2224,31 @@ paths:
               example:
                 error:
                   statusCode: 409
-                  message: Seat number has already been used in the same flight
+                  message: Flight number is already used by another flight
         '422':
           description: Response
           content:
             application/json:
-              example:
-                error:
-                  statusCode: 422
-                  message: '"class" must be one of [ECONOMY, FIRST, BUSINESS]'
+              examples:
+                invalid_arrival_airport:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: Arrival airport must be different from departure airport.
+                invalid_arrival_time:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: Arrival time must be after departure time.
+                invalid_input:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: '"airlineId" must be a number'
       parameters: []
       security:
         - bearerAuth: []
+  /seats:
     get:
       tags:
         - Seats
@@ -2589,10 +2527,9 @@ paths:
                           class: ECONOMY
       security:
         - bearerAuth: []
-  /booking:
     post:
       tags:
-        - Booking
+        - Seats
       summary: create
       requestBody:
         content:
@@ -2600,42 +2537,11 @@ paths:
             schema:
               type: object
               example:
-                flightId: 3
-                returnFlightId: 1
-                bookingDate: '2024-11-26T00:00:00Z'
-                bookingDetail:
-                  - seatId: 70
-                    price: 200000
-                    passenger:
-                      name: Anton
-                      familyName: Wibowo
-                      gender: MALE
-                      identityNumber: '123456'
-                      citizenship: Indonesia
-                      countryOfIssue: Indonesia
-                      title: Mr
-                      dob: '1985-05-15T00:00:00Z'
-                      expiredDate: '2030-05-15T23:59:59Z'
-                      type: ADULT
-                  - seatId: 11
-                    price: 200000
-                    passenger:
-                      name: Anton
-                      familyName: Wibowo
-                      gender: MALE
-                      identityNumber: '123456'
-                      citizenship: Indonesia
-                      countryOfIssue: Indonesia
-                      title: Mr
-                      dob: '1985-05-15T00:00:00Z'
-                      expiredDate: '2030-05-15T23:59:59Z'
-                      type: ADULT
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer {{token}}
+                flightId: 1
+                seatNumber: A3
+                status: UNAVAILABLE
+                departureTime: '2024-01-01T00:00:00.000Z'
+                arrivalTime: '2024-01-02T00:00:00.000Z'
       responses:
         '200':
           description: Successful response
@@ -2643,19 +2549,52 @@ paths:
             application/json:
               example:
                 meta:
-                  statusCode: 201
-                  message: booking created
-        '401':
+                  statusCode: 200
+                  message: seat created successfully
+                data:
+                  seat:
+                    id: 1
+                    flightId: 1
+                    seatNumber: B3
+                    status: UNAVAILABLE
+                    departureTime: '2024-01-01T00:00:00.000Z'
+                    arrivalTime: '2024-01-02T00:00:00.000Z'
+        '403':
           description: Response
           content:
             application/json:
               example:
                 error:
-                  statusCode: 401
-                  message: jwt expired, please re-login
-                  details: jwt expired
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: flight id is not found
+        '409':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 409
+                  message: Seat number has already been used in the same flight
+        '422':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 422
+                  message: '"class" must be one of [ECONOMY, FIRST, BUSINESS]'
+      parameters: []
       security:
         - bearerAuth: []
+  /booking:
     get:
       tags:
         - Booking
@@ -2779,6 +2718,72 @@ paths:
                   details: jwt expired
       security:
         - bearerAuth: []
+    post:
+      tags:
+        - Booking
+      summary: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                flightId: 3
+                returnFlightId: 1
+                bookingDate: '2024-11-26T00:00:00Z'
+                bookingDetail:
+                  - seatId: 70
+                    price: 200000
+                    passenger:
+                      name: Anton
+                      familyName: Wibowo
+                      gender: MALE
+                      identityNumber: '123456'
+                      citizenship: Indonesia
+                      countryOfIssue: Indonesia
+                      title: Mr
+                      dob: '1985-05-15T00:00:00Z'
+                      expiredDate: '2030-05-15T23:59:59Z'
+                      type: ADULT
+                  - seatId: 11
+                    price: 200000
+                    passenger:
+                      name: Anton
+                      familyName: Wibowo
+                      gender: MALE
+                      identityNumber: '123456'
+                      citizenship: Indonesia
+                      countryOfIssue: Indonesia
+                      title: Mr
+                      dob: '1985-05-15T00:00:00Z'
+                      expiredDate: '2030-05-15T23:59:59Z'
+                      type: ADULT
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer {{token}}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 201
+                  message: booking created
+        '401':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 401
+                  message: jwt expired, please re-login
+                  details: jwt expired
+      security:
+        - bearerAuth: []
   /booking/group:
     get:
       tags:
@@ -2844,7 +2849,7 @@ paths:
     get:
       tags:
         - Notification
-      summary: check notification
+      summary: show notification
       responses:
         '200':
           description: Successful response
@@ -3161,7 +3166,43 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: user data retrieved successfully
+                data:
+                  id: 1
+                  firstName: Viery
+                  lastName: Nugroho
+                  email: viery@gmail.com
+                  phone: '628123456789'
+                  status: VERIFIED
+                  role: BUYER
+        '401':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 401
+                  message: unauthorized
+        '403':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: user is not found
       parameters:
         - name: userID
           in: path
@@ -3188,7 +3229,51 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: user data updated successfully
+                data:
+                  id: 1
+                  firstName: Viery
+                  lastName: Nugroho
+                  email: viery@gmail.com
+                  phone: '628123456789'
+                  status: VERIFIED
+                  role: BUYER
+        '401':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 401
+                  message: unauthorized
+        '403':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: user is not found
+        '422':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 422
+                  message: '"password" is not allowed'
       parameters:
         - name: userID
           in: path
@@ -3205,7 +3290,47 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: user deleted successfully
+                data:
+                  user:
+                    id: 2
+                    firstName: Viery
+                    lastName: Nugroho
+                    email: Junior@gmail.com
+                    phone: '628123456789'
+                    password: password
+                    secretKey: ''
+                    otpToken: ''
+                    status: VERIFIED
+                    role: BUYER
+        '401':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 401
+                  message: unauthorized
+        '403':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: user is not found
       parameters:
         - name: userID
           in: path
@@ -3215,6 +3340,55 @@ paths:
       security:
         - bearerAuth: []
   /airports/{airportID}:
+    get:
+      tags:
+        - Airports
+      summary: read by id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: Airport data retrieved successfully
+                data:
+                  id: 2
+                  code: CGK
+                  name: Soekarno-Hatta International Airport
+                  city: Jakarta
+                  state: Banten
+                  country: Indonesia
+                  timezone: Asia/Jakarta
+                  latitude: '-6.125556'
+                  longitude: '106.655833'
+                  elevation: '34'
+                  imageUrl: ''
+                  imageId: ''
+                  createdAt: '2024-11-25T04:27:02.136Z'
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: Airport not found
+        '422':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 422
+                  message: Airport ID is not a number
+      parameters:
+        - name: airportID
+          in: path
+          required: true
+          schema:
+            type: string
     put:
       tags:
         - Airports
@@ -3225,24 +3399,59 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
-      parameters:
-        - name: airportID
-          in: path
-          required: true
-          schema:
-            type: string
-      security:
-        - bearerAuth: []
-    get:
-      tags:
-        - Airports
-      summary: read by id
-      responses:
-        '200':
-          description: Successful response
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: Airport updated successfully
+                data:
+                  airport:
+                    id: 10
+                    code: update
+                    name: update
+                    city: DKI Jakarta
+                    state: Asia Tenggara
+                    country: '1'
+                    timezone: Asia/Jakarta
+                    latitude: '1'
+                    longitude: '1'
+                    elevation: '1'
+                    imageUrl: https://ik.imagekit.io/vieryn/airports/image-1733116450427_BuOgrRSzM.jpeg
+                    imageId: 674d4224e375273f60e58702
+                    createdAt: '2024-12-02T05:14:14.443Z'
+        '400':
+          description: Response
           content:
-            application/json: {}
+            application/json:
+              examples:
+                file_too_large:
+                  value:
+                    error:
+                      statusCode: 400
+                      title: 'LIMIT_FILE_SIZE: MulterError'
+                      message: MulterError - File too large
+                      fields: image
+                no_file_selected:
+                  value:
+                    error:
+                      statusCode: 400
+                      message: no file selected
+        '401':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 401
+                  message: unauthorized
+        '403':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
       parameters:
         - name: airportID
           in: path
@@ -3259,7 +3468,58 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: Airport deleted successfully
+                data:
+                  airport:
+                    id: 2
+                    code: CGK
+                    name: Updated Airport Name
+                    city: Jakarta
+                    state: Asia Tenggara
+                    country: Indonesia
+                    timezone: Asia/Jakarta
+                    latitude: '-6.121111'
+                    longitude: '106.661111'
+                    elevation: '35'
+                    imageUrl: ''
+                    imageId: ''
+                    createdAt: '2024-11-25T04:27:02.136Z'
+        '401':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 401
+                  message: unauthorized
+        '403':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: Airport not found
+        '422':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 422
+                  message: Airport ID is not a number
       parameters:
         - name: airportID
           in: path
@@ -3292,15 +3552,38 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: Airline fetched successfully
+                data:
+                  id: 5
+                  name: Lion Air
+                  imageUrl: https://ik.imagekit.io/7z63pekkd/airlines/Lion_Air_t9MLl0Gd7.jpg
+                  imageId: 674958f4e375273f602974e5
+        '400':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 400
+                  message: Invalid ID format
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: Airline not found
       parameters:
         - name: airlineID
           in: path
           required: true
           schema:
             type: string
-      security:
-        - bearerAuth: []
   /api/v1/airlines/{airlineID}:
     put:
       tags:
@@ -3334,7 +3617,68 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              examples:
+                success_-_without_image:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: Airline updated successfully
+                    data:
+                      id: 6
+                      name: Garuda Airline
+                      imageUrl: delta.png
+                      imageId: delta-logo
+                success_-_with_image:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: Airline updated successfully
+                    data:
+                      id: 10
+                      name: Garuda Airline
+                      imageUrl: https://ik.imagekit.io/vieryn/airlines/image-1733030790528_I4LUboOyT.png
+                      imageId: 674bf38de375273f60157efc
+        '400':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 400
+                  message: Invalid ID format
+        '401':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 401
+                  message: unauthorized
+        '403':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: Airline not found
+        '422':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 422
+                  message: No file selected.
       parameters:
         - name: airlineID
           in: path
@@ -3363,7 +3707,32 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: Airline deleted successfully
+                data:
+                  id: 10
+                  name: Garuda Airline
+                  imageUrl: https://ik.imagekit.io/vieryn/airlines/image-1733030790528_I4LUboOyT.png
+                  imageId: 674bf38de375273f60157efc
+        '400':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 400
+                  message: Invalid ID format
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: Airline not found
       parameters:
         - name: airlineID
           in: path
@@ -3373,6 +3742,91 @@ paths:
       security:
         - bearerAuth: []
   /flights/{flightID}:
+    get:
+      tags:
+        - Flights
+      summary: get by ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: fligt data retrieved successfully
+                data:
+                  id: 2
+                  flightNumber: CH1
+                  airlineId: 2
+                  departureAirport: 1
+                  arrivalAirport: 2
+                  departureTime: '2024-01-01T00:00:00.000Z'
+                  arrivalTime: '2024-01-02T00:00:00.000Z'
+                  terminal: terminal 2A
+                  information: free wifi-free inflight meals
+                  price: 5000
+                  class: BUSINESS
+                  _count:
+                    seat: 0
+                    booking: 0
+                    returnBooking: 0
+                  airline:
+                    id: 2
+                    name: Batik Air
+                    imageUrl: '-'
+                    imageId: '-'
+                  arrival:
+                    id: 2
+                    code: SBY1
+                    name: Juanda International Airport
+                    city: SURABAYA
+                    state: INDONESIA
+                    country: INDONESIA
+                    timezone: GMT+7
+                    latitude: '1'
+                    longitude: '1'
+                    elevation: '1'
+                    imageUrl: '-'
+                    imageId: '-'
+                    createdAt: '1970-01-01T00:00:00.000Z'
+                  departure:
+                    id: 1
+                    code: JKT1
+                    name: Soekarno Hatta International Airport
+                    city: JAKARTA
+                    state: INDONESIA
+                    country: INDONESIA
+                    timezone: GMT+7
+                    latitude: '1'
+                    longitude: '1'
+                    elevation: '1'
+                    imageUrl: '-'
+                    imageId: '-'
+                    createdAt: '1970-01-01T00:00:00.000Z'
+                  seat: []
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: flight is not found
+        '422':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 422
+                  message: flight ID is not a number
+      parameters:
+        - name: flightID
+          in: path
+          required: true
+          schema:
+            type: string
     put:
       tags:
         - Flights
@@ -3397,7 +3851,90 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: flight updated successfully
+                data:
+                  flight:
+                    id: 1
+                    flightNumber: CH2
+                    airlineId: 2
+                    departureAirport: 1
+                    arrivalAirport: 2
+                    departureTime: '2024-01-01T00:00:00.000Z'
+                    arrivalTime: '2024-01-02T00:00:00.000Z'
+                    terminal: terminal 2A
+                    information: free wifi-free inflight meals
+                    price: 5000
+                    class: BUSINESS
+        '403':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
+        '404':
+          description: Response
+          content:
+            application/json:
+              examples:
+                not_found:
+                  value:
+                    error:
+                      statusCode: 404
+                      message: Flight is not found
+                departure_airport_is_not_found:
+                  value:
+                    error:
+                      statusCode: 404
+                      message: departure airport is not found
+                arrival_airport_is_not_found:
+                  value:
+                    error:
+                      statusCode: 404
+                      message: arrival airport is not found
+        '409':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 409
+                  message: Flight number is already used by another flight
+        '422':
+          description: Response
+          content:
+            application/json:
+              examples:
+                invalid_arrival_airport:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: Arrival airport must be different from departure airport.
+                invalid_arrival_time:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: Arrival time must be after departure time.
+                invalid_input:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: '"airlineId" must be a number'
+                invalid_params:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: flight ID is not a number
+                invalid_class:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: '"class" must be one of [ECONOMY, FIRST, BUSINESS]'
       parameters:
         - name: flightID
           in: path
@@ -3414,24 +3951,48 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
-      parameters:
-        - name: flightID
-          in: path
-          required: true
-          schema:
-            type: string
-      security:
-        - bearerAuth: []
-    get:
-      tags:
-        - Flights
-      summary: get by ID
-      responses:
-        '200':
-          description: Successful response
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: flight deleted successfully
+                data:
+                  flight:
+                    id: 1
+                    flightNumber: CH2
+                    airlineId: 2
+                    departureAirport: 1
+                    arrivalAirport: 2
+                    departureTime: '2024-01-01T00:00:00.000Z'
+                    arrivalTime: '2024-01-02T00:00:00.000Z'
+                    terminal: terminal 2A
+                    information: free wifi-free inflight meals
+                    price: 5000
+                    class: BUSINESS
+        '403':
+          description: Response
           content:
-            application/json: {}
+            application/json:
+              example:
+                error:
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: flight is not found
+        '422':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 422
+                  message: flight ID is not a number
       parameters:
         - name: flightID
           in: path
@@ -3441,6 +4002,60 @@ paths:
       security:
         - bearerAuth: []
   /seats/{seatID}:
+    get:
+      tags:
+        - Seats
+      summary: get by seat ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: seat data retrieved successfully
+                data:
+                  id: 8
+                  flightId: 1
+                  seatNumber: A6
+                  price: 1000
+                  status: AVAILABLE
+                  class: ECONOMY
+                  _count:
+                    passenger: 0
+                  flight:
+                    id: 1
+                    flightNumber: GRD1
+                    airlineId: 1
+                    departureAirport: 2
+                    arrivalAirport: 1
+                    departureTime: '1970-01-01T00:00:00.000Z'
+                    arrivalTime: '1970-01-01T00:00:00.000Z'
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: seat is not found
+        '422':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 422
+                  message: seat ID is not a number
+      parameters:
+        - name: seatID
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
     put:
       tags:
         - Seats
@@ -3460,7 +4075,65 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: seat updated successfully
+                data:
+                  seat:
+                    id: 1
+                    flightId: 1
+                    seatNumber: B3
+                    status: LOCKED
+                    departureTime: '2024-01-01T00:00:00.000Z'
+                    arrivalTime: '2024-01-02T00:00:00.000Z'
+        '403':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
+        '404':
+          description: Response
+          content:
+            application/json:
+              examples:
+                not_found:
+                  value:
+                    error:
+                      statusCode: 404
+                      message: seat is not found
+                flightID_is_not_found:
+                  value:
+                    error:
+                      statusCode: 404
+                      message: flight id is not found
+        '409':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 409
+                  message: Seat number has already been used
+        '422':
+          description: Response
+          content:
+            application/json:
+              examples:
+                invalid_input:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: '"status" must be one of [AVAILABLE, UNAVAILABLE, LOCKED]'
+                invalid_params:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: seat ID is not a number
       parameters:
         - name: seatID
           in: path
@@ -3477,24 +4150,41 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
-      parameters:
-        - name: seatID
-          in: path
-          required: true
-          schema:
-            type: string
-      security:
-        - bearerAuth: []
-    get:
-      tags:
-        - Seats
-      summary: get by seat ID
-      responses:
-        '200':
-          description: Successful response
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: seat deleted successfully
+                data:
+                  seat:
+                    id: 1
+                    flightId: 1
+                    seatNumber: B3
+                    status: UNAVAILABLE
+        '403':
+          description: Response
           content:
-            application/json: {}
+            application/json:
+              example:
+                error:
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: seat is not found
+        '422':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 422
+                  message: seat ID is not a number
       parameters:
         - name: seatID
           in: path
@@ -3523,7 +4213,107 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              example:
+                meta:
+                  status: 200
+                  message: successs
+                data:
+                  id: 14
+                  userId: 1
+                  flightId: 3
+                  returnFlightId: 1
+                  bookingDate: '2024-11-29T12:02:15.925Z'
+                  totalPrice: 400000
+                  status: ACTIVE
+                  createdAt: '2024-11-29T12:02:15.929Z'
+                  updateAt: '2024-11-29T12:02:15.929Z'
+                  bookingDetail:
+                    - id: 18
+                      bookingId: 14
+                      passengerId: 18
+                      seatId: 70
+                      price: 200000
+                      createdAt: '2024-11-29T12:02:15.934Z'
+                      updateAt: '2024-11-29T12:02:15.934Z'
+                      passenger:
+                        id: 18
+                        name: Anton
+                        familyName: Wibowo
+                        gender: MALE
+                        identityNumber: '123456'
+                        citizenship: Indonesia
+                        countryOfIssue: Indonesia
+                        title: Mr
+                        dob: '1985-05-15T00:00:00.000Z'
+                        expiredDate: '2030-05-15T23:59:59.000Z'
+                        type: ADULT
+                      seat:
+                        id: 70
+                        flightId: 3
+                        seatNumber: 3B
+                        status: LOCKED
+                        departureTime: '2024-11-29T08:40:42.629Z'
+                        arrivalTime: '2024-11-29T08:40:42.629Z'
+                    - id: 19
+                      bookingId: 14
+                      passengerId: 19
+                      seatId: 11
+                      price: 200000
+                      createdAt: '2024-11-29T12:02:15.934Z'
+                      updateAt: '2024-11-29T12:02:15.934Z'
+                      passenger:
+                        id: 19
+                        name: Anton
+                        familyName: Wibowo
+                        gender: MALE
+                        identityNumber: '123456'
+                        citizenship: Indonesia
+                        countryOfIssue: Indonesia
+                        title: Mr
+                        dob: '1985-05-15T00:00:00.000Z'
+                        expiredDate: '2030-05-15T23:59:59.000Z'
+                        type: ADULT
+                      seat:
+                        id: 11
+                        flightId: 1
+                        seatNumber: 3C
+                        status: LOCKED
+                        departureTime: '2024-11-29T08:40:42.629Z'
+                        arrivalTime: '2024-11-29T08:40:42.629Z'
+                  flight:
+                    id: 3
+                    flightNumber: LA789
+                    airlineId: 3
+                    departureAirport: 3
+                    arrivalAirport: 1
+                    departureTime: '2024-12-03T18:00:00.000Z'
+                    arrivalTime: '2024-12-03T21:00:00.000Z'
+                    terminal: T2
+                    information: Delayed flight
+                    price: 100
+                    class: ECONOMY
+                  returnFlight:
+                    id: 1
+                    flightNumber: GA123
+                    airlineId: 1
+                    departureAirport: 1
+                    arrivalAirport: 2
+                    departureTime: '2024-12-01T08:00:00.000Z'
+                    arrivalTime: '2024-12-01T11:00:00.000Z'
+                    terminal: T3
+                    information: Non-stop flight
+                    price: 150
+                    class: ECONOMY
+        '401':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 401
+                  message: jwt expired, please re-login
+                  details: jwt expired
       security:
         - bearerAuth: []
   /booking/code/{bookingCode}:
@@ -3546,7 +4336,107 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              example:
+                meta:
+                  status: 200
+                  message: successs
+                data:
+                  id: 14
+                  userId: 1
+                  flightId: 3
+                  returnFlightId: 1
+                  bookingDate: '2024-11-29T12:02:15.925Z'
+                  totalPrice: 400000
+                  status: ACTIVE
+                  createdAt: '2024-11-29T12:02:15.929Z'
+                  updateAt: '2024-11-29T12:02:15.929Z'
+                  bookingDetail:
+                    - id: 18
+                      bookingId: 14
+                      passengerId: 18
+                      seatId: 70
+                      price: 200000
+                      createdAt: '2024-11-29T12:02:15.934Z'
+                      updateAt: '2024-11-29T12:02:15.934Z'
+                      passenger:
+                        id: 18
+                        name: Anton
+                        familyName: Wibowo
+                        gender: MALE
+                        identityNumber: '123456'
+                        citizenship: Indonesia
+                        countryOfIssue: Indonesia
+                        title: Mr
+                        dob: '1985-05-15T00:00:00.000Z'
+                        expiredDate: '2030-05-15T23:59:59.000Z'
+                        type: ADULT
+                      seat:
+                        id: 70
+                        flightId: 3
+                        seatNumber: 3B
+                        status: LOCKED
+                        departureTime: '2024-11-29T08:40:42.629Z'
+                        arrivalTime: '2024-11-29T08:40:42.629Z'
+                    - id: 19
+                      bookingId: 14
+                      passengerId: 19
+                      seatId: 11
+                      price: 200000
+                      createdAt: '2024-11-29T12:02:15.934Z'
+                      updateAt: '2024-11-29T12:02:15.934Z'
+                      passenger:
+                        id: 19
+                        name: Anton
+                        familyName: Wibowo
+                        gender: MALE
+                        identityNumber: '123456'
+                        citizenship: Indonesia
+                        countryOfIssue: Indonesia
+                        title: Mr
+                        dob: '1985-05-15T00:00:00.000Z'
+                        expiredDate: '2030-05-15T23:59:59.000Z'
+                        type: ADULT
+                      seat:
+                        id: 11
+                        flightId: 1
+                        seatNumber: 3C
+                        status: LOCKED
+                        departureTime: '2024-11-29T08:40:42.629Z'
+                        arrivalTime: '2024-11-29T08:40:42.629Z'
+                  flight:
+                    id: 3
+                    flightNumber: LA789
+                    airlineId: 3
+                    departureAirport: 3
+                    arrivalAirport: 1
+                    departureTime: '2024-12-03T18:00:00.000Z'
+                    arrivalTime: '2024-12-03T21:00:00.000Z'
+                    terminal: T2
+                    information: Delayed flight
+                    price: 100
+                    class: ECONOMY
+                  returnFlight:
+                    id: 1
+                    flightNumber: GA123
+                    airlineId: 1
+                    departureAirport: 1
+                    arrivalAirport: 2
+                    departureTime: '2024-12-01T08:00:00.000Z'
+                    arrivalTime: '2024-12-01T11:00:00.000Z'
+                    terminal: T3
+                    information: Non-stop flight
+                    price: 150
+                    class: ECONOMY
+        '401':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 401
+                  message: jwt expired, please re-login
+                  details: jwt expired
       security:
         - bearerAuth: []
   /notifications/{notificationID}:
@@ -3558,7 +4448,27 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: notification data retrieved successfully
+                data:
+                  id: 1
+                  type: DISCOUNT
+                  title: Discount Natal
+                  description: Diskon 100% Khusus Hari Natal
+                  isRead: false
+                  createdAt: '2024-12-05T14:34:58.033Z'
+                  userId: 1
+        '403':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
       parameters:
         - name: notificationID
           in: path
@@ -3585,7 +4495,51 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: notification data updated successfully
+                data:
+                  id: 34
+                  type: PAYMENT
+                  title: Pembayaran Booking
+                  description: Cepet bayar
+                  isRead: false
+                  createdAt: '2024-12-06T06:17:42.903Z'
+                  userId: 1
+        '401':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 401
+                  message: unauthorized
+        '403':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: notification is not found
+        '422':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 422
+                  message: '"type" must be one of [INFO, DISCOUNT, ACCOUNT, EVENT, PAYMENT]'
       parameters:
         - name: notificationID
           in: path
@@ -3602,7 +4556,44 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: notification deleted successfully
+                data:
+                  notification:
+                    id: 34
+                    type: PAYMENT
+                    title: Pembayaran Booking
+                    description: Cepet bayar
+                    isRead: false
+                    createdAt: '2024-12-06T06:17:42.903Z'
+                    userId: 1
+        '401':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 401
+                  message: unauthorized
+        '403':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 403
+                  message: forbidden, Go Back ! >:(
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: notification is not found
       parameters:
         - name: notificationID
           in: path
