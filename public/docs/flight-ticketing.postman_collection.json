@@ -20,7 +20,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\": \"jane.smith@example.com\",\r\n    \"password\": \"password\"\r\n}",
+              "raw": "{\r\n    \"email\": \"john.doe@example.com\",\r\n    \"password\": \"password\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1199,9 +1199,16 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/users/1",
+              "raw": "{{local_base_url}}/users/:userID",
               "host": ["{{local_base_url}}"],
-              "path": ["users", "1"]
+              "path": ["users", ":userID"],
+              "variable": [
+                {
+                  "key": "userID",
+                  "value": "1",
+                  "description": "userID"
+                }
+              ]
             }
           },
           "response": [
@@ -1442,9 +1449,16 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}/users/1",
+              "raw": "{{local_base_url}}/users/:userID",
               "host": ["{{local_base_url}}"],
-              "path": ["users", "1"]
+              "path": ["users", ":userID"],
+              "variable": [
+                {
+                  "key": "userID",
+                  "value": "1",
+                  "description": "user ID"
+                }
+              ]
             }
           },
           "response": [
@@ -1776,9 +1790,16 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/users/2",
+              "raw": "{{local_base_url}}/users/:userID",
               "host": ["{{local_base_url}}"],
-              "path": ["users", "2"]
+              "path": ["users", ":userID"],
+              "variable": [
+                {
+                  "key": "userID",
+                  "value": "1",
+                  "description": "user ID"
+                }
+              ]
             }
           },
           "response": [
@@ -3314,9 +3335,16 @@
               ]
             },
             "url": {
-              "raw": "{{local_base_url}}/airports/10",
+              "raw": "{{local_base_url}}/airports/:airportID",
               "host": ["{{local_base_url}}"],
-              "path": ["airports", "10"]
+              "path": ["airports", ":airportID"],
+              "variable": [
+                {
+                  "key": "airportID",
+                  "value": "1",
+                  "description": "airport ID"
+                }
+              ]
             }
           },
           "response": [
@@ -4525,9 +4553,16 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/airports/1",
+              "raw": "{{local_base_url}}/airports/:airportID",
               "host": ["{{local_base_url}}"],
-              "path": ["airports", "1"]
+              "path": ["airports", ":airportID"],
+              "variable": [
+                {
+                  "key": "airportID",
+                  "value": "1",
+                  "description": "airport ID"
+                }
+              ]
             }
           },
           "response": [
@@ -4710,9 +4745,16 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/airports/1",
+              "raw": "{{local_base_url}}/airports/:airportID",
               "host": ["{{local_base_url}}"],
-              "path": ["airports", "1"]
+              "path": ["airports", ":airportID"],
+              "variable": [
+                {
+                  "key": "airportID",
+                  "value": "1",
+                  "description": "airport ID"
+                }
+              ]
             }
           },
           "response": [
@@ -5242,9 +5284,16 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/airlines/1",
+              "raw": "{{local_base_url}}/airlines/:airlineID",
               "host": ["{{local_base_url}}"],
-              "path": ["airlines", "1"]
+              "path": ["airlines", ":airlineID"],
+              "variable": [
+                {
+                  "key": "airlineID",
+                  "value": "1",
+                  "description": "Airline ID"
+                }
+              ]
             },
             "description": "Endpoint untuk mengambil detail informasi tentang maskapai penerbangan berdasarkan ID. Anda harus mengganti `{id}` dengan ID maskapai yang ingin dicari. Response akan mengembalikan informasi lengkap maskapai, termasuk nama dan gambar.\n\n**Parameter**:\n\n- `id`: ID maskapai yang ingin dicari (integer).\n    \n\n**Response yang Diharapkan**:\n\n- `id`: ID maskapai (integer).\n    \n- `name`: Nama maskapai penerbangan (string).\n    \n- `image_url`: URL gambar maskapai (string)."
           },
@@ -5904,11 +5953,18 @@
               ]
             },
             "url": {
-              "raw": "http://localhost:3000/api/v1/airlines/11",
+              "raw": "http://localhost:3000/api/v1/airlines/:airlineID",
               "protocol": "http",
               "host": ["localhost"],
               "port": "3000",
-              "path": ["api", "v1", "airlines", "11"]
+              "path": ["api", "v1", "airlines", ":airlineID"],
+              "variable": [
+                {
+                  "key": "airlineID",
+                  "value": "1",
+                  "description": "Airline ID"
+                }
+              ]
             },
             "description": "Endpoint untuk memperbarui data maskapai penerbangan berdasarkan ID. Anda dapat mengirimkan data baru untuk nama maskapai dan gambar maskapai. Pastikan untuk mengganti `{id}` dengan ID maskapai yang ingin diperbarui. Response akan mengembalikan data maskapai yang telah diperbarui.\n\n**Parameter**:\n\n- `id`: ID maskapai yang ingin diperbarui (integer).\n    \n\n**Body Request**:\n\n- `name`: Nama maskapai penerbangan baru (string).\n    \n- `image` (optional): Gambar maskapai baru dalam format file (form-data).\n    \n\n**Response yang Diharapkan**:\n\n- `id`: ID maskapai yang telah diperbarui (integer).\n    \n- `name`: Nama maskapai yang telah diperbarui (string).\n    \n- `image_url`: URL gambar maskapai yang telah diperbarui (string)."
           },
@@ -6426,9 +6482,16 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/airlines/airlines/10",
+              "raw": "{{local_base_url}}/airlines/airlines/:airlineID",
               "host": ["{{local_base_url}}"],
-              "path": ["airlines", "airlines", "10"]
+              "path": ["airlines", "airlines", ":airlineID"],
+              "variable": [
+                {
+                  "key": "airlineID",
+                  "value": "1",
+                  "description": "airline ID"
+                }
+              ]
             },
             "description": "Endpoint untuk menghapus maskapai penerbangan berdasarkan ID. Anda harus mengganti `{id}` dengan ID maskapai yang ingin dihapus. Jika berhasil, server akan mengembalikan status sukses. Jika maskapai tidak ditemukan, akan mengembalikan error dengan pesan yang sesuai.\n\n**Parameter**:\n\n- `id`: ID maskapai yang ingin dihapus (integer).\n    \n\n**Response yang Diharapkan**:\n\n- `message`: Pesan konfirmasi bahwa maskapai telah berhasil dihapus (string)."
           },
@@ -7226,9 +7289,16 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}/flights/2",
+              "raw": "{{local_base_url}}/flights/:flightID",
               "host": ["{{local_base_url}}"],
-              "path": ["flights", "2"]
+              "path": ["flights", ":flightID"],
+              "variable": [
+                {
+                  "key": "flightID",
+                  "value": "1",
+                  "description": "Flight ID"
+                }
+              ]
             }
           },
           "response": [
@@ -7944,9 +8014,16 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/flights/1",
+              "raw": "{{local_base_url}}/flights/:flightID",
               "host": ["{{local_base_url}}"],
-              "path": ["flights", "1"]
+              "path": ["flights", ":flightID"],
+              "variable": [
+                {
+                  "key": "flightID",
+                  "value": "1",
+                  "description": "flightID"
+                }
+              ]
             }
           },
           "response": [
@@ -8181,9 +8258,16 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/flights/2",
+              "raw": "{{local_base_url}}/flights/:flightID",
               "host": ["{{local_base_url}}"],
-              "path": ["flights", "2"]
+              "path": ["flights", ":flightID"],
+              "variable": [
+                {
+                  "key": "flightID",
+                  "value": "1",
+                  "description": "Flight ID"
+                }
+              ]
             }
           },
           "response": [
@@ -9530,9 +9614,16 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}/seats/1",
+              "raw": "{{local_base_url}}/seats/:seatID",
               "host": ["{{local_base_url}}"],
-              "path": ["seats", "1"]
+              "path": ["seats", ":seatID"],
+              "variable": [
+                {
+                  "key": "seatID",
+                  "value": "1",
+                  "description": "seat ID"
+                }
+              ]
             }
           },
           "response": [
@@ -9992,9 +10083,16 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/seats/1",
+              "raw": "{{local_base_url}}/seats/:seatID",
               "host": ["{{local_base_url}}"],
-              "path": ["seats", "1"]
+              "path": ["seats", ":seatID"],
+              "variable": [
+                {
+                  "key": "seatID",
+                  "value": "1",
+                  "description": "seat ID"
+                }
+              ]
             }
           },
           "response": [
@@ -10555,9 +10653,16 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/seats/B",
+              "raw": "{{local_base_url}}/seats/:seatID",
               "host": ["{{local_base_url}}"],
-              "path": ["seats", "B"]
+              "path": ["seats", ":seatID"],
+              "variable": [
+                {
+                  "key": "seatID",
+                  "value": "1",
+                  "description": "seat ID"
+                }
+              ]
             }
           },
           "response": [
@@ -10740,7 +10845,7 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMyODQ1MDY5LCJleHAiOjE3MzI5MzE0Njl9.S3ZJ2dl31HS0VsYV3AszgrFBwm82vxkEnZSUARDseP4",
+                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
@@ -10793,7 +10898,6 @@
                 {
                   "key": "Content-Type",
                   "value": "application/json",
-                  "name": "Content-Type",
                   "description": "",
                   "type": "text"
                 }
@@ -10835,7 +10939,6 @@
                 {
                   "key": "Content-Type",
                   "value": "application/json",
-                  "name": "Content-Type",
                   "description": "",
                   "type": "text"
                 }
@@ -10846,116 +10949,28 @@
           ]
         },
         {
-          "name": "get booking by ID",
+          "name": "find",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzNDg3NDY5LCJleHAiOjE3MzM1NzM4Njl9._2hrgP6uvCJx7nyARkGqVd1K_CmxMFucmyAT6F0OwgY",
                 "type": "text"
               }
             ],
             "url": {
-              "raw": "{{prod_base_url}}/booking/12323",
-              "host": ["{{prod_base_url}}"],
-              "path": ["booking", "12323"]
-            }
-          },
-          "response": [
-            {
-              "name": "ok",
-              "originalRequest": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "http://{{host}}/api/v1/booking/14",
-                  "protocol": "http",
-                  "host": ["{{host}}"],
-                  "path": ["api", "v1", "booking", "14"]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json",
-                  "name": "Content-Type",
-                  "description": "",
-                  "type": "text"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"successs\"\n    },\n    \"data\": {\n        \"id\": 14,\n        \"userId\": 1,\n        \"flightId\": 3,\n        \"returnFlightId\": 1,\n        \"bookingDate\": \"2024-11-29T12:02:15.925Z\",\n        \"totalPrice\": 400000,\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2024-11-29T12:02:15.929Z\",\n        \"updateAt\": \"2024-11-29T12:02:15.929Z\",\n        \"bookingDetail\": [\n            {\n                \"id\": 18,\n                \"bookingId\": 14,\n                \"passengerId\": 18,\n                \"seatId\": 70,\n                \"price\": 200000,\n                \"createdAt\": \"2024-11-29T12:02:15.934Z\",\n                \"updateAt\": \"2024-11-29T12:02:15.934Z\",\n                \"passenger\": {\n                    \"id\": 18,\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"gender\": \"MALE\",\n                    \"identityNumber\": \"123456\",\n                    \"citizenship\": \"Indonesia\",\n                    \"countryOfIssue\": \"Indonesia\",\n                    \"title\": \"Mr\",\n                    \"dob\": \"1985-05-15T00:00:00.000Z\",\n                    \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                    \"type\": \"ADULT\"\n                },\n                \"seat\": {\n                    \"id\": 70,\n                    \"flightId\": 3,\n                    \"seatNumber\": \"3B\",\n                    \"status\": \"LOCKED\",\n                    \"departureTime\": \"2024-11-29T08:40:42.629Z\",\n                    \"arrivalTime\": \"2024-11-29T08:40:42.629Z\"\n                }\n            },\n            {\n                \"id\": 19,\n                \"bookingId\": 14,\n                \"passengerId\": 19,\n                \"seatId\": 11,\n                \"price\": 200000,\n                \"createdAt\": \"2024-11-29T12:02:15.934Z\",\n                \"updateAt\": \"2024-11-29T12:02:15.934Z\",\n                \"passenger\": {\n                    \"id\": 19,\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"gender\": \"MALE\",\n                    \"identityNumber\": \"123456\",\n                    \"citizenship\": \"Indonesia\",\n                    \"countryOfIssue\": \"Indonesia\",\n                    \"title\": \"Mr\",\n                    \"dob\": \"1985-05-15T00:00:00.000Z\",\n                    \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                    \"type\": \"ADULT\"\n                },\n                \"seat\": {\n                    \"id\": 11,\n                    \"flightId\": 1,\n                    \"seatNumber\": \"3C\",\n                    \"status\": \"LOCKED\",\n                    \"departureTime\": \"2024-11-29T08:40:42.629Z\",\n                    \"arrivalTime\": \"2024-11-29T08:40:42.629Z\"\n                }\n            }\n        ],\n        \"flight\": {\n            \"id\": 3,\n            \"flightNumber\": \"LA789\",\n            \"airlineId\": 3,\n            \"departureAirport\": 3,\n            \"arrivalAirport\": 1,\n            \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n            \"terminal\": \"T2\",\n            \"information\": \"Delayed flight\",\n            \"price\": 100,\n            \"class\": \"ECONOMY\"\n        },\n        \"returnFlight\": {\n            \"id\": 1,\n            \"flightNumber\": \"GA123\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n            \"terminal\": \"T3\",\n            \"information\": \"Non-stop flight\",\n            \"price\": 150,\n            \"class\": \"ECONOMY\"\n        }\n    }\n}"
-            },
-            {
-              "name": "error",
-              "originalRequest": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "http://{{host}}/api/v1/booking/14",
-                  "protocol": "http",
-                  "host": ["{{host}}"],
-                  "path": ["api", "v1", "booking", "14"]
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json",
-                  "name": "Content-Type",
-                  "description": "",
-                  "type": "text"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n    \"error\": {\n        \"statusCode\": 401,\n        \"message\": \"jwt expired, please re-login\",\n        \"details\": \"jwt expired\"\n    }\n}"
-            }
-          ]
-        },
-        {
-          "name": "get all booking",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "{{prod_base_url}}/booking?page=1&limit=2",
-              "host": ["{{prod_base_url}}"],
+              "raw": "{{local_base_url}}/booking?page=1&limit=2",
+              "host": ["{{local_base_url}}"],
               "path": ["booking"],
               "query": [
                 {
                   "key": "page",
-                  "value": "1",
-                  "description": "page number"
+                  "value": "1"
                 },
                 {
                   "key": "limit",
-                  "value": "2",
-                  "description": "total item per page"
+                  "value": "2"
                 }
               ]
             }
@@ -11032,13 +11047,12 @@
                 {
                   "key": "Content-Type",
                   "value": "application/json",
-                  "name": "Content-Type",
                   "description": "",
                   "type": "text"
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"success\",\n        \"pagination\": {\n            \"totalPage\": 2,\n            \"currentPage\": 1,\n            \"pageItems\": 5,\n            \"nextPage\": 2,\n            \"prevPage\": null\n        }\n    },\n    \"data\": [\n        {\n            \"id\": 6,\n            \"userId\": 1,\n            \"flightId\": 1,\n            \"returnFlightId\": 2,\n            \"bookingDate\": \"2024-11-29T03:05:10.890Z\",\n            \"totalPrice\": 400000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-11-29T03:05:10.892Z\",\n            \"updateAt\": \"2024-11-29T03:05:10.892Z\"\n        },\n        {\n            \"id\": 7,\n            \"userId\": 1,\n            \"flightId\": 1,\n            \"returnFlightId\": null,\n            \"bookingDate\": \"2024-11-29T05:10:42.618Z\",\n            \"totalPrice\": 200000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-11-29T05:10:42.620Z\",\n            \"updateAt\": \"2024-11-29T05:10:42.620Z\"\n        },\n        {\n            \"id\": 8,\n            \"userId\": 1,\n            \"flightId\": 1,\n            \"returnFlightId\": null,\n            \"bookingDate\": \"2024-11-29T11:09:39.805Z\",\n            \"totalPrice\": 200000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-11-29T11:09:39.808Z\",\n            \"updateAt\": \"2024-11-29T11:09:39.808Z\"\n        },\n        {\n            \"id\": 9,\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": null,\n            \"bookingDate\": \"2024-11-29T11:09:50.898Z\",\n            \"totalPrice\": 200000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-11-29T11:09:50.900Z\",\n            \"updateAt\": \"2024-11-29T11:09:50.900Z\"\n        },\n        {\n            \"id\": 10,\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": null,\n            \"bookingDate\": \"2024-11-29T11:09:57.218Z\",\n            \"totalPrice\": 200000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-11-29T11:09:57.219Z\",\n            \"updateAt\": \"2024-11-29T11:09:57.219Z\"\n        }\n    ]\n}"
+              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"success\",\n        \"pagination\": {\n            \"totalPage\": 1,\n            \"currentPage\": 1,\n            \"pageItems\": 1,\n            \"nextPage\": null,\n            \"prevPage\": null\n        }\n    },\n    \"data\": [\n        {\n            \"id\": 16,\n            \"bookingCode\": \"2411026A6E\",\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": 1,\n            \"bookingDate\": \"2024-12-03T13:37:05.394Z\",\n            \"totalPrice\": 400000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-12-03T13:37:05.424Z\",\n            \"updateAt\": \"2024-12-03T13:37:05.424Z\",\n            \"flight\": {\n                \"id\": 3,\n                \"flightNumber\": \"LA789\",\n                \"airlineId\": 3,\n                \"departureAirport\": 3,\n                \"arrivalAirport\": 1,\n                \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n                \"terminal\": \"T2\",\n                \"information\": \"Delayed flight\",\n                \"price\": 100,\n                \"class\": \"ECONOMY\"\n            },\n            \"returnFlight\": {\n                \"id\": 1,\n                \"flightNumber\": \"GA123\",\n                \"airlineId\": 1,\n                \"departureAirport\": 1,\n                \"arrivalAirport\": 2,\n                \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n                \"terminal\": \"T3\",\n                \"information\": \"Non-stop flight\",\n                \"price\": 150,\n                \"class\": \"ECONOMY\"\n            }\n        }\n    ]\n}"
             },
             {
               "name": "find all",
@@ -11070,7 +11084,297 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"success\",\n        \"pagination\": null\n    },\n    \"data\": [\n        {\n            \"id\": 6,\n            \"userId\": 1,\n            \"flightId\": 1,\n            \"returnFlightId\": 2,\n            \"bookingDate\": \"2024-11-29T03:05:10.890Z\",\n            \"totalPrice\": 400000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-11-29T03:05:10.892Z\",\n            \"updateAt\": \"2024-11-29T03:05:10.892Z\"\n        },\n        {\n            \"id\": 7,\n            \"userId\": 1,\n            \"flightId\": 1,\n            \"returnFlightId\": null,\n            \"bookingDate\": \"2024-11-29T05:10:42.618Z\",\n            \"totalPrice\": 200000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-11-29T05:10:42.620Z\",\n            \"updateAt\": \"2024-11-29T05:10:42.620Z\"\n        },\n        {\n            \"id\": 8,\n            \"userId\": 1,\n            \"flightId\": 1,\n            \"returnFlightId\": null,\n            \"bookingDate\": \"2024-11-29T11:09:39.805Z\",\n            \"totalPrice\": 200000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-11-29T11:09:39.808Z\",\n            \"updateAt\": \"2024-11-29T11:09:39.808Z\"\n        },\n        {\n            \"id\": 9,\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": null,\n            \"bookingDate\": \"2024-11-29T11:09:50.898Z\",\n            \"totalPrice\": 200000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-11-29T11:09:50.900Z\",\n            \"updateAt\": \"2024-11-29T11:09:50.900Z\"\n        },\n        {\n            \"id\": 10,\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": null,\n            \"bookingDate\": \"2024-11-29T11:09:57.218Z\",\n            \"totalPrice\": 200000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-11-29T11:09:57.219Z\",\n            \"updateAt\": \"2024-11-29T11:09:57.219Z\"\n        },\n        {\n            \"id\": 11,\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": null,\n            \"bookingDate\": \"2024-11-29T11:10:01.706Z\",\n            \"totalPrice\": 200000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-11-29T11:10:01.708Z\",\n            \"updateAt\": \"2024-11-29T11:10:01.708Z\"\n        },\n        {\n            \"id\": 12,\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": 1,\n            \"bookingDate\": \"2024-11-29T11:58:16.568Z\",\n            \"totalPrice\": 400000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-11-29T11:58:16.572Z\",\n            \"updateAt\": \"2024-11-29T11:58:16.572Z\"\n        },\n        {\n            \"id\": 13,\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": null,\n            \"bookingDate\": \"2024-11-29T11:59:53.541Z\",\n            \"totalPrice\": 200000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-11-29T11:59:53.543Z\",\n            \"updateAt\": \"2024-11-29T11:59:53.543Z\"\n        },\n        {\n            \"id\": 14,\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": 1,\n            \"bookingDate\": \"2024-11-29T12:02:15.925Z\",\n            \"totalPrice\": 400000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-11-29T12:02:15.929Z\",\n            \"updateAt\": \"2024-11-29T12:02:15.929Z\"\n        },\n        {\n            \"id\": 15,\n            \"userId\": 1,\n            \"flightId\": 1,\n            \"returnFlightId\": 2,\n            \"bookingDate\": \"2024-12-02T14:14:18.630Z\",\n            \"totalPrice\": 400000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-12-02T14:14:18.633Z\",\n            \"updateAt\": \"2024-12-02T14:14:18.633Z\"\n        }\n    ]\n}"
+              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"success\"\n    },\n    \"data\": [\n        {\n            \"id\": 16,\n            \"bookingCode\": \"2411026A6E\",\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": 1,\n            \"bookingDate\": \"2024-12-03T13:37:05.394Z\",\n            \"totalPrice\": 400000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-12-03T13:37:05.424Z\",\n            \"updateAt\": \"2024-12-03T13:37:05.424Z\",\n            \"flight\": {\n                \"id\": 3,\n                \"flightNumber\": \"LA789\",\n                \"airlineId\": 3,\n                \"departureAirport\": 3,\n                \"arrivalAirport\": 1,\n                \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n                \"terminal\": \"T2\",\n                \"information\": \"Delayed flight\",\n                \"price\": 100,\n                \"class\": \"ECONOMY\"\n            },\n            \"returnFlight\": {\n                \"id\": 1,\n                \"flightNumber\": \"GA123\",\n                \"airlineId\": 1,\n                \"departureAirport\": 1,\n                \"arrivalAirport\": 2,\n                \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n                \"terminal\": \"T3\",\n                \"information\": \"Non-stop flight\",\n                \"price\": 150,\n                \"class\": \"ECONOMY\"\n            }\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "booking by id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{local_base_url}}/booking/id/:bookingId",
+              "host": ["{{local_base_url}}"],
+              "path": ["booking", "id", ":bookingId"],
+              "variable": [
+                {
+                  "key": "bookingId",
+                  "value": "1",
+                  "description": "booking ID"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "ok",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://{{host}}/api/v1/booking/id/14",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["api", "v1", "booking", "id", "14"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"successs\"\n    },\n    \"data\": {\n        \"id\": 14,\n        \"userId\": 1,\n        \"flightId\": 3,\n        \"returnFlightId\": 1,\n        \"bookingDate\": \"2024-11-29T12:02:15.925Z\",\n        \"totalPrice\": 400000,\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2024-11-29T12:02:15.929Z\",\n        \"updateAt\": \"2024-11-29T12:02:15.929Z\",\n        \"bookingDetail\": [\n            {\n                \"id\": 18,\n                \"bookingId\": 14,\n                \"passengerId\": 18,\n                \"seatId\": 70,\n                \"price\": 200000,\n                \"createdAt\": \"2024-11-29T12:02:15.934Z\",\n                \"updateAt\": \"2024-11-29T12:02:15.934Z\",\n                \"passenger\": {\n                    \"id\": 18,\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"gender\": \"MALE\",\n                    \"identityNumber\": \"123456\",\n                    \"citizenship\": \"Indonesia\",\n                    \"countryOfIssue\": \"Indonesia\",\n                    \"title\": \"Mr\",\n                    \"dob\": \"1985-05-15T00:00:00.000Z\",\n                    \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                    \"type\": \"ADULT\"\n                },\n                \"seat\": {\n                    \"id\": 70,\n                    \"flightId\": 3,\n                    \"seatNumber\": \"3B\",\n                    \"status\": \"LOCKED\",\n                    \"departureTime\": \"2024-11-29T08:40:42.629Z\",\n                    \"arrivalTime\": \"2024-11-29T08:40:42.629Z\"\n                }\n            },\n            {\n                \"id\": 19,\n                \"bookingId\": 14,\n                \"passengerId\": 19,\n                \"seatId\": 11,\n                \"price\": 200000,\n                \"createdAt\": \"2024-11-29T12:02:15.934Z\",\n                \"updateAt\": \"2024-11-29T12:02:15.934Z\",\n                \"passenger\": {\n                    \"id\": 19,\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"gender\": \"MALE\",\n                    \"identityNumber\": \"123456\",\n                    \"citizenship\": \"Indonesia\",\n                    \"countryOfIssue\": \"Indonesia\",\n                    \"title\": \"Mr\",\n                    \"dob\": \"1985-05-15T00:00:00.000Z\",\n                    \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                    \"type\": \"ADULT\"\n                },\n                \"seat\": {\n                    \"id\": 11,\n                    \"flightId\": 1,\n                    \"seatNumber\": \"3C\",\n                    \"status\": \"LOCKED\",\n                    \"departureTime\": \"2024-11-29T08:40:42.629Z\",\n                    \"arrivalTime\": \"2024-11-29T08:40:42.629Z\"\n                }\n            }\n        ],\n        \"flight\": {\n            \"id\": 3,\n            \"flightNumber\": \"LA789\",\n            \"airlineId\": 3,\n            \"departureAirport\": 3,\n            \"arrivalAirport\": 1,\n            \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n            \"terminal\": \"T2\",\n            \"information\": \"Delayed flight\",\n            \"price\": 100,\n            \"class\": \"ECONOMY\"\n        },\n        \"returnFlight\": {\n            \"id\": 1,\n            \"flightNumber\": \"GA123\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n            \"terminal\": \"T3\",\n            \"information\": \"Non-stop flight\",\n            \"price\": 150,\n            \"class\": \"ECONOMY\"\n        }\n    }\n}"
+            },
+            {
+              "name": "error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://{{host}}/api/v1/booking/id/14",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["api", "v1", "booking", "id", "14"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 401,\n        \"message\": \"jwt expired, please re-login\",\n        \"details\": \"jwt expired\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "booking by code",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{local_base_url}}/booking/code/:bookingCode",
+              "host": ["{{local_base_url}}"],
+              "path": ["booking", "code", ":bookingCode"],
+              "variable": [
+                {
+                  "key": "bookingCode",
+                  "value": "1",
+                  "description": "booking code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "ok",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://{{host}}/api/v1/booking/code/2411026A6E",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["api", "v1", "booking", "code", "2411026A6E"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"successs\"\n    },\n    \"data\": {\n        \"id\": 14,\n        \"userId\": 1,\n        \"flightId\": 3,\n        \"returnFlightId\": 1,\n        \"bookingDate\": \"2024-11-29T12:02:15.925Z\",\n        \"totalPrice\": 400000,\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2024-11-29T12:02:15.929Z\",\n        \"updateAt\": \"2024-11-29T12:02:15.929Z\",\n        \"bookingDetail\": [\n            {\n                \"id\": 18,\n                \"bookingId\": 14,\n                \"passengerId\": 18,\n                \"seatId\": 70,\n                \"price\": 200000,\n                \"createdAt\": \"2024-11-29T12:02:15.934Z\",\n                \"updateAt\": \"2024-11-29T12:02:15.934Z\",\n                \"passenger\": {\n                    \"id\": 18,\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"gender\": \"MALE\",\n                    \"identityNumber\": \"123456\",\n                    \"citizenship\": \"Indonesia\",\n                    \"countryOfIssue\": \"Indonesia\",\n                    \"title\": \"Mr\",\n                    \"dob\": \"1985-05-15T00:00:00.000Z\",\n                    \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                    \"type\": \"ADULT\"\n                },\n                \"seat\": {\n                    \"id\": 70,\n                    \"flightId\": 3,\n                    \"seatNumber\": \"3B\",\n                    \"status\": \"LOCKED\",\n                    \"departureTime\": \"2024-11-29T08:40:42.629Z\",\n                    \"arrivalTime\": \"2024-11-29T08:40:42.629Z\"\n                }\n            },\n            {\n                \"id\": 19,\n                \"bookingId\": 14,\n                \"passengerId\": 19,\n                \"seatId\": 11,\n                \"price\": 200000,\n                \"createdAt\": \"2024-11-29T12:02:15.934Z\",\n                \"updateAt\": \"2024-11-29T12:02:15.934Z\",\n                \"passenger\": {\n                    \"id\": 19,\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"gender\": \"MALE\",\n                    \"identityNumber\": \"123456\",\n                    \"citizenship\": \"Indonesia\",\n                    \"countryOfIssue\": \"Indonesia\",\n                    \"title\": \"Mr\",\n                    \"dob\": \"1985-05-15T00:00:00.000Z\",\n                    \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                    \"type\": \"ADULT\"\n                },\n                \"seat\": {\n                    \"id\": 11,\n                    \"flightId\": 1,\n                    \"seatNumber\": \"3C\",\n                    \"status\": \"LOCKED\",\n                    \"departureTime\": \"2024-11-29T08:40:42.629Z\",\n                    \"arrivalTime\": \"2024-11-29T08:40:42.629Z\"\n                }\n            }\n        ],\n        \"flight\": {\n            \"id\": 3,\n            \"flightNumber\": \"LA789\",\n            \"airlineId\": 3,\n            \"departureAirport\": 3,\n            \"arrivalAirport\": 1,\n            \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n            \"terminal\": \"T2\",\n            \"information\": \"Delayed flight\",\n            \"price\": 100,\n            \"class\": \"ECONOMY\"\n        },\n        \"returnFlight\": {\n            \"id\": 1,\n            \"flightNumber\": \"GA123\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n            \"terminal\": \"T3\",\n            \"information\": \"Non-stop flight\",\n            \"price\": 150,\n            \"class\": \"ECONOMY\"\n        }\n    }\n}"
+            },
+            {
+              "name": "error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://{{host}}/api/v1/booking/code/2411026A6E",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["api", "v1", "booking", "code", "2411026A6E"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 401,\n        \"message\": \"jwt expired, please re-login\",\n        \"details\": \"jwt expired\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "grouped booking",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{local_base_url}}/booking/group?page=5&limit=2",
+              "host": ["{{local_base_url}}"],
+              "path": ["booking", "group"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "5",
+                  "description": "page number"
+                },
+                {
+                  "key": "limit",
+                  "value": "2",
+                  "description": "total item per page"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "ok",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzNDg2NzMyLCJleHAiOjE3MzM1NzMxMzJ9.7SXuzqRHG6cN69WwL4NyNbYeuH3LhlzqAa0DYQbuqpM",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://{{host}}/api/v1/booking/group?page=5&limit=2",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["api", "v1", "booking", "group"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "5"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\r\n    \"meta\": {\r\n        \"status\": 200,\r\n        \"message\": \"success\",\r\n        \"pagination\": {\r\n            \"totalPage\": 1,\r\n            \"currentPage\": 1,\r\n            \"pageItems\": 1,\r\n            \"nextPage\": null,\r\n            \"prevPage\": null\r\n        }\r\n    },\r\n    \"data\": {\r\n        \"Desember\": [\r\n            {\r\n                \"id\": 16,\r\n                \"bookingCode\": \"2411026A6E\",\r\n                \"userId\": 1,\r\n                \"flightId\": 3,\r\n                \"returnFlightId\": 1,\r\n                \"bookingDate\": \"2024-12-03T13:37:05.394Z\",\r\n                \"totalPrice\": 400000,\r\n                \"status\": \"ACTIVE\",\r\n                \"createdAt\": \"2024-12-03T13:37:05.424Z\",\r\n                \"updateAt\": \"2024-12-03T13:37:05.424Z\"\r\n            }\r\n        ]\r\n    }\r\n}"
+            },
+            {
+              "name": "error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzNDg2NzMyLCJleHAiOjE3MzM1NzMxMzJ9.7SXuzqRHG6cN69WwL4NyNbYeuH3LhlzqAa0DYQbuqpM",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://{{host}}/api/v1/booking/group?page=5&limit=2",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["api", "v1", "booking", "group"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "5"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 401,\n        \"message\": \"jwt expired, please re-login\",\n        \"details\": \"jwt expired\"\n    }\n}"
             }
           ]
         }
@@ -11862,9 +12166,16 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/notifications/1",
+              "raw": "{{local_base_url}}/notifications/:notificationID",
               "host": ["{{local_base_url}}"],
-              "path": ["notifications", "1"]
+              "path": ["notifications", ":notificationID"],
+              "variable": [
+                {
+                  "key": "notificationID",
+                  "value": "1",
+                  "description": "notification ID"
+                }
+              ]
             }
           },
           "response": [
@@ -12618,9 +12929,16 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}/notifications/34",
+              "raw": "{{local_base_url}}/notifications/:notificationID",
               "host": ["{{local_base_url}}"],
-              "path": ["notifications", "34"]
+              "path": ["notifications", ":notificationID"],
+              "variable": [
+                {
+                  "key": "notificationID",
+                  "value": "1",
+                  "description": "notification ID"
+                }
+              ]
             }
           },
           "response": [
@@ -12952,9 +13270,8 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "localhost:3000/notifications",
-              "host": ["localhost"],
-              "port": "3000",
+              "raw": "{{local_base_url}}/notifications",
+              "host": ["{{local_base_url}}"],
               "path": ["notifications"]
             }
           },
@@ -13035,9 +13352,16 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/notifications/3",
+              "raw": "{{local_base_url}}/notifications/:notificationID",
               "host": ["{{local_base_url}}"],
-              "path": ["notifications", "3"]
+              "path": ["notifications", ":notificationID"],
+              "variable": [
+                {
+                  "key": "notificationID",
+                  "value": "1",
+                  "description": "Notification ID"
+                }
+              ]
             }
           },
           "response": [
