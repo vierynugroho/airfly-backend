@@ -4,10 +4,7 @@ export default [
   {
     files: ['**/*.js'],
     languageOptions: {
-      globals: {
-        ...globals.browser,
-        AudioWorkletGlobalScope: 'readonly',
-      },
+      globals: globals.node,
       sourceType: 'module',
       ecmaVersion: 2020,
       parserOptions: {
