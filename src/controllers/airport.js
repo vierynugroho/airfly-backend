@@ -6,8 +6,9 @@ export class AirportController {
   static async create(req, res, next) {
     try {
       const data = req.body;
+      const files = req.files;
 
-      const airport = await AirportService.create(data);
+      const airport = await AirportService.create(files, data);
 
       return res.json({
         meta: {
@@ -26,13 +27,14 @@ export class AirportController {
   static async update(req, res, next) {
     try {
       const data = req.body;
+      const files = req.files;
       const airportID = parseInt(req.params.id);
 
       if (isNaN(airportID)) {
         throw new ErrorHandler(422, 'Airport ID is not a number');
       }
 
-      const airport = await AirportService.update(airportID, data);
+      const airport = await AirportService.update(airportID, files, data);
 
       return res.json({
         meta: {

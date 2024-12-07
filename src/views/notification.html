@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Notifications - Banking System</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      socket.on('connect', () => {
+        console.log('Connected to server');
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Broadcast Notifications</h1>
+    <div id="notification-broadcast"></div>
+    <hr />
+    <h1>General Notifications</h1>
+    <div id="notification-general"></div>
+    <hr />
+    <h1>Info Notifications</h1>
+    <div id="notification-info"></div>
+    <hr />
+    <h1>Account Notifications</h1>
+    <div id="notification-account"></div>
+    <hr />
+    <h1>Discount Notifications</h1>
+    <div id="notification-discount"></div>
+    <hr />
+    <h1>Event Notifications</h1>
+    <div id="notification-event"></div>
+    <hr />
+    <h1>Payment Notifications</h1>
+    <div id="notification-payment"></div>
+    <hr />
+    <h1>Specific User Notifications</h1>
+    <div id="notification-user"></div>
+    <hr />
+
+    <script>
+      socket.on('notification:broadcast', function (data) {
+        console.log(data);
+        var notificationContainer = document.getElementById(
+          'notification-broadcast'
+        );
+        var notification = document.createElement('div');
+        notification.textContent = `${data.title} - ${data.description}`;
+        notification.style.backgroundColor = 'black';
+        notification.style.color = 'white';
+        notification.style.padding = '10px';
+        notification.style.marginBottom = '10px';
+        notificationContainer.appendChild(notification);
+      });
+    </script>
+    <script>
+      socket.on('notification:general', function (data) {
+        console.log(data);
+        var notificationContainer = document.getElementById(
+          'notification-general'
+        );
+        var notification = document.createElement('div');
+        notification.textContent = `${data.title} - ${data.description}`;
+        notification.style.backgroundColor = 'silver';
+        notification.style.color = 'white';
+        notification.style.padding = '10px';
+        notification.style.marginBottom = '10px';
+        notificationContainer.appendChild(notification);
+      });
+    </script>
+    <script>
+      socket.on('notification:info', function (data) {
+        console.log(data);
+        var notificationContainer =
+          document.getElementById('notification-info');
+        var notification = document.createElement('div');
+        notification.textContent = `${data.title} - ${data.description}`;
+        notification.style.backgroundColor = 'cyan';
+        notification.style.color = 'black';
+        notification.style.padding = '10px';
+        notification.style.marginBottom = '10px';
+        notificationContainer.appendChild(notification);
+      });
+    </script>
+    <script>
+      socket.on('notification:account', function (data) {
+        console.log(data);
+        var notificationContainer = document.getElementById(
+          'notification-account'
+        );
+        var notification = document.createElement('div');
+        notification.textContent = `${data.title} - ${data.description}`;
+        notification.style.backgroundColor = 'purple';
+        notification.style.color = 'white';
+        notification.style.padding = '10px';
+        notification.style.marginBottom = '10px';
+        notificationContainer.appendChild(notification);
+      });
+    </script>
+    <script>
+      socket.on('notification:discount', function (data) {
+        console.log(data);
+        var notificationContainer = document.getElementById(
+          'notification-discount'
+        );
+        var notification = document.createElement('div');
+        notification.textContent = `${data.title} - ${data.description}`;
+        notification.style.backgroundColor = 'blue';
+        notification.style.color = 'white';
+        notification.style.padding = '10px';
+        notification.style.marginBottom = '10px';
+        notificationContainer.appendChild(notification);
+      });
+    </script>
+    <script>
+      socket.on('notification:event', function (data) {
+        console.log(data);
+        var notificationContainer =
+          document.getElementById('notification-event');
+        var notification = document.createElement('div');
+        notification.textContent = `${data.title} - ${data.description}`;
+        notification.style.backgroundColor = 'yellow';
+        notification.style.color = 'black';
+        notification.style.padding = '10px';
+        notification.style.marginBottom = '10px';
+        notificationContainer.appendChild(notification);
+      });
+    </script>
+    <script>
+      socket.on('notification:payment', function (data) {
+        console.log(data);
+        var notificationContainer = document.getElementById(
+          'notification-payment'
+        );
+        var notification = document.createElement('div');
+        notification.textContent = `${data.title} - ${data.description}`;
+        notification.style.backgroundColor = 'green';
+        notification.style.color = 'white';
+        notification.style.padding = '10px';
+        notification.style.marginBottom = '10px';
+        notificationContainer.appendChild(notification);
+      });
+    </script>
+    <script>
+      let userID = 1; // id user yang login - required
+      /*
+      data userID akan di oper ke src/index.js untuk room notif
+      */
+
+      socket.emit('user-room', userID);
+      socket.on('notification:user', function (data) {
+        console.log(data);
+        var notificationContainer =
+          document.getElementById('notification-user');
+        var notification = document.createElement('div');
+        notification.textContent = `${data.title} - ${data.description}`;
+        notification.style.backgroundColor = 'green';
+        notification.style.color = 'white';
+        notification.style.padding = '10px';
+        notification.style.marginBottom = '10px';
+        notificationContainer.appendChild(notification);
+      });
+    </script>
+  </body>
+</html>

@@ -127,6 +127,18 @@ export const airportSchema = Joi.object({
     .messages({
       'string.pattern.base': 'Elevation must be a valid decimal number.',
     }),
+  image: Joi.binary()
+    .optional()
+    .custom((value, helpers) => {
+      if (value && value.length === 0) {
+        return helpers.error('any.noFileSelected'); // Error kustom
+      }
+      return value;
+    })
+    .messages({
+      'binary.base': 'Image must be a file.',
+      'any.noFileSelected': 'No file selected.',
+    }),
 });
 
 export const airlineSchema = Joi.object({
@@ -138,4 +150,31 @@ export const airlineSchema = Joi.object({
       'string.pattern.name': 'Airline name cannot contain only numbers.',
       'any.required': 'Airline name is required.',
     }),
+  image: Joi.binary()
+    .optional()
+    .custom((value, helpers) => {
+      if (value && value.length === 0) {
+        return helpers.error('any.noFileSelected'); // Error kustom
+      }
+      return value;
+    })
+    .messages({
+      'binary.base': 'Image must be a file.',
+      'any.noFileSelected': 'No file selected.',
+    }),
+});
+
+export const notificationSchema = Joi.object({
+  type: Joi.string()
+    .valid('INFO', 'DISCOUNT', 'ACCOUNT', 'EVENT', 'PAYMENT')
+    .required(),
+  title: Joi.string().required(),
+  description: Joi.string().required(),
+  isRead: Joi.boolean().required(),
+  userId: Joi.number().optional(),
+});
+
+export const readNotificationSchema = Joi.object({
+  notificationID: Joi.number().required(),
+  isRead: Joi.boolean().required(),
 });

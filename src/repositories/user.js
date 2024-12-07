@@ -22,6 +22,16 @@ export class UserRepository {
     return users;
   }
 
+  static async getUsersID() {
+    const usersID = await prisma.user.findMany({
+      select: {
+        id: true,
+      },
+    });
+
+    return usersID;
+  }
+
   static async findByID(userID) {
     const user = await prisma.user.findUnique({
       where: {

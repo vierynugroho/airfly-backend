@@ -27,21 +27,6 @@ export class AirlineRepository {
     return deletedAirline;
   }
 
-  static async deleteImage(imageKitId) {
-    try {
-      console.log(`Deleting image with ID: ${imageKitId}`);
-      const response = await imagekit.deleteFile(imageKitId);
-      return response;
-    } catch (error) {
-      console.error(`Error deleting image (ID: ${imageKitId}):`, error.message);
-      if (error.response?.status === 404) {
-        console.warn(`Image not found: ${imageKitId}`);
-        return null;
-      }
-      throw error;
-    }
-  }
-
   static async findMany(pagination, filter, sorter) {
     const airlines = await prisma.airline.findMany({
       skip: pagination.offset,
@@ -72,11 +57,12 @@ export class AirlineRepository {
     const airline = await prisma.airline.findFirst({
       where: {
         name: {
-          contains: name,
+          equals: name,
           mode: 'insensitive',
         },
       },
     });
+
     return airline;
   }
 }
