@@ -135,16 +135,40 @@ class PostmanToOpenAPIConverter {
         if (correspondingItem && correspondingItem.response) {
           method.responses = method.responses || {};
 
-          correspondingItem.response.forEach((response) => {
-            const statusCode = response.code || '200';
+          const responseGroups = correspondingItem.response.reduce(
+            (acc, response) => {
+              const statusCode = response.code || '200';
+              acc[statusCode] = acc[statusCode] || [];
+              acc[statusCode].push(response);
+              return acc;
+            },
+            {}
+          );
+
+          Object.entries(responseGroups).forEach(([statusCode, responses]) => {
             method.responses[statusCode] = method.responses[statusCode] || {
-              description: response.name || 'Response',
+              description: 'Response',
               content: {},
             };
 
-            if (response.body) {
+            if (responses.length > 1) {
               method.responses[statusCode].content['application/json'] = {
-                example: JSON.parse(response.body),
+                examples: responses.reduce((examples, response) => {
+                  const exampleName = response.name
+                    ? response.name.replace(/[^a-zA-Z0-9-_]/g, '_')
+                    : 'example';
+                  examples[exampleName] = {
+                    value: response.body ? JSON.parse(response.body) : {},
+                  };
+                  return examples;
+                }, {}),
+              };
+            } else {
+              const singleResponse = responses[0];
+              method.responses[statusCode].content['application/json'] = {
+                example: singleResponse.body
+                  ? JSON.parse(singleResponse.body)
+                  : {},
               };
             }
           });
@@ -187,7 +211,6 @@ class PostmanToOpenAPIConverter {
         postmanCollection
       );
 
-      // Hapus global security
       delete transformedSpec.security;
 
       const yamlOutput = dump(transformedSpec, {

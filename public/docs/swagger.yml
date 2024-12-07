@@ -76,7 +76,7 @@ paths:
                 data:
                   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzMyNTA4ODkzLCJleHAiOjE3MzI1OTUyOTN9.RcqSghLV99vMSp82Lw8f2qPkKbQwwkWOMqO6UB8br9w
         '401':
-          description: failed
+          description: Response
           content:
             application/json:
               example:
@@ -110,7 +110,7 @@ paths:
                   statusCode: 201
                   message: user has created, let's verify
         '409':
-          description: failed
+          description: Response
           content:
             application/json:
               example:
@@ -136,12 +136,19 @@ paths:
           description: Successful response
           content:
             application/json:
-              example:
-                meta:
-                  statusCode: 200
-                  message: OTP is valid
+              examples:
+                user_has_been_verified:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: User has been verified
+                otp_is_valid:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: OTP is valid
         '400':
-          description: invalid otp
+          description: Response
           content:
             application/json:
               example:
@@ -171,7 +178,7 @@ paths:
                   statusCode: 200
                   message: OTP has been sent
         '404':
-          description: failed
+          description: Response
           content:
             application/json:
               example:
@@ -198,10 +205,17 @@ paths:
           description: Successful response
           content:
             application/json:
-              example:
-                error:
-                  statusCode: 400
-                  message: Invalid OTP Code 1
+              examples:
+                success:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: Password has been reset
+                failed:
+                  value:
+                    error:
+                      statusCode: 400
+                      message: Invalid OTP Code 1
       parameters: []
   /auth/me:
     get:
@@ -226,7 +240,7 @@ paths:
                   status: VERIFIED
                   role: BUYER
         '401':
-          description: unauthorized
+          description: Response
           content:
             application/json:
               example:
@@ -265,19 +279,98 @@ paths:
           description: Successful response
           content:
             application/json:
-              example:
-                meta:
-                  statusCode: 200
-                  message: users data retrieved successfully
-                  pagination:
-                    totalPage: 1
-                    currentPage: 3
-                    pageItems: 0
-                    nextPage: null
-                    prevPage: 2
-                data: []
+              examples:
+                success_-_without_pagination:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: users data retrieved successfully
+                      pagination: null
+                    data:
+                      - id: 1
+                        firstName: Viery
+                        lastName: Nugroho
+                        email: viery@gmail.com
+                        phone: '628123456789'
+                        status: VERIFIED
+                        role: BUYER
+                        _count:
+                          booking: 0
+                          Notification: 0
+                        booking: []
+                        Notification: []
+                      - id: 2
+                        firstName: Viery
+                        lastName: Nugroho
+                        email: Junior@gmail.com
+                        phone: '628123456789'
+                        status: VERIFIED
+                        role: BUYER
+                        _count:
+                          booking: 0
+                          Notification: 0
+                        booking: []
+                        Notification: []
+                success_-_with_pagination:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: users data retrieved successfully
+                      pagination:
+                        totalPage: 2
+                        currentPage: 1
+                        pageItems: 1
+                        nextPage: 2
+                        prevPage: null
+                    data:
+                      - id: 1
+                        firstName: Viery
+                        lastName: Nugroho
+                        email: viery@gmail.com
+                        phone: '628123456789'
+                        status: VERIFIED
+                        role: BUYER
+                        _count:
+                          booking: 0
+                          Notification: 0
+                        booking: []
+                        Notification: []
+                success_-_filtering:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: users data retrieved successfully
+                      pagination: null
+                    data:
+                      - id: 2
+                        firstName: Nugroho
+                        lastName: Junior
+                        email: Junior@gmail.com
+                        phone: '-'
+                        password: password
+                        secretKey: ''
+                        otpToken: ''
+                        status: VERIFIED
+                        role: BUYER
+                        _count:
+                          booking: 0
+                          Notification: 0
+                        booking: []
+                        Notification: []
+                success_-_empty_data:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: users data retrieved successfully
+                      pagination:
+                        totalPage: 1
+                        currentPage: 3
+                        pageItems: 0
+                        nextPage: null
+                        prevPage: 2
+                    data: []
         '401':
-          description: unauthorized
+          description: Response
           content:
             application/json:
               example:
@@ -285,7 +378,7 @@ paths:
                   statusCode: 401
                   message: unauthorized
         '403':
-          description: forbidden
+          description: Response
           content:
             application/json:
               example:
@@ -293,7 +386,7 @@ paths:
                   statusCode: 403
                   message: forbidden, Go Back ! >:(
         '422':
-          description: invalid user status
+          description: Response
           content:
             application/json:
               example:
@@ -334,7 +427,7 @@ paths:
                   status: VERIFIED
                   role: BUYER
         '401':
-          description: unauthorized
+          description: Response
           content:
             application/json:
               example:
@@ -342,7 +435,7 @@ paths:
                   statusCode: 401
                   message: unauthorized
         '422':
-          description: not allowed field
+          description: Response
           content:
             application/json:
               example:
@@ -378,7 +471,7 @@ paths:
                     status: VERIFIED
                     role: BUYER
         '401':
-          description: unauthorized
+          description: Response
           content:
             application/json:
               example:
@@ -386,7 +479,7 @@ paths:
                   statusCode: 401
                   message: unauthorized
         '403':
-          description: forbidden
+          description: Response
           content:
             application/json:
               example:
@@ -428,15 +521,24 @@ paths:
                     imageId: 674d3be7e375273f60c23a27
                     createdAt: '2024-12-02T04:47:37.509Z'
         '400':
-          description: file too large
+          description: Response
           content:
             application/json:
-              example:
-                error:
-                  statusCode: 400
-                  message: no file selected
+              examples:
+                file_too_large:
+                  value:
+                    error:
+                      statusCode: 400
+                      title: 'LIMIT_FILE_SIZE: MulterError'
+                      message: MulterError - File too large
+                      fields: image
+                no_file_selected:
+                  value:
+                    error:
+                      statusCode: 400
+                      message: no file selected
         '401':
-          description: unauthorized
+          description: Response
           content:
             application/json:
               example:
@@ -444,7 +546,7 @@ paths:
                   statusCode: 401
                   message: unauthorized
         '403':
-          description: forbidden
+          description: Response
           content:
             application/json:
               example:
@@ -452,7 +554,7 @@ paths:
                   statusCode: 403
                   message: forbidden, Go Back ! >:(
         '409':
-          description: already exist
+          description: Response
           content:
             application/json:
               example:
@@ -460,7 +562,7 @@ paths:
                   statusCode: 409
                   message: Airport code already exists
         '422':
-          description: create
+          description: Response
           content:
             application/json:
               example:
@@ -504,12 +606,797 @@ paths:
           description: Successful response
           content:
             application/json:
-              example:
-                meta:
-                  statusCode: 200
-                  message: Airports data retrieved successfully
-                  pagination: null
-                data: []
+              examples:
+                success_with_pagination:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: Airports data retrieved successfully
+                      pagination:
+                        totalPage: 2
+                        currentPage: 1
+                        pageItems: 5
+                        nextPage: 2
+                        prevPage: null
+                    data:
+                      - id: 11
+                        code: SYD
+                        name: Sydney Kingsford Smith Airport
+                        city: Sydney
+                        state: New South Wales
+                        country: Australia
+                        timezone: Australia/Sydney
+                        latitude: '-33.9399'
+                        longitude: '151.1753'
+                        elevation: '6'
+                        imageUrl: syd-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure: []
+                        arrival: []
+                      - id: 4
+                        code: CGK
+                        name: Soekarno-Hatta International Airport
+                        city: Jakarta
+                        state: DKI Jakarta
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-6.1255'
+                        longitude: '106.6551'
+                        elevation: '8'
+                        imageUrl: cgk-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure:
+                          - id: 1
+                            flightNumber: GA123
+                            airlineId: 1
+                            departureAirport: 4
+                            arrivalAirport: 7
+                            departureTime: '2024-07-15T08:00:00.000Z'
+                            arrivalTime: '2024-07-15T11:00:00.000Z'
+                            terminal: A
+                            information: Direct flight from Jakarta to Singapore
+                            price: 850
+                            class: ECONOMY
+                        arrival:
+                          - id: 2
+                            flightNumber: SQ456
+                            airlineId: 2
+                            departureAirport: 7
+                            arrivalAirport: 4
+                            departureTime: '2024-07-16T14:30:00.000Z'
+                            arrivalTime: '2024-07-16T17:30:00.000Z'
+                            terminal: C
+                            information: Return flight from Singapore to Jakarta
+                            price: 900
+                            class: BUSINESS
+                      - id: 5
+                        code: SUB
+                        name: Juanda International Airport
+                        city: Surabaya
+                        state: East Java
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-7.3797'
+                        longitude: '112.7876'
+                        elevation: '7'
+                        imageUrl: sub-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure:
+                          - id: 3
+                            flightNumber: QR789
+                            airlineId: 3
+                            departureAirport: 5
+                            arrivalAirport: 8
+                            departureTime: '2024-07-17T22:00:00.000Z'
+                            arrivalTime: '2024-07-18T01:30:00.000Z'
+                            terminal: B
+                            information: International flight from Surabaya to Doha
+                            price: 1200
+                            class: FIRST
+                        arrival: []
+                      - id: 6
+                        code: DPS
+                        name: Ngurah Rai International Airport
+                        city: Denpasar
+                        state: Bali
+                        country: Indonesia
+                        timezone: Asia/Makassar
+                        latitude: '-8.7487'
+                        longitude: '115.1670'
+                        elevation: '4'
+                        imageUrl: dps-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure: []
+                        arrival: []
+                      - id: 7
+                        code: SIN
+                        name: Singapore Changi Airport
+                        city: Singapore
+                        state: Central Singapore
+                        country: Singapore
+                        timezone: Asia/Singapore
+                        latitude: '1.3644'
+                        longitude: '103.9915'
+                        elevation: '22'
+                        imageUrl: sin-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure:
+                          - id: 2
+                            flightNumber: SQ456
+                            airlineId: 2
+                            departureAirport: 7
+                            arrivalAirport: 4
+                            departureTime: '2024-07-16T14:30:00.000Z'
+                            arrivalTime: '2024-07-16T17:30:00.000Z'
+                            terminal: C
+                            information: Return flight from Singapore to Jakarta
+                            price: 900
+                            class: BUSINESS
+                        arrival:
+                          - id: 1
+                            flightNumber: GA123
+                            airlineId: 1
+                            departureAirport: 4
+                            arrivalAirport: 7
+                            departureTime: '2024-07-15T08:00:00.000Z'
+                            arrivalTime: '2024-07-15T11:00:00.000Z'
+                            terminal: A
+                            information: Direct flight from Jakarta to Singapore
+                            price: 850
+                            class: ECONOMY
+                success_without_pagination:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: Airports data retrieved successfully
+                      pagination: null
+                    data:
+                      - id: 2
+                        code: CGK
+                        name: Soekarno-Hatta International Airport
+                        city: Jakarta
+                        state: Banten
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-6.125556'
+                        longitude: '106.655833'
+                        elevation: '34'
+                        imageUrl: ''
+                        imageId: ''
+                        createdAt: '2024-11-25T04:27:02.136Z'
+                      - id: 3
+                        code: HLP
+                        name: Halim Perdanakusuma International Airport
+                        city: DKI Jakarta
+                        state: Asia Tengggara
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-6.264451'
+                        longitude: '106.895859'
+                        elevation: '25'
+                        imageUrl: ''
+                        imageId: ''
+                        createdAt: '2024-11-26T03:28:57.895Z'
+                success_with_filtering:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: Airports data retrieved successfully
+                      pagination: null
+                    data:
+                      - id: 2
+                        code: CGK
+                        name: Soekarno-Hatta International Airport
+                        city: Jakarta
+                        state: Banten
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-6.125556'
+                        longitude: '106.655833'
+                        elevation: '34'
+                        imageUrl: ''
+                        imageId: ''
+                        createdAt: '2024-11-25T04:27:02.136Z'
+                      - id: 3
+                        code: HLP
+                        name: Halim Perdanakusuma International Airport
+                        city: DKI Jakarta
+                        state: Asia Tengggara
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-6.264451'
+                        longitude: '106.895859'
+                        elevation: '25'
+                        imageUrl: ''
+                        imageId: ''
+                        createdAt: '2024-11-26T03:28:57.895Z'
+                success_with_sorting:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: Airports data retrieved successfully
+                      pagination: null
+                    data:
+                      - id: 3
+                        code: HLP
+                        name: Halim Perdanakusuma International Airport
+                        city: DKI Jakarta
+                        state: Asia Tengggara
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-6.264451'
+                        longitude: '106.895859'
+                        elevation: '25'
+                        imageUrl: ''
+                        imageId: ''
+                        createdAt: '2024-11-26T03:28:57.895Z'
+                        departure: []
+                        arrival: []
+                      - id: 8
+                        code: DOH
+                        name: Hamad International Airport
+                        city: Doha
+                        state: Qatar
+                        country: Qatar
+                        timezone: Asia/Qatar
+                        latitude: '25.2654'
+                        longitude: '51.6066'
+                        elevation: '5'
+                        imageUrl: doh-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure: []
+                        arrival:
+                          - id: 3
+                            flightNumber: QR789
+                            airlineId: 3
+                            departureAirport: 5
+                            arrivalAirport: 8
+                            departureTime: '2024-07-17T22:00:00.000Z'
+                            arrivalTime: '2024-07-18T01:30:00.000Z'
+                            terminal: B
+                            information: International flight from Surabaya to Doha
+                            price: 1200
+                            class: FIRST
+                      - id: 5
+                        code: SUB
+                        name: Juanda International Airport
+                        city: Surabaya
+                        state: East Java
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-7.3797'
+                        longitude: '112.7876'
+                        elevation: '7'
+                        imageUrl: sub-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure:
+                          - id: 3
+                            flightNumber: QR789
+                            airlineId: 3
+                            departureAirport: 5
+                            arrivalAirport: 8
+                            departureTime: '2024-07-17T22:00:00.000Z'
+                            arrivalTime: '2024-07-18T01:30:00.000Z'
+                            terminal: B
+                            information: International flight from Surabaya to Doha
+                            price: 1200
+                            class: FIRST
+                        arrival: []
+                      - id: 9
+                        code: JED
+                        name: King Abdulaziz International Airport
+                        city: Jeddah
+                        state: Makkah
+                        country: Saudi Arabia
+                        timezone: Asia/Riyadh
+                        latitude: '21.6820'
+                        longitude: '39.1606'
+                        elevation: '5'
+                        imageUrl: jed-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure: []
+                        arrival: []
+                      - id: 10
+                        code: LAX
+                        name: Los Angeles International Airport
+                        city: Los Angeles
+                        state: California
+                        country: United States
+                        timezone: America/Los_Angeles
+                        latitude: '33.9416'
+                        longitude: '-118.4085'
+                        elevation: '38'
+                        imageUrl: lax-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure: []
+                        arrival: []
+                      - id: 6
+                        code: DPS
+                        name: Ngurah Rai International Airport
+                        city: Denpasar
+                        state: Bali
+                        country: Indonesia
+                        timezone: Asia/Makassar
+                        latitude: '-8.7487'
+                        longitude: '115.1670'
+                        elevation: '4'
+                        imageUrl: dps-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure: []
+                        arrival: []
+                      - id: 7
+                        code: SIN
+                        name: Singapore Changi Airport
+                        city: Singapore
+                        state: Central Singapore
+                        country: Singapore
+                        timezone: Asia/Singapore
+                        latitude: '1.3644'
+                        longitude: '103.9915'
+                        elevation: '22'
+                        imageUrl: sin-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure:
+                          - id: 2
+                            flightNumber: SQ456
+                            airlineId: 2
+                            departureAirport: 7
+                            arrivalAirport: 4
+                            departureTime: '2024-07-16T14:30:00.000Z'
+                            arrivalTime: '2024-07-16T17:30:00.000Z'
+                            terminal: C
+                            information: Return flight from Singapore to Jakarta
+                            price: 900
+                            class: BUSINESS
+                        arrival:
+                          - id: 1
+                            flightNumber: GA123
+                            airlineId: 1
+                            departureAirport: 4
+                            arrivalAirport: 7
+                            departureTime: '2024-07-15T08:00:00.000Z'
+                            arrivalTime: '2024-07-15T11:00:00.000Z'
+                            terminal: A
+                            information: Direct flight from Jakarta to Singapore
+                            price: 850
+                            class: ECONOMY
+                      - id: 4
+                        code: CGK
+                        name: Soekarno-Hatta International Airport
+                        city: Jakarta
+                        state: DKI Jakarta
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-6.1255'
+                        longitude: '106.6551'
+                        elevation: '8'
+                        imageUrl: cgk-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure:
+                          - id: 1
+                            flightNumber: GA123
+                            airlineId: 1
+                            departureAirport: 4
+                            arrivalAirport: 7
+                            departureTime: '2024-07-15T08:00:00.000Z'
+                            arrivalTime: '2024-07-15T11:00:00.000Z'
+                            terminal: A
+                            information: Direct flight from Jakarta to Singapore
+                            price: 850
+                            class: ECONOMY
+                        arrival:
+                          - id: 2
+                            flightNumber: SQ456
+                            airlineId: 2
+                            departureAirport: 7
+                            arrivalAirport: 4
+                            departureTime: '2024-07-16T14:30:00.000Z'
+                            arrivalTime: '2024-07-16T17:30:00.000Z'
+                            terminal: C
+                            information: Return flight from Singapore to Jakarta
+                            price: 900
+                            class: BUSINESS
+                      - id: 11
+                        code: SYD
+                        name: Sydney Kingsford Smith Airport
+                        city: Sydney
+                        state: New South Wales
+                        country: Australia
+                        timezone: Australia/Sydney
+                        latitude: '-33.9399'
+                        longitude: '151.1753'
+                        elevation: '6'
+                        imageUrl: syd-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure: []
+                        arrival: []
+                success_with_pagination___filtering:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: Airports data retrieved successfully
+                      pagination:
+                        totalPage: 2
+                        currentPage: 1
+                        pageItems: 3
+                        nextPage: 2
+                        prevPage: null
+                    data:
+                      - id: 4
+                        code: CGK
+                        name: Soekarno-Hatta International Airport
+                        city: Jakarta
+                        state: DKI Jakarta
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-6.1255'
+                        longitude: '106.6551'
+                        elevation: '8'
+                        imageUrl: cgk-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure:
+                          - id: 1
+                            flightNumber: GA123
+                            airlineId: 1
+                            departureAirport: 4
+                            arrivalAirport: 7
+                            departureTime: '2024-07-15T08:00:00.000Z'
+                            arrivalTime: '2024-07-15T11:00:00.000Z'
+                            terminal: A
+                            information: Direct flight from Jakarta to Singapore
+                            price: 850
+                            class: ECONOMY
+                        arrival:
+                          - id: 2
+                            flightNumber: SQ456
+                            airlineId: 2
+                            departureAirport: 7
+                            arrivalAirport: 4
+                            departureTime: '2024-07-16T14:30:00.000Z'
+                            arrivalTime: '2024-07-16T17:30:00.000Z'
+                            terminal: C
+                            information: Return flight from Singapore to Jakarta
+                            price: 900
+                            class: BUSINESS
+                      - id: 5
+                        code: SUB
+                        name: Juanda International Airport
+                        city: Surabaya
+                        state: East Java
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-7.3797'
+                        longitude: '112.7876'
+                        elevation: '7'
+                        imageUrl: sub-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure:
+                          - id: 3
+                            flightNumber: QR789
+                            airlineId: 3
+                            departureAirport: 5
+                            arrivalAirport: 8
+                            departureTime: '2024-07-17T22:00:00.000Z'
+                            arrivalTime: '2024-07-18T01:30:00.000Z'
+                            terminal: B
+                            information: International flight from Surabaya to Doha
+                            price: 1200
+                            class: FIRST
+                        arrival: []
+                      - id: 6
+                        code: DPS
+                        name: Ngurah Rai International Airport
+                        city: Denpasar
+                        state: Bali
+                        country: Indonesia
+                        timezone: Asia/Makassar
+                        latitude: '-8.7487'
+                        longitude: '115.1670'
+                        elevation: '4'
+                        imageUrl: dps-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure: []
+                        arrival: []
+                success_with_pagination___sorting:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: Airports data retrieved successfully
+                      pagination:
+                        totalPage: 2
+                        currentPage: 1
+                        pageItems: 5
+                        nextPage: 2
+                        prevPage: null
+                    data:
+                      - id: 3
+                        code: HLP
+                        name: Halim Perdanakusuma International Airport
+                        city: DKI Jakarta
+                        state: Asia Tengggara
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-6.264451'
+                        longitude: '106.895859'
+                        elevation: '25'
+                        imageUrl: ''
+                        imageId: ''
+                        createdAt: '2024-11-26T03:28:57.895Z'
+                        departure: []
+                        arrival: []
+                      - id: 8
+                        code: DOH
+                        name: Hamad International Airport
+                        city: Doha
+                        state: Qatar
+                        country: Qatar
+                        timezone: Asia/Qatar
+                        latitude: '25.2654'
+                        longitude: '51.6066'
+                        elevation: '5'
+                        imageUrl: doh-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure: []
+                        arrival:
+                          - id: 3
+                            flightNumber: QR789
+                            airlineId: 3
+                            departureAirport: 5
+                            arrivalAirport: 8
+                            departureTime: '2024-07-17T22:00:00.000Z'
+                            arrivalTime: '2024-07-18T01:30:00.000Z'
+                            terminal: B
+                            information: International flight from Surabaya to Doha
+                            price: 1200
+                            class: FIRST
+                      - id: 5
+                        code: SUB
+                        name: Juanda International Airport
+                        city: Surabaya
+                        state: East Java
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-7.3797'
+                        longitude: '112.7876'
+                        elevation: '7'
+                        imageUrl: sub-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure:
+                          - id: 3
+                            flightNumber: QR789
+                            airlineId: 3
+                            departureAirport: 5
+                            arrivalAirport: 8
+                            departureTime: '2024-07-17T22:00:00.000Z'
+                            arrivalTime: '2024-07-18T01:30:00.000Z'
+                            terminal: B
+                            information: International flight from Surabaya to Doha
+                            price: 1200
+                            class: FIRST
+                        arrival: []
+                      - id: 9
+                        code: JED
+                        name: King Abdulaziz International Airport
+                        city: Jeddah
+                        state: Makkah
+                        country: Saudi Arabia
+                        timezone: Asia/Riyadh
+                        latitude: '21.6820'
+                        longitude: '39.1606'
+                        elevation: '5'
+                        imageUrl: jed-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure: []
+                        arrival: []
+                      - id: 10
+                        code: LAX
+                        name: Los Angeles International Airport
+                        city: Los Angeles
+                        state: California
+                        country: United States
+                        timezone: America/Los_Angeles
+                        latitude: '33.9416'
+                        longitude: '-118.4085'
+                        elevation: '38'
+                        imageUrl: lax-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure: []
+                        arrival: []
+                success_with_filtering___sorting:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: Airports data retrieved successfully
+                      pagination: null
+                    data:
+                      - id: 3
+                        code: HLP
+                        name: Halim Perdanakusuma International Airport
+                        city: DKI Jakarta
+                        state: Asia Tengggara
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-6.264451'
+                        longitude: '106.895859'
+                        elevation: '25'
+                        imageUrl: ''
+                        imageId: ''
+                        createdAt: '2024-11-26T03:28:57.895Z'
+                        departure: []
+                        arrival: []
+                      - id: 5
+                        code: SUB
+                        name: Juanda International Airport
+                        city: Surabaya
+                        state: East Java
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-7.3797'
+                        longitude: '112.7876'
+                        elevation: '7'
+                        imageUrl: sub-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure:
+                          - id: 3
+                            flightNumber: QR789
+                            airlineId: 3
+                            departureAirport: 5
+                            arrivalAirport: 8
+                            departureTime: '2024-07-17T22:00:00.000Z'
+                            arrivalTime: '2024-07-18T01:30:00.000Z'
+                            terminal: B
+                            information: International flight from Surabaya to Doha
+                            price: 1200
+                            class: FIRST
+                        arrival: []
+                      - id: 6
+                        code: DPS
+                        name: Ngurah Rai International Airport
+                        city: Denpasar
+                        state: Bali
+                        country: Indonesia
+                        timezone: Asia/Makassar
+                        latitude: '-8.7487'
+                        longitude: '115.1670'
+                        elevation: '4'
+                        imageUrl: dps-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure: []
+                        arrival: []
+                      - id: 4
+                        code: CGK
+                        name: Soekarno-Hatta International Airport
+                        city: Jakarta
+                        state: DKI Jakarta
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-6.1255'
+                        longitude: '106.6551'
+                        elevation: '8'
+                        imageUrl: cgk-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure:
+                          - id: 1
+                            flightNumber: GA123
+                            airlineId: 1
+                            departureAirport: 4
+                            arrivalAirport: 7
+                            departureTime: '2024-07-15T08:00:00.000Z'
+                            arrivalTime: '2024-07-15T11:00:00.000Z'
+                            terminal: A
+                            information: Direct flight from Jakarta to Singapore
+                            price: 850
+                            class: ECONOMY
+                        arrival:
+                          - id: 2
+                            flightNumber: SQ456
+                            airlineId: 2
+                            departureAirport: 7
+                            arrivalAirport: 4
+                            departureTime: '2024-07-16T14:30:00.000Z'
+                            arrivalTime: '2024-07-16T17:30:00.000Z'
+                            terminal: C
+                            information: Return flight from Singapore to Jakarta
+                            price: 900
+                            class: BUSINESS
+                success_with_pagination__filtering___sorting:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: Airports data retrieved successfully
+                      pagination:
+                        totalPage: 2
+                        currentPage: 1
+                        pageItems: 3
+                        nextPage: 2
+                        prevPage: null
+                    data:
+                      - id: 3
+                        code: HLP
+                        name: Halim Perdanakusuma International Airport
+                        city: DKI Jakarta
+                        state: Asia Tengggara
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-6.264451'
+                        longitude: '106.895859'
+                        elevation: '25'
+                        imageUrl: ''
+                        imageId: ''
+                        createdAt: '2024-11-26T03:28:57.895Z'
+                        departure: []
+                        arrival: []
+                      - id: 5
+                        code: SUB
+                        name: Juanda International Airport
+                        city: Surabaya
+                        state: East Java
+                        country: Indonesia
+                        timezone: Asia/Jakarta
+                        latitude: '-7.3797'
+                        longitude: '112.7876'
+                        elevation: '7'
+                        imageUrl: sub-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure:
+                          - id: 3
+                            flightNumber: QR789
+                            airlineId: 3
+                            departureAirport: 5
+                            arrivalAirport: 8
+                            departureTime: '2024-07-17T22:00:00.000Z'
+                            arrivalTime: '2024-07-18T01:30:00.000Z'
+                            terminal: B
+                            information: International flight from Surabaya to Doha
+                            price: 1200
+                            class: FIRST
+                        arrival: []
+                      - id: 6
+                        code: DPS
+                        name: Ngurah Rai International Airport
+                        city: Denpasar
+                        state: Bali
+                        country: Indonesia
+                        timezone: Asia/Makassar
+                        latitude: '-8.7487'
+                        longitude: '115.1670'
+                        elevation: '4'
+                        imageUrl: dps-airport.png
+                        imageId: ''
+                        createdAt: '2024-12-01T07:19:25.926Z'
+                        departure: []
+                        arrival: []
+                success_empty:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: Airports data retrieved successfully
+                      pagination: null
+                    data: []
   /airlines:
     get:
       tags:
@@ -545,46 +1432,64 @@ paths:
           description: Successful response
           content:
             application/json:
-              example:
-                meta:
-                  statusCode: 200
-                  message: Airlines fetched successfully
-                  pagination: null
-                data:
-                  - id: 1
-                    name: Garuda Indonesia
-                    imageUrl: garuda.png
-                    imageId: garuda-logo
-                  - id: 2
-                    name: Singapore Airlines
-                    imageUrl: singapore-airlines.png
-                    imageId: sia-logo
-                  - id: 3
-                    name: Qatar Airways
-                    imageUrl: qatar-airways.png
-                    imageId: qatar-logo
-                  - id: 4
-                    name: Emirates
-                    imageUrl: emirates.png
-                    imageId: emirates-logo
-                  - id: 5
-                    name: Qantas
-                    imageUrl: qantas.png
-                    imageId: qantas-logo
-                  - id: 6
-                    name: Delta Airlines
-                    imageUrl: delta.png
-                    imageId: delta-logo
-                  - id: 7
-                    name: Lion Air
-                    imageUrl: lion-air.png
-                    imageId: lion-logo
-                  - id: 8
-                    name: AirAsia
-                    imageUrl: airasia.png
-                    imageId: airasia-logo
+              examples:
+                success_-_pagination:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: Airlines fetched successfully
+                      pagination:
+                        totalPage: 8
+                        currentPage: 3
+                        pageItems: 1
+                        nextPage: 4
+                        prevPage: 2
+                    data:
+                      - id: 3
+                        name: Qatar Airways
+                        imageUrl: qatar-airways.png
+                        imageId: qatar-logo
+                success_-_without_pagination:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: Airlines fetched successfully
+                      pagination: null
+                    data:
+                      - id: 1
+                        name: Garuda Indonesia
+                        imageUrl: garuda.png
+                        imageId: garuda-logo
+                      - id: 2
+                        name: Singapore Airlines
+                        imageUrl: singapore-airlines.png
+                        imageId: sia-logo
+                      - id: 3
+                        name: Qatar Airways
+                        imageUrl: qatar-airways.png
+                        imageId: qatar-logo
+                      - id: 4
+                        name: Emirates
+                        imageUrl: emirates.png
+                        imageId: emirates-logo
+                      - id: 5
+                        name: Qantas
+                        imageUrl: qantas.png
+                        imageId: qantas-logo
+                      - id: 6
+                        name: Delta Airlines
+                        imageUrl: delta.png
+                        imageId: delta-logo
+                      - id: 7
+                        name: Lion Air
+                        imageUrl: lion-air.png
+                        imageId: lion-logo
+                      - id: 8
+                        name: AirAsia
+                        imageUrl: airasia.png
+                        imageId: airasia-logo
         '404':
-          description: Error response - Airline Not Found
+          description: Response
           content:
             application/json:
               example:
@@ -629,7 +1534,7 @@ paths:
                   imageUrl: https://ik.imagekit.io/vieryn/airlines/image-1733027041812_rBNjDI47QW.jpg
                   imageId: 674be501e375273f60d0a937
         '400':
-          description: no file selected
+          description: Response
           content:
             application/json:
               example:
@@ -637,7 +1542,7 @@ paths:
                   statusCode: 400
                   message: no file selected
         '403':
-          description: forbidden
+          description: Response
           content:
             application/json:
               example:
@@ -645,7 +1550,7 @@ paths:
                   statusCode: 403
                   message: forbidden, Go Back ! >:(
         '409':
-          description: already exist
+          description: Response
           content:
             application/json:
               example:
@@ -653,13 +1558,20 @@ paths:
                   statusCode: 409
                   message: Airline name already exists
         '422':
-          description: invalid field value
+          description: Response
           content:
             application/json:
-              example:
-                error:
-                  statusCode: 422
-                  message: Only images (jpeg, jpg, png) are allowed!
+              examples:
+                invalid_field_value:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: Airline name cannot contain only numbers.
+                invalid_file_type:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: Only images (jpeg, jpg, png) are allowed!
       parameters: []
       security:
         - bearerAuth: []
@@ -722,7 +1634,7 @@ paths:
                     price: 5000
                     class: BUSINESS
         '403':
-          description: forbidden
+          description: Response
           content:
             application/json:
               example:
@@ -730,15 +1642,27 @@ paths:
                   statusCode: 403
                   message: forbidden, Go Back ! >:(
         '404':
-          description: arrival airport is not found
+          description: Response
           content:
             application/json:
-              example:
-                error:
-                  statusCode: 404
-                  message: airline is not found
+              examples:
+                arrival_airport_is_not_found:
+                  value:
+                    error:
+                      statusCode: 404
+                      message: arrival airport is not found
+                departure_airport_is_not_found:
+                  value:
+                    error:
+                      statusCode: 404
+                      message: departure airport is not found
+                airline_not_found:
+                  value:
+                    error:
+                      statusCode: 404
+                      message: airline is not found
         '409':
-          description: already used flight number
+          description: Response
           content:
             application/json:
               example:
@@ -746,13 +1670,25 @@ paths:
                   statusCode: 409
                   message: Flight number is already used by another flight
         '422':
-          description: invalid arrival airport
+          description: Response
           content:
             application/json:
-              example:
-                error:
-                  statusCode: 422
-                  message: '"airlineId" must be a number'
+              examples:
+                invalid_arrival_airport:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: Arrival airport must be different from departure airport.
+                invalid_arrival_time:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: Arrival time must be after departure time.
+                invalid_input:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: '"airlineId" must be a number'
       parameters: []
       security:
         - bearerAuth: []
@@ -856,25 +1792,457 @@ paths:
           description: Successful response
           content:
             application/json:
-              example:
-                meta:
-                  statusCode: 200
-                  message: flights data retrieved successfully
-                  pagination:
-                    totalPage: 0
-                    currentPage: 100
-                    pageItems: 0
-                    nextPage: null
-                    prevPage: 99
-                data: []
+              examples:
+                success_-_without_pagination:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: flights data retrieved successfully
+                      pagination: null
+                    data:
+                      - duration: 1d 0h 0m
+                        id: 2
+                        flightNumber: CH1
+                        airlineId: 2
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-01-02T00:00:00.000Z'
+                        terminal: terminal 2A
+                        information: free wifi-free inflight meals
+                        price: 5000
+                        class: BUSINESS
+                        _count:
+                          seat: 0
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 2
+                          name: Batik Air
+                          imageUrl: '-'
+                          imageId: '-'
+                        arrival:
+                          id: 2
+                          code: SBY1
+                          name: Juanda International Airport
+                          city: SURABAYA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                        departure:
+                          id: 1
+                          code: JKT1
+                          name: Soekarno Hatta International Airport
+                          city: JAKARTA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                      - duration: 32d 0h 0m
+                        id: 5
+                        flightNumber: AB1
+                        airlineId: 2
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-02-02T00:00:00.000Z'
+                        terminal: terminal 2A
+                        information: free wifi-free inflight meals
+                        price: 3000
+                        class: ECONOMY
+                        _count:
+                          seat: 0
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 2
+                          name: Batik Air
+                          imageUrl: '-'
+                          imageId: '-'
+                        arrival:
+                          id: 2
+                          code: SBY1
+                          name: Juanda International Airport
+                          city: SURABAYA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                        departure:
+                          id: 1
+                          code: JKT1
+                          name: Soekarno Hatta International Airport
+                          city: JAKARTA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                      - duration: 61d 0h 0m
+                        id: 4
+                        flightNumber: CH2
+                        airlineId: 2
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-03-02T00:00:00.000Z'
+                        terminal: terminal 2A
+                        information: free wifi-free inflight meals
+                        price: 5000
+                        class: BUSINESS
+                        _count:
+                          seat: 0
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 2
+                          name: Batik Air
+                          imageUrl: '-'
+                          imageId: '-'
+                        arrival:
+                          id: 2
+                          code: SBY1
+                          name: Juanda International Airport
+                          city: SURABAYA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                        departure:
+                          id: 1
+                          code: JKT1
+                          name: Soekarno Hatta International Airport
+                          city: JAKARTA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                      - duration: 92d 0h 0m
+                        id: 6
+                        flightNumber: FE
+                        airlineId: 2
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-04-02T00:00:00.000Z'
+                        terminal: terminal 2A
+                        information: free wifi-free inflight meals
+                        price: 8000
+                        class: FIRST
+                        _count:
+                          seat: 0
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 2
+                          name: Batik Air
+                          imageUrl: '-'
+                          imageId: '-'
+                        arrival:
+                          id: 2
+                          code: SBY1
+                          name: Juanda International Airport
+                          city: SURABAYA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                        departure:
+                          id: 1
+                          code: JKT1
+                          name: Soekarno Hatta International Airport
+                          city: JAKARTA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                success_-_with_pagination:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: flights data retrieved successfully
+                      pagination:
+                        totalPage: 2
+                        currentPage: 1
+                        pageItems: 2
+                        nextPage: 2
+                        prevPage: null
+                    data:
+                      - duration: 1d 0h 0m
+                        id: 2
+                        flightNumber: CH1
+                        airlineId: 2
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-01-02T00:00:00.000Z'
+                        terminal: terminal 2A
+                        information: free wifi-free inflight meals
+                        price: 5000
+                        class: BUSINESS
+                        _count:
+                          seat: 0
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 2
+                          name: Batik Air
+                          imageUrl: '-'
+                          imageId: '-'
+                        arrival:
+                          id: 2
+                          code: SBY1
+                          name: Juanda International Airport
+                          city: SURABAYA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                        departure:
+                          id: 1
+                          code: JKT1
+                          name: Soekarno Hatta International Airport
+                          city: JAKARTA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                      - duration: 61d 0h 0m
+                        id: 4
+                        flightNumber: CH2
+                        airlineId: 2
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-03-02T00:00:00.000Z'
+                        terminal: terminal 2A
+                        information: free wifi-free inflight meals
+                        price: 5000
+                        class: BUSINESS
+                        _count:
+                          seat: 0
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 2
+                          name: Batik Air
+                          imageUrl: '-'
+                          imageId: '-'
+                        arrival:
+                          id: 2
+                          code: SBY1
+                          name: Juanda International Airport
+                          city: SURABAYA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                        departure:
+                          id: 1
+                          code: JKT1
+                          name: Soekarno Hatta International Airport
+                          city: JAKARTA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                success_-_filtering:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: flights data retrieved successfully
+                      pagination:
+                        totalPage: 2
+                        currentPage: 1
+                        pageItems: 2
+                        nextPage: 2
+                        prevPage: null
+                    data:
+                      - duration: 1d 0h 0m
+                        id: 2
+                        flightNumber: CH1
+                        airlineId: 2
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-01-02T00:00:00.000Z'
+                        terminal: terminal 2A
+                        information: free wifi-free inflight meals
+                        price: 5000
+                        class: BUSINESS
+                        _count:
+                          seat: 0
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 2
+                          name: Batik Air
+                          imageUrl: '-'
+                          imageId: '-'
+                        arrival:
+                          id: 2
+                          code: SBY1
+                          name: Juanda International Airport
+                          city: SURABAYA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                        departure:
+                          id: 1
+                          code: JKT1
+                          name: Soekarno Hatta International Airport
+                          city: JAKARTA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                      - duration: 32d 0h 0m
+                        id: 5
+                        flightNumber: AB1
+                        airlineId: 2
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-02-02T00:00:00.000Z'
+                        terminal: terminal 2A
+                        information: free wifi-free inflight meals
+                        price: 3000
+                        class: ECONOMY
+                        _count:
+                          seat: 0
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 2
+                          name: Batik Air
+                          imageUrl: '-'
+                          imageId: '-'
+                        arrival:
+                          id: 2
+                          code: SBY1
+                          name: Juanda International Airport
+                          city: SURABAYA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                        departure:
+                          id: 1
+                          code: JKT1
+                          name: Soekarno Hatta International Airport
+                          city: JAKARTA
+                          state: INDONESIA
+                          country: INDONESIA
+                          timezone: GMT+7
+                          latitude: '1'
+                          longitude: '1'
+                          elevation: '1'
+                          imageUrl: '-'
+                          imageId: '-'
+                          createdAt: '1970-01-01T00:00:00.000Z'
+                success_-_empty_data:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: flights data retrieved successfully
+                      pagination:
+                        totalPage: 0
+                        currentPage: 100
+                        pageItems: 0
+                        nextPage: null
+                        prevPage: 99
+                    data: []
         '422':
-          description: invalid seatClass params
+          description: Response
           content:
             application/json:
-              example:
-                error:
-                  statusCode: 422
-                  message: invalid value for departure airport or arrival airport
+              examples:
+                invalid_seatClass_params:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: 'Invalid seat class. Available classes: ECONOMY, FIRST, BUSINESS'
+                invalid_query_params_departure_or_arrival_airport:
+                  value:
+                    error:
+                      statusCode: 422
+                      message: invalid value for departure airport or arrival airport
   /seats:
     post:
       tags:
@@ -909,7 +2277,7 @@ paths:
                     departureTime: '2024-01-01T00:00:00.000Z'
                     arrivalTime: '2024-01-02T00:00:00.000Z'
         '403':
-          description: forbidden
+          description: Response
           content:
             application/json:
               example:
@@ -917,7 +2285,7 @@ paths:
                   statusCode: 403
                   message: forbidden, Go Back ! >:(
         '404':
-          description: flightId is not found
+          description: Response
           content:
             application/json:
               example:
@@ -925,7 +2293,7 @@ paths:
                   statusCode: 404
                   message: flight id is not found
         '409':
-          description: already created
+          description: Response
           content:
             application/json:
               example:
@@ -933,7 +2301,7 @@ paths:
                   statusCode: 409
                   message: Seat number has already been used in the same flight
         '422':
-          description: invalid input
+          description: Response
           content:
             application/json:
               example:
@@ -995,72 +2363,230 @@ paths:
           description: Successful response
           content:
             application/json:
-              example:
-                meta:
-                  statusCode: 200
-                  message: seats data retrieved successfully
-                  pagination: null
-                data:
-                  - id: 2
-                    flightId: 1
-                    seatNumber: A1
-                    status: UNAVAILABLE
-                    departureTime: '2024-01-01T00:00:00.000Z'
-                    arrivalTime: '2024-01-02T00:00:00.000Z'
-                    _count:
-                      bookingDetail: 0
-                    flight:
-                      id: 1
-                      flightNumber: GA123
-                      airlineId: 1
-                      departureAirport: 1
-                      arrivalAirport: 4
-                      departureTime: '2024-07-15T08:00:00.000Z'
-                      arrivalTime: '2024-07-15T11:00:00.000Z'
-                      terminal: A
-                      information: Direct flight from Jakarta to Singapore
-                      price: 850
-                      class: ECONOMY
-                  - id: 1
-                    flightId: 1
-                    seatNumber: B3
-                    status: LOCKED
-                    departureTime: '2024-01-01T00:00:00.000Z'
-                    arrivalTime: '2024-01-02T00:00:00.000Z'
-                    _count:
-                      bookingDetail: 0
-                    flight:
-                      id: 1
-                      flightNumber: GA123
-                      airlineId: 1
-                      departureAirport: 1
-                      arrivalAirport: 4
-                      departureTime: '2024-07-15T08:00:00.000Z'
-                      arrivalTime: '2024-07-15T11:00:00.000Z'
-                      terminal: A
-                      information: Direct flight from Jakarta to Singapore
-                      price: 850
-                      class: ECONOMY
-                  - id: 3
-                    flightId: 1
-                    seatNumber: A2
-                    status: UNAVAILABLE
-                    departureTime: '2024-01-01T00:00:00.000Z'
-                    arrivalTime: '2024-01-02T00:00:00.000Z'
-                    _count:
-                      bookingDetail: 0
-                    flight:
-                      id: 1
-                      flightNumber: GA123
-                      airlineId: 1
-                      departureAirport: 1
-                      arrivalAirport: 4
-                      departureTime: '2024-07-15T08:00:00.000Z'
-                      arrivalTime: '2024-07-15T11:00:00.000Z'
-                      terminal: A
-                      information: Direct flight from Jakarta to Singapore
-                      price: 850
-                      class: ECONOMY
+              examples:
+                success:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: seats data retrieved successfully
+                      pagination:
+                        totalPage: 1
+                        currentPage: 1
+                        pageItems: 3
+                        nextPage: null
+                        prevPage: null
+                    data:
+                      - id: 1
+                        flightId: 1
+                        seatNumber: B3
+                        status: LOCKED
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-01-02T00:00:00.000Z'
+                        _count:
+                          bookingDetail: 0
+                        flight:
+                          id: 1
+                          flightNumber: GA123
+                          airlineId: 1
+                          departureAirport: 1
+                          arrivalAirport: 4
+                          departureTime: '2024-07-15T08:00:00.000Z'
+                          arrivalTime: '2024-07-15T11:00:00.000Z'
+                          terminal: A
+                          information: Direct flight from Jakarta to Singapore
+                          price: 850
+                          class: ECONOMY
+                      - id: 2
+                        flightId: 1
+                        seatNumber: A1
+                        status: UNAVAILABLE
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-01-02T00:00:00.000Z'
+                        _count:
+                          bookingDetail: 0
+                        flight:
+                          id: 1
+                          flightNumber: GA123
+                          airlineId: 1
+                          departureAirport: 1
+                          arrivalAirport: 4
+                          departureTime: '2024-07-15T08:00:00.000Z'
+                          arrivalTime: '2024-07-15T11:00:00.000Z'
+                          terminal: A
+                          information: Direct flight from Jakarta to Singapore
+                          price: 850
+                          class: ECONOMY
+                      - id: 3
+                        flightId: 1
+                        seatNumber: A2
+                        status: UNAVAILABLE
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-01-02T00:00:00.000Z'
+                        _count:
+                          bookingDetail: 0
+                        flight:
+                          id: 1
+                          flightNumber: GA123
+                          airlineId: 1
+                          departureAirport: 1
+                          arrivalAirport: 4
+                          departureTime: '2024-07-15T08:00:00.000Z'
+                          arrivalTime: '2024-07-15T11:00:00.000Z'
+                          terminal: A
+                          information: Direct flight from Jakarta to Singapore
+                          price: 850
+                          class: ECONOMY
+                success_-_empty:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: users data retrieved successfully
+                      pagination:
+                        totalPage: 0
+                        currentPage: 1
+                        pageItems: 0
+                        nextPage: null
+                        prevPage: null
+                    data: []
+                success_-_filtering:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: seats data retrieved successfully
+                      pagination:
+                        totalPage: 1
+                        currentPage: 1
+                        pageItems: 3
+                        nextPage: null
+                        prevPage: null
+                    data:
+                      - id: 1
+                        flightId: 1
+                        seatNumber: B3
+                        status: LOCKED
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-01-02T00:00:00.000Z'
+                        _count:
+                          bookingDetail: 0
+                        flight:
+                          id: 1
+                          flightNumber: GA123
+                          airlineId: 1
+                          departureAirport: 1
+                          arrivalAirport: 4
+                          departureTime: '2024-07-15T08:00:00.000Z'
+                          arrivalTime: '2024-07-15T11:00:00.000Z'
+                          terminal: A
+                          information: Direct flight from Jakarta to Singapore
+                          price: 850
+                          class: ECONOMY
+                      - id: 2
+                        flightId: 1
+                        seatNumber: A1
+                        status: UNAVAILABLE
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-01-02T00:00:00.000Z'
+                        _count:
+                          bookingDetail: 0
+                        flight:
+                          id: 1
+                          flightNumber: GA123
+                          airlineId: 1
+                          departureAirport: 1
+                          arrivalAirport: 4
+                          departureTime: '2024-07-15T08:00:00.000Z'
+                          arrivalTime: '2024-07-15T11:00:00.000Z'
+                          terminal: A
+                          information: Direct flight from Jakarta to Singapore
+                          price: 850
+                          class: ECONOMY
+                      - id: 3
+                        flightId: 1
+                        seatNumber: A2
+                        status: UNAVAILABLE
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-01-02T00:00:00.000Z'
+                        _count:
+                          bookingDetail: 0
+                        flight:
+                          id: 1
+                          flightNumber: GA123
+                          airlineId: 1
+                          departureAirport: 1
+                          arrivalAirport: 4
+                          departureTime: '2024-07-15T08:00:00.000Z'
+                          arrivalTime: '2024-07-15T11:00:00.000Z'
+                          terminal: A
+                          information: Direct flight from Jakarta to Singapore
+                          price: 850
+                          class: ECONOMY
+                success_-_without_pagination:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: seats data retrieved successfully
+                      pagination: null
+                    data:
+                      - id: 2
+                        flightId: 1
+                        seatNumber: A1
+                        status: UNAVAILABLE
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-01-02T00:00:00.000Z'
+                        _count:
+                          bookingDetail: 0
+                        flight:
+                          id: 1
+                          flightNumber: GA123
+                          airlineId: 1
+                          departureAirport: 1
+                          arrivalAirport: 4
+                          departureTime: '2024-07-15T08:00:00.000Z'
+                          arrivalTime: '2024-07-15T11:00:00.000Z'
+                          terminal: A
+                          information: Direct flight from Jakarta to Singapore
+                          price: 850
+                          class: ECONOMY
+                      - id: 1
+                        flightId: 1
+                        seatNumber: B3
+                        status: LOCKED
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-01-02T00:00:00.000Z'
+                        _count:
+                          bookingDetail: 0
+                        flight:
+                          id: 1
+                          flightNumber: GA123
+                          airlineId: 1
+                          departureAirport: 1
+                          arrivalAirport: 4
+                          departureTime: '2024-07-15T08:00:00.000Z'
+                          arrivalTime: '2024-07-15T11:00:00.000Z'
+                          terminal: A
+                          information: Direct flight from Jakarta to Singapore
+                          price: 850
+                          class: ECONOMY
+                      - id: 3
+                        flightId: 1
+                        seatNumber: A2
+                        status: UNAVAILABLE
+                        departureTime: '2024-01-01T00:00:00.000Z'
+                        arrivalTime: '2024-01-02T00:00:00.000Z'
+                        _count:
+                          bookingDetail: 0
+                        flight:
+                          id: 1
+                          flightNumber: GA123
+                          airlineId: 1
+                          departureAirport: 1
+                          arrivalAirport: 4
+                          departureTime: '2024-07-15T08:00:00.000Z'
+                          arrivalTime: '2024-07-15T11:00:00.000Z'
+                          terminal: A
+                          information: Direct flight from Jakarta to Singapore
+                          price: 850
+                          class: ECONOMY
       security:
         - bearerAuth: []
   /booking:
@@ -1120,7 +2646,7 @@ paths:
                   statusCode: 201
                   message: booking created
         '401':
-          description: error
+          description: Response
           content:
             application/json:
               example:
@@ -1155,47 +2681,95 @@ paths:
           description: Successful response
           content:
             application/json:
-              example:
-                meta:
-                  status: 200
-                  message: success
-                data:
-                  - id: 16
-                    bookingCode: 2411026A6E
-                    userId: 1
-                    flightId: 3
-                    returnFlightId: 1
-                    bookingDate: '2024-12-03T13:37:05.394Z'
-                    totalPrice: 400000
-                    status: ACTIVE
-                    createdAt: '2024-12-03T13:37:05.424Z'
-                    updateAt: '2024-12-03T13:37:05.424Z'
-                    flight:
-                      id: 3
-                      flightNumber: LA789
-                      airlineId: 3
-                      departureAirport: 3
-                      arrivalAirport: 1
-                      departureTime: '2024-12-03T18:00:00.000Z'
-                      arrivalTime: '2024-12-03T21:00:00.000Z'
-                      terminal: T2
-                      information: Delayed flight
-                      price: 100
-                      class: ECONOMY
-                    returnFlight:
-                      id: 1
-                      flightNumber: GA123
-                      airlineId: 1
-                      departureAirport: 1
-                      arrivalAirport: 2
-                      departureTime: '2024-12-01T08:00:00.000Z'
-                      arrivalTime: '2024-12-01T11:00:00.000Z'
-                      terminal: T3
-                      information: Non-stop flight
-                      price: 150
-                      class: ECONOMY
+              examples:
+                filter:
+                  value:
+                    meta:
+                      status: 200
+                      message: success
+                      pagination:
+                        totalPage: 1
+                        currentPage: 1
+                        pageItems: 1
+                        nextPage: null
+                        prevPage: null
+                    data:
+                      - id: 16
+                        bookingCode: 2411026A6E
+                        userId: 1
+                        flightId: 3
+                        returnFlightId: 1
+                        bookingDate: '2024-12-03T13:37:05.394Z'
+                        totalPrice: 400000
+                        status: ACTIVE
+                        createdAt: '2024-12-03T13:37:05.424Z'
+                        updateAt: '2024-12-03T13:37:05.424Z'
+                        flight:
+                          id: 3
+                          flightNumber: LA789
+                          airlineId: 3
+                          departureAirport: 3
+                          arrivalAirport: 1
+                          departureTime: '2024-12-03T18:00:00.000Z'
+                          arrivalTime: '2024-12-03T21:00:00.000Z'
+                          terminal: T2
+                          information: Delayed flight
+                          price: 100
+                          class: ECONOMY
+                        returnFlight:
+                          id: 1
+                          flightNumber: GA123
+                          airlineId: 1
+                          departureAirport: 1
+                          arrivalAirport: 2
+                          departureTime: '2024-12-01T08:00:00.000Z'
+                          arrivalTime: '2024-12-01T11:00:00.000Z'
+                          terminal: T3
+                          information: Non-stop flight
+                          price: 150
+                          class: ECONOMY
+                find_all:
+                  value:
+                    meta:
+                      status: 200
+                      message: success
+                    data:
+                      - id: 16
+                        bookingCode: 2411026A6E
+                        userId: 1
+                        flightId: 3
+                        returnFlightId: 1
+                        bookingDate: '2024-12-03T13:37:05.394Z'
+                        totalPrice: 400000
+                        status: ACTIVE
+                        createdAt: '2024-12-03T13:37:05.424Z'
+                        updateAt: '2024-12-03T13:37:05.424Z'
+                        flight:
+                          id: 3
+                          flightNumber: LA789
+                          airlineId: 3
+                          departureAirport: 3
+                          arrivalAirport: 1
+                          departureTime: '2024-12-03T18:00:00.000Z'
+                          arrivalTime: '2024-12-03T21:00:00.000Z'
+                          terminal: T2
+                          information: Delayed flight
+                          price: 100
+                          class: ECONOMY
+                        returnFlight:
+                          id: 1
+                          flightNumber: GA123
+                          airlineId: 1
+                          departureAirport: 1
+                          arrivalAirport: 2
+                          departureTime: '2024-12-01T08:00:00.000Z'
+                          arrivalTime: '2024-12-01T11:00:00.000Z'
+                          terminal: T3
+                          information: Non-stop flight
+                          price: 150
+                          class: ECONOMY
         '401':
-          description: error
+          description: Response
           content:
             application/json:
               example:
@@ -1256,7 +2830,7 @@ paths:
                       createdAt: '2024-12-03T13:37:05.424Z'
                       updateAt: '2024-12-03T13:37:05.424Z'
         '401':
-          description: error
+          description: Response
           content:
             application/json:
               example:
@@ -1276,21 +2850,63 @@ paths:
           description: Successful response
           content:
             application/json:
-              example:
-                meta:
-                  statusCode: 200
-                  message: notifications data retrieved successfully
-                  pagination: null
-                data:
-                  - id: 1
-                    type: DISCOUNT
-                    title: Discount Natal
-                    description: Diskon 100% Khusus Hari Natal
-                    isRead: false
-                    createdAt: '2024-12-05T14:34:58.033Z'
-                    userId: 1
+              examples:
+                success_-_empty_data:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: notifications data retrieved successfully
+                      pagination: null
+                    data: []
+                success__-_without_pagination:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: notifications data retrieved successfully
+                      pagination: null
+                    data:
+                      - id: 1
+                        type: DISCOUNT
+                        title: Discount Natal
+                        description: Diskon 100% Khusus Hari Natal
+                        isRead: false
+                        createdAt: '2024-12-05T14:34:58.033Z'
+                        userId: 1
+                      - id: 2
+                        type: PAYMENT
+                        title: Booking Payment - Pending
+                        description: Segera lakukan pembayaran untuk transaksi booking penerbangan anda
+                        isRead: false
+                        createdAt: '2024-12-05T14:36:45.201Z'
+                        userId: 2
+                success_-_with_pagination:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: notifications data retrieved successfully
+                      pagination:
+                        totalPage: 1
+                        currentPage: 3
+                        pageItems: 0
+                        nextPage: null
+                        prevPage: 2
+                    data: []
+                success_-_filter:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: notifications data retrieved successfully
+                      pagination: null
+                    data:
+                      - id: 1
+                        type: DISCOUNT
+                        title: Discount Natal
+                        description: Diskon 100% Khusus Hari Natal
+                        isRead: false
+                        createdAt: '2024-12-05T14:34:58.033Z'
+                        userId: 1
         '401':
-          description: unauthorized
+          description: Response
           content:
             application/json:
               example:
@@ -1298,7 +2914,7 @@ paths:
                   statusCode: 401
                   message: unauthorized
         '403':
-          description: forbidden
+          description: Response
           content:
             application/json:
               example:
@@ -1306,7 +2922,7 @@ paths:
                   statusCode: 403
                   message: forbidden, Go Back ! >:(
         '422':
-          description: invalid type
+          description: Response
           content:
             application/json:
               example:
@@ -1345,20 +2961,35 @@ paths:
           description: Successful response
           content:
             application/json:
-              example:
-                meta:
-                  statusCode: 200
-                  message: users notification created successfully
-                data:
-                  id: 2
-                  type: INFO
-                  title: Perbarui profile
-                  description: Perbarui Profile anda untuk keandalan data pada sistem
-                  isRead: false
-                  createdAt: '2024-12-06T02:19:21.190Z'
-                  userId: null
+              examples:
+                success_-_specific_user:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: users notification created successfully
+                    data:
+                      id: 4
+                      type: DISCOUNT
+                      title: Desember Liburan
+                      description: Discount 75% untuk anda yang bernama AGUS
+                      isRead: false
+                      createdAt: '2024-12-06T02:02:55.671Z'
+                      userId: 1
+                success_-_for_all_users:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: users notification created successfully
+                    data:
+                      id: 2
+                      type: INFO
+                      title: Perbarui profile
+                      description: Perbarui Profile anda untuk keandalan data pada sistem
+                      isRead: false
+                      createdAt: '2024-12-06T02:19:21.190Z'
+                      userId: null
         '401':
-          description: unauthorized
+          description: Response
           content:
             application/json:
               example:
@@ -1366,7 +2997,7 @@ paths:
                   statusCode: 401
                   message: unauthorized
         '403':
-          description: forbidden
+          description: Response
           content:
             application/json:
               example:
@@ -1374,7 +3005,7 @@ paths:
                   statusCode: 403
                   message: forbidden, Go Back ! >:(
         '422':
-          description: invalid type
+          description: Response
           content:
             application/json:
               example:
@@ -1418,21 +3049,44 @@ paths:
           description: Successful response
           content:
             application/json:
-              example:
-                meta:
-                  statusCode: 200
-                  message: notifications data retrieved successfully
-                  pagination: null
-                data:
-                  - id: 35
-                    type: ACCOUNT
-                    title: Perbarui profile
-                    description: Perbarui Profile anda untuk keandalan data pada sistem
-                    isRead: false
-                    createdAt: '2024-12-06T07:37:43.414Z'
-                    userId: 1
+              examples:
+                success_-_as_a_admin:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: notifications data retrieved successfully
+                      pagination: null
+                    data:
+                      - id: 35
+                        type: ACCOUNT
+                        title: Perbarui profile
+                        description: Perbarui Profile anda untuk keandalan data pada sistem
+                        isRead: false
+                        createdAt: '2024-12-06T07:37:43.414Z'
+                        userId: 1
+                      - id: 36
+                        type: PAYMENT
+                        title: Perbarui Payment
+                        description: Perbarui Payment anda untuk keandalan data pada sistem
+                        isRead: false
+                        createdAt: '2024-12-06T07:37:57.377Z'
+                        userId: 2
+                success_-_as_a_buyer:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: notifications data retrieved successfully
+                      pagination: null
+                    data:
+                      - id: 35
+                        type: ACCOUNT
+                        title: Perbarui profile
+                        description: Perbarui Profile anda untuk keandalan data pada sistem
+                        isRead: false
+                        createdAt: '2024-12-06T07:37:43.414Z'
+                        userId: 1
         '422':
-          description: filter - invalid type
+          description: Response
           content:
             application/json:
               example:
@@ -1472,7 +3126,7 @@ paths:
                   createdAt: '2024-12-06T06:17:42.903Z'
                   userId: 1
         '401':
-          description: unauthorized
+          description: Response
           content:
             application/json:
               example:
@@ -1480,7 +3134,7 @@ paths:
                   statusCode: 401
                   message: unauthorized
         '404':
-          description: not found
+          description: Response
           content:
             application/json:
               example:
@@ -1488,7 +3142,7 @@ paths:
                   statusCode: 404
                   message: notification is not found
         '422':
-          description: invalid field value
+          description: Response
           content:
             application/json:
               example:
