@@ -7,7 +7,6 @@ import { calculateDuration } from '../utils/calculateDuration.js';
 
 export class FlightService {
   static async getAll(pagination, filter, sorter, duration) {
-    console.log(duration);
     if (filter.class) {
       const seatClassEnum = await SeatRepository.getClassEnum();
       const upperCaseClass = filter.class.trim().toUpperCase();
@@ -56,6 +55,13 @@ export class FlightService {
 
     if (!flight) {
       throw new ErrorHandler(404, 'flight is not found');
+    }
+
+    const flightSoldOut = await FlightRepository.flightTicketsSoldOut(flightID);
+
+    console.log(flightSoldOut);
+    if (flightSoldOut) {
+      throw new ErrorHandler(400, 'Flight Tickets Sold Out');
     }
 
     return flight;

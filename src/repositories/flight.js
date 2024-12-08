@@ -80,4 +80,21 @@ export class FlightRepository {
     });
     return !!flight;
   }
+
+  static async flightTicketsSoldOut(flightID) {
+    const flight = await prisma.flight.findMany({
+      where: {
+        id: flightID,
+        seat: {
+          every: {
+            status: { in: ['LOCKED', 'UNAVAILABLE'] },
+          },
+        },
+      },
+    });
+
+    console.log(flight);
+
+    return !!flight;
+  }
 }
