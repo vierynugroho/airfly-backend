@@ -3,7 +3,15 @@ import { prisma } from '../../database/db.js';
 import { AuthRepository } from '../auth.js';
 import { Bcrypt } from '../../utils/bcrypt.js';
 
-jest.mock('../../database/db.js');
+jest.mock('../../database/db.js', () => ({
+  prisma: {
+    user: {
+      findFirst: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+    },
+  },
+}));
 jest.mock('../../utils/bcrypt.js');
 
 describe('AuthRepository', () => {
