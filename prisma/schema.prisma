@@ -206,6 +206,7 @@ enum SeatStatus {
 
 enum SeatClass {
   ECONOMY
+  PREMIUM_ECONOMY
   FIRST
   BUSINESS
 }

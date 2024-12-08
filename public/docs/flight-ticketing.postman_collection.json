@@ -2425,7 +2425,7 @@
       "name": "Airports",
       "item": [
         {
-          "name": "get all data",
+          "name": "get all",
           "request": {
             "auth": {
               "type": "noauth"
@@ -5047,7 +5047,7 @@
       "name": "Airlines",
       "item": [
         {
-          "name": "Get All Airlines",
+          "name": "get all",
           "request": {
             "auth": {
               "type": "noauth"
@@ -5276,7 +5276,7 @@
           ]
         },
         {
-          "name": "Get Airlines by ID",
+          "name": "get by ID",
           "request": {
             "auth": {
               "type": "noauth"
@@ -6860,6 +6860,68 @@
               ],
               "cookie": [],
               "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"fligt data retrieved successfully\"\n    },\n    \"data\": {\n        \"id\": 2,\n        \"flightNumber\": \"CH1\",\n        \"airlineId\": 2,\n        \"departureAirport\": 1,\n        \"arrivalAirport\": 2,\n        \"departureTime\": \"2024-01-01T00:00:00.000Z\",\n        \"arrivalTime\": \"2024-01-02T00:00:00.000Z\",\n        \"terminal\": \"terminal 2A\",\n        \"information\": \"free wifi-free inflight meals\",\n        \"price\": 5000,\n        \"class\": \"BUSINESS\",\n        \"_count\": {\n            \"seat\": 0,\n            \"booking\": 0,\n            \"returnBooking\": 0\n        },\n        \"airline\": {\n            \"id\": 2,\n            \"name\": \"Batik Air\",\n            \"imageUrl\": \"-\",\n            \"imageId\": \"-\"\n        },\n        \"arrival\": {\n            \"id\": 2,\n            \"code\": \"SBY1\",\n            \"name\": \"Juanda International Airport\",\n            \"city\": \"SURABAYA\",\n            \"state\": \"INDONESIA\",\n            \"country\": \"INDONESIA\",\n            \"timezone\": \"GMT+7\",\n            \"latitude\": \"1\",\n            \"longitude\": \"1\",\n            \"elevation\": \"1\",\n            \"imageUrl\": \"-\",\n            \"imageId\": \"-\",\n            \"createdAt\": \"1970-01-01T00:00:00.000Z\"\n        },\n        \"departure\": {\n            \"id\": 1,\n            \"code\": \"JKT1\",\n            \"name\": \"Soekarno Hatta International Airport\",\n            \"city\": \"JAKARTA\",\n            \"state\": \"INDONESIA\",\n            \"country\": \"INDONESIA\",\n            \"timezone\": \"GMT+7\",\n            \"latitude\": \"1\",\n            \"longitude\": \"1\",\n            \"elevation\": \"1\",\n            \"imageUrl\": \"-\",\n            \"imageId\": \"-\",\n            \"createdAt\": \"1970-01-01T00:00:00.000Z\"\n        },\n        \"seat\": []\n    }\n}"
+            },
+            {
+              "name": "sold out",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/flights/:flightID",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["flights", ":flightID"],
+                  "variable": [
+                    {
+                      "key": "flightID",
+                      "value": "1",
+                      "description": "Flight ID"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "64"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"40-gcp1FMAAPrEcsZhQVp/3BIkLTUs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 08 Dec 2024 14:13:37 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 400,\n        \"message\": \"Flight Tickets Sold Out\"\n    }\n}"
             }
           ]
         },
@@ -6872,27 +6934,19 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/flights",
+              "raw": "{{local_base_url}}/flights?page=1&limit=20&seatClass=PREMIUM_ECONOMY",
               "host": ["{{local_base_url}}"],
               "path": ["flights"],
               "query": [
                 {
                   "key": "page",
-                  "value": "100",
-                  "description": "page number",
-                  "disabled": true
+                  "value": "1",
+                  "description": "page number"
                 },
                 {
                   "key": "limit",
-                  "value": "10",
-                  "description": "page items",
-                  "disabled": true
-                },
-                {
-                  "key": "seatClass",
-                  "value": "business",
-                  "description": "seat class [BUSINESS, ECONOMY, FIRST]",
-                  "disabled": true
+                  "value": "20",
+                  "description": "page items"
                 },
                 {
                   "key": "isCheapest",
@@ -6963,14 +7017,19 @@
                 {
                   "key": "returnTime",
                   "value": "2024-01-01T00:00:00Z",
-                  "description": "flight departure time [ISO date]",
+                  "description": "flight departure time [ISO date] - 2024-01-01T00:00:00Z",
                   "disabled": true
                 },
                 {
                   "key": "departureTime",
                   "value": "2026-01-01T00:00:00Z",
-                  "description": "flight departure time [ISO date]",
+                  "description": "flight departure time [ISO date] - 2024-01-01T00:00:00Z",
                   "disabled": true
+                },
+                {
+                  "key": "seatClass",
+                  "value": "PREMIUM_ECONOMY",
+                  "description": "seat class: ECONOMY, PREMIUM_ECONOMY, FIRST, BUSINESS"
                 }
               ]
             }
@@ -6999,7 +7058,7 @@
                     {
                       "key": "seatClass",
                       "value": "businesss",
-                      "description": "seat class [BUSINESS, ECONOMY, FIRST]"
+                      "description": "seat class [BUSINESS, ECONOMY, FIRST, PREMIUM_ECONOMY]"
                     },
                     {
                       "key": "isCheapest",
@@ -7070,7 +7129,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"error\": {\n        \"statusCode\": 422,\n        \"message\": \"Invalid seat class. Available classes: ECONOMY, FIRST, BUSINESS\"\n    }\n}"
+              "body": "{\n    \"error\": {\n        \"statusCode\": 422,\n        \"message\": \"Invalid seat class. Available classes: ECONOMY, PREMIUM_ECONOMY, FIRST, BUSINESS\"\n    }\n}"
             },
             {
               "name": "success - without pagination",
@@ -7678,6 +7737,156 @@
               ],
               "cookie": [],
               "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"flights data retrieved successfully\",\n        \"pagination\": {\n            \"totalPage\": 0,\n            \"currentPage\": 100,\n            \"pageItems\": 0,\n            \"nextPage\": null,\n            \"prevPage\": 99\n        }\n    },\n    \"data\": []\n}"
+            },
+            {
+              "name": "success - sort duration",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/flights?page=1&limit=20&shortest=true",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["flights"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": "page number"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20",
+                      "description": "page items"
+                    },
+                    {
+                      "key": "seatClass",
+                      "value": "business",
+                      "description": "seat class [BUSINESS, ECONOMY, FIRST]",
+                      "disabled": true
+                    },
+                    {
+                      "key": "isCheapest",
+                      "value": "true",
+                      "description": "sort - string true or false",
+                      "disabled": true
+                    },
+                    {
+                      "key": "flightNumber",
+                      "value": "CH2",
+                      "description": "flight Number",
+                      "disabled": true
+                    },
+                    {
+                      "key": "priceMin",
+                      "value": "3000",
+                      "description": "minimum price",
+                      "disabled": true
+                    },
+                    {
+                      "key": "priceMax",
+                      "value": "1000",
+                      "description": "maximum price",
+                      "disabled": true
+                    },
+                    {
+                      "key": "earliestDeparture",
+                      "value": "true",
+                      "description": "sort - string true or false",
+                      "disabled": true
+                    },
+                    {
+                      "key": "latestDeparture",
+                      "value": "true",
+                      "description": "sort - string true or false",
+                      "disabled": true
+                    },
+                    {
+                      "key": "earliestArrival",
+                      "value": "true",
+                      "description": "sort - string true or false",
+                      "disabled": true
+                    },
+                    {
+                      "key": "latestArrival",
+                      "value": "true",
+                      "description": "sort - string true or false",
+                      "disabled": true
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "true",
+                      "description": "sort - string true or false"
+                    },
+                    {
+                      "key": "arrivalAirport",
+                      "value": "1",
+                      "description": "filter - integer - airport ID",
+                      "disabled": true
+                    },
+                    {
+                      "key": "departureAirport",
+                      "value": "2",
+                      "description": "filter - integer - airport ID",
+                      "disabled": true
+                    },
+                    {
+                      "key": "returnTime",
+                      "value": "2024-01-01T00:00:00Z",
+                      "description": "flight departure time [ISO date]",
+                      "disabled": true
+                    },
+                    {
+                      "key": "departureTime",
+                      "value": "2026-01-01T00:00:00Z",
+                      "description": "flight departure time [ISO date]",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "24448"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"5f80-or6Iu/N7pDeH+Xk+RSW+a1SREgQ\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 08 Dec 2024 13:26:43 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"flights data retrieved successfully\",\n        \"pagination\": {\n            \"totalPage\": 6,\n            \"currentPage\": 1,\n            \"pageItems\": 20,\n            \"nextPage\": 2,\n            \"prevPage\": null\n        }\n    },\n    \"data\": [\n        {\n            \"duration\": \"0d 2h 0m\",\n            \"id\": 11,\n            \"flightNumber\": \"HA115\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-16T09:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-16T11:00:00.000Z\",\n            \"terminal\": \"B\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 950,\n            \"class\": \"BUSINESS\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 2h 0m\",\n            \"id\": 12,\n            \"flightNumber\": \"HA119\",\n            \"airlineId\": 1,\n            \"departureAirport\": 2,\n            \"arrivalAirport\": 1,\n            \"departureTime\": \"2024-12-16T09:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-16T11:00:00.000Z\",\n            \"terminal\": \"C\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 950,\n            \"class\": \"BUSINESS\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 2h 30m\",\n            \"id\": 3,\n            \"flightNumber\": \"AH111\",\n            \"airlineId\": 1,\n            \"departureAirport\": 2,\n            \"arrivalAirport\": 1,\n            \"departureTime\": \"2024-12-15T15:30:00.000Z\",\n            \"arrivalTime\": \"2024-12-15T18:00:00.000Z\",\n            \"terminal\": \"A\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 450,\n            \"class\": \"ECONOMY\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 2h 30m\",\n            \"id\": 16,\n            \"flightNumber\": \"HA137\",\n            \"airlineId\": 1,\n            \"departureAirport\": 2,\n            \"arrivalAirport\": 1,\n            \"departureTime\": \"2024-12-18T05:30:00.000Z\",\n            \"arrivalTime\": \"2024-12-18T08:00:00.000Z\",\n            \"terminal\": \"C\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 550,\n            \"class\": \"BUSINESS\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 1,\n            \"flightNumber\": \"AH100\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-14T08:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-14T11:00:00.000Z\",\n            \"terminal\": \"A\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 450,\n            \"class\": \"ECONOMY\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 2,\n            \"flightNumber\": \"AH110\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-15T08:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-15T11:00:00.000Z\",\n            \"terminal\": \"A\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 450,\n            \"class\": \"ECONOMY\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 4,\n            \"flightNumber\": \"AH101\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-14T09:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-14T12:00:00.000Z\",\n            \"terminal\": \"A\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 450,\n            \"class\": \"ECONOMY\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 5,\n            \"flightNumber\": \"AH102\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-14T09:30:00.000Z\",\n            \"arrivalTime\": \"2024-12-14T12:30:00.000Z\",\n            \"terminal\": \"A\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 750,\n            \"class\": \"FIRST\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 6,\n            \"flightNumber\": \"AH107\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-14T09:30:00.000Z\",\n            \"arrivalTime\": \"2024-12-14T12:30:00.000Z\",\n            \"terminal\": \"A\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 600,\n            \"class\": \"BUSINESS\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 7,\n            \"flightNumber\": \"AH108\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-14T09:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-14T12:00:00.000Z\",\n            \"terminal\": \"A\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 700,\n            \"class\": \"BUSINESS\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 8,\n            \"flightNumber\": \"AH118\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-15T09:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-15T12:00:00.000Z\",\n            \"terminal\": \"A\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 500,\n            \"class\": \"ECONOMY\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 9,\n            \"flightNumber\": \"HA113\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-15T08:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-15T11:00:00.000Z\",\n            \"terminal\": \"A\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 550,\n            \"class\": \"ECONOMY\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 10,\n            \"flightNumber\": \"HA114\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-16T09:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-16T12:00:00.000Z\",\n            \"terminal\": \"A\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 550,\n            \"class\": \"ECONOMY\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 13,\n            \"flightNumber\": \"HA129\",\n            \"airlineId\": 1,\n            \"departureAirport\": 2,\n            \"arrivalAirport\": 1,\n            \"departureTime\": \"2024-12-17T05:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-17T08:00:00.000Z\",\n            \"terminal\": \"C\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 950,\n            \"class\": \"BUSINESS\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 14,\n            \"flightNumber\": \"HA139\",\n            \"airlineId\": 1,\n            \"departureAirport\": 2,\n            \"arrivalAirport\": 1,\n            \"departureTime\": \"2024-12-17T05:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-17T08:00:00.000Z\",\n            \"terminal\": \"C\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 450,\n            \"class\": \"ECONOMY\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 15,\n            \"flightNumber\": \"HA131\",\n            \"airlineId\": 1,\n            \"departureAirport\": 2,\n            \"arrivalAirport\": 1,\n            \"departureTime\": \"2024-12-18T05:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-18T08:00:00.000Z\",\n            \"terminal\": \"C\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 450,\n            \"class\": \"ECONOMY\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 2,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3797\",\n                \"longitude\": \"112.7876\",\n                \"elevation\": \"7\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 17,\n            \"flightNumber\": \"GA123\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 4,\n            \"departureTime\": \"2024-12-15T08:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-15T11:00:00.000Z\",\n            \"terminal\": \"A\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 850,\n            \"class\": \"ECONOMY\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 4,\n                \"code\": \"SIN\",\n                \"name\": \"Singapore Changi Airport\",\n                \"city\": \"Singapore\",\n                \"state\": \"Asia\",\n                \"country\": \"Singapore\",\n                \"timezone\": \"Asia/Singapore\",\n                \"latitude\": \"1.3644\",\n                \"longitude\": \"103.9915\",\n                \"elevation\": \"22\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/singapura.jpg?updatedAt=1733579566914\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 18,\n            \"flightNumber\": \"GA121\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 4,\n            \"departureTime\": \"2024-12-23T08:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-23T11:00:00.000Z\",\n            \"terminal\": \"A\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 850,\n            \"class\": \"ECONOMY\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 4,\n                \"code\": \"SIN\",\n                \"name\": \"Singapore Changi Airport\",\n                \"city\": \"Singapore\",\n                \"state\": \"Asia\",\n                \"country\": \"Singapore\",\n                \"timezone\": \"Asia/Singapore\",\n                \"latitude\": \"1.3644\",\n                \"longitude\": \"103.9915\",\n                \"elevation\": \"22\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/singapura.jpg?updatedAt=1733579566914\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 19,\n            \"flightNumber\": \"GA120\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 4,\n            \"departureTime\": \"2024-12-23T09:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-23T12:00:00.000Z\",\n            \"terminal\": \"A\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 1000,\n            \"class\": \"FIRST\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 4,\n                \"code\": \"SIN\",\n                \"name\": \"Singapore Changi Airport\",\n                \"city\": \"Singapore\",\n                \"state\": \"Asia\",\n                \"country\": \"Singapore\",\n                \"timezone\": \"Asia/Singapore\",\n                \"latitude\": \"1.3644\",\n                \"longitude\": \"103.9915\",\n                \"elevation\": \"22\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/singapura.jpg?updatedAt=1733579566914\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        },\n        {\n            \"duration\": \"0d 3h 0m\",\n            \"id\": 20,\n            \"flightNumber\": \"GA119\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 4,\n            \"departureTime\": \"2024-12-23T05:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-23T08:00:00.000Z\",\n            \"terminal\": \"A\",\n            \"information\": \"Free Wi Fi-Free Inflight Meals\",\n            \"price\": 1000,\n            \"class\": \"FIRST\",\n            \"_count\": {\n                \"seat\": 72,\n                \"booking\": 0,\n                \"returnBooking\": 0\n            },\n            \"airline\": {\n                \"id\": 1,\n                \"name\": \"Garuda Indonesia\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                \"imageId\": \"garuda-logo\"\n            },\n            \"arrival\": {\n                \"id\": 4,\n                \"code\": \"SIN\",\n                \"name\": \"Singapore Changi Airport\",\n                \"city\": \"Singapore\",\n                \"state\": \"Asia\",\n                \"country\": \"Singapore\",\n                \"timezone\": \"Asia/Singapore\",\n                \"latitude\": \"1.3644\",\n                \"longitude\": \"103.9915\",\n                \"elevation\": \"22\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/singapura.jpg?updatedAt=1733579566914\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            },\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"Asia\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1255\",\n                \"longitude\": \"106.6551\",\n                \"elevation\": \"8\",\n                \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-12-08T04:19:15.767Z\"\n            }\n        }\n    ]\n}"
             }
           ]
         },
@@ -9267,46 +9476,51 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/seats?page=1&limit=5&flightId=1&departureTime=2024-01-01T00:00:00Z&seatStatus=LOCKED",
+              "raw": "{{local_base_url}}/seats",
               "host": ["{{local_base_url}}"],
               "path": ["seats"],
               "query": [
                 {
                   "key": "page",
                   "value": "1",
-                  "description": "page number"
+                  "description": "page number",
+                  "disabled": true
                 },
                 {
                   "key": "limit",
                   "value": "5",
-                  "description": "page items"
+                  "description": "page items",
+                  "disabled": true
                 },
                 {
                   "key": "seatClass",
                   "value": "BUSINESS",
-                  "description": "seat class [ECONOMY, BUSINESS, FIRST]",
+                  "description": "seat class [ECONOMY, PREMIUM_ECONOMY, FIRST, BUSINESS]",
                   "disabled": true
                 },
                 {
                   "key": "flightId",
                   "value": "1",
-                  "description": "flight ID"
+                  "description": "flight ID",
+                  "disabled": true
                 },
                 {
                   "key": "departureTime",
                   "value": "2024-01-01T00:00:00Z",
-                  "description": "flight departure time [ISO date]"
+                  "description": "flight departure time [ISO date] - 2024-01-01T00:00:00Z",
+                  "disabled": true
                 },
                 {
                   "key": "arrivalTime",
                   "value": "2024-01-01T00:00:00Z",
-                  "description": "flight arrival Time [ISO date]",
+                  "description": "flight arrival Time [ISO date] - 2024-01-01T00:00:00Z",
                   "disabled": true
                 },
                 {
                   "key": "seatStatus",
                   "value": "LOCKED",
-                  "description": "seat status [AVAILABLE, LOCKED, UNAVAILABLE]"
+                  "description": "seat status [AVAILABLE, LOCKED, UNAVAILABLE]",
+                  "disabled": true
                 }
               ]
             }
@@ -9587,6 +9801,104 @@
               ],
               "cookie": [],
               "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"seats data retrieved successfully\",\n        \"pagination\": null\n    },\n    \"data\": [\n        {\n            \"id\": 2,\n            \"flightId\": 1,\n            \"seatNumber\": \"A1\",\n            \"status\": \"UNAVAILABLE\",\n            \"departureTime\": \"2024-01-01T00:00:00.000Z\",\n            \"arrivalTime\": \"2024-01-02T00:00:00.000Z\",\n            \"_count\": {\n                \"bookingDetail\": 0\n            },\n            \"flight\": {\n                \"id\": 1,\n                \"flightNumber\": \"GA123\",\n                \"airlineId\": 1,\n                \"departureAirport\": 1,\n                \"arrivalAirport\": 4,\n                \"departureTime\": \"2024-07-15T08:00:00.000Z\",\n                \"arrivalTime\": \"2024-07-15T11:00:00.000Z\",\n                \"terminal\": \"A\",\n                \"information\": \"Direct flight from Jakarta to Singapore\",\n                \"price\": 850,\n                \"class\": \"ECONOMY\"\n            }\n        },\n        {\n            \"id\": 1,\n            \"flightId\": 1,\n            \"seatNumber\": \"B3\",\n            \"status\": \"LOCKED\",\n            \"departureTime\": \"2024-01-01T00:00:00.000Z\",\n            \"arrivalTime\": \"2024-01-02T00:00:00.000Z\",\n            \"_count\": {\n                \"bookingDetail\": 0\n            },\n            \"flight\": {\n                \"id\": 1,\n                \"flightNumber\": \"GA123\",\n                \"airlineId\": 1,\n                \"departureAirport\": 1,\n                \"arrivalAirport\": 4,\n                \"departureTime\": \"2024-07-15T08:00:00.000Z\",\n                \"arrivalTime\": \"2024-07-15T11:00:00.000Z\",\n                \"terminal\": \"A\",\n                \"information\": \"Direct flight from Jakarta to Singapore\",\n                \"price\": 850,\n                \"class\": \"ECONOMY\"\n            }\n        },\n        {\n            \"id\": 3,\n            \"flightId\": 1,\n            \"seatNumber\": \"A2\",\n            \"status\": \"UNAVAILABLE\",\n            \"departureTime\": \"2024-01-01T00:00:00.000Z\",\n            \"arrivalTime\": \"2024-01-02T00:00:00.000Z\",\n            \"_count\": {\n                \"bookingDetail\": 0\n            },\n            \"flight\": {\n                \"id\": 1,\n                \"flightNumber\": \"GA123\",\n                \"airlineId\": 1,\n                \"departureAirport\": 1,\n                \"arrivalAirport\": 4,\n                \"departureTime\": \"2024-07-15T08:00:00.000Z\",\n                \"arrivalTime\": \"2024-07-15T11:00:00.000Z\",\n                \"terminal\": \"A\",\n                \"information\": \"Direct flight from Jakarta to Singapore\",\n                \"price\": 850,\n                \"class\": \"ECONOMY\"\n            }\n        }\n    ]\n}"
+            },
+            {
+              "name": "error - invalid seat class",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/seats?seatClass=BUSINESSs",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["seats"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": "page number",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5",
+                      "description": "page items",
+                      "disabled": true
+                    },
+                    {
+                      "key": "seatClass",
+                      "value": "BUSINESSs",
+                      "description": "seat class [ECONOMY, PREMIUM_ECONOMY, FIRST, BUSINESS]"
+                    },
+                    {
+                      "key": "flightId",
+                      "value": "1",
+                      "description": "flight ID",
+                      "disabled": true
+                    },
+                    {
+                      "key": "departureTime",
+                      "value": "2024-01-01T00:00:00Z",
+                      "description": "flight departure time [ISO date] - 2024-01-01T00:00:00Z",
+                      "disabled": true
+                    },
+                    {
+                      "key": "arrivalTime",
+                      "value": "2024-01-01T00:00:00Z",
+                      "description": "flight arrival Time [ISO date] - 2024-01-01T00:00:00Z",
+                      "disabled": true
+                    },
+                    {
+                      "key": "seatStatus",
+                      "value": "LOCKED",
+                      "description": "seat status [AVAILABLE, LOCKED, UNAVAILABLE]",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "121"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"79-RqNyt/iphwIXdsTywKA5w0QpQQA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 08 Dec 2024 14:33:25 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 422,\n        \"message\": \"Invalid seat class. Available classes: ECONOMY, PREMIUM_ECONOMY, FIRST, BUSINESS\"\n    }\n}"
             }
           ]
         },
@@ -11037,7 +11349,7 @@
               "variable": [
                 {
                   "key": "bookingId",
-                  "value": "",
+                  "value": "1",
                   "description": "booking ID"
                 }
               ]
@@ -11268,7 +11580,6 @@
                 {
                   "key": "Content-Type",
                   "value": "application/json",
-                  "name": "Content-Type",
                   "description": "",
                   "type": "text"
                 }
@@ -11334,7 +11645,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"flightId\": 3,\r\n    \"returnFlightId\": 1,\r\n    \"bookingDate\": \"2024-11-26T00:00:00Z\",\r\n    \"bookingDetail\": [\r\n        {\r\n            \"seatId\": 71,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Anton\",\r\n                \"familyName\": \"Wibowo\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        },\r\n        {\r\n            \"seatId\": 12,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Anton\",\r\n                \"familyName\": \"Wibowo\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n",
+              "raw": "{\r\n    \"flightId\": 3,\r\n    \"returnFlightId\": 1,\r\n    \"bookingDate\": \"2024-11-26T00:00:00Z\",\r\n    \"bookingDetail\": [\r\n        {\r\n            \"seatId\": 1,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Anton\",\r\n                \"familyName\": \"Wibowo\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        },\r\n        {\r\n            \"seatId\": 12,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Anton\",\r\n                \"familyName\": \"Wibowo\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"

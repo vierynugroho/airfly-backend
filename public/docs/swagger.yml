@@ -492,7 +492,7 @@ paths:
     get:
       tags:
         - Airports
-      summary: get all data
+      summary: get all
       parameters:
         - name: page
           in: query
@@ -1400,7 +1400,7 @@ paths:
     get:
       tags:
         - Airlines
-      summary: Get All Airlines
+      summary: get all
       description: |-
         Endpoint untuk mengambil daftar semua maskapai penerbangan yang terdaftar dalam sistem. Endpoint ini akan mengembalikan data dalam bentuk array yang berisi objek maskapai, termasuk ID, nama, dan URL gambar untuk setiap maskapai.
 
@@ -1585,19 +1585,13 @@ paths:
           schema:
             type: integer
           description: page number
-          example: '100'
+          example: '1'
         - name: limit
           in: query
           schema:
             type: integer
           description: page items
-          example: '10'
-        - name: seatClass
-          in: query
-          schema:
-            type: string
-          description: seat class [BUSINESS, ECONOMY, FIRST]
-          example: business
+          example: '20'
         - name: isCheapest
           in: query
           schema:
@@ -1668,14 +1662,20 @@ paths:
           in: query
           schema:
             type: string
-          description: flight departure time [ISO date]
+          description: flight departure time [ISO date] - 2024-01-01T00:00:00Z
           example: '2024-01-01T00:00:00Z'
         - name: departureTime
           in: query
           schema:
             type: string
-          description: flight departure time [ISO date]
+          description: flight departure time [ISO date] - 2024-01-01T00:00:00Z
           example: '2026-01-01T00:00:00Z'
+        - name: seatClass
+          in: query
+          schema:
+            type: string
+          description: 'seat class: ECONOMY, PREMIUM_ECONOMY, FIRST, BUSINESS'
+          example: PREMIUM_ECONOMY
       responses:
         '200':
           description: Successful response
@@ -2117,6 +2117,998 @@ paths:
                         nextPage: null
                         prevPage: 99
                     data: []
+                success_-_sort_duration:
+                  value:
+                    meta:
+                      statusCode: 200
+                      message: flights data retrieved successfully
+                      pagination:
+                        totalPage: 6
+                        currentPage: 1
+                        pageItems: 20
+                        nextPage: 2
+                        prevPage: null
+                    data:
+                      - duration: 0d 2h 0m
+                        id: 11
+                        flightNumber: HA115
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-12-16T09:00:00.000Z'
+                        arrivalTime: '2024-12-16T11:00:00.000Z'
+                        terminal: B
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 950
+                        class: BUSINESS
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 2h 0m
+                        id: 12
+                        flightNumber: HA119
+                        airlineId: 1
+                        departureAirport: 2
+                        arrivalAirport: 1
+                        departureTime: '2024-12-16T09:00:00.000Z'
+                        arrivalTime: '2024-12-16T11:00:00.000Z'
+                        terminal: C
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 950
+                        class: BUSINESS
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 2h 30m
+                        id: 3
+                        flightNumber: AH111
+                        airlineId: 1
+                        departureAirport: 2
+                        arrivalAirport: 1
+                        departureTime: '2024-12-15T15:30:00.000Z'
+                        arrivalTime: '2024-12-15T18:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 450
+                        class: ECONOMY
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 2h 30m
+                        id: 16
+                        flightNumber: HA137
+                        airlineId: 1
+                        departureAirport: 2
+                        arrivalAirport: 1
+                        departureTime: '2024-12-18T05:30:00.000Z'
+                        arrivalTime: '2024-12-18T08:00:00.000Z'
+                        terminal: C
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 550
+                        class: BUSINESS
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 1
+                        flightNumber: AH100
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-12-14T08:00:00.000Z'
+                        arrivalTime: '2024-12-14T11:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 450
+                        class: ECONOMY
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 2
+                        flightNumber: AH110
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-12-15T08:00:00.000Z'
+                        arrivalTime: '2024-12-15T11:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 450
+                        class: ECONOMY
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 4
+                        flightNumber: AH101
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-12-14T09:00:00.000Z'
+                        arrivalTime: '2024-12-14T12:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 450
+                        class: ECONOMY
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 5
+                        flightNumber: AH102
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-12-14T09:30:00.000Z'
+                        arrivalTime: '2024-12-14T12:30:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 750
+                        class: FIRST
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 6
+                        flightNumber: AH107
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-12-14T09:30:00.000Z'
+                        arrivalTime: '2024-12-14T12:30:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 600
+                        class: BUSINESS
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 7
+                        flightNumber: AH108
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-12-14T09:00:00.000Z'
+                        arrivalTime: '2024-12-14T12:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 700
+                        class: BUSINESS
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 8
+                        flightNumber: AH118
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-12-15T09:00:00.000Z'
+                        arrivalTime: '2024-12-15T12:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 500
+                        class: ECONOMY
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 9
+                        flightNumber: HA113
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-12-15T08:00:00.000Z'
+                        arrivalTime: '2024-12-15T11:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 550
+                        class: ECONOMY
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 10
+                        flightNumber: HA114
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-12-16T09:00:00.000Z'
+                        arrivalTime: '2024-12-16T12:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 550
+                        class: ECONOMY
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 13
+                        flightNumber: HA129
+                        airlineId: 1
+                        departureAirport: 2
+                        arrivalAirport: 1
+                        departureTime: '2024-12-17T05:00:00.000Z'
+                        arrivalTime: '2024-12-17T08:00:00.000Z'
+                        terminal: C
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 950
+                        class: BUSINESS
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 14
+                        flightNumber: HA139
+                        airlineId: 1
+                        departureAirport: 2
+                        arrivalAirport: 1
+                        departureTime: '2024-12-17T05:00:00.000Z'
+                        arrivalTime: '2024-12-17T08:00:00.000Z'
+                        terminal: C
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 450
+                        class: ECONOMY
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 15
+                        flightNumber: HA131
+                        airlineId: 1
+                        departureAirport: 2
+                        arrivalAirport: 1
+                        departureTime: '2024-12-18T05:00:00.000Z'
+                        arrivalTime: '2024-12-18T08:00:00.000Z'
+                        terminal: C
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 450
+                        class: ECONOMY
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 17
+                        flightNumber: GA123
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 4
+                        departureTime: '2024-12-15T08:00:00.000Z'
+                        arrivalTime: '2024-12-15T11:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 850
+                        class: ECONOMY
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 4
+                          code: SIN
+                          name: Singapore Changi Airport
+                          city: Singapore
+                          state: Asia
+                          country: Singapore
+                          timezone: Asia/Singapore
+                          latitude: '1.3644'
+                          longitude: '103.9915'
+                          elevation: '22'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/singapura.jpg?updatedAt=1733579566914
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 18
+                        flightNumber: GA121
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 4
+                        departureTime: '2024-12-23T08:00:00.000Z'
+                        arrivalTime: '2024-12-23T11:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 850
+                        class: ECONOMY
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 4
+                          code: SIN
+                          name: Singapore Changi Airport
+                          city: Singapore
+                          state: Asia
+                          country: Singapore
+                          timezone: Asia/Singapore
+                          latitude: '1.3644'
+                          longitude: '103.9915'
+                          elevation: '22'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/singapura.jpg?updatedAt=1733579566914
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 19
+                        flightNumber: GA120
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 4
+                        departureTime: '2024-12-23T09:00:00.000Z'
+                        arrivalTime: '2024-12-23T12:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 1000
+                        class: FIRST
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 4
+                          code: SIN
+                          name: Singapore Changi Airport
+                          city: Singapore
+                          state: Asia
+                          country: Singapore
+                          timezone: Asia/Singapore
+                          latitude: '1.3644'
+                          longitude: '103.9915'
+                          elevation: '22'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/singapura.jpg?updatedAt=1733579566914
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                      - duration: 0d 3h 0m
+                        id: 20
+                        flightNumber: GA119
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 4
+                        departureTime: '2024-12-23T05:00:00.000Z'
+                        arrivalTime: '2024-12-23T08:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 1000
+                        class: FIRST
+                        _count:
+                          seat: 72
+                          booking: 0
+                          returnBooking: 0
+                        airline:
+                          id: 1
+                          name: Garuda Indonesia
+                          imageUrl: https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025
+                          imageId: garuda-logo
+                        arrival:
+                          id: 4
+                          code: SIN
+                          name: Singapore Changi Airport
+                          city: Singapore
+                          state: Asia
+                          country: Singapore
+                          timezone: Asia/Singapore
+                          latitude: '1.3644'
+                          longitude: '103.9915'
+                          elevation: '22'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/singapura.jpg?updatedAt=1733579566914
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-08T04:19:15.767Z'
         '422':
           description: Response
           content:
@@ -2126,7 +3118,7 @@ paths:
                   value:
                     error:
                       statusCode: 422
-                      message: 'Invalid seat class. Available classes: ECONOMY, FIRST, BUSINESS'
+                      message: 'Invalid seat class. Available classes: ECONOMY, PREMIUM_ECONOMY, FIRST, BUSINESS'
                 invalid_query_params_departure_or_arrival_airport:
                   value:
                     error:
@@ -2270,7 +3262,7 @@ paths:
           in: query
           schema:
             type: string
-          description: seat class [ECONOMY, BUSINESS, FIRST]
+          description: seat class [ECONOMY, PREMIUM_ECONOMY, FIRST, BUSINESS]
           example: BUSINESS
         - name: flightId
           in: query
@@ -2282,13 +3274,13 @@ paths:
           in: query
           schema:
             type: string
-          description: flight departure time [ISO date]
+          description: flight departure time [ISO date] - 2024-01-01T00:00:00Z
           example: '2024-01-01T00:00:00Z'
         - name: arrivalTime
           in: query
           schema:
             type: string
-          description: flight arrival Time [ISO date]
+          description: flight arrival Time [ISO date] - 2024-01-01T00:00:00Z
           example: '2024-01-01T00:00:00Z'
         - name: seatStatus
           in: query
@@ -2525,6 +3517,14 @@ paths:
                           information: Direct flight from Jakarta to Singapore
                           price: 850
                           class: ECONOMY
+        '422':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 422
+                  message: 'Invalid seat class. Available classes: ECONOMY, PREMIUM_ECONOMY, FIRST, BUSINESS'
       security:
         - bearerAuth: []
     post:
@@ -3032,7 +4032,7 @@ paths:
                 returnFlightId: 1
                 bookingDate: '2024-11-26T00:00:00Z'
                 bookingDetail:
-                  - seatId: 71
+                  - seatId: 1
                     price: 200000
                     passenger:
                       name: Anton
@@ -4160,7 +5160,7 @@ paths:
     get:
       tags:
         - Airlines
-      summary: Get Airlines by ID
+      summary: get by ID
       description: |-
         Endpoint untuk mengambil detail informasi tentang maskapai penerbangan berdasarkan ID. Anda harus mengganti `{id}` dengan ID maskapai yang ingin dicari. Response akan mengembalikan informasi lengkap maskapai, termasuk nama dan gambar.
 
@@ -4433,6 +5433,14 @@ paths:
                     imageId: '-'
                     createdAt: '1970-01-01T00:00:00.000Z'
                   seat: []
+        '400':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 400
+                  message: Flight Tickets Sold Out
         '404':
           description: Response
           content:

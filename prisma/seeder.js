@@ -63,7 +63,7 @@ async function main() {
         secretKey: '',
         otpToken: '',
         status: UserStatus.VERIFIED,
-        role: UserRole.BUYER.VERIFIED,
+        role: UserRole.BUYER,
       },
       {
         firstName: 'David',
@@ -401,6 +401,32 @@ async function main() {
         information: 'Free Wi Fi-Free Inflight Meals',
         price: 450.0,
         class: 'ECONOMY',
+      },
+      {
+        flightNumber: 'AH91',
+        airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
+          .id,
+        departureAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        departureTime: parseISO('2024-12-15T08:00:00Z'),
+        arrivalTime: parseISO('2024-12-15T11:00:00Z'),
+        terminal: 'A',
+        information: 'Free Wi Fi-Free Inflight Meals',
+        price: 550.0,
+        class: 'PREMIUM_ECONOMY',
+      },
+      {
+        flightNumber: 'AL91',
+        airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
+          .id,
+        departureAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        departureTime: parseISO('2024-12-16T08:00:00Z'),
+        arrivalTime: parseISO('2024-12-16T11:00:00Z'),
+        terminal: 'A',
+        information: 'Free Wi Fi-Free Inflight Meals',
+        price: 550.0,
+        class: 'PREMIUM_ECONOMY',
       },
       {
         flightNumber: 'AH110',

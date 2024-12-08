@@ -65,7 +65,9 @@ export const seatSchema = Joi.object({
 
 export const flightSchema = Joi.object({
   price: Joi.number().min(0).required(),
-  class: Joi.string().valid('ECONOMY', 'FIRST', 'BUSINESS').required(),
+  class: Joi.string()
+    .valid('ECONOMY', 'FIRST', 'BUSINESS', 'PREMIUM_ECONOMY')
+    .required(),
   flightNumber: Joi.string().required(),
   airlineId: Joi.number().positive().required(),
   departureAirport: Joi.number().positive().required(),

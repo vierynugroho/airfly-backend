@@ -34,6 +34,7 @@ export class FlightController {
 
       let sort = {};
       let condition = {};
+      let duration = {};
       const pagination = {};
 
       if (page && limit) {
@@ -45,7 +46,7 @@ export class FlightController {
         sort = { price: 'asc' };
       }
       if (shortest === 'true') {
-        sort = { duration: 'asc' };
+        duration = { sort: 'asc' };
       }
       if (earliestDeparture === 'true') {
         sort = { departureTime: 'asc' };
@@ -93,7 +94,8 @@ export class FlightController {
       const { flights, totalFlights } = await FlightService.getAll(
         pagination,
         condition,
-        sort
+        sort,
+        duration
       );
 
       res.json({
