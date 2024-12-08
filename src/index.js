@@ -6,7 +6,6 @@ import logger from 'morgan';
 import { errorMiddleware } from './middlewares/error.js';
 import logger_format from './config/logger.js';
 import { Server } from 'socket.io';
-import { join } from 'node:path';
 import { createServer } from 'node:http';
 
 const app = express();
@@ -45,10 +44,6 @@ const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/src/views');
 
-app.get('/notifications', (req, res) => {
-  res.sendFile(join(__dirname, '/src/views/notification.html'));
-});
-
 app.use(logger(logger_format.MORGAN_FORMAT));
 
 app.use(express.json());
@@ -66,6 +61,7 @@ app.use((req, res) => {
     error: {
       statusCode: 404,
       message: `${method} - ${url} is not found!`,
+      docs: '/api/v1/api-docs',
     },
   });
 });

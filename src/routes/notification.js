@@ -7,8 +7,15 @@ import {
 } from '../utils/validationSchema.js';
 import { NotificationController } from '../controllers/notification.js';
 import { UserRole } from '@prisma/client';
+import { join } from 'node:path';
 
 const notificationRouter = Router();
+
+const __dirname = process.cwd();
+
+notificationRouter.get('/show-notifications', (req, res) => {
+  res.sendFile(join(__dirname, '/src/views/notification.html'));
+});
 
 notificationRouter
   .route('/')

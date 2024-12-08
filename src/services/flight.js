@@ -19,7 +19,6 @@ export class FlightService {
       }
     }
 
-    console.log(filter);
     const flights = await FlightRepository.findMany(pagination, filter, sorter);
     const flightsWithDuration = flights.map((flight) => {
       const duration = calculateDuration(
