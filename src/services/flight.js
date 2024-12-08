@@ -6,7 +6,8 @@ import { AirlineRepository } from '../repositories/airline.js';
 import { calculateDuration } from '../utils/calculateDuration.js';
 
 export class FlightService {
-  static async getAll(pagination, filter, sorter) {
+  static async getAll(pagination, filter, sorter, duration) {
+    console.log(duration);
     if (filter.class) {
       const seatClassEnum = await SeatRepository.getClassEnum();
       const upperCaseClass = filter.class.trim().toUpperCase();
@@ -30,6 +31,21 @@ export class FlightService {
         ...flight,
       };
     });
+
+    if (duration && duration.sort) {
+      flightsWithDuration.sort((a, b) => {
+        const [aDays, aHours, aMinutes] = a.duration.match(/\d+/g).map(Number);
+        const [bDays, bHours, bMinutes] = b.duration.match(/\d+/g).map(Number);
+
+        const aTotalMinutes = aDays * 24 * 60 + aHours * 60 + aMinutes;
+        const bTotalMinutes = bDays * 24 * 60 + bHours * 60 + bMinutes;
+
+        if (duration.sort === 'asc') {
+          return aTotalMinutes - bTotalMinutes;
+        }
+      });
+    }
+
     const totalFlights = await FlightRepository.count(filter);
 
     return { flights: flightsWithDuration, totalFlights };

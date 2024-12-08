@@ -63,7 +63,7 @@ async function main() {
         secretKey: '',
         otpToken: '',
         status: UserStatus.VERIFIED,
-        role: UserRole.BUYER.VERIFIED,
+        role: UserRole.BUYER,
       },
       {
         firstName: 'David',
