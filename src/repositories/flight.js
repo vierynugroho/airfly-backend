@@ -82,19 +82,21 @@ export class FlightRepository {
   }
 
   static async flightTicketsSoldOut(flightID) {
-    const flight = await prisma.flight.findMany({
+    const availableSeats = await prisma.flight.findFirst({
       where: {
         id: flightID,
+      },
+      include: {
         seat: {
-          every: {
-            status: { in: ['LOCKED', 'UNAVAILABLE'] },
+          where: {
+            status: 'AVAILABLE',
           },
         },
       },
     });
 
-    console.log(flight);
+    const isSoldOut = !availableSeats || availableSeats.seat.length === 0;
 
-    return !!flight;
+    return isSoldOut;
   }
 }

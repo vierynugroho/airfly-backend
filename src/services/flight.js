@@ -59,7 +59,6 @@ export class FlightService {
 
     const flightSoldOut = await FlightRepository.flightTicketsSoldOut(flightID);
 
-    console.log(flightSoldOut);
     if (flightSoldOut) {
       throw new ErrorHandler(400, 'Flight Tickets Sold Out');
     }
