@@ -77,7 +77,9 @@ export class SeatService {
   static async findMany(pagination, filter) {
     if (filter.class) {
       const seatClassEnum = await SeatRepository.getClassEnum();
+
       const upperCaseClass = filter.class.trim().toUpperCase();
+
       if (!Object.keys(seatClassEnum).includes(upperCaseClass)) {
         throw new ErrorHandler(
           422,

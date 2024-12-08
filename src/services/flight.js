@@ -9,6 +9,7 @@ export class FlightService {
   static async getAll(pagination, filter, sorter, duration) {
     if (filter.class) {
       const seatClassEnum = await SeatRepository.getClassEnum();
+
       const upperCaseClass = filter.class.trim().toUpperCase();
 
       if (!Object.keys(seatClassEnum).includes(upperCaseClass)) {
