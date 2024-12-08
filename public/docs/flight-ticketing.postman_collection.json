@@ -10850,22 +10850,32 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzNDg3NDY5LCJleHAiOjE3MzM1NzM4Njl9._2hrgP6uvCJx7nyARkGqVd1K_CmxMFucmyAT6F0OwgY",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzNTYzNDUxLCJleHAiOjE3MzM2NDk4NTF9.G3FV_E6c2ZKwo4S2SLFOFVDhJ1QO1iWlCg5Tdb5K0uc",
                 "type": "text"
               }
             ],
             "url": {
-              "raw": "{{local_base_url}}/booking?page=1&limit=2",
+              "raw": "{{local_base_url}}/booking",
               "host": ["{{local_base_url}}"],
               "path": ["booking"],
               "query": [
                 {
                   "key": "page",
-                  "value": "1"
+                  "value": "1",
+                  "description": "page number",
+                  "disabled": true
                 },
                 {
                   "key": "limit",
-                  "value": "2"
+                  "value": "2",
+                  "description": "total item per page",
+                  "disabled": true
+                },
+                {
+                  "key": "sort",
+                  "value": "asc",
+                  "description": "sort",
+                  "disabled": true
                 }
               ]
             }
@@ -10883,10 +10893,21 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://{{host}}/api/v1/booking/",
-                  "protocol": "http",
-                  "host": ["{{host}}"],
-                  "path": ["api", "v1", "booking", ""]
+                  "raw": "{{local_base_url}}/booking",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2",
+                      "disabled": true
+                    }
+                  ]
                 }
               },
               "status": "Unauthorized",
@@ -10915,22 +10936,24 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://{{host}}/api/v1/booking?page=1&limit=5&sort=asc",
-                  "protocol": "http",
-                  "host": ["{{host}}"],
-                  "path": ["api", "v1", "booking"],
+                  "raw": "{{local_base_url}}/booking?page=1&limit=5&sort=asc",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking"],
                   "query": [
                     {
                       "key": "page",
-                      "value": "1"
+                      "value": "1",
+                      "description": "page number"
                     },
                     {
                       "key": "limit",
-                      "value": "5"
+                      "value": "5",
+                      "description": "total item per page"
                     },
                     {
                       "key": "sort",
-                      "value": "asc"
+                      "value": "asc",
+                      "description": "sort"
                     }
                   ]
                 }
@@ -10947,7 +10970,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"success\",\n        \"pagination\": {\n            \"totalPage\": 1,\n            \"currentPage\": 1,\n            \"pageItems\": 1,\n            \"nextPage\": null,\n            \"prevPage\": null\n        }\n    },\n    \"data\": [\n        {\n            \"id\": 16,\n            \"bookingCode\": \"2411026A6E\",\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": 1,\n            \"bookingDate\": \"2024-12-03T13:37:05.394Z\",\n            \"totalPrice\": 400000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-12-03T13:37:05.424Z\",\n            \"updateAt\": \"2024-12-03T13:37:05.424Z\",\n            \"flight\": {\n                \"id\": 3,\n                \"flightNumber\": \"LA789\",\n                \"airlineId\": 3,\n                \"departureAirport\": 3,\n                \"arrivalAirport\": 1,\n                \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n                \"terminal\": \"T2\",\n                \"information\": \"Delayed flight\",\n                \"price\": 100,\n                \"class\": \"ECONOMY\"\n            },\n            \"returnFlight\": {\n                \"id\": 1,\n                \"flightNumber\": \"GA123\",\n                \"airlineId\": 1,\n                \"departureAirport\": 1,\n                \"arrivalAirport\": 2,\n                \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n                \"terminal\": \"T3\",\n                \"information\": \"Non-stop flight\",\n                \"price\": 150,\n                \"class\": \"ECONOMY\"\n            }\n        }\n    ]\n}"
+              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"success\",\n        \"pagination\": {\n            \"totalPage\": 1,\n            \"currentPage\": 1,\n            \"pageItems\": 2,\n            \"nextPage\": null,\n            \"prevPage\": null\n        }\n    },\n    \"data\": [\n        {\n            \"id\": 16,\n            \"code\": \"\",\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": 1,\n            \"bookingDate\": \"2024-12-03T13:37:05.394Z\",\n            \"totalPrice\": 400000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-12-03T13:37:05.424Z\",\n            \"updateAt\": \"2024-12-03T13:37:05.424Z\",\n            \"flight\": {\n                \"id\": 3,\n                \"flightNumber\": \"LA789\",\n                \"airlineId\": 3,\n                \"departureAirport\": 3,\n                \"arrivalAirport\": 1,\n                \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n                \"terminal\": \"T2\",\n                \"information\": \"Delayed flight\",\n                \"price\": 100,\n                \"class\": \"ECONOMY\",\n                \"departure\": {\n                    \"id\": 3,\n                    \"code\": \"SUB\",\n                    \"name\": \"Juanda International Airport\",\n                    \"city\": \"Surabaya\",\n                    \"state\": \"East Java\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-7.3798\",\n                    \"longitude\": \"112.7873\",\n                    \"elevation\": \"3 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                },\n                \"arrival\": {\n                    \"id\": 1,\n                    \"code\": \"CGK\",\n                    \"name\": \"Soekarno-Hatta International Airport\",\n                    \"city\": \"Jakarta\",\n                    \"state\": \"DKI Jakarta\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-6.1256\",\n                    \"longitude\": \"106.6559\",\n                    \"elevation\": \"10 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                }\n            },\n            \"returnFlight\": {\n                \"id\": 1,\n                \"flightNumber\": \"GA123\",\n                \"airlineId\": 1,\n                \"departureAirport\": 1,\n                \"arrivalAirport\": 2,\n                \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n                \"terminal\": \"T3\",\n                \"information\": \"Non-stop flight\",\n                \"price\": 150,\n                \"class\": \"ECONOMY\",\n                \"departure\": {\n                    \"id\": 1,\n                    \"code\": \"CGK\",\n                    \"name\": \"Soekarno-Hatta International Airport\",\n                    \"city\": \"Jakarta\",\n                    \"state\": \"DKI Jakarta\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-6.1256\",\n                    \"longitude\": \"106.6559\",\n                    \"elevation\": \"10 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                },\n                \"arrival\": {\n                    \"id\": 2,\n                    \"code\": \"DPS\",\n                    \"name\": \"Ngurah Rai International Airport\",\n                    \"city\": \"Denpasar\",\n                    \"state\": \"Bali\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Makassar\",\n                    \"latitude\": \"-8.7482\",\n                    \"longitude\": \"115.1675\",\n                    \"elevation\": \"4 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                }\n            }\n        },\n        {\n            \"id\": 17,\n            \"code\": \"24110652FD\",\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": 1,\n            \"bookingDate\": \"2024-12-07T09:34:11.064Z\",\n            \"totalPrice\": 400000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-12-07T09:34:11.067Z\",\n            \"updateAt\": \"2024-12-07T09:34:11.067Z\",\n            \"flight\": {\n                \"id\": 3,\n                \"flightNumber\": \"LA789\",\n                \"airlineId\": 3,\n                \"departureAirport\": 3,\n                \"arrivalAirport\": 1,\n                \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n                \"terminal\": \"T2\",\n                \"information\": \"Delayed flight\",\n                \"price\": 100,\n                \"class\": \"ECONOMY\",\n                \"departure\": {\n                    \"id\": 3,\n                    \"code\": \"SUB\",\n                    \"name\": \"Juanda International Airport\",\n                    \"city\": \"Surabaya\",\n                    \"state\": \"East Java\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-7.3798\",\n                    \"longitude\": \"112.7873\",\n                    \"elevation\": \"3 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                },\n                \"arrival\": {\n                    \"id\": 1,\n                    \"code\": \"CGK\",\n                    \"name\": \"Soekarno-Hatta International Airport\",\n                    \"city\": \"Jakarta\",\n                    \"state\": \"DKI Jakarta\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-6.1256\",\n                    \"longitude\": \"106.6559\",\n                    \"elevation\": \"10 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                }\n            },\n            \"returnFlight\": {\n                \"id\": 1,\n                \"flightNumber\": \"GA123\",\n                \"airlineId\": 1,\n                \"departureAirport\": 1,\n                \"arrivalAirport\": 2,\n                \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n                \"terminal\": \"T3\",\n                \"information\": \"Non-stop flight\",\n                \"price\": 150,\n                \"class\": \"ECONOMY\",\n                \"departure\": {\n                    \"id\": 1,\n                    \"code\": \"CGK\",\n                    \"name\": \"Soekarno-Hatta International Airport\",\n                    \"city\": \"Jakarta\",\n                    \"state\": \"DKI Jakarta\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-6.1256\",\n                    \"longitude\": \"106.6559\",\n                    \"elevation\": \"10 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                },\n                \"arrival\": {\n                    \"id\": 2,\n                    \"code\": \"DPS\",\n                    \"name\": \"Ngurah Rai International Airport\",\n                    \"city\": \"Denpasar\",\n                    \"state\": \"Bali\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Makassar\",\n                    \"latitude\": \"-8.7482\",\n                    \"longitude\": \"115.1675\",\n                    \"elevation\": \"4 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                }\n            }\n        }\n    ]\n}"
             },
             {
               "name": "find all",
@@ -10961,10 +10984,23 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://{{host}}/api/v1/booking/",
-                  "protocol": "http",
-                  "host": ["{{host}}"],
-                  "path": ["api", "v1", "booking", ""]
+                  "raw": "{{local_base_url}}/booking",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": "page number",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2",
+                      "description": "total item per page",
+                      "disabled": true
+                    }
+                  ]
                 }
               },
               "status": "OK",
@@ -10979,7 +11015,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"success\"\n    },\n    \"data\": [\n        {\n            \"id\": 16,\n            \"bookingCode\": \"2411026A6E\",\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": 1,\n            \"bookingDate\": \"2024-12-03T13:37:05.394Z\",\n            \"totalPrice\": 400000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-12-03T13:37:05.424Z\",\n            \"updateAt\": \"2024-12-03T13:37:05.424Z\",\n            \"flight\": {\n                \"id\": 3,\n                \"flightNumber\": \"LA789\",\n                \"airlineId\": 3,\n                \"departureAirport\": 3,\n                \"arrivalAirport\": 1,\n                \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n                \"terminal\": \"T2\",\n                \"information\": \"Delayed flight\",\n                \"price\": 100,\n                \"class\": \"ECONOMY\"\n            },\n            \"returnFlight\": {\n                \"id\": 1,\n                \"flightNumber\": \"GA123\",\n                \"airlineId\": 1,\n                \"departureAirport\": 1,\n                \"arrivalAirport\": 2,\n                \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n                \"terminal\": \"T3\",\n                \"information\": \"Non-stop flight\",\n                \"price\": 150,\n                \"class\": \"ECONOMY\"\n            }\n        }\n    ]\n}"
+              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"success\"\n    },\n    \"data\": [\n        {\n            \"id\": 16,\n            \"code\": \"\",\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": 1,\n            \"bookingDate\": \"2024-12-03T13:37:05.394Z\",\n            \"totalPrice\": 400000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-12-03T13:37:05.424Z\",\n            \"updateAt\": \"2024-12-03T13:37:05.424Z\",\n            \"flight\": {\n                \"id\": 3,\n                \"flightNumber\": \"LA789\",\n                \"airlineId\": 3,\n                \"departureAirport\": 3,\n                \"arrivalAirport\": 1,\n                \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n                \"terminal\": \"T2\",\n                \"information\": \"Delayed flight\",\n                \"price\": 100,\n                \"class\": \"ECONOMY\",\n                \"departure\": {\n                    \"id\": 3,\n                    \"code\": \"SUB\",\n                    \"name\": \"Juanda International Airport\",\n                    \"city\": \"Surabaya\",\n                    \"state\": \"East Java\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-7.3798\",\n                    \"longitude\": \"112.7873\",\n                    \"elevation\": \"3 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                },\n                \"arrival\": {\n                    \"id\": 1,\n                    \"code\": \"CGK\",\n                    \"name\": \"Soekarno-Hatta International Airport\",\n                    \"city\": \"Jakarta\",\n                    \"state\": \"DKI Jakarta\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-6.1256\",\n                    \"longitude\": \"106.6559\",\n                    \"elevation\": \"10 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                }\n            },\n            \"returnFlight\": {\n                \"id\": 1,\n                \"flightNumber\": \"GA123\",\n                \"airlineId\": 1,\n                \"departureAirport\": 1,\n                \"arrivalAirport\": 2,\n                \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n                \"terminal\": \"T3\",\n                \"information\": \"Non-stop flight\",\n                \"price\": 150,\n                \"class\": \"ECONOMY\",\n                \"departure\": {\n                    \"id\": 1,\n                    \"code\": \"CGK\",\n                    \"name\": \"Soekarno-Hatta International Airport\",\n                    \"city\": \"Jakarta\",\n                    \"state\": \"DKI Jakarta\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-6.1256\",\n                    \"longitude\": \"106.6559\",\n                    \"elevation\": \"10 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                },\n                \"arrival\": {\n                    \"id\": 2,\n                    \"code\": \"DPS\",\n                    \"name\": \"Ngurah Rai International Airport\",\n                    \"city\": \"Denpasar\",\n                    \"state\": \"Bali\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Makassar\",\n                    \"latitude\": \"-8.7482\",\n                    \"longitude\": \"115.1675\",\n                    \"elevation\": \"4 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                }\n            }\n        },\n        {\n            \"id\": 17,\n            \"code\": \"24110652FD\",\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": 1,\n            \"bookingDate\": \"2024-12-07T09:34:11.064Z\",\n            \"totalPrice\": 400000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-12-07T09:34:11.067Z\",\n            \"updateAt\": \"2024-12-07T09:34:11.067Z\",\n            \"flight\": {\n                \"id\": 3,\n                \"flightNumber\": \"LA789\",\n                \"airlineId\": 3,\n                \"departureAirport\": 3,\n                \"arrivalAirport\": 1,\n                \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n                \"terminal\": \"T2\",\n                \"information\": \"Delayed flight\",\n                \"price\": 100,\n                \"class\": \"ECONOMY\",\n                \"departure\": {\n                    \"id\": 3,\n                    \"code\": \"SUB\",\n                    \"name\": \"Juanda International Airport\",\n                    \"city\": \"Surabaya\",\n                    \"state\": \"East Java\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-7.3798\",\n                    \"longitude\": \"112.7873\",\n                    \"elevation\": \"3 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                },\n                \"arrival\": {\n                    \"id\": 1,\n                    \"code\": \"CGK\",\n                    \"name\": \"Soekarno-Hatta International Airport\",\n                    \"city\": \"Jakarta\",\n                    \"state\": \"DKI Jakarta\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-6.1256\",\n                    \"longitude\": \"106.6559\",\n                    \"elevation\": \"10 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                }\n            },\n            \"returnFlight\": {\n                \"id\": 1,\n                \"flightNumber\": \"GA123\",\n                \"airlineId\": 1,\n                \"departureAirport\": 1,\n                \"arrivalAirport\": 2,\n                \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n                \"terminal\": \"T3\",\n                \"information\": \"Non-stop flight\",\n                \"price\": 150,\n                \"class\": \"ECONOMY\",\n                \"departure\": {\n                    \"id\": 1,\n                    \"code\": \"CGK\",\n                    \"name\": \"Soekarno-Hatta International Airport\",\n                    \"city\": \"Jakarta\",\n                    \"state\": \"DKI Jakarta\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-6.1256\",\n                    \"longitude\": \"106.6559\",\n                    \"elevation\": \"10 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                },\n                \"arrival\": {\n                    \"id\": 2,\n                    \"code\": \"DPS\",\n                    \"name\": \"Ngurah Rai International Airport\",\n                    \"city\": \"Denpasar\",\n                    \"state\": \"Bali\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Makassar\",\n                    \"latitude\": \"-8.7482\",\n                    \"longitude\": \"115.1675\",\n                    \"elevation\": \"4 m\",\n                    \"imageUrl\": \"\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                }\n            }\n        }\n    ]\n}"
             }
           ]
         },
@@ -10990,7 +11026,7 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok",
+                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
@@ -11001,7 +11037,7 @@
               "variable": [
                 {
                   "key": "bookingId",
-                  "value": "1",
+                  "value": "",
                   "description": "booking ID"
                 }
               ]
@@ -11020,10 +11056,16 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://{{host}}/api/v1/booking/id/14",
-                  "protocol": "http",
-                  "host": ["{{host}}"],
-                  "path": ["api", "v1", "booking", "id", "14"]
+                  "raw": "{{local_base_url}}/booking/id/:bookingId",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking", "id", ":bookingId"],
+                  "variable": [
+                    {
+                      "key": "bookingId",
+                      "value": "17",
+                      "description": "booking ID"
+                    }
+                  ]
                 }
               },
               "status": "OK",
@@ -11038,7 +11080,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"successs\"\n    },\n    \"data\": {\n        \"id\": 14,\n        \"userId\": 1,\n        \"flightId\": 3,\n        \"returnFlightId\": 1,\n        \"bookingDate\": \"2024-11-29T12:02:15.925Z\",\n        \"totalPrice\": 400000,\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2024-11-29T12:02:15.929Z\",\n        \"updateAt\": \"2024-11-29T12:02:15.929Z\",\n        \"bookingDetail\": [\n            {\n                \"id\": 18,\n                \"bookingId\": 14,\n                \"passengerId\": 18,\n                \"seatId\": 70,\n                \"price\": 200000,\n                \"createdAt\": \"2024-11-29T12:02:15.934Z\",\n                \"updateAt\": \"2024-11-29T12:02:15.934Z\",\n                \"passenger\": {\n                    \"id\": 18,\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"gender\": \"MALE\",\n                    \"identityNumber\": \"123456\",\n                    \"citizenship\": \"Indonesia\",\n                    \"countryOfIssue\": \"Indonesia\",\n                    \"title\": \"Mr\",\n                    \"dob\": \"1985-05-15T00:00:00.000Z\",\n                    \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                    \"type\": \"ADULT\"\n                },\n                \"seat\": {\n                    \"id\": 70,\n                    \"flightId\": 3,\n                    \"seatNumber\": \"3B\",\n                    \"status\": \"LOCKED\",\n                    \"departureTime\": \"2024-11-29T08:40:42.629Z\",\n                    \"arrivalTime\": \"2024-11-29T08:40:42.629Z\"\n                }\n            },\n            {\n                \"id\": 19,\n                \"bookingId\": 14,\n                \"passengerId\": 19,\n                \"seatId\": 11,\n                \"price\": 200000,\n                \"createdAt\": \"2024-11-29T12:02:15.934Z\",\n                \"updateAt\": \"2024-11-29T12:02:15.934Z\",\n                \"passenger\": {\n                    \"id\": 19,\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"gender\": \"MALE\",\n                    \"identityNumber\": \"123456\",\n                    \"citizenship\": \"Indonesia\",\n                    \"countryOfIssue\": \"Indonesia\",\n                    \"title\": \"Mr\",\n                    \"dob\": \"1985-05-15T00:00:00.000Z\",\n                    \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                    \"type\": \"ADULT\"\n                },\n                \"seat\": {\n                    \"id\": 11,\n                    \"flightId\": 1,\n                    \"seatNumber\": \"3C\",\n                    \"status\": \"LOCKED\",\n                    \"departureTime\": \"2024-11-29T08:40:42.629Z\",\n                    \"arrivalTime\": \"2024-11-29T08:40:42.629Z\"\n                }\n            }\n        ],\n        \"flight\": {\n            \"id\": 3,\n            \"flightNumber\": \"LA789\",\n            \"airlineId\": 3,\n            \"departureAirport\": 3,\n            \"arrivalAirport\": 1,\n            \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n            \"terminal\": \"T2\",\n            \"information\": \"Delayed flight\",\n            \"price\": 100,\n            \"class\": \"ECONOMY\"\n        },\n        \"returnFlight\": {\n            \"id\": 1,\n            \"flightNumber\": \"GA123\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n            \"terminal\": \"T3\",\n            \"information\": \"Non-stop flight\",\n            \"price\": 150,\n            \"class\": \"ECONOMY\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"successs\"\n    },\n    \"data\": {\n        \"id\": 17,\n        \"code\": \"24110652FD\",\n        \"userId\": 1,\n        \"flightId\": 3,\n        \"returnFlightId\": 1,\n        \"bookingDate\": \"2024-12-07T09:34:11.064Z\",\n        \"totalPrice\": 400000,\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2024-12-07T09:34:11.067Z\",\n        \"updateAt\": \"2024-12-07T09:34:11.067Z\",\n        \"bookingDetail\": [\n            {\n                \"id\": 24,\n                \"bookingId\": 17,\n                \"passengerId\": 24,\n                \"seatId\": 71,\n                \"price\": 200000,\n                \"createdAt\": \"2024-12-07T09:34:11.112Z\",\n                \"updateAt\": \"2024-12-07T09:34:11.112Z\",\n                \"passenger\": {\n                    \"id\": 24,\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"gender\": \"MALE\",\n                    \"identityNumber\": \"123456\",\n                    \"citizenship\": \"Indonesia\",\n                    \"countryOfIssue\": \"Indonesia\",\n                    \"title\": \"Mr\",\n                    \"dob\": \"1985-05-15T00:00:00.000Z\",\n                    \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                    \"type\": \"ADULT\"\n                },\n                \"seat\": {\n                    \"id\": 71,\n                    \"flightId\": 3,\n                    \"seatNumber\": \"3C\",\n                    \"status\": \"LOCKED\",\n                    \"departureTime\": \"2024-11-29T08:40:42.629Z\",\n                    \"arrivalTime\": \"2024-11-29T08:40:42.629Z\"\n                }\n            },\n            {\n                \"id\": 25,\n                \"bookingId\": 17,\n                \"passengerId\": 25,\n                \"seatId\": 12,\n                \"price\": 200000,\n                \"createdAt\": \"2024-12-07T09:34:11.112Z\",\n                \"updateAt\": \"2024-12-07T09:34:11.112Z\",\n                \"passenger\": {\n                    \"id\": 25,\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"gender\": \"MALE\",\n                    \"identityNumber\": \"123456\",\n                    \"citizenship\": \"Indonesia\",\n                    \"countryOfIssue\": \"Indonesia\",\n                    \"title\": \"Mr\",\n                    \"dob\": \"1985-05-15T00:00:00.000Z\",\n                    \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                    \"type\": \"ADULT\"\n                },\n                \"seat\": {\n                    \"id\": 12,\n                    \"flightId\": 1,\n                    \"seatNumber\": \"3D\",\n                    \"status\": \"LOCKED\",\n                    \"departureTime\": \"2024-11-29T08:40:42.629Z\",\n                    \"arrivalTime\": \"2024-11-29T08:40:42.629Z\"\n                }\n            }\n        ],\n        \"flight\": {\n            \"id\": 3,\n            \"flightNumber\": \"LA789\",\n            \"airlineId\": 3,\n            \"departureAirport\": 3,\n            \"arrivalAirport\": 1,\n            \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n            \"terminal\": \"T2\",\n            \"information\": \"Delayed flight\",\n            \"price\": 100,\n            \"class\": \"ECONOMY\",\n            \"departure\": {\n                \"id\": 3,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"East Java\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3798\",\n                \"longitude\": \"112.7873\",\n                \"elevation\": \"3 m\",\n                \"imageUrl\": \"\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n            },\n            \"arrival\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"DKI Jakarta\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1256\",\n                \"longitude\": \"106.6559\",\n                \"elevation\": \"10 m\",\n                \"imageUrl\": \"\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n            }\n        },\n        \"returnFlight\": {\n            \"id\": 1,\n            \"flightNumber\": \"GA123\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n            \"terminal\": \"T3\",\n            \"information\": \"Non-stop flight\",\n            \"price\": 150,\n            \"class\": \"ECONOMY\",\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"DKI Jakarta\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1256\",\n                \"longitude\": \"106.6559\",\n                \"elevation\": \"10 m\",\n                \"imageUrl\": \"\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n            },\n            \"arrival\": {\n                \"id\": 2,\n                \"code\": \"DPS\",\n                \"name\": \"Ngurah Rai International Airport\",\n                \"city\": \"Denpasar\",\n                \"state\": \"Bali\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Makassar\",\n                \"latitude\": \"-8.7482\",\n                \"longitude\": \"115.1675\",\n                \"elevation\": \"4 m\",\n                \"imageUrl\": \"\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n            }\n        }\n    }\n}"
             },
             {
               "name": "error",
@@ -11052,10 +11094,9 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://{{host}}/api/v1/booking/id/14",
-                  "protocol": "http",
-                  "host": ["{{host}}"],
-                  "path": ["api", "v1", "booking", "id", "14"]
+                  "raw": "{{local_base_url}}/booking/id/14",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking", "id", "14"]
                 }
               },
               "status": "Unauthorized",
@@ -11092,7 +11133,7 @@
               "variable": [
                 {
                   "key": "bookingCode",
-                  "value": "1",
+                  "value": "",
                   "description": "booking code"
                 }
               ]
@@ -11111,10 +11152,9 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://{{host}}/api/v1/booking/code/2411026A6E",
-                  "protocol": "http",
-                  "host": ["{{host}}"],
-                  "path": ["api", "v1", "booking", "code", "2411026A6E"]
+                  "raw": "{{local_base_url}}/booking/code/24110652FD",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking", "code", "24110652FD"]
                 }
               },
               "status": "OK",
@@ -11129,7 +11169,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"successs\"\n    },\n    \"data\": {\n        \"id\": 14,\n        \"userId\": 1,\n        \"flightId\": 3,\n        \"returnFlightId\": 1,\n        \"bookingDate\": \"2024-11-29T12:02:15.925Z\",\n        \"totalPrice\": 400000,\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2024-11-29T12:02:15.929Z\",\n        \"updateAt\": \"2024-11-29T12:02:15.929Z\",\n        \"bookingDetail\": [\n            {\n                \"id\": 18,\n                \"bookingId\": 14,\n                \"passengerId\": 18,\n                \"seatId\": 70,\n                \"price\": 200000,\n                \"createdAt\": \"2024-11-29T12:02:15.934Z\",\n                \"updateAt\": \"2024-11-29T12:02:15.934Z\",\n                \"passenger\": {\n                    \"id\": 18,\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"gender\": \"MALE\",\n                    \"identityNumber\": \"123456\",\n                    \"citizenship\": \"Indonesia\",\n                    \"countryOfIssue\": \"Indonesia\",\n                    \"title\": \"Mr\",\n                    \"dob\": \"1985-05-15T00:00:00.000Z\",\n                    \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                    \"type\": \"ADULT\"\n                },\n                \"seat\": {\n                    \"id\": 70,\n                    \"flightId\": 3,\n                    \"seatNumber\": \"3B\",\n                    \"status\": \"LOCKED\",\n                    \"departureTime\": \"2024-11-29T08:40:42.629Z\",\n                    \"arrivalTime\": \"2024-11-29T08:40:42.629Z\"\n                }\n            },\n            {\n                \"id\": 19,\n                \"bookingId\": 14,\n                \"passengerId\": 19,\n                \"seatId\": 11,\n                \"price\": 200000,\n                \"createdAt\": \"2024-11-29T12:02:15.934Z\",\n                \"updateAt\": \"2024-11-29T12:02:15.934Z\",\n                \"passenger\": {\n                    \"id\": 19,\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"gender\": \"MALE\",\n                    \"identityNumber\": \"123456\",\n                    \"citizenship\": \"Indonesia\",\n                    \"countryOfIssue\": \"Indonesia\",\n                    \"title\": \"Mr\",\n                    \"dob\": \"1985-05-15T00:00:00.000Z\",\n                    \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                    \"type\": \"ADULT\"\n                },\n                \"seat\": {\n                    \"id\": 11,\n                    \"flightId\": 1,\n                    \"seatNumber\": \"3C\",\n                    \"status\": \"LOCKED\",\n                    \"departureTime\": \"2024-11-29T08:40:42.629Z\",\n                    \"arrivalTime\": \"2024-11-29T08:40:42.629Z\"\n                }\n            }\n        ],\n        \"flight\": {\n            \"id\": 3,\n            \"flightNumber\": \"LA789\",\n            \"airlineId\": 3,\n            \"departureAirport\": 3,\n            \"arrivalAirport\": 1,\n            \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n            \"terminal\": \"T2\",\n            \"information\": \"Delayed flight\",\n            \"price\": 100,\n            \"class\": \"ECONOMY\"\n        },\n        \"returnFlight\": {\n            \"id\": 1,\n            \"flightNumber\": \"GA123\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n            \"terminal\": \"T3\",\n            \"information\": \"Non-stop flight\",\n            \"price\": 150,\n            \"class\": \"ECONOMY\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"successs\"\n    },\n    \"data\": {\n        \"id\": 17,\n        \"code\": \"24110652FD\",\n        \"userId\": 1,\n        \"flightId\": 3,\n        \"returnFlightId\": 1,\n        \"bookingDate\": \"2024-12-07T09:34:11.064Z\",\n        \"totalPrice\": 400000,\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2024-12-07T09:34:11.067Z\",\n        \"updateAt\": \"2024-12-07T09:34:11.067Z\",\n        \"bookingDetail\": [\n            {\n                \"id\": 24,\n                \"bookingId\": 17,\n                \"passengerId\": 24,\n                \"seatId\": 71,\n                \"price\": 200000,\n                \"createdAt\": \"2024-12-07T09:34:11.112Z\",\n                \"updateAt\": \"2024-12-07T09:34:11.112Z\",\n                \"passenger\": {\n                    \"id\": 24,\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"gender\": \"MALE\",\n                    \"identityNumber\": \"123456\",\n                    \"citizenship\": \"Indonesia\",\n                    \"countryOfIssue\": \"Indonesia\",\n                    \"title\": \"Mr\",\n                    \"dob\": \"1985-05-15T00:00:00.000Z\",\n                    \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                    \"type\": \"ADULT\"\n                },\n                \"seat\": {\n                    \"id\": 71,\n                    \"flightId\": 3,\n                    \"seatNumber\": \"3C\",\n                    \"status\": \"LOCKED\",\n                    \"departureTime\": \"2024-11-29T08:40:42.629Z\",\n                    \"arrivalTime\": \"2024-11-29T08:40:42.629Z\"\n                }\n            },\n            {\n                \"id\": 25,\n                \"bookingId\": 17,\n                \"passengerId\": 25,\n                \"seatId\": 12,\n                \"price\": 200000,\n                \"createdAt\": \"2024-12-07T09:34:11.112Z\",\n                \"updateAt\": \"2024-12-07T09:34:11.112Z\",\n                \"passenger\": {\n                    \"id\": 25,\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"gender\": \"MALE\",\n                    \"identityNumber\": \"123456\",\n                    \"citizenship\": \"Indonesia\",\n                    \"countryOfIssue\": \"Indonesia\",\n                    \"title\": \"Mr\",\n                    \"dob\": \"1985-05-15T00:00:00.000Z\",\n                    \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                    \"type\": \"ADULT\"\n                },\n                \"seat\": {\n                    \"id\": 12,\n                    \"flightId\": 1,\n                    \"seatNumber\": \"3D\",\n                    \"status\": \"LOCKED\",\n                    \"departureTime\": \"2024-11-29T08:40:42.629Z\",\n                    \"arrivalTime\": \"2024-11-29T08:40:42.629Z\"\n                }\n            }\n        ],\n        \"flight\": {\n            \"id\": 3,\n            \"flightNumber\": \"LA789\",\n            \"airlineId\": 3,\n            \"departureAirport\": 3,\n            \"arrivalAirport\": 1,\n            \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n            \"terminal\": \"T2\",\n            \"information\": \"Delayed flight\",\n            \"price\": 100,\n            \"class\": \"ECONOMY\",\n            \"departure\": {\n                \"id\": 3,\n                \"code\": \"SUB\",\n                \"name\": \"Juanda International Airport\",\n                \"city\": \"Surabaya\",\n                \"state\": \"East Java\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-7.3798\",\n                \"longitude\": \"112.7873\",\n                \"elevation\": \"3 m\",\n                \"imageUrl\": \"\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n            },\n            \"arrival\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"DKI Jakarta\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1256\",\n                \"longitude\": \"106.6559\",\n                \"elevation\": \"10 m\",\n                \"imageUrl\": \"\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n            }\n        },\n        \"returnFlight\": {\n            \"id\": 1,\n            \"flightNumber\": \"GA123\",\n            \"airlineId\": 1,\n            \"departureAirport\": 1,\n            \"arrivalAirport\": 2,\n            \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n            \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n            \"terminal\": \"T3\",\n            \"information\": \"Non-stop flight\",\n            \"price\": 150,\n            \"class\": \"ECONOMY\",\n            \"departure\": {\n                \"id\": 1,\n                \"code\": \"CGK\",\n                \"name\": \"Soekarno-Hatta International Airport\",\n                \"city\": \"Jakarta\",\n                \"state\": \"DKI Jakarta\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Jakarta\",\n                \"latitude\": \"-6.1256\",\n                \"longitude\": \"106.6559\",\n                \"elevation\": \"10 m\",\n                \"imageUrl\": \"\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n            },\n            \"arrival\": {\n                \"id\": 2,\n                \"code\": \"DPS\",\n                \"name\": \"Ngurah Rai International Airport\",\n                \"city\": \"Denpasar\",\n                \"state\": \"Bali\",\n                \"country\": \"Indonesia\",\n                \"timezone\": \"Asia/Makassar\",\n                \"latitude\": \"-8.7482\",\n                \"longitude\": \"115.1675\",\n                \"elevation\": \"4 m\",\n                \"imageUrl\": \"\",\n                \"imageId\": \"\",\n                \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n            }\n        }\n    }\n}"
             },
             {
               "name": "error",
@@ -11143,10 +11183,9 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://{{host}}/api/v1/booking/code/2411026A6E",
-                  "protocol": "http",
-                  "host": ["{{host}}"],
-                  "path": ["api", "v1", "booking", "code", "2411026A6E"]
+                  "raw": "{{local_base_url}}/booking/code/2411026A6E",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking", "code", "2411026A6E"]
                 }
               },
               "status": "Unauthorized",
@@ -11172,18 +11211,18 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok",
+                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
             "url": {
-              "raw": "{{local_base_url}}/booking/group?page=5&limit=2",
+              "raw": "{{local_base_url}}/booking/group?page=1&limit=2",
               "host": ["{{local_base_url}}"],
               "path": ["booking", "group"],
               "query": [
                 {
                   "key": "page",
-                  "value": "5",
+                  "value": "1",
                   "description": "page number"
                 },
                 {
@@ -11207,26 +11246,35 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://{{host}}/api/v1/booking/group?page=5&limit=2",
-                  "protocol": "http",
-                  "host": ["{{host}}"],
-                  "path": ["api", "v1", "booking", "group"],
+                  "raw": "{{local_base_url}}/booking/group?page=1&limit=2",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking", "group"],
                   "query": [
                     {
                       "key": "page",
-                      "value": "5"
+                      "value": "1",
+                      "description": "page number"
                     },
                     {
                       "key": "limit",
-                      "value": "2"
+                      "value": "2",
+                      "description": "total item per page"
                     }
                   ]
                 }
               },
-              "_postman_previewlanguage": "Text",
-              "header": [],
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
               "cookie": [],
-              "body": "{\r\n    \"meta\": {\r\n        \"status\": 200,\r\n        \"message\": \"success\",\r\n        \"pagination\": {\r\n            \"totalPage\": 1,\r\n            \"currentPage\": 1,\r\n            \"pageItems\": 1,\r\n            \"nextPage\": null,\r\n            \"prevPage\": null\r\n        }\r\n    },\r\n    \"data\": {\r\n        \"Desember\": [\r\n            {\r\n                \"id\": 16,\r\n                \"bookingCode\": \"2411026A6E\",\r\n                \"userId\": 1,\r\n                \"flightId\": 3,\r\n                \"returnFlightId\": 1,\r\n                \"bookingDate\": \"2024-12-03T13:37:05.394Z\",\r\n                \"totalPrice\": 400000,\r\n                \"status\": \"ACTIVE\",\r\n                \"createdAt\": \"2024-12-03T13:37:05.424Z\",\r\n                \"updateAt\": \"2024-12-03T13:37:05.424Z\"\r\n            }\r\n        ]\r\n    }\r\n}"
+              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"success\",\n        \"pagination\": {\n            \"totalPage\": 1,\n            \"currentPage\": 1,\n            \"pageItems\": 2,\n            \"nextPage\": null,\n            \"prevPage\": null\n        }\n    },\n    \"data\": {\n        \"Desember\": [\n            {\n                \"id\": 16,\n                \"code\": \"\",\n                \"userId\": 1,\n                \"flightId\": 3,\n                \"returnFlightId\": 1,\n                \"bookingDate\": \"2024-12-03T13:37:05.394Z\",\n                \"totalPrice\": 400000,\n                \"status\": \"ACTIVE\",\n                \"createdAt\": \"2024-12-03T13:37:05.424Z\",\n                \"updateAt\": \"2024-12-03T13:37:05.424Z\",\n                \"flight\": {\n                    \"id\": 3,\n                    \"flightNumber\": \"LA789\",\n                    \"airlineId\": 3,\n                    \"departureAirport\": 3,\n                    \"arrivalAirport\": 1,\n                    \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n                    \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n                    \"terminal\": \"T2\",\n                    \"information\": \"Delayed flight\",\n                    \"price\": 100,\n                    \"class\": \"ECONOMY\",\n                    \"departure\": {\n                        \"id\": 3,\n                        \"code\": \"SUB\",\n                        \"name\": \"Juanda International Airport\",\n                        \"city\": \"Surabaya\",\n                        \"state\": \"East Java\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-7.3798\",\n                        \"longitude\": \"112.7873\",\n                        \"elevation\": \"3 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    },\n                    \"arrival\": {\n                        \"id\": 1,\n                        \"code\": \"CGK\",\n                        \"name\": \"Soekarno-Hatta International Airport\",\n                        \"city\": \"Jakarta\",\n                        \"state\": \"DKI Jakarta\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-6.1256\",\n                        \"longitude\": \"106.6559\",\n                        \"elevation\": \"10 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    }\n                },\n                \"returnFlight\": {\n                    \"id\": 1,\n                    \"flightNumber\": \"GA123\",\n                    \"airlineId\": 1,\n                    \"departureAirport\": 1,\n                    \"arrivalAirport\": 2,\n                    \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n                    \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n                    \"terminal\": \"T3\",\n                    \"information\": \"Non-stop flight\",\n                    \"price\": 150,\n                    \"class\": \"ECONOMY\",\n                    \"departure\": {\n                        \"id\": 1,\n                        \"code\": \"CGK\",\n                        \"name\": \"Soekarno-Hatta International Airport\",\n                        \"city\": \"Jakarta\",\n                        \"state\": \"DKI Jakarta\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-6.1256\",\n                        \"longitude\": \"106.6559\",\n                        \"elevation\": \"10 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    },\n                    \"arrival\": {\n                        \"id\": 2,\n                        \"code\": \"DPS\",\n                        \"name\": \"Ngurah Rai International Airport\",\n                        \"city\": \"Denpasar\",\n                        \"state\": \"Bali\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Makassar\",\n                        \"latitude\": \"-8.7482\",\n                        \"longitude\": \"115.1675\",\n                        \"elevation\": \"4 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    }\n                }\n            },\n            {\n                \"id\": 17,\n                \"code\": \"24110652FD\",\n                \"userId\": 1,\n                \"flightId\": 3,\n                \"returnFlightId\": 1,\n                \"bookingDate\": \"2024-12-07T09:34:11.064Z\",\n                \"totalPrice\": 400000,\n                \"status\": \"ACTIVE\",\n                \"createdAt\": \"2024-12-07T09:34:11.067Z\",\n                \"updateAt\": \"2024-12-07T09:34:11.067Z\",\n                \"flight\": {\n                    \"id\": 3,\n                    \"flightNumber\": \"LA789\",\n                    \"airlineId\": 3,\n                    \"departureAirport\": 3,\n                    \"arrivalAirport\": 1,\n                    \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n                    \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n                    \"terminal\": \"T2\",\n                    \"information\": \"Delayed flight\",\n                    \"price\": 100,\n                    \"class\": \"ECONOMY\",\n                    \"departure\": {\n                        \"id\": 3,\n                        \"code\": \"SUB\",\n                        \"name\": \"Juanda International Airport\",\n                        \"city\": \"Surabaya\",\n                        \"state\": \"East Java\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-7.3798\",\n                        \"longitude\": \"112.7873\",\n                        \"elevation\": \"3 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    },\n                    \"arrival\": {\n                        \"id\": 1,\n                        \"code\": \"CGK\",\n                        \"name\": \"Soekarno-Hatta International Airport\",\n                        \"city\": \"Jakarta\",\n                        \"state\": \"DKI Jakarta\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-6.1256\",\n                        \"longitude\": \"106.6559\",\n                        \"elevation\": \"10 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    }\n                },\n                \"returnFlight\": {\n                    \"id\": 1,\n                    \"flightNumber\": \"GA123\",\n                    \"airlineId\": 1,\n                    \"departureAirport\": 1,\n                    \"arrivalAirport\": 2,\n                    \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n                    \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n                    \"terminal\": \"T3\",\n                    \"information\": \"Non-stop flight\",\n                    \"price\": 150,\n                    \"class\": \"ECONOMY\",\n                    \"departure\": {\n                        \"id\": 1,\n                        \"code\": \"CGK\",\n                        \"name\": \"Soekarno-Hatta International Airport\",\n                        \"city\": \"Jakarta\",\n                        \"state\": \"DKI Jakarta\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-6.1256\",\n                        \"longitude\": \"106.6559\",\n                        \"elevation\": \"10 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    },\n                    \"arrival\": {\n                        \"id\": 2,\n                        \"code\": \"DPS\",\n                        \"name\": \"Ngurah Rai International Airport\",\n                        \"city\": \"Denpasar\",\n                        \"state\": \"Bali\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Makassar\",\n                        \"latitude\": \"-8.7482\",\n                        \"longitude\": \"115.1675\",\n                        \"elevation\": \"4 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    }\n                }\n            }\n        ]\n    }\n}"
             },
             {
               "name": "error",
@@ -11240,18 +11288,19 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://{{host}}/api/v1/booking/group?page=5&limit=2",
-                  "protocol": "http",
-                  "host": ["{{host}}"],
-                  "path": ["api", "v1", "booking", "group"],
+                  "raw": "{{local_base_url}}/booking/group?page=5&limit=2",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking", "group"],
                   "query": [
                     {
                       "key": "page",
-                      "value": "5"
+                      "value": "5",
+                      "description": "page number"
                     },
                     {
                       "key": "limit",
-                      "value": "2"
+                      "value": "2",
+                      "description": "total item per page"
                     }
                   ]
                 }
@@ -11263,7 +11312,6 @@
                 {
                   "key": "Content-Type",
                   "value": "application/json",
-                  "name": "Content-Type",
                   "description": "",
                   "type": "text"
                 }
@@ -11286,7 +11334,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"flightId\": 3,\r\n    \"returnFlightId\": 1,\r\n    \"bookingDate\": \"2024-11-26T00:00:00Z\",\r\n    \"bookingDetail\": [\r\n        {\r\n            \"seatId\": 70,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Anton\",\r\n                \"familyName\": \"Wibowo\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        },\r\n        {\r\n            \"seatId\": 11,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Anton\",\r\n                \"familyName\": \"Wibowo\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n",
+              "raw": "{\r\n    \"flightId\": 3,\r\n    \"returnFlightId\": 1,\r\n    \"bookingDate\": \"2024-11-26T00:00:00Z\",\r\n    \"bookingDetail\": [\r\n        {\r\n            \"seatId\": 71,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Anton\",\r\n                \"familyName\": \"Wibowo\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        },\r\n        {\r\n            \"seatId\": 12,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Anton\",\r\n                \"familyName\": \"Wibowo\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -11321,10 +11369,9 @@
                   }
                 },
                 "url": {
-                  "raw": "http://{{host}}/api/v1/booking/",
-                  "protocol": "http",
-                  "host": ["{{host}}"],
-                  "path": ["api", "v1", "booking", ""]
+                  "raw": "{{local_base_url}}/booking",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking"]
                 }
               },
               "code": 200,
@@ -11361,10 +11408,9 @@
                   }
                 },
                 "url": {
-                  "raw": "http://{{host}}/api/v1/booking/",
-                  "protocol": "http",
-                  "host": ["{{host}}"],
-                  "path": ["api", "v1", "booking", ""]
+                  "raw": "{{local_base_url}}/booking",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking"]
                 }
               },
               "status": "Unauthorized",

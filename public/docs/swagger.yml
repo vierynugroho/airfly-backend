@@ -2604,17 +2604,25 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzNDg3NDY5LCJleHAiOjE3MzM1NzM4Njl9._2hrgP6uvCJx7nyARkGqVd1K_CmxMFucmyAT6F0OwgY
+          example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzNTYzNDUxLCJleHAiOjE3MzM2NDk4NTF9.G3FV_E6c2ZKwo4S2SLFOFVDhJ1QO1iWlCg5Tdb5K0uc
         - name: page
           in: query
           schema:
             type: integer
+          description: page number
           example: '1'
         - name: limit
           in: query
           schema:
             type: integer
+          description: total item per page
           example: '2'
+        - name: sort
+          in: query
+          schema:
+            type: string
+          description: sort
+          example: asc
       responses:
         '200':
           description: Successful response
@@ -2629,12 +2637,12 @@ paths:
                       pagination:
                         totalPage: 1
                         currentPage: 1
-                        pageItems: 1
+                        pageItems: 2
                         nextPage: null
                         prevPage: null
                     data:
                       - id: 16
-                        bookingCode: 2411026A6E
+                        code: ''
                         userId: 1
                         flightId: 3
                         returnFlightId: 1
@@ -2655,6 +2663,34 @@ paths:
                           information: Delayed flight
                           price: 100
                           class: ECONOMY
+                          departure:
+                            id: 3
+                            code: SUB
+                            name: Juanda International Airport
+                            city: Surabaya
+                            state: East Java
+                            country: Indonesia
+                            timezone: Asia/Jakarta
+                            latitude: '-7.3798'
+                            longitude: '112.7873'
+                            elevation: 3 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
+                          arrival:
+                            id: 1
+                            code: CGK
+                            name: Soekarno-Hatta International Airport
+                            city: Jakarta
+                            state: DKI Jakarta
+                            country: Indonesia
+                            timezone: Asia/Jakarta
+                            latitude: '-6.1256'
+                            longitude: '106.6559'
+                            elevation: 10 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
                         returnFlight:
                           id: 1
                           flightNumber: GA123
@@ -2667,6 +2703,124 @@ paths:
                           information: Non-stop flight
                           price: 150
                           class: ECONOMY
+                          departure:
+                            id: 1
+                            code: CGK
+                            name: Soekarno-Hatta International Airport
+                            city: Jakarta
+                            state: DKI Jakarta
+                            country: Indonesia
+                            timezone: Asia/Jakarta
+                            latitude: '-6.1256'
+                            longitude: '106.6559'
+                            elevation: 10 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
+                          arrival:
+                            id: 2
+                            code: DPS
+                            name: Ngurah Rai International Airport
+                            city: Denpasar
+                            state: Bali
+                            country: Indonesia
+                            timezone: Asia/Makassar
+                            latitude: '-8.7482'
+                            longitude: '115.1675'
+                            elevation: 4 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
+                      - id: 17
+                        code: 24110652FD
+                        userId: 1
+                        flightId: 3
+                        returnFlightId: 1
+                        bookingDate: '2024-12-07T09:34:11.064Z'
+                        totalPrice: 400000
+                        status: ACTIVE
+                        createdAt: '2024-12-07T09:34:11.067Z'
+                        updateAt: '2024-12-07T09:34:11.067Z'
+                        flight:
+                          id: 3
+                          flightNumber: LA789
+                          airlineId: 3
+                          departureAirport: 3
+                          arrivalAirport: 1
+                          departureTime: '2024-12-03T18:00:00.000Z'
+                          arrivalTime: '2024-12-03T21:00:00.000Z'
+                          terminal: T2
+                          information: Delayed flight
+                          price: 100
+                          class: ECONOMY
+                          departure:
+                            id: 3
+                            code: SUB
+                            name: Juanda International Airport
+                            city: Surabaya
+                            state: East Java
+                            country: Indonesia
+                            timezone: Asia/Jakarta
+                            latitude: '-7.3798'
+                            longitude: '112.7873'
+                            elevation: 3 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
+                          arrival:
+                            id: 1
+                            code: CGK
+                            name: Soekarno-Hatta International Airport
+                            city: Jakarta
+                            state: DKI Jakarta
+                            country: Indonesia
+                            timezone: Asia/Jakarta
+                            latitude: '-6.1256'
+                            longitude: '106.6559'
+                            elevation: 10 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
+                        returnFlight:
+                          id: 1
+                          flightNumber: GA123
+                          airlineId: 1
+                          departureAirport: 1
+                          arrivalAirport: 2
+                          departureTime: '2024-12-01T08:00:00.000Z'
+                          arrivalTime: '2024-12-01T11:00:00.000Z'
+                          terminal: T3
+                          information: Non-stop flight
+                          price: 150
+                          class: ECONOMY
+                          departure:
+                            id: 1
+                            code: CGK
+                            name: Soekarno-Hatta International Airport
+                            city: Jakarta
+                            state: DKI Jakarta
+                            country: Indonesia
+                            timezone: Asia/Jakarta
+                            latitude: '-6.1256'
+                            longitude: '106.6559'
+                            elevation: 10 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
+                          arrival:
+                            id: 2
+                            code: DPS
+                            name: Ngurah Rai International Airport
+                            city: Denpasar
+                            state: Bali
+                            country: Indonesia
+                            timezone: Asia/Makassar
+                            latitude: '-8.7482'
+                            longitude: '115.1675'
+                            elevation: 4 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
                 find_all:
                   value:
                     meta:
@@ -2674,7 +2828,7 @@ paths:
                       message: success
                     data:
                       - id: 16
-                        bookingCode: 2411026A6E
+                        code: ''
                         userId: 1
                         flightId: 3
                         returnFlightId: 1
@@ -2695,6 +2849,34 @@ paths:
                           information: Delayed flight
                           price: 100
                           class: ECONOMY
+                          departure:
+                            id: 3
+                            code: SUB
+                            name: Juanda International Airport
+                            city: Surabaya
+                            state: East Java
+                            country: Indonesia
+                            timezone: Asia/Jakarta
+                            latitude: '-7.3798'
+                            longitude: '112.7873'
+                            elevation: 3 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
+                          arrival:
+                            id: 1
+                            code: CGK
+                            name: Soekarno-Hatta International Airport
+                            city: Jakarta
+                            state: DKI Jakarta
+                            country: Indonesia
+                            timezone: Asia/Jakarta
+                            latitude: '-6.1256'
+                            longitude: '106.6559'
+                            elevation: 10 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
                         returnFlight:
                           id: 1
                           flightNumber: GA123
@@ -2707,6 +2889,124 @@ paths:
                           information: Non-stop flight
                           price: 150
                           class: ECONOMY
+                          departure:
+                            id: 1
+                            code: CGK
+                            name: Soekarno-Hatta International Airport
+                            city: Jakarta
+                            state: DKI Jakarta
+                            country: Indonesia
+                            timezone: Asia/Jakarta
+                            latitude: '-6.1256'
+                            longitude: '106.6559'
+                            elevation: 10 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
+                          arrival:
+                            id: 2
+                            code: DPS
+                            name: Ngurah Rai International Airport
+                            city: Denpasar
+                            state: Bali
+                            country: Indonesia
+                            timezone: Asia/Makassar
+                            latitude: '-8.7482'
+                            longitude: '115.1675'
+                            elevation: 4 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
+                      - id: 17
+                        code: 24110652FD
+                        userId: 1
+                        flightId: 3
+                        returnFlightId: 1
+                        bookingDate: '2024-12-07T09:34:11.064Z'
+                        totalPrice: 400000
+                        status: ACTIVE
+                        createdAt: '2024-12-07T09:34:11.067Z'
+                        updateAt: '2024-12-07T09:34:11.067Z'
+                        flight:
+                          id: 3
+                          flightNumber: LA789
+                          airlineId: 3
+                          departureAirport: 3
+                          arrivalAirport: 1
+                          departureTime: '2024-12-03T18:00:00.000Z'
+                          arrivalTime: '2024-12-03T21:00:00.000Z'
+                          terminal: T2
+                          information: Delayed flight
+                          price: 100
+                          class: ECONOMY
+                          departure:
+                            id: 3
+                            code: SUB
+                            name: Juanda International Airport
+                            city: Surabaya
+                            state: East Java
+                            country: Indonesia
+                            timezone: Asia/Jakarta
+                            latitude: '-7.3798'
+                            longitude: '112.7873'
+                            elevation: 3 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
+                          arrival:
+                            id: 1
+                            code: CGK
+                            name: Soekarno-Hatta International Airport
+                            city: Jakarta
+                            state: DKI Jakarta
+                            country: Indonesia
+                            timezone: Asia/Jakarta
+                            latitude: '-6.1256'
+                            longitude: '106.6559'
+                            elevation: 10 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
+                        returnFlight:
+                          id: 1
+                          flightNumber: GA123
+                          airlineId: 1
+                          departureAirport: 1
+                          arrivalAirport: 2
+                          departureTime: '2024-12-01T08:00:00.000Z'
+                          arrivalTime: '2024-12-01T11:00:00.000Z'
+                          terminal: T3
+                          information: Non-stop flight
+                          price: 150
+                          class: ECONOMY
+                          departure:
+                            id: 1
+                            code: CGK
+                            name: Soekarno-Hatta International Airport
+                            city: Jakarta
+                            state: DKI Jakarta
+                            country: Indonesia
+                            timezone: Asia/Jakarta
+                            latitude: '-6.1256'
+                            longitude: '106.6559'
+                            elevation: 10 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
+                          arrival:
+                            id: 2
+                            code: DPS
+                            name: Ngurah Rai International Airport
+                            city: Denpasar
+                            state: Bali
+                            country: Indonesia
+                            timezone: Asia/Makassar
+                            latitude: '-8.7482'
+                            longitude: '115.1675'
+                            elevation: 4 m
+                            imageUrl: ''
+                            imageId: ''
+                            createdAt: '2024-11-29T08:37:00.345Z'
         '401':
           description: Response
           content:
@@ -2732,7 +3032,7 @@ paths:
                 returnFlightId: 1
                 bookingDate: '2024-11-26T00:00:00Z'
                 bookingDetail:
-                  - seatId: 70
+                  - seatId: 71
                     price: 200000
                     passenger:
                       name: Anton
@@ -2745,7 +3045,7 @@ paths:
                       dob: '1985-05-15T00:00:00Z'
                       expiredDate: '2030-05-15T23:59:59Z'
                       type: ADULT
-                  - seatId: 11
+                  - seatId: 12
                     price: 200000
                     passenger:
                       name: Anton
@@ -2794,13 +3094,13 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok
+          example: Bearer {{token}}
         - name: page
           in: query
           schema:
             type: integer
           description: page number
-          example: '5'
+          example: '1'
         - name: limit
           in: query
           schema:
@@ -2810,7 +3110,200 @@ paths:
       responses:
         '200':
           description: Successful response
-          content: {}
+          content:
+            application/json:
+              example:
+                meta:
+                  status: 200
+                  message: success
+                  pagination:
+                    totalPage: 1
+                    currentPage: 1
+                    pageItems: 2
+                    nextPage: null
+                    prevPage: null
+                data:
+                  Desember:
+                    - id: 16
+                      code: ''
+                      userId: 1
+                      flightId: 3
+                      returnFlightId: 1
+                      bookingDate: '2024-12-03T13:37:05.394Z'
+                      totalPrice: 400000
+                      status: ACTIVE
+                      createdAt: '2024-12-03T13:37:05.424Z'
+                      updateAt: '2024-12-03T13:37:05.424Z'
+                      flight:
+                        id: 3
+                        flightNumber: LA789
+                        airlineId: 3
+                        departureAirport: 3
+                        arrivalAirport: 1
+                        departureTime: '2024-12-03T18:00:00.000Z'
+                        arrivalTime: '2024-12-03T21:00:00.000Z'
+                        terminal: T2
+                        information: Delayed flight
+                        price: 100
+                        class: ECONOMY
+                        departure:
+                          id: 3
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: East Java
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3798'
+                          longitude: '112.7873'
+                          elevation: 3 m
+                          imageUrl: ''
+                          imageId: ''
+                          createdAt: '2024-11-29T08:37:00.345Z'
+                        arrival:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: DKI Jakarta
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1256'
+                          longitude: '106.6559'
+                          elevation: 10 m
+                          imageUrl: ''
+                          imageId: ''
+                          createdAt: '2024-11-29T08:37:00.345Z'
+                      returnFlight:
+                        id: 1
+                        flightNumber: GA123
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-12-01T08:00:00.000Z'
+                        arrivalTime: '2024-12-01T11:00:00.000Z'
+                        terminal: T3
+                        information: Non-stop flight
+                        price: 150
+                        class: ECONOMY
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: DKI Jakarta
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1256'
+                          longitude: '106.6559'
+                          elevation: 10 m
+                          imageUrl: ''
+                          imageId: ''
+                          createdAt: '2024-11-29T08:37:00.345Z'
+                        arrival:
+                          id: 2
+                          code: DPS
+                          name: Ngurah Rai International Airport
+                          city: Denpasar
+                          state: Bali
+                          country: Indonesia
+                          timezone: Asia/Makassar
+                          latitude: '-8.7482'
+                          longitude: '115.1675'
+                          elevation: 4 m
+                          imageUrl: ''
+                          imageId: ''
+                          createdAt: '2024-11-29T08:37:00.345Z'
+                    - id: 17
+                      code: 24110652FD
+                      userId: 1
+                      flightId: 3
+                      returnFlightId: 1
+                      bookingDate: '2024-12-07T09:34:11.064Z'
+                      totalPrice: 400000
+                      status: ACTIVE
+                      createdAt: '2024-12-07T09:34:11.067Z'
+                      updateAt: '2024-12-07T09:34:11.067Z'
+                      flight:
+                        id: 3
+                        flightNumber: LA789
+                        airlineId: 3
+                        departureAirport: 3
+                        arrivalAirport: 1
+                        departureTime: '2024-12-03T18:00:00.000Z'
+                        arrivalTime: '2024-12-03T21:00:00.000Z'
+                        terminal: T2
+                        information: Delayed flight
+                        price: 100
+                        class: ECONOMY
+                        departure:
+                          id: 3
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: East Java
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3798'
+                          longitude: '112.7873'
+                          elevation: 3 m
+                          imageUrl: ''
+                          imageId: ''
+                          createdAt: '2024-11-29T08:37:00.345Z'
+                        arrival:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: DKI Jakarta
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1256'
+                          longitude: '106.6559'
+                          elevation: 10 m
+                          imageUrl: ''
+                          imageId: ''
+                          createdAt: '2024-11-29T08:37:00.345Z'
+                      returnFlight:
+                        id: 1
+                        flightNumber: GA123
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-12-01T08:00:00.000Z'
+                        arrivalTime: '2024-12-01T11:00:00.000Z'
+                        terminal: T3
+                        information: Non-stop flight
+                        price: 150
+                        class: ECONOMY
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: DKI Jakarta
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1256'
+                          longitude: '106.6559'
+                          elevation: 10 m
+                          imageUrl: ''
+                          imageId: ''
+                          createdAt: '2024-11-29T08:37:00.345Z'
+                        arrival:
+                          id: 2
+                          code: DPS
+                          name: Ngurah Rai International Airport
+                          city: Denpasar
+                          state: Bali
+                          country: Indonesia
+                          timezone: Asia/Makassar
+                          latitude: '-8.7482'
+                          longitude: '115.1675'
+                          elevation: 4 m
+                          imageUrl: ''
+                          imageId: ''
+                          createdAt: '2024-11-29T08:37:00.345Z'
         '401':
           description: Response
           content:
@@ -4338,7 +4831,7 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTMyMTI1LCJleHAiOjE3MzMyMTg1MjV9._VeGoMUm1FfV2PXJJae9ETdxBeK-9jsGoAOWyrIcpok
+          example: Bearer {{token}}
         - name: bookingId
           in: path
           required: true
@@ -4354,25 +4847,26 @@ paths:
                   status: 200
                   message: successs
                 data:
-                  id: 14
+                  id: 17
+                  code: 24110652FD
                   userId: 1
                   flightId: 3
                   returnFlightId: 1
-                  bookingDate: '2024-11-29T12:02:15.925Z'
+                  bookingDate: '2024-12-07T09:34:11.064Z'
                   totalPrice: 400000
                   status: ACTIVE
-                  createdAt: '2024-11-29T12:02:15.929Z'
-                  updateAt: '2024-11-29T12:02:15.929Z'
+                  createdAt: '2024-12-07T09:34:11.067Z'
+                  updateAt: '2024-12-07T09:34:11.067Z'
                   bookingDetail:
-                    - id: 18
-                      bookingId: 14
-                      passengerId: 18
-                      seatId: 70
+                    - id: 24
+                      bookingId: 17
+                      passengerId: 24
+                      seatId: 71
                       price: 200000
-                      createdAt: '2024-11-29T12:02:15.934Z'
-                      updateAt: '2024-11-29T12:02:15.934Z'
+                      createdAt: '2024-12-07T09:34:11.112Z'
+                      updateAt: '2024-12-07T09:34:11.112Z'
                       passenger:
-                        id: 18
+                        id: 24
                         name: Anton
                         familyName: Wibowo
                         gender: MALE
@@ -4384,21 +4878,21 @@ paths:
                         expiredDate: '2030-05-15T23:59:59.000Z'
                         type: ADULT
                       seat:
-                        id: 70
+                        id: 71
                         flightId: 3
-                        seatNumber: 3B
+                        seatNumber: 3C
                         status: LOCKED
                         departureTime: '2024-11-29T08:40:42.629Z'
                         arrivalTime: '2024-11-29T08:40:42.629Z'
-                    - id: 19
-                      bookingId: 14
-                      passengerId: 19
-                      seatId: 11
+                    - id: 25
+                      bookingId: 17
+                      passengerId: 25
+                      seatId: 12
                       price: 200000
-                      createdAt: '2024-11-29T12:02:15.934Z'
-                      updateAt: '2024-11-29T12:02:15.934Z'
+                      createdAt: '2024-12-07T09:34:11.112Z'
+                      updateAt: '2024-12-07T09:34:11.112Z'
                       passenger:
-                        id: 19
+                        id: 25
                         name: Anton
                         familyName: Wibowo
                         gender: MALE
@@ -4410,9 +4904,9 @@ paths:
                         expiredDate: '2030-05-15T23:59:59.000Z'
                         type: ADULT
                       seat:
-                        id: 11
+                        id: 12
                         flightId: 1
-                        seatNumber: 3C
+                        seatNumber: 3D
                         status: LOCKED
                         departureTime: '2024-11-29T08:40:42.629Z'
                         arrivalTime: '2024-11-29T08:40:42.629Z'
@@ -4428,6 +4922,34 @@ paths:
                     information: Delayed flight
                     price: 100
                     class: ECONOMY
+                    departure:
+                      id: 3
+                      code: SUB
+                      name: Juanda International Airport
+                      city: Surabaya
+                      state: East Java
+                      country: Indonesia
+                      timezone: Asia/Jakarta
+                      latitude: '-7.3798'
+                      longitude: '112.7873'
+                      elevation: 3 m
+                      imageUrl: ''
+                      imageId: ''
+                      createdAt: '2024-11-29T08:37:00.345Z'
+                    arrival:
+                      id: 1
+                      code: CGK
+                      name: Soekarno-Hatta International Airport
+                      city: Jakarta
+                      state: DKI Jakarta
+                      country: Indonesia
+                      timezone: Asia/Jakarta
+                      latitude: '-6.1256'
+                      longitude: '106.6559'
+                      elevation: 10 m
+                      imageUrl: ''
+                      imageId: ''
+                      createdAt: '2024-11-29T08:37:00.345Z'
                   returnFlight:
                     id: 1
                     flightNumber: GA123
@@ -4440,6 +4962,34 @@ paths:
                     information: Non-stop flight
                     price: 150
                     class: ECONOMY
+                    departure:
+                      id: 1
+                      code: CGK
+                      name: Soekarno-Hatta International Airport
+                      city: Jakarta
+                      state: DKI Jakarta
+                      country: Indonesia
+                      timezone: Asia/Jakarta
+                      latitude: '-6.1256'
+                      longitude: '106.6559'
+                      elevation: 10 m
+                      imageUrl: ''
+                      imageId: ''
+                      createdAt: '2024-11-29T08:37:00.345Z'
+                    arrival:
+                      id: 2
+                      code: DPS
+                      name: Ngurah Rai International Airport
+                      city: Denpasar
+                      state: Bali
+                      country: Indonesia
+                      timezone: Asia/Makassar
+                      latitude: '-8.7482'
+                      longitude: '115.1675'
+                      elevation: 4 m
+                      imageUrl: ''
+                      imageId: ''
+                      createdAt: '2024-11-29T08:37:00.345Z'
         '401':
           description: Response
           content:
@@ -4477,25 +5027,26 @@ paths:
                   status: 200
                   message: successs
                 data:
-                  id: 14
+                  id: 17
+                  code: 24110652FD
                   userId: 1
                   flightId: 3
                   returnFlightId: 1
-                  bookingDate: '2024-11-29T12:02:15.925Z'
+                  bookingDate: '2024-12-07T09:34:11.064Z'
                   totalPrice: 400000
                   status: ACTIVE
-                  createdAt: '2024-11-29T12:02:15.929Z'
-                  updateAt: '2024-11-29T12:02:15.929Z'
+                  createdAt: '2024-12-07T09:34:11.067Z'
+                  updateAt: '2024-12-07T09:34:11.067Z'
                   bookingDetail:
-                    - id: 18
-                      bookingId: 14
-                      passengerId: 18
-                      seatId: 70
+                    - id: 24
+                      bookingId: 17
+                      passengerId: 24
+                      seatId: 71
                       price: 200000
-                      createdAt: '2024-11-29T12:02:15.934Z'
-                      updateAt: '2024-11-29T12:02:15.934Z'
+                      createdAt: '2024-12-07T09:34:11.112Z'
+                      updateAt: '2024-12-07T09:34:11.112Z'
                       passenger:
-                        id: 18
+                        id: 24
                         name: Anton
                         familyName: Wibowo
                         gender: MALE
@@ -4507,21 +5058,21 @@ paths:
                         expiredDate: '2030-05-15T23:59:59.000Z'
                         type: ADULT
                       seat:
-                        id: 70
+                        id: 71
                         flightId: 3
-                        seatNumber: 3B
+                        seatNumber: 3C
                         status: LOCKED
                         departureTime: '2024-11-29T08:40:42.629Z'
                         arrivalTime: '2024-11-29T08:40:42.629Z'
-                    - id: 19
-                      bookingId: 14
-                      passengerId: 19
-                      seatId: 11
+                    - id: 25
+                      bookingId: 17
+                      passengerId: 25
+                      seatId: 12
                       price: 200000
-                      createdAt: '2024-11-29T12:02:15.934Z'
-                      updateAt: '2024-11-29T12:02:15.934Z'
+                      createdAt: '2024-12-07T09:34:11.112Z'
+                      updateAt: '2024-12-07T09:34:11.112Z'
                       passenger:
-                        id: 19
+                        id: 25
                         name: Anton
                         familyName: Wibowo
                         gender: MALE
@@ -4533,9 +5084,9 @@ paths:
                         expiredDate: '2030-05-15T23:59:59.000Z'
                         type: ADULT
                       seat:
-                        id: 11
+                        id: 12
                         flightId: 1
-                        seatNumber: 3C
+                        seatNumber: 3D
                         status: LOCKED
                         departureTime: '2024-11-29T08:40:42.629Z'
                         arrivalTime: '2024-11-29T08:40:42.629Z'
@@ -4551,6 +5102,34 @@ paths:
                     information: Delayed flight
                     price: 100
                     class: ECONOMY
+                    departure:
+                      id: 3
+                      code: SUB
+                      name: Juanda International Airport
+                      city: Surabaya
+                      state: East Java
+                      country: Indonesia
+                      timezone: Asia/Jakarta
+                      latitude: '-7.3798'
+                      longitude: '112.7873'
+                      elevation: 3 m
+                      imageUrl: ''
+                      imageId: ''
+                      createdAt: '2024-11-29T08:37:00.345Z'
+                    arrival:
+                      id: 1
+                      code: CGK
+                      name: Soekarno-Hatta International Airport
+                      city: Jakarta
+                      state: DKI Jakarta
+                      country: Indonesia
+                      timezone: Asia/Jakarta
+                      latitude: '-6.1256'
+                      longitude: '106.6559'
+                      elevation: 10 m
+                      imageUrl: ''
+                      imageId: ''
+                      createdAt: '2024-11-29T08:37:00.345Z'
                   returnFlight:
                     id: 1
                     flightNumber: GA123
@@ -4563,6 +5142,34 @@ paths:
                     information: Non-stop flight
                     price: 150
                     class: ECONOMY
+                    departure:
+                      id: 1
+                      code: CGK
+                      name: Soekarno-Hatta International Airport
+                      city: Jakarta
+                      state: DKI Jakarta
+                      country: Indonesia
+                      timezone: Asia/Jakarta
+                      latitude: '-6.1256'
+                      longitude: '106.6559'
+                      elevation: 10 m
+                      imageUrl: ''
+                      imageId: ''
+                      createdAt: '2024-11-29T08:37:00.345Z'
+                    arrival:
+                      id: 2
+                      code: DPS
+                      name: Ngurah Rai International Airport
+                      city: Denpasar
+                      state: Bali
+                      country: Indonesia
+                      timezone: Asia/Makassar
+                      latitude: '-8.7482'
+                      longitude: '115.1675'
+                      elevation: 4 m
+                      imageUrl: ''
+                      imageId: ''
+                      createdAt: '2024-11-29T08:37:00.345Z'
         '401':
           description: Response
           content:
