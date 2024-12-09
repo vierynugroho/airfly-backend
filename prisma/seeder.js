@@ -1784,6 +1784,85 @@ async function main() {
     skipDuplicates: true,
   });
 
+  await prisma.notification.createMany({
+    data: [
+      {
+        type: 'INFO',
+        title: 'Selamat Datang di Layanan Pemesanan Tiket Kami!',
+        description:
+          'Terima kasih telah bergabung. Dapatkan info terbaru dan promo menarik dari kami.',
+        isRead: false,
+      },
+      {
+        type: 'ACCOUNT',
+        title: 'Verifikasi Akun Berhasil!',
+        description:
+          'Selamat, akun anda berhasil terverifikasi!. Nikmati penerbangan penuh adrenalin bersama kami.',
+        isRead: false,
+        userId: 1,
+      },
+      {
+        type: 'DISCOUNT',
+        title: 'Promo Spesial untuk Anda!',
+        description:
+          'Dapatkan diskon 20% untuk pemesanan tiket berikutnya. Berlaku untuk waktu terbatas.',
+        isRead: false,
+      },
+      {
+        type: 'EVENT',
+        title: 'Pemberitahuan Perubahan Jadwal Penerbangan',
+        description:
+          'Perhatikan perubahan jadwal penerbangan terbaru Anda. Periksa detailnya di sini.',
+        isRead: false,
+      },
+      {
+        type: 'PAYMENT',
+        title: 'Notifikasi Pembayaran Palsu',
+        description:
+          'Pembayaran Anda telah berhasil diproses. Terima kasih telah memesan tiket dengan kami.',
+        isRead: true,
+        userId: 1,
+      },
+      {
+        type: 'INFO',
+        title: 'Fitur Baru Telah Diluncurkan!',
+        description:
+          'Nikmati fitur pencarian penerbangan yang lebih cepat dan mudah. Coba sekarang!',
+        isRead: false,
+      },
+      {
+        type: 'DISCOUNT',
+        title: 'Flash Sale: Diskon Tiket Terbatas!',
+        description:
+          'Pesan tiket penerbangan favorit Anda dengan harga diskon. Penawaran terbatas!',
+        isRead: false,
+      },
+      {
+        type: 'ACCOUNT',
+        title: 'Perubahan Kata Sandi Berhasil',
+        description:
+          'Anda telah berhasil mengubah kata sandi akun pemesanan tiket Anda.',
+        isRead: true,
+        userId: 2,
+      },
+      {
+        type: 'EVENT',
+        title: 'Pengumuman: Penundaan Penerbangan',
+        description:
+          'Penerbangan Anda mengalami penundaan. Periksa pembaruan terbaru di aplikasi kami.',
+        isRead: false,
+      },
+      {
+        type: 'PAYMENT',
+        title: 'Notifikasi Pembayaran Palsu',
+        description:
+          'Pembayaran Anda telah berhasil diproses. Terima kasih telah memesan tiket dengan kami.',
+        isRead: true,
+        userId: 2,
+      },
+    ],
+  });
+
   console.log('Seeding complete');
 }
 
