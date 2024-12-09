@@ -137,12 +137,14 @@ export class BookingRepository {
           include: {
             departure: true,
             arrival: true,
+            airline: true,
           },
         },
         returnFlight: {
           include: {
             departure: true,
             arrival: true,
+            airline: true,
           },
         },
       },
