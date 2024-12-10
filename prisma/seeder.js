@@ -383,7 +383,7 @@ async function main() {
     ],
   });
 
-  // Retrieve airline and airport IDs for creating flights
+  // Seed Flights
   const retrievedAirlines = await prisma.airline.findMany();
   const retrievedAirports = await prisma.airport.findMany();
 
@@ -1760,6 +1760,7 @@ async function main() {
   const seatData = [];
   const flights = await prisma.flight.findMany();
 
+  // Seed Seats
   flights.forEach((flight) => {
     const numberOfRows = 12;
     const seatsPerRow = 6;
@@ -1784,6 +1785,68 @@ async function main() {
     skipDuplicates: true,
   });
 
+  // Seed Passenger
+  await prisma.passenger.createMany({
+    data: Array.from({ length: 10 }).map((_, index) => ({
+      name: `Passenger ${index + 1}`,
+      familyName: `Passenger Family ${index + 1}`,
+      gender: index % 2 === 0 ? 'MALE' : 'FEMALE',
+      identityNumber: `${1000000000000 + index}`,
+      citizenship: 'Indonesia',
+      countryOfIssue: 'Indonesia',
+      title: index % 3 === 0 ? 'Mr' : 'Mrs',
+      dob: new Date(1970 + Math.floor(index / 2), index % 12, index + 1),
+      expiredDate: new Date(2030, index % 12, index + 1),
+      type: 'ADULT',
+    })),
+    skipDuplicates: true,
+  });
+
+  // Seed Booking
+  await prisma.booking.createMany({
+    data: Array.from({ length: 5 }).map((_, index) => ({
+      code: `BK-${index + 1}`,
+      userId: 1,
+      flightId: 1,
+      returnFlightId: 2,
+      bookingDate: new Date(2024, index, index + 1),
+      totalPrice: 1000000 + index * 500000,
+      status: 'ACTIVE',
+    })),
+    skipDuplicates: true,
+  });
+
+  // Seed Booking Details
+  await prisma.bookingDetail.createMany({
+    data: Array.from({ length: 5 }).map((_, index) => ({
+      bookingId: index + 1,
+      passengerId: index + 1,
+      seatId: index + 1,
+      price: 500000 + index * 250000,
+    })),
+    skipDuplicates: true,
+  });
+
+  // Seed Payments
+  await prisma.payment.createMany({
+    data: Array.from({ length: 5 }).map((_, index) => ({
+      bookingId: index + 1,
+      paymentMethod:
+        index % 4 === 0
+          ? 'CREDIT_CARD'
+          : index % 4 === 1
+            ? 'BANK_TRANSFER'
+            : index % 4 === 2
+              ? 'DIGITAL_WALLET'
+              : 'PAYPAL',
+      paymentDate: new Date(2024, index, index + 1),
+      paymentAmount: 1000000 + index * 500000,
+      paymentStatus: index % 2 === 0 ? 'PAID' : 'UNPAID',
+    })),
+    skipDuplicates: true,
+  });
+
+  // Seed Notifications
   await prisma.notification.createMany({
     data: [
       {
