@@ -1,0 +1,25 @@
+name: Deployment
+on:
+  push:
+    branches: ['stagging', 'main']
+
+jobs:
+  deploy:
+    name: Deployment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to GCP Compute Engine (Huge Server Prod)
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.HOST}}
+          port: ${{secrets.PORT}}
+          username: ${{secrets.USER}}
+          key: ${{secrets.KEY}}
+          script: |
+            cd /project/Backend
+            eval $(ssh-agent)
+            ssh-add ~/.ssh/github
+            git fetch origin stagging
+            git merge origin/stagging
+            docker compose down && sudo docker image rm binar:1.0 && sudo docker build -t binar:1.0 . && sudo docker compose up -d
