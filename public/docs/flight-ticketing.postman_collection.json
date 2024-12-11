@@ -11645,7 +11645,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"flightId\": 3,\r\n    \"returnFlightId\": 1,\r\n    \"bookingDate\": \"2024-11-26T00:00:00Z\",\r\n    \"bookingDetail\": [\r\n        {\r\n            \"seatId\": 1,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Anton\",\r\n                \"familyName\": \"Wibowo\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        },\r\n        {\r\n            \"seatId\": 12,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Anton\",\r\n                \"familyName\": \"Wibowo\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n",
+              "raw": "{\r\n    \"flightId\": 3,\r\n    \"returnFlightId\": 1,\r\n    \"bookingDate\": \"2024-11-26T00:00:00Z\",\r\n    \"bookingDetail\": [\r\n        {\r\n            \"seatId\": 3,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Wibu\",\r\n                \"familyName\": \"Bau Bawang\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -13949,6 +13949,432 @@
               ],
               "cookie": [],
               "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"notification deleted successfully\"\n    },\n    \"data\": {\n        \"notification\": {\n            \"id\": 34,\n            \"type\": \"PAYMENT\",\n            \"title\": \"Pembayaran Booking\",\n            \"description\": \"Cepet bayar\",\n            \"isRead\": false,\n            \"createdAt\": \"2024-12-06T06:17:42.903Z\",\n            \"userId\": 1\n        }\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "QR Ticket",
+      "item": [
+        {
+          "name": "validate ticket",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"QRCodeData\": {\r\n        \"bookingID\": 6,\r\n        \"flightID\": 3,\r\n        \"returnFlightId\": 1,\r\n        \"bookingDate\": \"2024-12-11T07:26:52.571Z\",\r\n        \"bookingCode\": \"241103AE27\",\r\n        \"passengerId\": 11,\r\n        \"seatId\": 1,\r\n        \"uniqueToken\": \"98fa306c-fc31-4195-af00-caacd6bbe851\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}/tickets/validate/qr-ticket",
+              "host": ["{{local_base_url}}"],
+              "path": ["tickets", "validate", "qr-ticket"]
+            },
+            "description": "### **Request Body:**\n\n_**QRCodeData - Required**_  \nisi dari **QRCodeData** di dapat dari scan kode QR\n\nkode QR didapat dari\n\n``` sql\nbookingDetail.qrCodeImage\n\n ```"
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"QRCodeData\": {\r\n        \"bookingID\": 6,\r\n        \"flightID\": 3,\r\n        \"returnFlightId\": 1,\r\n        \"bookingDate\": \"2024-12-11T07:26:52.571Z\",\r\n        \"bookingCode\": \"241103AE27\",\r\n        \"passengerId\": 11,\r\n        \"seatId\": 1,\r\n        \"uniqueToken\": \"98fa306c-fc31-4195-af00-caacd6bbe851\"\r\n    }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{local_base_url}}/tickets/validate/qr-ticket",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["tickets", "validate", "qr-ticket"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "9003"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"232b-Bx+xgi2NbT6RCQS3CkrUG9sJ7NY\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 11 Dec 2024 08:47:23 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"QR Ticket validate successfully\"\n    },\n    \"data\": {\n        \"QRTickets\": {\n            \"id\": 6,\n            \"code\": \"241103AE27\",\n            \"userId\": 1,\n            \"flightId\": 3,\n            \"returnFlightId\": 1,\n            \"bookingDate\": \"2024-12-11T07:26:52.571Z\",\n            \"totalPrice\": 400000,\n            \"status\": \"ACTIVE\",\n            \"createdAt\": \"2024-12-11T07:26:52.574Z\",\n            \"updateAt\": \"2024-12-11T07:26:52.574Z\",\n            \"bookingDetail\": [\n                {\n                    \"id\": 6,\n                    \"bookingId\": 6,\n                    \"passengerId\": 11,\n                    \"seatId\": 1,\n                    \"price\": 200000,\n                    \"qrCodeImage\": \"data:image/png;base64,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\",\n                    \"qrToken\": null,\n                    \"createdAt\": \"2024-12-11T07:26:52.848Z\",\n                    \"updateAt\": \"2024-12-11T08:26:19.806Z\",\n                    \"passenger\": {\n                        \"id\": 11,\n                        \"name\": \"Anton\",\n                        \"familyName\": \"Wibowo\",\n                        \"gender\": \"MALE\",\n                        \"identityNumber\": \"123456\",\n                        \"citizenship\": \"Indonesia\",\n                        \"countryOfIssue\": \"Indonesia\",\n                        \"title\": \"Mr\",\n                        \"dob\": \"1985-05-15T00:00:00.000Z\",\n                        \"expiredDate\": \"2030-05-15T23:59:59.000Z\",\n                        \"type\": \"ADULT\"\n                    },\n                    \"seat\": {\n                        \"id\": 1,\n                        \"flightId\": 1,\n                        \"seatNumber\": \"1A\",\n                        \"status\": \"LOCKED\",\n                        \"departureTime\": \"2024-12-14T08:00:00.000Z\",\n                        \"arrivalTime\": \"2024-12-14T11:00:00.000Z\"\n                    }\n                }\n            ],\n            \"payment\": {\n                \"id\": 6,\n                \"bookingId\": 6,\n                \"paymentMethod\": \"BANK_TRANSFER\",\n                \"paymentDate\": \"1970-01-01T00:00:00.000Z\",\n                \"paymentAmount\": 1000,\n                \"paymentStatus\": \"PAID\"\n            },\n            \"flight\": {\n                \"id\": 3,\n                \"flightNumber\": \"AL91\",\n                \"airlineId\": 1,\n                \"departureAirport\": 1,\n                \"arrivalAirport\": 2,\n                \"departureTime\": \"2024-12-16T08:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-16T11:00:00.000Z\",\n                \"terminal\": \"A\",\n                \"information\": \"Free Wi Fi-Free Inflight Meals\",\n                \"price\": 550,\n                \"class\": \"PREMIUM_ECONOMY\",\n                \"airline\": {\n                    \"id\": 1,\n                    \"name\": \"Garuda Indonesia\",\n                    \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                    \"imageId\": \"garuda-logo\"\n                },\n                \"departure\": {\n                    \"id\": 1,\n                    \"code\": \"CGK\",\n                    \"name\": \"Soekarno-Hatta International Airport\",\n                    \"city\": \"Jakarta\",\n                    \"state\": \"Asia\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-6.1255\",\n                    \"longitude\": \"106.6551\",\n                    \"elevation\": \"8\",\n                    \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-12-11T04:17:41.893Z\"\n                },\n                \"arrival\": {\n                    \"id\": 2,\n                    \"code\": \"SUB\",\n                    \"name\": \"Juanda International Airport\",\n                    \"city\": \"Surabaya\",\n                    \"state\": \"Asia\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-7.3797\",\n                    \"longitude\": \"112.7876\",\n                    \"elevation\": \"7\",\n                    \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-12-11T04:17:41.893Z\"\n                }\n            },\n            \"returnFlight\": {\n                \"id\": 1,\n                \"flightNumber\": \"AH100\",\n                \"airlineId\": 1,\n                \"departureAirport\": 1,\n                \"arrivalAirport\": 2,\n                \"departureTime\": \"2024-12-14T08:00:00.000Z\",\n                \"arrivalTime\": \"2024-12-14T11:00:00.000Z\",\n                \"terminal\": \"A\",\n                \"information\": \"Free Wi Fi-Free Inflight Meals\",\n                \"price\": 450,\n                \"class\": \"ECONOMY\",\n                \"airline\": {\n                    \"id\": 1,\n                    \"name\": \"Garuda Indonesia\",\n                    \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                    \"imageId\": \"garuda-logo\"\n                },\n                \"departure\": {\n                    \"id\": 1,\n                    \"code\": \"CGK\",\n                    \"name\": \"Soekarno-Hatta International Airport\",\n                    \"city\": \"Jakarta\",\n                    \"state\": \"Asia\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-6.1255\",\n                    \"longitude\": \"106.6551\",\n                    \"elevation\": \"8\",\n                    \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-12-11T04:17:41.893Z\"\n                },\n                \"arrival\": {\n                    \"id\": 2,\n                    \"code\": \"SUB\",\n                    \"name\": \"Juanda International Airport\",\n                    \"city\": \"Surabaya\",\n                    \"state\": \"Asia\",\n                    \"country\": \"Indonesia\",\n                    \"timezone\": \"Asia/Jakarta\",\n                    \"latitude\": \"-7.3797\",\n                    \"longitude\": \"112.7876\",\n                    \"elevation\": \"7\",\n                    \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                    \"imageId\": \"\",\n                    \"createdAt\": \"2024-12-11T04:17:41.893Z\"\n                }\n            }\n        }\n    }\n}"
+            },
+            {
+              "name": "ticket is invalid",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"QRCodeData\": {\r\n        \"bookingID\": 0,\r\n        \"flightID\": 3,\r\n        \"returnFlightId\": 1,\r\n        \"bookingDate\": \"2024-12-11T07:26:52.571Z\",\r\n        \"bookingCode\": \"241103AE27\",\r\n        \"passengerId\": 11,\r\n        \"seatId\": 1,\r\n        \"uniqueToken\": \"98fa306c-fc31-4195-af00-caacd6bbe851\"\r\n    }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{local_base_url}}/tickets/validate/qr-ticket",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["tickets", "validate", "qr-ticket"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "55"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"37-EIfe51y5yJP1XBlr9C9mG9eskX4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 11 Dec 2024 08:49:26 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 400,\n        \"message\": \"invalid ticket\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "generate ticket",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{local_base_url}}/tickets/:bookingID",
+              "host": ["{{local_base_url}}"],
+              "path": ["tickets", ":bookingID"],
+              "variable": [
+                {
+                  "key": "bookingID",
+                  "value": "6",
+                  "description": "booking ID"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "success - multiple passengers",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/tickets/:bookingID",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["tickets", ":bookingID"],
+                  "variable": [
+                    {
+                      "key": "bookingID",
+                      "value": "6",
+                      "description": "booking ID"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "16655"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"410f-pnFSLsUKp8ZWcSASAzNQbPBoG8Y\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 11 Dec 2024 08:26:20 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"QR Ticket generated successfully\"\n    },\n    \"data\": {\n        \"QRTickets\": [\n            {\n                \"passenger\": {\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"type\": \"ADULT\"\n                },\n                \"booking\": {\n                    \"id\": 6,\n                    \"code\": \"241103AE27\",\n                    \"userId\": 1,\n                    \"flightId\": 3,\n                    \"returnFlightId\": 1,\n                    \"bookingDate\": \"2024-12-11T07:26:52.571Z\",\n                    \"totalPrice\": 400000,\n                    \"status\": \"ACTIVE\",\n                    \"createdAt\": \"2024-12-11T07:26:52.574Z\",\n                    \"updateAt\": \"2024-12-11T07:26:52.574Z\",\n                    \"flight\": {\n                        \"id\": 3,\n                        \"flightNumber\": \"AL91\",\n                        \"airlineId\": 1,\n                        \"departureAirport\": 1,\n                        \"arrivalAirport\": 2,\n                        \"departureTime\": \"2024-12-16T08:00:00.000Z\",\n                        \"arrivalTime\": \"2024-12-16T11:00:00.000Z\",\n                        \"terminal\": \"A\",\n                        \"information\": \"Free Wi Fi-Free Inflight Meals\",\n                        \"price\": 550,\n                        \"class\": \"PREMIUM_ECONOMY\",\n                        \"airline\": {\n                            \"id\": 1,\n                            \"name\": \"Garuda Indonesia\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                            \"imageId\": \"garuda-logo\"\n                        },\n                        \"departure\": {\n                            \"id\": 1,\n                            \"code\": \"CGK\",\n                            \"name\": \"Soekarno-Hatta International Airport\",\n                            \"city\": \"Jakarta\",\n                            \"state\": \"Asia\",\n                            \"country\": \"Indonesia\",\n                            \"timezone\": \"Asia/Jakarta\",\n                            \"latitude\": \"-6.1255\",\n                            \"longitude\": \"106.6551\",\n                            \"elevation\": \"8\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                            \"imageId\": \"\",\n                            \"createdAt\": \"2024-12-11T04:17:41.893Z\"\n                        },\n                        \"arrival\": {\n                            \"id\": 2,\n                            \"code\": \"SUB\",\n                            \"name\": \"Juanda International Airport\",\n                            \"city\": \"Surabaya\",\n                            \"state\": \"Asia\",\n                            \"country\": \"Indonesia\",\n                            \"timezone\": \"Asia/Jakarta\",\n                            \"latitude\": \"-7.3797\",\n                            \"longitude\": \"112.7876\",\n                            \"elevation\": \"7\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                            \"imageId\": \"\",\n                            \"createdAt\": \"2024-12-11T04:17:41.893Z\"\n                        }\n                    },\n                    \"returnFlight\": {\n                        \"id\": 1,\n                        \"flightNumber\": \"AH100\",\n                        \"airlineId\": 1,\n                        \"departureAirport\": 1,\n                        \"arrivalAirport\": 2,\n                        \"departureTime\": \"2024-12-14T08:00:00.000Z\",\n                        \"arrivalTime\": \"2024-12-14T11:00:00.000Z\",\n                        \"terminal\": \"A\",\n                        \"information\": \"Free Wi Fi-Free Inflight Meals\",\n                        \"price\": 450,\n                        \"class\": \"ECONOMY\",\n                        \"airline\": {\n                            \"id\": 1,\n                            \"name\": \"Garuda Indonesia\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                            \"imageId\": \"garuda-logo\"\n                        },\n                        \"departure\": {\n                            \"id\": 1,\n                            \"code\": \"CGK\",\n                            \"name\": \"Soekarno-Hatta International Airport\",\n                            \"city\": \"Jakarta\",\n                            \"state\": \"Asia\",\n                            \"country\": \"Indonesia\",\n                            \"timezone\": \"Asia/Jakarta\",\n                            \"latitude\": \"-6.1255\",\n                            \"longitude\": \"106.6551\",\n                            \"elevation\": \"8\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                            \"imageId\": \"\",\n                            \"createdAt\": \"2024-12-11T04:17:41.893Z\"\n                        },\n                        \"arrival\": {\n                            \"id\": 2,\n                            \"code\": \"SUB\",\n                            \"name\": \"Juanda International Airport\",\n                            \"city\": \"Surabaya\",\n                            \"state\": \"Asia\",\n                            \"country\": \"Indonesia\",\n                            \"timezone\": \"Asia/Jakarta\",\n                            \"latitude\": \"-7.3797\",\n                            \"longitude\": \"112.7876\",\n                            \"elevation\": \"7\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                            \"imageId\": \"\",\n                            \"createdAt\": \"2024-12-11T04:17:41.893Z\"\n                        }\n                    }\n                },\n                \"qrCodeImage\": \"data:image/png;base64,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\"\n            },\n            {\n                \"passenger\": {\n                    \"name\": \"Anton\",\n                    \"familyName\": \"Wibowo\",\n                    \"type\": \"ADULT\"\n                },\n                \"booking\": {\n                    \"id\": 6,\n                    \"code\": \"241103AE27\",\n                    \"userId\": 1,\n                    \"flightId\": 3,\n                    \"returnFlightId\": 1,\n                    \"bookingDate\": \"2024-12-11T07:26:52.571Z\",\n                    \"totalPrice\": 400000,\n                    \"status\": \"ACTIVE\",\n                    \"createdAt\": \"2024-12-11T07:26:52.574Z\",\n                    \"updateAt\": \"2024-12-11T07:26:52.574Z\",\n                    \"flight\": {\n                        \"id\": 3,\n                        \"flightNumber\": \"AL91\",\n                        \"airlineId\": 1,\n                        \"departureAirport\": 1,\n                        \"arrivalAirport\": 2,\n                        \"departureTime\": \"2024-12-16T08:00:00.000Z\",\n                        \"arrivalTime\": \"2024-12-16T11:00:00.000Z\",\n                        \"terminal\": \"A\",\n                        \"information\": \"Free Wi Fi-Free Inflight Meals\",\n                        \"price\": 550,\n                        \"class\": \"PREMIUM_ECONOMY\",\n                        \"airline\": {\n                            \"id\": 1,\n                            \"name\": \"Garuda Indonesia\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                            \"imageId\": \"garuda-logo\"\n                        },\n                        \"departure\": {\n                            \"id\": 1,\n                            \"code\": \"CGK\",\n                            \"name\": \"Soekarno-Hatta International Airport\",\n                            \"city\": \"Jakarta\",\n                            \"state\": \"Asia\",\n                            \"country\": \"Indonesia\",\n                            \"timezone\": \"Asia/Jakarta\",\n                            \"latitude\": \"-6.1255\",\n                            \"longitude\": \"106.6551\",\n                            \"elevation\": \"8\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                            \"imageId\": \"\",\n                            \"createdAt\": \"2024-12-11T04:17:41.893Z\"\n                        },\n                        \"arrival\": {\n                            \"id\": 2,\n                            \"code\": \"SUB\",\n                            \"name\": \"Juanda International Airport\",\n                            \"city\": \"Surabaya\",\n                            \"state\": \"Asia\",\n                            \"country\": \"Indonesia\",\n                            \"timezone\": \"Asia/Jakarta\",\n                            \"latitude\": \"-7.3797\",\n                            \"longitude\": \"112.7876\",\n                            \"elevation\": \"7\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                            \"imageId\": \"\",\n                            \"createdAt\": \"2024-12-11T04:17:41.893Z\"\n                        }\n                    },\n                    \"returnFlight\": {\n                        \"id\": 1,\n                        \"flightNumber\": \"AH100\",\n                        \"airlineId\": 1,\n                        \"departureAirport\": 1,\n                        \"arrivalAirport\": 2,\n                        \"departureTime\": \"2024-12-14T08:00:00.000Z\",\n                        \"arrivalTime\": \"2024-12-14T11:00:00.000Z\",\n                        \"terminal\": \"A\",\n                        \"information\": \"Free Wi Fi-Free Inflight Meals\",\n                        \"price\": 450,\n                        \"class\": \"ECONOMY\",\n                        \"airline\": {\n                            \"id\": 1,\n                            \"name\": \"Garuda Indonesia\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                            \"imageId\": \"garuda-logo\"\n                        },\n                        \"departure\": {\n                            \"id\": 1,\n                            \"code\": \"CGK\",\n                            \"name\": \"Soekarno-Hatta International Airport\",\n                            \"city\": \"Jakarta\",\n                            \"state\": \"Asia\",\n                            \"country\": \"Indonesia\",\n                            \"timezone\": \"Asia/Jakarta\",\n                            \"latitude\": \"-6.1255\",\n                            \"longitude\": \"106.6551\",\n                            \"elevation\": \"8\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                            \"imageId\": \"\",\n                            \"createdAt\": \"2024-12-11T04:17:41.893Z\"\n                        },\n                        \"arrival\": {\n                            \"id\": 2,\n                            \"code\": \"SUB\",\n                            \"name\": \"Juanda International Airport\",\n                            \"city\": \"Surabaya\",\n                            \"state\": \"Asia\",\n                            \"country\": \"Indonesia\",\n                            \"timezone\": \"Asia/Jakarta\",\n                            \"latitude\": \"-7.3797\",\n                            \"longitude\": \"112.7876\",\n                            \"elevation\": \"7\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                            \"imageId\": \"\",\n                            \"createdAt\": \"2024-12-11T04:17:41.893Z\"\n                        }\n                    }\n                },\n                \"qrCodeImage\": \"data:image/png;base64,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\"\n            }\n        ]\n    }\n}"
+            },
+            {
+              "name": "success - single passenger",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/tickets/:bookingID",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["tickets", ":bookingID"],
+                  "variable": [
+                    {
+                      "key": "bookingID",
+                      "value": "8",
+                      "description": "booking ID"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "7134"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1bde-tz1GI69FKqYcKs1X1YA4x0ZwA8M\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 11 Dec 2024 08:26:52 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"QR Ticket generated successfully\"\n    },\n    \"data\": {\n        \"QRTickets\": [\n            {\n                \"passenger\": {\n                    \"name\": \"Wibu\",\n                    \"familyName\": \"Bau Bawang\",\n                    \"type\": \"ADULT\"\n                },\n                \"booking\": {\n                    \"id\": 8,\n                    \"code\": \"241103356E\",\n                    \"userId\": 1,\n                    \"flightId\": 3,\n                    \"returnFlightId\": null,\n                    \"bookingDate\": \"2024-12-11T07:34:52.243Z\",\n                    \"totalPrice\": 200000,\n                    \"status\": \"ACTIVE\",\n                    \"createdAt\": \"2024-12-11T07:34:52.245Z\",\n                    \"updateAt\": \"2024-12-11T07:34:52.245Z\",\n                    \"flight\": {\n                        \"id\": 3,\n                        \"flightNumber\": \"AL91\",\n                        \"airlineId\": 1,\n                        \"departureAirport\": 1,\n                        \"arrivalAirport\": 2,\n                        \"departureTime\": \"2024-12-16T08:00:00.000Z\",\n                        \"arrivalTime\": \"2024-12-16T11:00:00.000Z\",\n                        \"terminal\": \"A\",\n                        \"information\": \"Free Wi Fi-Free Inflight Meals\",\n                        \"price\": 550,\n                        \"class\": \"PREMIUM_ECONOMY\",\n                        \"airline\": {\n                            \"id\": 1,\n                            \"name\": \"Garuda Indonesia\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                            \"imageId\": \"garuda-logo\"\n                        },\n                        \"departure\": {\n                            \"id\": 1,\n                            \"code\": \"CGK\",\n                            \"name\": \"Soekarno-Hatta International Airport\",\n                            \"city\": \"Jakarta\",\n                            \"state\": \"Asia\",\n                            \"country\": \"Indonesia\",\n                            \"timezone\": \"Asia/Jakarta\",\n                            \"latitude\": \"-6.1255\",\n                            \"longitude\": \"106.6551\",\n                            \"elevation\": \"8\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                            \"imageId\": \"\",\n                            \"createdAt\": \"2024-12-11T04:17:41.893Z\"\n                        },\n                        \"arrival\": {\n                            \"id\": 2,\n                            \"code\": \"SUB\",\n                            \"name\": \"Juanda International Airport\",\n                            \"city\": \"Surabaya\",\n                            \"state\": \"Asia\",\n                            \"country\": \"Indonesia\",\n                            \"timezone\": \"Asia/Jakarta\",\n                            \"latitude\": \"-7.3797\",\n                            \"longitude\": \"112.7876\",\n                            \"elevation\": \"7\",\n                            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                            \"imageId\": \"\",\n                            \"createdAt\": \"2024-12-11T04:17:41.893Z\"\n                        }\n                    },\n                    \"returnFlight\": null\n                },\n                \"qrCodeImage\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQQAAAEECAYAAADOCEoKAAAAAklEQVR4AewaftIAAA/fSURBVO3BQY7kWpAYQXei7n9lVy24CC30AIKZ1X9GYWa/WGutXxdrrXW7WGut28Vaa90u1lrrdrHWWreLtda6Xay11u1irbVuF2utdbtYa63bxVpr3S7WWut2sdZat4u11rpdrLXW7YeXVP5SxRMqb1RMKlPFicpU8UkqT1RMKm9UTCpTxaQyVZyoTBWTyhMVk8pUMamcVJyo/KWKNy7WWut2sdZat4u11rr98GEVn6TySRUnKv+SylRxUjGpPFExqUwVk8oTKlPFicpUMamcVJyonKhMFZPKGxWfpPJJF2utdbtYa63bxVpr3X74MpUnKp5QOamYVE4qJpWpYlKZKp5QmSqeUDmpmFSmiqnijYonVJ6omFSeqJhUTlS+SeWJim+6WGut28Vaa90u1lrr9sP6v6icqEwVT6icqEwVb6hMFW9UfFLFpDKpfFPFpDJVTCr/m12stdbtYq21bhdrrXX74X+ZipOKE5WTiknljYonVE4qJpVJ5ZMqJpWTiicqJpWpYlI5qVj/bxdrrXW7WGut28Vaa91++LKKv6RyUvFExaQyVUwqb6hMFZ9U8YTKVHFSMalMKicVk8pUcVIxqZyoTBWTylTxSRX/JRdrrXW7WGut28Vaa91++DCVf6liUjlRmSomlaliUpkqJpWpYlKZKiaVqWJSeUNlqnhCZao4qZhU3lCZKv6SylRxovJfdrHWWreLtda6Xay11s1+8T+YyhMVk8pUcaIyVUwqJxVvqLxR8YTKScWJyknFGypTxYnKScX/zy7WWut2sdZat4u11rrZL15QmSomlU+qOFF5ouINlZOKJ1SmikllqphUvqniROWkYlKZKiaVqeJE5aTiCZWTihOVT6r4pou11rpdrLXW7WKttW4/fJjKVDGpnFQ8ofJJKicVJxVPqEwVT6hMFZPKExUnKlPFGxUnFZPKScWk8kbFJ1U8oXKiMlW8cbHWWreLtda6Xay11u2HD6s4qZhUJpWTipOKE5U3VE5Upoo3VKaKSWVSmSpOVE5UpoonKk5U3qiYVE5Unqg4UXlC5aRiqjip+KSLtda6Xay11u1irbVuP7xUcaIyVTxRMalMFZPKVPFGxYnKVDGpnFRMKk9UnKhMFVPFEypPqJxUnKicqEwVk8pJxaRyonJS8YbKScU3Xay11u1irbVuF2utdbNfvKAyVUwqU8WJyknFicpUcaIyVUwqU8WJylTxhspUMam8UXGiMlWcqJxUTCpTxYnKVDGpnFRMKt9UcaIyVUwqJxWfdLHWWreLtda6Xay11s1+8UUqb1RMKlPFpDJVTCpTxaQyVZyovFExqUwVk8pUMamcVHyTylQxqZxUTCpTxRsqJxUnKlPFicpJxRMqJxVvXKy11u1irbVuF2utdbNfvKDyRMWJyknFGypTxaRyUjGpnFS8oTJVPKFyUjGpTBUnKlPFpDJVTCpTxRsqJxWTyhMVJyonFU+onFR80sVaa90u1lrrdrHWWjf7xRepTBV/SeWk4kTlkyomlaniRGWqmFROKt5QeaJiUpkqTlTeqHhDZaqYVD6p4kRlqviki7XWul2stdbtYq21bj+8pHJSMalMFScqJxWTylQxqUwqJxWTyl9SeaLiROWNiknlRGWqeKLiDZU3Kk4qJpWTihOVk4pvulhrrdvFWmvdLtZa62a/+CKVJyqeUJkqJpU3KiaVqeJE5aTiRGWqOFGZKt5QmSqeUDmpOFGZKp5QmSqeUHmj4g2VJyreuFhrrdvFWmvdLtZa62a/+EMq/1LFpDJVTConFU+oPFHxhspJxaQyVbyh8pcqnlA5qXhDZap4QmWq+KaLtda6Xay11u1irbVuP3yZylTxSSonFW9UnKhMFZPKVHGicqLyRMWJyhsqJxVvqEwVJyonFZ+k8oTKScVUMalMFZ90sdZat4u11rpdrLXWzX7xQSrfVPGGyhsVk8pUMalMFW+oTBUnKk9UnKhMFZPKScWkclIxqTxRMalMFZPKScU3qZxUfNPFWmvdLtZa63ax1lq3Hz6sYlKZKiaVqeIJlZOKJyqeqPgklZOKJyomlROVqWKqmFQ+qWJSeUPljYpJ5YmKE5Wp4kRlqviki7XWul2stdbtYq21bvaLF1ROKp5QeaPiCZUnKk5Unqg4UZkqJpWp4kRlqjhRmSo+SeWNihOVqWJSmSo+SWWqmFROKv7SxVpr3S7WWut2sdZaN/vFCypTxaQyVbyh8kbFEypTxRsqU8Wk8kkVT6icVJyoTBWTyknFpDJVTCr/UsWkclIxqUwVk8pJxSddrLXW7WKttW4Xa611s198kMpUcaIyVUwqJxUnKm9UTCpPVJyoTBUnKicVJypTxYnKJ1VMKlPFicpUcaIyVTyh8kTFpHJS8YTKScUbF2utdbtYa63bxVpr3X74YypPVEwqT1ScqJyoTBUnKpPKVHGiclIxqTxRcaJyUjGpfJLKVDFVTCpvqDxRcaLySSpTxaTySRdrrXW7WGut28Vaa93sFy+oTBWTyn9JxRMqT1RMKlPFpDJVTCpTxYnKv1QxqUwVk8oTFScqU8WJylTxhMonVfxLF2utdbtYa63bxVpr3X54qeKJikllqnhCZaqYVE5UTiomlanipOKk4gmVqeKJiidUTiomlanipOJE5Q2Vk4pJ5aTipOIJlROVqeKbLtZa63ax1lq3i7XWuv3wYSpTxaTyhMpU8YbKVDGpTConKlPFpDJVTCpPVHySylRxUvFJKlPFicpUMVW8UXGi8oTKVHGiMlX8pYu11rpdrLXW7WKttW4/vKQyVZxUTConFU+oTBWTyhMVk8onVUwqJyonFZPKScUTKlPFN1VMKk+oTBV/qeINlaliUpkq3rhYa63bxVpr3S7WWuv2w4epnFScqLxRcVLxRsU3VZyoTBWTyonKJ6k8ofKEyhMqT6icVEwVk8qk8kbFpDKpTBWfdLHWWreLtda6Xay11s1+8YdUnqg4UZkqvknlpGJS+UsVk8pJxaQyVUwqT1RMKn+pYlKZKk5U3qg4UXmj4pMu1lrrdrHWWreLtda6/fBhKk9UnKhMFVPFpHJSMalMFZPKN1VMKlPFpHKiMlVMKpPKExVPqEwVf0llqphUpoqTikllqvimikllqnjjYq21bhdrrXW7WGutm/3iBZUnKk5Upoo3VE4qJpWpYlJ5o2JSmSqeUDmpeEPlpGJSmSomlU+qOFGZKt5QOamYVE4q/ksu1lrrdrHWWreLtda62S++SOWJiknlpOINlTcq/pLKScWJyknFGyonFZPKVDGpTBUnKicVk8obFScqU8UbKlPFJ12stdbtYq21bhdrrXX74T9GZaqYVCaVqeKJiknlm1ROKiaVqWJSOVE5qZhUTiomlaniRGWqeELlpGJSOak4UZkqTlROVKaKE5Wp4psu1lrrdrHWWreLtda6/fBhKicVJyqTyhMqJxWTyknFpPJJFScVk8oTFZPKScWJylRxojJVTCpTxUnFExWTyhsqJxUnKicq/9LFWmvdLtZa63ax1lq3Hz6s4pMqJpWTir+k8kTFpPJExaRyojJVTCpPVJyoTBUnFU+oTBWTyknFpPJGxaQyVUwVk8oTKicVb1ystdbtYq21bhdrrXWzX7ygMlWcqEwVJyonFZPKScUTKp9UMalMFZPKExUnKicVn6QyVZyonFRMKlPFicoTFScqU8WJylTxX3Kx1lq3i7XWul2stdbNfvGCylQxqUwVk8pUcaLyTRWTyhsVk8pJxRsqJxWTyknFpPJExYnKVPGEyhMVk8pJxaTyRMUnqUwVn3Sx1lq3i7XWul2stdbth5cq3qiYVN6omFSmijcqTlTeUJkqnqiYVJ6omFROKv6SyknFpDKpTBVPVEwqU8WkMlVMKk9UTCpTxRsXa611u1hrrdvFWmvd7BcvqDxRMamcVLyh8kbFEypTxRsqU8WkMlWcqEwVb6icVLyhMlWcqHxSxRMqJxVPqJxUfNLFWmvdLtZa63ax1lo3+8UHqTxRMamcVJyoPFExqUwVk8pUMamcVEwq/1LFicpU8UkqJxWTyknFEypTxYnKExWTyknFv3Sx1lq3i7XWul2stdbNfvGCylQxqUwVn6TySRWTylQxqUwVk8pJxb+k8kbFEypTxaQyVZyo/EsVJypTxaTyRsUnXay11u1irbVuF2utdfvhpYpJ5UTljYqTiknlk1SmiknlpOIJlScqJpWp4qRiUpkqnlCZKiaVqeJE5aRiUpkqvknlROWk4l+6WGut28Vaa90u1lrr9sNLKicVT6hMFd9UMalMFZPKX6qYVJ6omFROVE5UpopJZap4QmWqeELlCZWTihOVqeJ/sou11rpdrLXW7WKttW4/fFjFpDJVPKEyVUwVT1ScVEwq36RyUjFVTCqTylQxVTyhMlWcVLxR8UbFpHJS8YTKVPGEyknFv3Sx1lq3i7XWul2stdbthw9TOVE5qThRmSqeUDmpeEJlqjhROamYVKaKk4oTlTdUpooTlaniX1KZKp6omFSmiknlpGJSOan4pou11rpdrLXW7WKttW72i/8wlW+qmFROKk5UTiqeUJkqnlD5pIoTlTcqJpWTiknlpGJSOamYVL6p4gmVqeKNi7XWul2stdbtYq21bj/8x1WcqLyhclIxqfxLKm9UPKEyqUwVU8Wk8kbFpHJSMal8UsWkMlU8ofJGxSddrLXW7WKttW4Xa611++Ellb9UMVU8oTJVnKicVJyoPKEyVUwqJxWTyonKVHFScaIyVbyhMlWcqEwVk8pUMalMKm+oTBVPqJxUfNLFWmvdLtZa63ax1lq3Hz6s4pNUTlSmiidUTiomlROVE5Wp4omKE5UnKp5QmSqmiknlpOINlU+qmFTeqHhC5aTimy7WWut2sdZat4u11rr98GUqT1S8ofJGxaRyojJVnKg8oTJVTCpTxaQyqbxRcaIyVTyh8kTFicpU8UbFpDKpvFExqUwqU8UnXay11u1irbVuF2utdfvhf7mKJ1SmiknlRGWqmComlSdUpopJ5aRiUnlD5QmVk4pPqphUpoqTikllqphUTipOVE4qvulirbVuF2utdbtYa63bD/+fUfmkihOVqeKk4i9VTConKlPFpDKpTBVPqJxUTCpPqDxRcVIxqUwqU8VU8S9drLXW7WKttW4Xa611s1+8oDJVfJLKVPGEyhMVk8pUMak8UXGiMlVMKlPFEyqfVPGXVD6p4g2VT6qYVKaKb7pYa63bxVpr3S7WWuv2w4ep/CWVqeKTKk4qJpUTlaniDZWp4qTiRGWqeELlpOIJlaniDZVJ5YmKJyomlROVE5Wp4pMu1lrrdrHWWreLtda62S/WWuvXxVpr3S7WWut2sdZat4u11rpdrLXW7WKttW4Xa611u1hrrdvFWmvdLtZa63ax1lq3i7XWul2stdbtYq21bhdrrXX7P8FLD2mWmvRAAAAAAElFTkSuQmCC\"\n            }\n        ]\n    }\n}"
+            },
+            {
+              "name": "unpaid - payment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/tickets/:bookingID",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["tickets", ":bookingID"],
+                  "variable": [
+                    {
+                      "key": "bookingID",
+                      "value": "6",
+                      "description": "booking ID"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "93"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"5d-UsuierV6bNRM3XWgZUo2eo2wjXM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 11 Dec 2024 08:28:53 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 400,\n        \"message\": \"flight ticket data not found or payment not yet paid\"\n    }\n}"
+            },
+            {
+              "name": "invalid id value",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/tickets/:bookingID",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["tickets", ":bookingID"],
+                  "variable": [
+                    {
+                      "key": "bookingID",
+                      "value": "ad",
+                      "description": "booking ID"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "65"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"41-BaQB4Uw/WSR1jpreeHdUOJcloU8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 11 Dec 2024 08:32:56 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 400,\n        \"message\": \"invalid booking ID value\"\n    }\n}"
             }
           ]
         }
