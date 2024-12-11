@@ -30,7 +30,7 @@ export class FlightController {
       const earliestArrival = req.query.earliestArrival || 'false';
       const latestArrival = req.query.latestArrival || 'false';
 
-      const { priceMin, priceMax, flightNumber, seatClass } = req.query;
+      const { priceMin, priceMax, flightNumber, seatClass, state } = req.query;
 
       let sort = {};
       let condition = {};
@@ -82,6 +82,14 @@ export class FlightController {
       }
       if (seatClass) {
         condition.class = seatClass.toUpperCase() || {};
+      }
+      if (state) {
+        condition.arrival = {
+          state: {
+            contains: state,
+            mode: 'insensitive',
+          },
+        };
       }
       if (priceMax) {
         condition.price = condition.price || {};
