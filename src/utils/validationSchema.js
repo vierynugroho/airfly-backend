@@ -180,3 +180,7 @@ export const readNotificationSchema = Joi.object({
   notificationID: Joi.number().required(),
   isRead: Joi.boolean().required(),
 });
+
+export const QRCodeSchema = Joi.object({
+  QRCodeData: Joi.object().required(),
+});
