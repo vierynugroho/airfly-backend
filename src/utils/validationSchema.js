@@ -184,3 +184,7 @@ export const readNotificationSchema = Joi.object({
 export const QRCodeSchema = Joi.object({
   QRCodeData: Joi.object().required(),
 });
+
+export const transactionSchema = Joi.object({
+  bookingId: Joi.number().required(),
+});
