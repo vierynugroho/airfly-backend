@@ -129,6 +129,7 @@ model BookingDetail {
   seatId      Int      @map("seat_id")
   price       Float
   qrCodeImage String?
+  qrToken     String?
   createdAt   DateTime @default(now()) @map("createdAt")
   updateAt    DateTime @default(now()) @updatedAt
 

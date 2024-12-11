@@ -17,9 +17,7 @@ export class TicketController {
           statusCode: 200,
           message: 'QR Ticket generated successfully',
         },
-        data: {
-          QRTickets,
-        },
+        data: QRTickets,
       });
     } catch (e) {
       next(e);
@@ -37,9 +35,7 @@ export class TicketController {
           statusCode: 200,
           message: 'QR Ticket validate successfully',
         },
-        data: {
-          QRTickets,
-        },
+        data: QRTickets,
       });
     } catch (e) {
       next(e);

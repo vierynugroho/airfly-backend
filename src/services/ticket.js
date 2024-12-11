@@ -24,11 +24,11 @@ export class TicketService {
     }
 
     const bookingDetailData = booking.bookingDetail;
-
     const createQRTicket = await Promise.all(
       bookingDetailData.map(async (bookingData) => {
         const QRData = {
           bookingID: booking.id,
+          bookingDetailID: bookingData.id,
           flightID: booking.flightId,
           returnFlightId: booking.returnFlightId,
           bookingDate: booking.bookingDate,
@@ -43,20 +43,26 @@ export class TicketService {
         const updateDetailBooking = await TicketRepository.updateQRCode(
           bookingID,
           bookingData.id,
-          QR
+          QR,
+          QRData.uniqueToken
         );
 
         return updateDetailBooking;
       })
     );
 
-    console.log(createQRTicket);
     return createQRTicket;
   }
 
   static async validate(QRCodeData) {
-    const ticket = await TicketRepository.findBoking(
-      QRCodeData.QRCodeData.bookingID
+    console.log(QRCodeData);
+    const bookingDetailID = QRCodeData.QRCodeData.bookingDetailID;
+    const bookingID = QRCodeData.QRCodeData.bookingID;
+    const QRToken = QRCodeData.QRCodeData.uniqueToken;
+    const ticket = await TicketRepository.validateQRCode(
+      bookingID,
+      bookingDetailID,
+      QRToken
     );
 
     if (!ticket) {

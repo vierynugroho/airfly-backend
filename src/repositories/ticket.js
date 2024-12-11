@@ -25,9 +25,6 @@ export class TicketRepository {
       },
       include: {
         bookingDetail: {
-          where: {
-            id: bookingID,
-          },
           include: {
             passenger: true,
             seat: true,
@@ -54,7 +51,7 @@ export class TicketRepository {
     return booking;
   }
 
-  static async updateQRCode(bookingID, detailBookingID, qrCodeImage) {
+  static async updateQRCode(bookingID, detailBookingID, qrCodeImage, qrToken) {
     const generate = await prisma.bookingDetail.update({
       where: {
         bookingId: bookingID,
@@ -62,6 +59,7 @@ export class TicketRepository {
       },
       data: {
         qrCodeImage,
+        qrToken,
       },
       select: {
         passenger: {
@@ -71,6 +69,7 @@ export class TicketRepository {
             type: true,
           },
         },
+        qrCodeImage: true,
         booking: {
           include: {
             flight: {
@@ -89,18 +88,17 @@ export class TicketRepository {
             },
           },
         },
-        qrCodeImage: true,
       },
     });
 
     return generate;
   }
 
-  static async validateQRCode(QRToken, bookingID, detailBookingID) {
+  static async validateQRCode(bookingID, bookingDetailID, QRToken) {
     const booking = await prisma.bookingDetail.findUnique({
       where: {
-        id: detailBookingID,
         bookingId: bookingID,
+        id: bookingDetailID,
         qrToken: QRToken,
       },
       include: {
