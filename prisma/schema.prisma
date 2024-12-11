@@ -103,7 +103,7 @@ model Seat {
 
 model Booking {
   id             Int           @id @default(autoincrement())
-  code           String        @unique @default("")
+  code           String        @unique
   user           User          @relation(fields: [userId], references: [id])
   userId         Int           @map("user_id")
   flightId       Int           @map("flight_id")
@@ -128,6 +128,8 @@ model BookingDetail {
   passengerId Int      @unique @map("passenger_id")
   seatId      Int      @map("seat_id")
   price       Float
+  qrCodeImage String?
+  qrToken     String?
   createdAt   DateTime @default(now()) @map("createdAt")
   updateAt    DateTime @default(now()) @updatedAt
 
@@ -206,6 +208,7 @@ enum SeatStatus {
 
 enum SeatClass {
   ECONOMY
+  PREMIUM_ECONOMY
   FIRST
   BUSINESS
 }

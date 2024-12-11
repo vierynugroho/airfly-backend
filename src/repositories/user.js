@@ -10,8 +10,6 @@ export class UserRepository {
         _count: true,
         booking: {
           include: {
-            flight: true,
-            passenger: true,
             _count: true,
           },
         },
