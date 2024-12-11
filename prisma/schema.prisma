@@ -158,10 +158,10 @@ model Passenger {
   gender         Gender         @default(MALE)
   identityNumber String         @map("identity_number")
   citizenship    String
-  countryOfIssue String         @map("country_of_issue")
+  countryOfIssue String?        @map("country_of_issue")
   title          PassengerTitle @default(Mr)
   dob            DateTime
-  expiredDate    DateTime       @map("expired_Date")
+  expiredDate    DateTime?      @map("expired_Date")
   type           PassengerType  @default(ADULT)
 
   bookingDetail BookingDetail?
