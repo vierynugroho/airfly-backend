@@ -44,7 +44,13 @@ export class FlightRepository {
       },
     });
 
-    return flights;
+    const sortedFlights = flights.sort((a, b) => {
+      const totalA = (a._count.booking || 0) + (a._count.returnBooking || 0);
+      const totalB = (b._count.booking || 0) + (b._count.returnBooking || 0);
+      return totalB - totalA;
+    });
+
+    return sortedFlights;
   }
 
   static async findByID(flightID) {
@@ -79,5 +85,24 @@ export class FlightRepository {
       },
     });
     return !!flight;
+  }
+
+  static async flightTicketsSoldOut(flightID) {
+    const availableSeats = await prisma.flight.findFirst({
+      where: {
+        id: flightID,
+      },
+      include: {
+        seat: {
+          where: {
+            status: 'AVAILABLE',
+          },
+        },
+      },
+    });
+
+    const isSoldOut = !availableSeats || availableSeats.seat.length === 0;
+
+    return isSoldOut;
   }
 }

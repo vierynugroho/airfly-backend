@@ -7,7 +7,8 @@ export class FlightController {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || null;
 
-      const departureDate = req.query.departureDate;
+      const departureTime = req.query.departureTime;
+      const returnTime = req.query.returnTime;
       const departureAirport = req.query.departureAirport
         ? parseInt(req.query.departureAirport)
         : null;
@@ -33,6 +34,7 @@ export class FlightController {
 
       let sort = {};
       let condition = {};
+      let duration = {};
       const pagination = {};
 
       if (page && limit) {
@@ -44,7 +46,7 @@ export class FlightController {
         sort = { price: 'asc' };
       }
       if (shortest === 'true') {
-        sort = { duration: 'asc' };
+        duration = { sort: 'asc' };
       }
       if (earliestDeparture === 'true') {
         sort = { departureTime: 'asc' };
@@ -62,9 +64,14 @@ export class FlightController {
         condition.price = condition.price || {};
         condition.price.gte = parseFloat(priceMin);
       }
-      if (departureDate) {
+      if (departureTime) {
         condition.departureTime = {
-          gte: new Date(departureDate),
+          gte: new Date(departureTime),
+        };
+      }
+      if (returnTime) {
+        condition.departureTime = {
+          gte: new Date(returnTime),
         };
       }
       if (departureAirport) {
@@ -87,7 +94,8 @@ export class FlightController {
       const { flights, totalFlights } = await FlightService.getAll(
         pagination,
         condition,
-        sort
+        sort,
+        duration
       );
 
       res.json({
