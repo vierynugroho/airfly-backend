@@ -28,9 +28,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{local_base_url}}/auth/me",
-                  "host": ["{{local_base_url}}"],
-                  "path": ["auth", "me"]
+                  "raw": "localhost:3000/api/v1/auth/me",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "me"]
                 }
               },
               "status": "Unauthorized",
@@ -685,9 +686,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{local_base_url}}/users",
-                  "host": ["{{local_base_url}}"],
-                  "path": ["users"],
+                  "raw": "localhost:3000/api/v1/users",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "users"],
                   "query": [
                     {
                       "key": "page",
@@ -1218,9 +1220,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{local_base_url}}/users/1",
-                  "host": ["{{local_base_url}}"],
-                  "path": ["users", "1"]
+                  "raw": "localhost:3000/api/v1/users/1",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "users", "1"]
                 }
               },
               "status": "OK",
@@ -6934,19 +6937,21 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/flights?page=1&limit=20&seatClass=PREMIUM_ECONOMY",
+              "raw": "{{local_base_url}}/flights",
               "host": ["{{local_base_url}}"],
               "path": ["flights"],
               "query": [
                 {
                   "key": "page",
                   "value": "1",
-                  "description": "page number"
+                  "description": "page number",
+                  "disabled": true
                 },
                 {
                   "key": "limit",
                   "value": "20",
-                  "description": "page items"
+                  "description": "page items",
+                  "disabled": true
                 },
                 {
                   "key": "isCheapest",
@@ -6956,80 +6961,87 @@
                 },
                 {
                   "key": "flightNumber",
-                  "value": "CH2",
+                  "value": "",
                   "description": "flight Number",
                   "disabled": true
                 },
                 {
                   "key": "priceMin",
-                  "value": "3000",
+                  "value": "",
                   "description": "minimum price",
                   "disabled": true
                 },
                 {
                   "key": "priceMax",
-                  "value": "1000",
+                  "value": "",
                   "description": "maximum price",
                   "disabled": true
                 },
                 {
                   "key": "earliestDeparture",
-                  "value": "true",
+                  "value": "false",
                   "description": "sort - string true or false",
                   "disabled": true
                 },
                 {
                   "key": "latestDeparture",
-                  "value": "true",
+                  "value": "false",
                   "description": "sort - string true or false",
                   "disabled": true
                 },
                 {
                   "key": "earliestArrival",
-                  "value": "true",
+                  "value": "false",
                   "description": "sort - string true or false",
                   "disabled": true
                 },
                 {
                   "key": "latestArrival",
-                  "value": "true",
+                  "value": "false",
                   "description": "sort - string true or false",
                   "disabled": true
                 },
                 {
                   "key": "shortest",
-                  "value": "true",
+                  "value": "false",
                   "description": "sort - string true or false",
                   "disabled": true
                 },
                 {
                   "key": "arrivalAirport",
-                  "value": "1",
+                  "value": "",
                   "description": "filter - integer - airport ID",
                   "disabled": true
                 },
                 {
                   "key": "departureAirport",
-                  "value": "2",
+                  "value": "",
                   "description": "filter - integer - airport ID",
                   "disabled": true
                 },
                 {
                   "key": "returnTime",
-                  "value": "2024-01-01T00:00:00Z",
+                  "value": "",
                   "description": "flight departure time [ISO date] - 2024-01-01T00:00:00Z",
                   "disabled": true
                 },
                 {
                   "key": "departureTime",
-                  "value": "2026-01-01T00:00:00Z",
+                  "value": "",
                   "description": "flight departure time [ISO date] - 2024-01-01T00:00:00Z",
                   "disabled": true
                 },
                 {
                   "key": "seatClass",
-                  "value": "PREMIUM_ECONOMY",
-                  "description": "seat class: ECONOMY, PREMIUM_ECONOMY, FIRST, BUSINESS"
+                  "value": "",
+                  "description": "seat class: ECONOMY, PREMIUM_ECONOMY, FIRST, BUSINESS",
+                  "disabled": true
+                },
+                {
+                  "key": "state",
+                  "value": null,
+                  "description": "valid value: Asia, Africa, America, Australia, Europe ('insensitive')",
+                  "disabled": true
                 }
               ]
             }
@@ -10934,9 +10946,10 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "{{local_base_url}}/seats/2",
-                  "host": ["{{local_base_url}}"],
-                  "path": ["seats", "2"]
+                  "raw": "localhost:3000/api/v1/seats/2",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "seats", "2"]
                 }
               },
               "status": "Not Found",
@@ -11205,9 +11218,10 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{local_base_url}}/booking",
-                  "host": ["{{local_base_url}}"],
-                  "path": ["booking"],
+                  "raw": "localhost:3000/api/v1/booking",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "booking"],
                   "query": [
                     {
                       "key": "page",
@@ -11368,9 +11382,10 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{local_base_url}}/booking/id/:bookingId",
-                  "host": ["{{local_base_url}}"],
-                  "path": ["booking", "id", ":bookingId"],
+                  "raw": "localhost:3000/api/v1/booking/id/:bookingId",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "booking", "id", ":bookingId"],
                   "variable": [
                     {
                       "key": "bookingId",
@@ -11464,9 +11479,10 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{local_base_url}}/booking/code/24110652FD",
-                  "host": ["{{local_base_url}}"],
-                  "path": ["booking", "code", "24110652FD"]
+                  "raw": "localhost:3000/api/v1/booking/code/24110652FD",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "booking", "code", "24110652FD"]
                 }
               },
               "status": "OK",
@@ -11558,9 +11574,10 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{local_base_url}}/booking/group?page=1&limit=2",
-                  "host": ["{{local_base_url}}"],
-                  "path": ["booking", "group"],
+                  "raw": "localhost:3000/api/v1/booking/group?page=1&limit=2",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "booking", "group"],
                   "query": [
                     {
                       "key": "page",
@@ -11680,9 +11697,10 @@
                   }
                 },
                 "url": {
-                  "raw": "{{local_base_url}}/booking",
-                  "host": ["{{local_base_url}}"],
-                  "path": ["booking"]
+                  "raw": "localhost:3000/api/v1/booking",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "booking"]
                 }
               },
               "code": 200,
@@ -11743,6 +11761,277 @@
       ]
     },
     {
+      "name": "Payment",
+      "item": [
+        {
+          "name": "create snap token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzOTAyNTkyLCJleHAiOjE3MzM5ODg5OTJ9.yFzgJ6t49BSqRKs5HneS9IVl42z1QFUFlKYXjdR24zY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bookingId\": 5\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}/payment",
+              "host": ["{{local_base_url}}"],
+              "path": ["payment"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"bookingId\": 5\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/payment",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "payment"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "246"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"f6-zDXPj/V77Ro+Jqe8amDTI+bzVm4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 11 Dec 2024 09:16:47 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 201,\n        \"message\": \"Snap token created successfully\"\n    },\n    \"data\": {\n        \"snapToken\": {\n            \"id\": 5,\n            \"userId\": 1,\n            \"bookingId\": 5,\n            \"snapToken\": \"7cc7dba5-3ebd-49ab-88ec-651daba0c0e5\",\n            \"paymentstatus\": \"PENDING\",\n            \"paymentType\": null,\n            \"paymentAmount\": 3000000\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "get by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local_base_url}}/payment/:paymentID",
+              "host": ["{{local_base_url}}"],
+              "path": ["payment", ":paymentID"],
+              "variable": [
+                {
+                  "key": "paymentID",
+                  "value": "",
+                  "description": "integer - payment ID"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/payment/4",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "payment", "4"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "258"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"102-chqR/HaouMWpEyul/9eiyVrRrqc\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 11 Dec 2024 09:00:41 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Payment retrieved successfully\"\n    },\n    \"data\": {\n        \"id\": 4,\n        \"userId\": 1,\n        \"bookingId\": 5,\n        \"snapToken\": \"5c788ff0-ad41-4fec-b953-16e31f35edb9\",\n        \"status\": \"PENDING\",\n        \"paymentType\": null,\n        \"orderId\": \"ORDER-5-1733907613455\",\n        \"paymentAmount\": 3000000\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "webhook",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"snapToken\": \"7cc7dba5-3ebd-49ab-88ec-651daba0c0e5\",\r\n  \"paymentStatus\": \"settlement\",\r\n  \"paymentType\": \"credit_card\" \r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}/payment/webhook",
+              "host": ["{{local_base_url}}"],
+              "path": ["payment", "webhook"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 ok",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"snapToken\": \"7cc7dba5-3ebd-49ab-88ec-651daba0c0e5\",\r\n  \"paymentStatus\": \"settlement\",\r\n  \"paymentType\": \"credit_card\" \r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/payment/webhook",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "payment", "webhook"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "html",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/html; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "2"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"2-nOO9QiTIwXgNtWtBJezz8kv3SLc\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 11 Dec 2024 09:46:25 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "OK"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "Notifications",
       "item": [
         {
@@ -11783,9 +12072,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{local_base_url}}/notifications",
-                  "host": ["{{local_base_url}}"],
-                  "path": ["notifications"]
+                  "raw": "localhost:3000/api/v1/notifications",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "notifications"]
                 }
               },
               "status": "OK",
@@ -12303,9 +12593,16 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{local_base_url}}/notifications/1/user-notifications?type=INFOS",
-                  "host": ["{{local_base_url}}"],
-                  "path": ["notifications", "1", "user-notifications"],
+                  "raw": "localhost:3000/api/v1/notifications/1/user-notifications?type=INFOS",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "v1",
+                    "notifications",
+                    "1",
+                    "user-notifications"
+                  ],
                   "query": [
                     {
                       "key": "type",
@@ -12548,9 +12845,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{local_base_url}}/notifications/1",
-                  "host": ["{{local_base_url}}"],
-                  "path": ["notifications", "1"]
+                  "raw": "localhost:3000/api/v1/notifications/1",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "notifications", "1"]
                 }
               },
               "status": "Forbidden",
@@ -12675,9 +12973,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{local_base_url}}/notifications/show-notifications",
-                  "host": ["{{local_base_url}}"],
-                  "path": ["notifications", "show-notifications"]
+                  "raw": "localhost:3000/api/v1/notifications/show-notifications",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "notifications", "show-notifications"]
                 }
               },
               "status": "OK",

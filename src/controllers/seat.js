@@ -13,9 +13,7 @@ export class SeatController {
           statusCode: 200,
           message: 'seat created successfully',
         },
-        data: {
-          seat,
-        },
+        data: seat,
       });
     } catch (e) {
       next(e);
@@ -38,9 +36,7 @@ export class SeatController {
           statusCode: 200,
           message: 'seat updated successfully',
         },
-        data: {
-          seat,
-        },
+        data: seat,
       });
     } catch (e) {
       next(e);
@@ -62,9 +58,7 @@ export class SeatController {
           statusCode: 200,
           message: 'seat deleted successfully',
         },
-        data: {
-          seat,
-        },
+        data: seat,
       });
     } catch (e) {
       next(e);

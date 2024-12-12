@@ -162,9 +162,7 @@ export class FlightController {
           statusCode: 200,
           message: 'flight created successfully',
         },
-        data: {
-          flight,
-        },
+        data: flight,
       });
     } catch (e) {
       next(e);
@@ -187,9 +185,7 @@ export class FlightController {
           statusCode: 200,
           message: 'flight updated successfully',
         },
-        data: {
-          flight,
-        },
+        data: flight,
       });
     } catch (e) {
       next(e);
@@ -211,9 +207,7 @@ export class FlightController {
           statusCode: 200,
           message: 'flight deleted successfully',
         },
-        data: {
-          flight,
-        },
+        data: flight,
       });
     } catch (e) {
       next(e);

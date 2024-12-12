@@ -123,9 +123,7 @@ export class UserController {
           statusCode: 200,
           message: 'user deleted successfully',
         },
-        data: {
-          user,
-        },
+        data: user,
       });
     } catch (e) {
       next(e);
@@ -162,9 +160,7 @@ export class UserController {
           statusCode: 200,
           message: 'user account deleted successfully',
         },
-        data: {
-          user,
-        },
+        data: user,
       });
     } catch (e) {
       next(e);
