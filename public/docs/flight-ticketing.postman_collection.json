@@ -28,10 +28,9 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "localhost:3000/api/v1/auth/me",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "auth", "me"]
+                  "raw": "{{local_base_url}}/auth/me",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["auth", "me"]
                 }
               },
               "status": "Unauthorized",
@@ -686,10 +685,9 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "localhost:3000/api/v1/users",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "users"],
+                  "raw": "{{local_base_url}}/users",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["users"],
                   "query": [
                     {
                       "key": "page",
@@ -1220,10 +1218,9 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "localhost:3000/api/v1/users/1",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "users", "1"]
+                  "raw": "{{local_base_url}}/users/1",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["users", "1"]
                 }
               },
               "status": "OK",
@@ -2129,7 +2126,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"user deleted successfully\"\n    },\n    \"data\": {\n        \"user\": {\n            \"id\": 2,\n            \"firstName\": \"Viery\",\n            \"lastName\": \"Nugroho\",\n            \"email\": \"Junior@gmail.com\",\n            \"phone\": \"628123456789\",\n            \"password\": \"password\",\n            \"secretKey\": \"\",\n            \"otpToken\": \"\",\n            \"status\": \"VERIFIED\",\n            \"role\": \"BUYER\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"user deleted successfully\"\n    },\n    \"data\": {\n            \"id\": 2,\n            \"firstName\": \"Viery\",\n            \"lastName\": \"Nugroho\",\n            \"email\": \"Junior@gmail.com\",\n            \"phone\": \"628123456789\",\n            \"password\": \"password\",\n            \"secretKey\": \"\",\n            \"otpToken\": \"\",\n            \"status\": \"VERIFIED\",\n            \"role\": \"BUYER\"\n    }\n}"
             },
             {
               "name": "unauthorized",
@@ -2363,7 +2360,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"user account deleted successfully\"\n    },\n    \"data\": {\n        \"user\": {\n            \"id\": 4,\n            \"firstName\": \"Test Update\",\n            \"lastName\": \"Shinomiya\",\n            \"email\": \"viery15102002@gmail.com\",\n            \"phone\": \"086655446677\",\n            \"password\": \"$2b$10$yRsvJb7SCEd6UX8Yzd/.aOShOgjQVImFRcRw8ear8wl/IV5/mz9H.\",\n            \"secretKey\": \"\",\n            \"otpToken\": \"\",\n            \"status\": \"VERIFIED\",\n            \"role\": \"BUYER\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"user account deleted successfully\"\n    },\n    \"data\": {\n            \"id\": 4,\n            \"firstName\": \"Test Update\",\n            \"lastName\": \"Shinomiya\",\n            \"email\": \"viery15102002@gmail.com\",\n            \"phone\": \"086655446677\",\n            \"password\": \"$2b$10$yRsvJb7SCEd6UX8Yzd/.aOShOgjQVImFRcRw8ear8wl/IV5/mz9H.\",\n            \"secretKey\": \"\",\n            \"otpToken\": \"\",\n            \"status\": \"VERIFIED\",\n            \"role\": \"BUYER\"\n    }\n}"
             },
             {
               "name": "unauthorized",
@@ -3555,7 +3552,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Airport created successfully\"\n    },\n    \"data\": {\n        \"airport\": {\n            \"id\": 9,\n            \"code\": \"HLP\",\n            \"name\": \"Halim Perdanakusuma International Airport\",\n            \"city\": \"DKI Jakarta\",\n            \"state\": \"Asia Tenggara\",\n            \"country\": \"1\",\n            \"timezone\": \"Asia/Jakarta\",\n            \"latitude\": \"1\",\n            \"longitude\": \"1\",\n            \"elevation\": \"1\",\n            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/image-1733114851306_xJxBmViPM.jpeg\",\n            \"imageId\": \"674d3be7e375273f60c23a27\",\n            \"createdAt\": \"2024-12-02T04:47:37.509Z\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Airport created successfully\"\n    },\n    \"data\": {\n            \"id\": 9,\n            \"code\": \"HLP\",\n            \"name\": \"Halim Perdanakusuma International Airport\",\n            \"city\": \"DKI Jakarta\",\n            \"state\": \"Asia Tenggara\",\n            \"country\": \"1\",\n            \"timezone\": \"Asia/Jakarta\",\n            \"latitude\": \"1\",\n            \"longitude\": \"1\",\n            \"elevation\": \"1\",\n            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/image-1733114851306_xJxBmViPM.jpeg\",\n            \"imageId\": \"674d3be7e375273f60c23a27\",\n            \"createdAt\": \"2024-12-02T04:47:37.509Z\"\n    }\n}"
             },
             {
               "name": "already exist",
@@ -4518,7 +4515,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Airport updated successfully\"\n    },\n    \"data\": {\n        \"airport\": {\n            \"id\": 10,\n            \"code\": \"update\",\n            \"name\": \"update\",\n            \"city\": \"DKI Jakarta\",\n            \"state\": \"Asia Tenggara\",\n            \"country\": \"1\",\n            \"timezone\": \"Asia/Jakarta\",\n            \"latitude\": \"1\",\n            \"longitude\": \"1\",\n            \"elevation\": \"1\",\n            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/image-1733116450427_BuOgrRSzM.jpeg\",\n            \"imageId\": \"674d4224e375273f60e58702\",\n            \"createdAt\": \"2024-12-02T05:14:14.443Z\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Airport updated successfully\"\n    },\n    \"data\": {\n            \"id\": 10,\n            \"code\": \"update\",\n            \"name\": \"update\",\n            \"city\": \"DKI Jakarta\",\n            \"state\": \"Asia Tenggara\",\n            \"country\": \"1\",\n            \"timezone\": \"Asia/Jakarta\",\n            \"latitude\": \"1\",\n            \"longitude\": \"1\",\n            \"elevation\": \"1\",\n            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/image-1733116450427_BuOgrRSzM.jpeg\",\n            \"imageId\": \"674d4224e375273f60e58702\",\n            \"createdAt\": \"2024-12-02T05:14:14.443Z\"\n    }\n}"
             },
             {
               "name": "unauthorized",
@@ -4930,7 +4927,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Airport deleted successfully\"\n    },\n    \"data\": {\n        \"airport\": {\n            \"id\": 2,\n            \"code\": \"CGK\",\n            \"name\": \"Updated Airport Name\",\n            \"city\": \"Jakarta\",\n            \"state\": \"Asia Tenggara\",\n            \"country\": \"Indonesia\",\n            \"timezone\": \"Asia/Jakarta\",\n            \"latitude\": \"-6.121111\",\n            \"longitude\": \"106.661111\",\n            \"elevation\": \"35\",\n            \"imageUrl\": \"\",\n            \"imageId\": \"\",\n            \"createdAt\": \"2024-11-25T04:27:02.136Z\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Airport deleted successfully\"\n    },\n    \"data\": {\n            \"id\": 2,\n            \"code\": \"CGK\",\n            \"name\": \"Updated Airport Name\",\n            \"city\": \"Jakarta\",\n            \"state\": \"Asia Tenggara\",\n            \"country\": \"Indonesia\",\n            \"timezone\": \"Asia/Jakarta\",\n            \"latitude\": \"-6.121111\",\n            \"longitude\": \"106.661111\",\n            \"elevation\": \"35\",\n            \"imageUrl\": \"\",\n            \"imageId\": \"\",\n            \"createdAt\": \"2024-11-25T04:27:02.136Z\"\n    }\n}"
             },
             {
               "name": "unauthorized",
@@ -10183,7 +10180,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"seat created successfully\"\n    },\n    \"data\": {\n        \"seat\": {\n            \"id\": 1,\n            \"flightId\": 1,\n            \"seatNumber\": \"B3\",\n            \"status\": \"UNAVAILABLE\",\n            \"departureTime\": \"2024-01-01T00:00:00.000Z\",\n            \"arrivalTime\": \"2024-01-02T00:00:00.000Z\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"seat created successfully\"\n    },\n    \"data\": {\n            \"id\": 1,\n            \"flightId\": 1,\n            \"seatNumber\": \"B3\",\n            \"status\": \"UNAVAILABLE\",\n            \"departureTime\": \"2024-01-01T00:00:00.000Z\",\n            \"arrivalTime\": \"2024-01-02T00:00:00.000Z\"\n    }\n}"
             },
             {
               "name": "already created",
@@ -10853,7 +10850,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"seat updated successfully\"\n    },\n    \"data\": {\n        \"seat\": {\n            \"id\": 1,\n            \"flightId\": 1,\n            \"seatNumber\": \"B3\",\n            \"status\": \"LOCKED\",\n            \"departureTime\": \"2024-01-01T00:00:00.000Z\",\n            \"arrivalTime\": \"2024-01-02T00:00:00.000Z\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"seat updated successfully\"\n    },\n    \"data\": {\n            \"id\": 1,\n            \"flightId\": 1,\n            \"seatNumber\": \"B3\",\n            \"status\": \"LOCKED\",\n            \"departureTime\": \"2024-01-01T00:00:00.000Z\",\n            \"arrivalTime\": \"2024-01-02T00:00:00.000Z\"\n    }\n}"
             },
             {
               "name": "forbidden",
@@ -10946,10 +10943,9 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "localhost:3000/api/v1/seats/2",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "seats", "2"]
+                  "raw": "{{local_base_url}}/seats/2",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["seats", "2"]
                 }
               },
               "status": "Not Found",
@@ -11104,7 +11100,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"seat deleted successfully\"\n    },\n    \"data\": {\n        \"seat\": {\n            \"id\": 1,\n            \"flightId\": 1,\n            \"seatNumber\": \"B3\",\n            \"status\": \"UNAVAILABLE\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"seat deleted successfully\"\n    },\n    \"data\": {\n            \"id\": 1,\n            \"flightId\": 1,\n            \"seatNumber\": \"B3\",\n            \"status\": \"UNAVAILABLE\"\n    }\n}"
             },
             {
               "name": "forbidden",
@@ -11218,10 +11214,9 @@
                   }
                 ],
                 "url": {
-                  "raw": "localhost:3000/api/v1/booking",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "booking"],
+                  "raw": "{{local_base_url}}/booking",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking"],
                   "query": [
                     {
                       "key": "page",
@@ -11382,10 +11377,9 @@
                   }
                 ],
                 "url": {
-                  "raw": "localhost:3000/api/v1/booking/id/:bookingId",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "booking", "id", ":bookingId"],
+                  "raw": "{{local_base_url}}/booking/id/:bookingId",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking", "id", ":bookingId"],
                   "variable": [
                     {
                       "key": "bookingId",
@@ -11479,10 +11473,9 @@
                   }
                 ],
                 "url": {
-                  "raw": "localhost:3000/api/v1/booking/code/24110652FD",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "booking", "code", "24110652FD"]
+                  "raw": "{{local_base_url}}/booking/code/24110652FD",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking", "code", "24110652FD"]
                 }
               },
               "status": "OK",
@@ -11574,10 +11567,9 @@
                   }
                 ],
                 "url": {
-                  "raw": "localhost:3000/api/v1/booking/group?page=1&limit=2",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "booking", "group"],
+                  "raw": "{{local_base_url}}/booking/group?page=1&limit=2",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking", "group"],
                   "query": [
                     {
                       "key": "page",
@@ -11697,10 +11689,9 @@
                   }
                 },
                 "url": {
-                  "raw": "localhost:3000/api/v1/booking",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "booking"]
+                  "raw": "{{local_base_url}}/booking",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["booking"]
                 }
               },
               "code": 200,
@@ -12072,10 +12063,9 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "localhost:3000/api/v1/notifications",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "notifications"]
+                  "raw": "{{local_base_url}}/notifications",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["notifications"]
                 }
               },
               "status": "OK",
@@ -12593,16 +12583,9 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "localhost:3000/api/v1/notifications/1/user-notifications?type=INFOS",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": [
-                    "api",
-                    "v1",
-                    "notifications",
-                    "1",
-                    "user-notifications"
-                  ],
+                  "raw": "{{local_base_url}}/notifications/1/user-notifications?type=INFOS",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["notifications", "1", "user-notifications"],
                   "query": [
                     {
                       "key": "type",
@@ -12845,10 +12828,9 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "localhost:3000/api/v1/notifications/1",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "notifications", "1"]
+                  "raw": "{{local_base_url}}/notifications/1",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["notifications", "1"]
                 }
               },
               "status": "Forbidden",
@@ -12973,10 +12955,9 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "localhost:3000/api/v1/notifications/show-notifications",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "notifications", "show-notifications"]
+                  "raw": "{{local_base_url}}/notifications/show-notifications",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["notifications", "show-notifications"]
                 }
               },
               "status": "OK",
@@ -14247,7 +14228,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"notification deleted successfully\"\n    },\n    \"data\": {\n        \"notification\": {\n            \"id\": 34,\n            \"type\": \"PAYMENT\",\n            \"title\": \"Pembayaran Booking\",\n            \"description\": \"Cepet bayar\",\n            \"isRead\": false,\n            \"createdAt\": \"2024-12-06T06:17:42.903Z\",\n            \"userId\": 1\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"notification deleted successfully\"\n    },\n    \"data\": {\n            \"id\": 34,\n            \"type\": \"PAYMENT\",\n            \"title\": \"Pembayaran Booking\",\n            \"description\": \"Cepet bayar\",\n            \"isRead\": false,\n            \"createdAt\": \"2024-12-06T06:17:42.903Z\",\n            \"userId\": 1\n    }\n}"
             }
           ]
         }

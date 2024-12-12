@@ -159,14 +159,14 @@ export class NotificationController {
     try {
       const data = req.body;
 
-      const user = await NotificationService.create(data);
+      const notification = await NotificationService.create(data);
 
       res.json({
         meta: {
           statusCode: 200,
           message: 'users notification created successfully',
         },
-        data: user,
+        data: notification,
       });
     } catch (error) {
       next(error);
@@ -183,7 +183,7 @@ export class NotificationController {
         isRead: data.isRead,
       };
 
-      const user = await NotificationService.update(
+      const notification = await NotificationService.update(
         data.notificationID,
         readNotificationData
       );
@@ -193,7 +193,7 @@ export class NotificationController {
           statusCode: 200,
           message: 'user notification updated successfully',
         },
-        data: user,
+        data: notification,
       });
     } catch (error) {
       next(error);
@@ -241,9 +241,7 @@ export class NotificationController {
           statusCode: 200,
           message: 'notification deleted successfully',
         },
-        data: {
-          notification,
-        },
+        data: notification,
       });
     } catch (e) {
       next(e);
