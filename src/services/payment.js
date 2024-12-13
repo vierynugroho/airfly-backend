@@ -12,10 +12,10 @@ export class PaymentService {
 
     const itemDetails = booking.bookingDetail.map((detail) => {
       return {
-        id: `SEAT-${detail.seatId}`,
+        id: booking.id,
         price: detail.price,
         quantity: 1,
-        name: `Seat ${detail.seatId} ${detail.passenger.name}`,
+        name: `${booking.code} Seat-${detail.seatId}`,
       };
     });
 
@@ -28,10 +28,10 @@ export class PaymentService {
     const tax = totalPriceWithoutTax * taxRate;
 
     itemDetails.push({
-      id: 'TAX',
+      id: `Tax- ${booking.id}`,
       price: tax,
       quantity: 1,
-      name: 'Tax',
+      name: 'TAX',
     });
 
     const totalAmount = totalPriceWithoutTax + tax;
