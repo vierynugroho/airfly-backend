@@ -45,13 +45,16 @@ export class PaymentRepository {
     transactionId,
     transactionTime
   ) {
+
+    const isoTransactionTime = new Date(transactionTime).toISOString();
+
     return prisma.payment.update({
       where: { orderId: orderId },
       data: {
         status: paymentstatus,
         type: paymentType,
         transactionId: transactionId,
-        transactionTime: transactionTime,
+        transactionTime: isoTransactionTime,
       },
     });
   }
