@@ -90,7 +90,7 @@ export class BookingRepository {
       },
     });
   }
-  
+
   static async getBooking(bookingID) {
     const booking = await prisma.booking.findUnique({
       where: {
@@ -109,12 +109,20 @@ export class BookingRepository {
   }
 
   static async updateSeatStatusOnPayment(seatIds, seatStatus) {
-    const update = await prisma.seat.updateMany({
-      where: { id: { in: seatIds } },
-      data: { status: seatStatus },
-    });
+    try {
+      const update = await prisma.seat.updateMany({
+        where: { id: { in: seatIds } },
+        data: { status: seatStatus },
+      });
 
-    return update;
+      console.log('update seat status on payment');
+      console.log(update);
+
+      return update;
+    } catch (error) {
+      console.error('Error updating seat status on payment:', error);
+      throw Error(error.message);
+    }
   }
 
   static async findBooking(condition, pagination, orderBy) {
