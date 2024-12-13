@@ -9,7 +9,7 @@ export class BookingController {
    */
   static async createBooking(req, res, next) {
     try {
-      await BookingService.createBooking({
+      const bookingId = await BookingService.createBooking({
         ...req.body,
         userId: req.user.id,
       });
@@ -18,6 +18,9 @@ export class BookingController {
         meta: {
           statusCode: 201,
           message: 'booking created',
+        },
+        data: {
+          bookingId,
         },
       });
     } catch (err) {
