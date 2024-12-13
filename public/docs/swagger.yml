@@ -96,7 +96,7 @@ paths:
             schema:
               type: object
               example:
-                email: john.doe@example.com
+                email: viery15102002@gmail.com
                 password: password
       responses:
         '200':
@@ -1646,8 +1646,9 @@ paths:
         - name: arrivalAirport
           in: query
           schema:
-            type: string
+            type: integer
           description: filter - integer - airport ID
+          example: '1'
         - name: departureAirport
           in: query
           schema:
@@ -4028,24 +4029,11 @@ paths:
                 returnFlightId: 1
                 bookingDate: '2024-11-26T00:00:00Z'
                 bookingDetail:
-                  - seatId: 182
-                    price: 200000
+                  - seatId: 147
+                    price: 9000
                     passenger:
                       name: Orang
                       familyName: Jago
-                      gender: MALE
-                      identityNumber: '123456'
-                      citizenship: Indonesia
-                      countryOfIssue: Indonesia
-                      title: Mr
-                      dob: '1985-05-15T00:00:00Z'
-                      expiredDate: '2030-05-15T23:59:59Z'
-                      type: ADULT
-                  - seatId: 178
-                    price: 200000
-                    passenger:
-                      name: Naruto
-                      familyName: Uzumaki
                       gender: MALE
                       identityNumber: '123456'
                       citizenship: Indonesia
@@ -4322,7 +4310,7 @@ paths:
             schema:
               type: object
               example:
-                bookingId: 6
+                bookingId: 30
       responses:
         '200':
           description: Successful response
@@ -4373,9 +4361,23 @@ paths:
             schema:
               type: object
               example:
-                snapToken: 7cc7dba5-3ebd-49ab-88ec-651daba0c0e5
-                paymentStatus: settlement
-                paymentType: credit_card
+                va_numbers:
+                  - va_number: '9880475897224761'
+                    bank: bni
+                transaction_time: '2024-12-14 02:35:26'
+                transaction_status: pending
+                transaction_id: c28e7aff-6317-4538-8bbf-612933a908bf
+                status_message: midtrans payment notification
+                status_code: '201'
+                signature_key: b84a2ea502941c35c6a9dceb4e9ea7116f17fa909b7638ab5e6dc94f7a98849a7ae2ebb8ccc3e2070505adc8bc9ed056111541d271cea4901b02270218cc9824
+                payment_type: bank_transfer
+                payment_amounts: []
+                order_id: c9c1cdeb-9357-4025-8330-8497a7b9838a
+                merchant_id: G600704758
+                gross_amount: '9270.00'
+                fraud_status: accept
+                expiry_time: '2024-12-15 02:35:26'
+                currency: IDR
       responses:
         '200':
           description: Successful response
