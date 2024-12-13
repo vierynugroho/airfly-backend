@@ -25,10 +25,11 @@ export class PaymentRepository {
     return { payments, total, page, limit };
   }
 
-  static async getById(paymentId) {
+  static async getById(paymentId, userId) {
     return prisma.payment.findUnique({
       where: {
         id: paymentId,
+        userId: userId,
       },
     });
   }
