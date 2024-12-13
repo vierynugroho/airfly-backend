@@ -2,13 +2,14 @@ import { prisma } from '../database/db.js';
 
 export class PaymentRepository {
   static async create(paymentData) {
-    return prisma.payment.create({ 
-      data: paymentData, });
+    return prisma.payment.create({
+      data: paymentData,
+    });
   }
 
   static async getByBookingId(bookingId) {
     return prisma.payment.findUnique({ where: { bookingId } });
-  }  
+  }
 
   static async getAll({ page, limit }) {
     const offset = (page - 1) * limit;
@@ -33,17 +34,24 @@ export class PaymentRepository {
   }
 
   static async findByOrderId(orderId) {
-    return prisma.payment.findUnique({ where: { orderId} });
+    return prisma.payment.findUnique({ where: { orderId } });
   }
 
-  static async updateStatus(orderId, paymentstatus, paymentType, transactionId, transactionTime) {
+  static async updateStatus(
+    orderId,
+    paymentstatus,
+    paymentType,
+    transactionId,
+    transactionTime
+  ) {
     return prisma.payment.update({
-      where: { orderId: orderId},
-      data: { 
-        paymentstatus: paymentstatus,
-        paymentType: paymentType},
+      where: { orderId: orderId },
+      data: {
+        status: paymentstatus,
+        type: paymentType,
         transactionId: transactionId,
         transactionTime: transactionTime,
+      },
     });
   }
 

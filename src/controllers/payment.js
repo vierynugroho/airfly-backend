@@ -21,7 +21,7 @@ export class PaymentController {
           statusCode: 201,
           message: 'Snap token created successfully',
         },
-        data: { snapToken },
+        data: snapToken,
       });
     } catch (e) {
       next(e);
@@ -30,22 +30,12 @@ export class PaymentController {
 
   static async handleWebhook(req, res, next) {
     try {
+      console.log('req body weebhook:');
       console.log(req.body);
-      const {
-        order_id: orderId,
-        transaction_status: paymentstatus,
-        payment_type: paymentType,
-        transaction_id: transactionId,
-        transaction_time: transactionTime,
-      } = req.body;
+      console.log('-----------------');
+      const data = req.body;
 
-      await PaymentService.processWebhook({
-        orderId,
-        paymentStatus: paymentstatus.toUpperCase(),
-        paymentType: paymentType.toUpperCase(),
-        transactionId,
-        transactionTime,
-      });
+      await PaymentService.processWebhook(data);
 
       res.status(200).send('OK');
     } catch (e) {

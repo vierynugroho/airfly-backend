@@ -1849,24 +1849,27 @@ async function main() {
   const bookings = await prisma.booking.findMany();
 
   bookings.forEach((booking, index) => {
-    const paymentstatus = ['SETTLEMENT', 'PENDING', 'CANCEL', 'EXPIRE'][index % 4];
+    const paymentstatus = ['settlement', 'pending', 'cancel', 'expire'][
+      index % 4
+    ];
 
     const paymentType =
-    index % 4 === 0
-      ? 'CREDIT_CARD'
-      : index % 4 === 1
-      ? 'BANK_TRANSFER'
-      : index % 4 === 2
-      ? 'DIGITAL_WALLET'
-      : 'PAYPAL';
+      index % 4 === 0
+        ? 'credit_card'
+        : index % 4 === 1
+          ? 'bank_transfer'
+          : index % 4 === 2
+            ? 'digital_walet'
+            : 'paypal';
 
     paymentData.push({
+      orderId: crypto.randomUUID(),
       bookingId: booking.id,
       userId: booking.userId,
       snapToken: `SNAP-${booking.id}-${Date.now()}`,
-      paymentType,
-      paymentAmount: booking.totalPrice,
-      paymentstatus,
+      type: paymentType,
+      amount: booking.totalPrice,
+      status: paymentstatus,
     });
   });
 

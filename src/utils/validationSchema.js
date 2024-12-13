@@ -190,30 +190,13 @@ export const transactionSchema = Joi.object({
 });
 
 export const webhookSchema = Joi.object({
-  paymentStatus: Joi.string()
-    .valid('SETTLEMENT', 'PENDING', 'CANCEL', 'EXPIRE')
-    .uppercase()
-    .required()
-    .messages({
-      'any.only': 'Payment status must be one of: SETTLEMENT, PENDING, CANCEL, EXPIRE.',
-      'string.empty': 'Payment status is required.',
-  }),
-  paymentType: Joi.string()
-    .valid('CREDIT_CARD', 'BANK_TRANSFER', 'DIGITAL_WALLET', 'PAYPAL', 'QRIS')
-    .uppercase()
-    .required()
-    .messages({
-      'any.only': 'Payment type must be one of: CREDIT_CARD, BANK_TRANSFER, DIGITAL_WALLET, PAYPAL, QRIS.',
-      'string.empty': 'Payment type is required.',
-  }),
-  
+  paymentStatus: Joi.string().required(),
+  paymentType: Joi.string().required(),
   transaction_id: Joi.string().required().messages({
-      'string.empty': 'Transaction ID is required.',
+    'string.empty': 'Transaction ID is required.',
   }),
-
   transactionTime: Joi.string().isoDate().required().messages({
     'string.empty': 'Transaction time is required.',
     'string.isoDate': 'Transaction time must be a valid ISO date.',
   }),
-
 });
