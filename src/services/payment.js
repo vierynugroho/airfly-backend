@@ -125,10 +125,21 @@ export class PaymentService {
     await PaymentRepository.updateStatus(
       order_id,
       transaction_status,
-      payment.paymentType,
+      paymentData.payment_type,
       paymentData.transaction_id,
-      paymentData.transaction_time
+      new Date(paymentData.transaction_time).toISOString()
     );
+
+    console.log({
+      transaction_status: transaction_status,
+      capture: transaction_status === 'capture',
+      accept: transaction_status === 'accept',
+      settlement: transaction_status === 'settlement',
+      cancel: transaction_status === 'cancel',
+      deny: transaction_status === 'deny',
+      expire: transaction_status === 'expire',
+      pending: transaction_status === 'pending',
+    });
 
     if (transaction_status === 'capture' && fraud_status === 'accept') {
       await BookingRepository.updateSeatStatusOnPayment(seatIds, 'UNAVAILABLE');
@@ -173,6 +184,7 @@ export class PaymentService {
     const response = await fetch(url, options);
     const transaction = await response.json();
 
+    console.log('response cancel');
     console.log(transaction);
     if (transaction.status_code === '404') {
       throw new ErrorHandler(422, "Transaction doesn't exist.");
