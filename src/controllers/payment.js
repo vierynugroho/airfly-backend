@@ -77,6 +77,7 @@ export class PaymentController {
   static async cancel(req, res, next) {
     try {
       const { orderId } = req.params;
+      console.log(`orderID: ${orderId}`);
       const transaction = await PaymentService.cancel(orderId);
 
       res.status(200).json({

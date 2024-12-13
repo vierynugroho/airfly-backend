@@ -147,10 +147,6 @@ export class PaymentService {
       throw new ErrorHandler(404, 'Payment not found.');
     }
 
-    console.log('payment on cancel');
-    console.log(payment);
-    console.log('-----------------');
-
     if (payment.paymentstatus === 'settlement') {
       throw new ErrorHandler(
         400,
@@ -158,7 +154,7 @@ export class PaymentService {
       );
     }
 
-    const encodedServerKey = btoa(`${process.env.SANDBOX_SERVER_KEY}:`);
+    const encodedServerKey = btoa(`${process.env.MIDTRANS_SERVER_KEY}:`);
 
     const url = `https://api.sandbox.midtrans.com/v2/${orderId}/cancel`;
     const options = {
@@ -181,7 +177,7 @@ export class PaymentService {
     }
 
     await PaymentRepository.updateStatus(
-      payment.id,
+      orderId,
       'cancel',
       payment.paymentType
     );
