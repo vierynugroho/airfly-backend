@@ -184,3 +184,18 @@ export const readNotificationSchema = Joi.object({
 export const QRCodeSchema = Joi.object({
   QRCodeData: Joi.object().required(),
 });
+
+export const resetPasswordSchema = Joi.object({
+  email: Joi.string().email().required(),
+  otp: Joi.string().min(6),
+  password: Joi.string().min(8),
+});
+
+export const verifyOtpSchema = Joi.object({
+  email: Joi.string().email().required(),
+  otp: Joi.string().min(6),
+});
+
+export const resetOtpSchema = Joi.object({
+  email: Joi.string().email().required(),
+});
