@@ -142,20 +142,19 @@ model BookingDetail {
 }
 
 model Payment {
-  id              Int               @id @default(autoincrement())
-  userId          Int               @map("user_id")
-  bookingId       Int               @map("booking_id") @unique
-  snapToken       String            @map("snap_token") @unique
-  orderId         String            @map("order_id") @unique
-  paymentstatus   PaymentStatus     @default(PENDING) @map("payment_status")
-  paymentType     PaymentType?      @map("payment_type")
-  paymentAmount   Float             @map("payment_amount")
-  transactionId   String?           @map("transaction_id")
-  transactionTime DateTime?         @map("transaction_time")
+  id              Int       @id @default(autoincrement())
+  userId          Int       @map("user_id")
+  bookingId       Int       @unique @map("booking_id")
+  snapToken       String    @unique @map("snap_token")
+  orderId         String    @unique @map("order_id")
+  status          String    @map("status")
+  type            String    @map("type")
+  amount          Float     @map("amount")
+  transactionId   String?   @map("transaction_id")
+  transactionTime DateTime? @map("transaction_time")
 
   user    User    @relation(fields: [userId], references: [id])
   booking Booking @relation(fields: [bookingId], references: [id])
-
 
   @@index([userId])
   @@index([bookingId])
@@ -227,21 +226,6 @@ enum BookingStatus {
   CANCELED
   EXPIRED
 }
-
-enum PaymentStatus {
-  SETTLEMENT
-  PENDING
-  CANCEL
-  EXPIRE
-}
-
-enum PaymentType {
-  BANK_TRANSFER
-  DIGITAL_WALLET
-  CREDIT_CARD
-  PAYPAL
-  QRIS
-} 
 
 enum Gender {
   MALE
