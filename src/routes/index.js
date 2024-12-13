@@ -6,6 +6,7 @@ import notificationRoute from './notification.js';
 import flightRoute from './flight.js';
 import airportRoute from './airport.js';
 import airlineRoute from './airline.js';
+import paymentRoute from './payment.js';
 import * as swaggerUI from 'swagger-ui-express';
 import { bookingRoute } from './booking.js';
 import YAML from 'yamljs';
@@ -44,6 +45,6 @@ router.use('/api/v1/airports', airportRoute);
 router.use('/api/v1/booking', bookingRoute);
 router.use('/api/v1/airlines', airlineRoute);
 router.use('/api/v1/notifications', notificationRoute);
+router.use('/api/v1/payment', paymentRoute);
 router.use('/api/v1/tickets', ticketRouter);
-
 export default router;

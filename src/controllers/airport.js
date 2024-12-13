@@ -15,9 +15,7 @@ export class AirportController {
           statusCode: 200,
           message: 'Airport created successfully',
         },
-        data: {
-          airport,
-        },
+        data: airport,
       });
     } catch (e) {
       next(e);
@@ -41,9 +39,7 @@ export class AirportController {
           statusCode: 200,
           message: 'Airport updated successfully',
         },
-        data: {
-          airport,
-        },
+        data: airport,
       });
     } catch (e) {
       next(e);
@@ -65,9 +61,7 @@ export class AirportController {
           statusCode: 200,
           message: 'Airport deleted successfully',
         },
-        data: {
-          airport,
-        },
+        data: airport,
       });
     } catch (e) {
       next(e);

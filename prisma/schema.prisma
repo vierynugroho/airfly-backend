@@ -26,6 +26,7 @@ model User {
   role         UserRole       @default(BUYER)
   booking      Booking[]
   Notification Notification[]
+  payments     Payment[]
 
   @@map("users")
 }
@@ -141,16 +142,23 @@ model BookingDetail {
 }
 
 model Payment {
-  id            Int           @id @default(autoincrement())
-  bookingId     Int           @unique @map("booking_id")
-  paymentMethod String        @map("payment_method")
-  paymentDate   DateTime      @map("payment_date")
-  paymentAmount Float         @map("payment_amount")
-  paymentStatus PaymentStatus @default(UNPAID) @map("payment_status")
+  id              Int       @id @default(autoincrement())
+  userId          Int       @map("user_id")
+  bookingId       Int       @unique @map("booking_id")
+  snapToken       String    @unique @map("snap_token")
+  orderId         String    @unique @map("order_id")
+  status          String    @default("pending") @map("status")
+  type            String?   @map("type")
+  amount          Float     @map("amount")
+  transactionId   String?   @map("transaction_id")
+  transactionTime DateTime? @map("transaction_time")
 
+  user    User    @relation(fields: [userId], references: [id])
   booking Booking @relation(fields: [bookingId], references: [id])
 
-  @@map("payments")
+  @@index([userId])
+  @@index([bookingId])
+  @@map("payment")
 }
 
 model Passenger {
@@ -217,11 +225,6 @@ enum BookingStatus {
   ACTIVE
   CANCELED
   EXPIRED
-}
-
-enum PaymentStatus {
-  PAID
-  UNPAID
 }
 
 enum Gender {

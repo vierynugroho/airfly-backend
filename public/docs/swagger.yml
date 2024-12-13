@@ -40,6 +40,7 @@ tags:
   - name: Flights
   - name: Seats
   - name: Booking
+  - name: Payment
   - name: Notifications
   - name: QR Ticket
 paths:
@@ -128,11 +129,11 @@ paths:
             schema:
               type: object
               example:
-                firstName: Kaguya
-                lastName: Shinomiya
+                firstName: Viery
+                lastName: Nugroho
                 phone: '086655446677'
-                email: kutakulu@gmail.com
-                password: bakashirogane
+                email: viery15102002@gmail.com
+                password: password
       responses:
         '200':
           description: Successful response
@@ -459,17 +460,16 @@ paths:
                   statusCode: 200
                   message: user account deleted successfully
                 data:
-                  user:
-                    id: 4
-                    firstName: Test Update
-                    lastName: Shinomiya
-                    email: viery15102002@gmail.com
-                    phone: '086655446677'
-                    password: $2b$10$yRsvJb7SCEd6UX8Yzd/.aOShOgjQVImFRcRw8ear8wl/IV5/mz9H.
-                    secretKey: ''
-                    otpToken: ''
-                    status: VERIFIED
-                    role: BUYER
+                  id: 4
+                  firstName: Test Update
+                  lastName: Shinomiya
+                  email: viery15102002@gmail.com
+                  phone: '086655446677'
+                  password: $2b$10$yRsvJb7SCEd6UX8Yzd/.aOShOgjQVImFRcRw8ear8wl/IV5/mz9H.
+                  secretKey: ''
+                  otpToken: ''
+                  status: VERIFIED
+                  role: BUYER
         '401':
           description: Response
           content:
@@ -1331,20 +1331,19 @@ paths:
                   statusCode: 200
                   message: Airport created successfully
                 data:
-                  airport:
-                    id: 9
-                    code: HLP
-                    name: Halim Perdanakusuma International Airport
-                    city: DKI Jakarta
-                    state: Asia Tenggara
-                    country: '1'
-                    timezone: Asia/Jakarta
-                    latitude: '1'
-                    longitude: '1'
-                    elevation: '1'
-                    imageUrl: https://ik.imagekit.io/vieryn/airports/image-1733114851306_xJxBmViPM.jpeg
-                    imageId: 674d3be7e375273f60c23a27
-                    createdAt: '2024-12-02T04:47:37.509Z'
+                  id: 9
+                  code: HLP
+                  name: Halim Perdanakusuma International Airport
+                  city: DKI Jakarta
+                  state: Asia Tenggara
+                  country: '1'
+                  timezone: Asia/Jakarta
+                  latitude: '1'
+                  longitude: '1'
+                  elevation: '1'
+                  imageUrl: https://ik.imagekit.io/vieryn/airports/image-1733114851306_xJxBmViPM.jpeg
+                  imageId: 674d3be7e375273f60c23a27
+                  createdAt: '2024-12-02T04:47:37.509Z'
         '400':
           description: Response
           content:
@@ -1604,79 +1603,76 @@ paths:
           schema:
             type: string
           description: flight Number
-          example: CH2
         - name: priceMin
           in: query
           schema:
-            type: integer
+            type: string
           description: minimum price
-          example: '3000'
         - name: priceMax
           in: query
           schema:
-            type: integer
+            type: string
           description: maximum price
-          example: '1000'
         - name: earliestDeparture
           in: query
           schema:
             type: boolean
           description: sort - string true or false
-          example: 'true'
+          example: 'false'
         - name: latestDeparture
           in: query
           schema:
             type: boolean
           description: sort - string true or false
-          example: 'true'
+          example: 'false'
         - name: earliestArrival
           in: query
           schema:
             type: boolean
           description: sort - string true or false
-          example: 'true'
+          example: 'false'
         - name: latestArrival
           in: query
           schema:
             type: boolean
           description: sort - string true or false
-          example: 'true'
+          example: 'false'
         - name: shortest
           in: query
           schema:
             type: boolean
           description: sort - string true or false
-          example: 'true'
+          example: 'false'
         - name: arrivalAirport
           in: query
           schema:
-            type: integer
+            type: string
           description: filter - integer - airport ID
-          example: '1'
         - name: departureAirport
           in: query
           schema:
-            type: integer
+            type: string
           description: filter - integer - airport ID
-          example: '2'
         - name: returnTime
           in: query
           schema:
             type: string
           description: flight departure time [ISO date] - 2024-01-01T00:00:00Z
-          example: '2024-01-01T00:00:00Z'
         - name: departureTime
           in: query
           schema:
             type: string
           description: flight departure time [ISO date] - 2024-01-01T00:00:00Z
-          example: '2026-01-01T00:00:00Z'
         - name: seatClass
           in: query
           schema:
             type: string
           description: 'seat class: ECONOMY, PREMIUM_ECONOMY, FIRST, BUSINESS'
-          example: PREMIUM_ECONOMY
+        - name: state
+          in: query
+          schema:
+            type: string
+          description: "valid value: Asia, Africa, America, Australia, Europe ('insensitive')"
       responses:
         '200':
           description: Successful response
@@ -3553,13 +3549,12 @@ paths:
                   statusCode: 200
                   message: seat created successfully
                 data:
-                  seat:
-                    id: 1
-                    flightId: 1
-                    seatNumber: B3
-                    status: UNAVAILABLE
-                    departureTime: '2024-01-01T00:00:00.000Z'
-                    arrivalTime: '2024-01-02T00:00:00.000Z'
+                  id: 1
+                  flightId: 1
+                  seatNumber: B3
+                  status: UNAVAILABLE
+                  departureTime: '2024-01-01T00:00:00.000Z'
+                  arrivalTime: '2024-01-02T00:00:00.000Z'
         '403':
           description: Response
           content:
@@ -4033,7 +4028,7 @@ paths:
                 returnFlightId: 1
                 bookingDate: '2024-11-26T00:00:00Z'
                 bookingDetail:
-                  - seatId: 181
+                  - seatId: 182
                     price: 200000
                     passenger:
                       name: Orang
@@ -4314,6 +4309,79 @@ paths:
                   statusCode: 401
                   message: jwt expired, please re-login
                   details: jwt expired
+      security:
+        - bearerAuth: []
+  /payment:
+    post:
+      tags:
+        - Payment
+      summary: create snap token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                bookingId: 6
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+        '201':
+          description: Response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 201
+                  message: Snap token created successfully
+                data:
+                  token: cc2cf122-0abe-458f-a4d1-a7ccec25dafd
+                  redirect_url: https://app.sandbox.midtrans.com/snap/v2/vtweb/cc2cf122-0abe-458f-a4d1-a7ccec25dafd
+                  payment:
+                    id: 6
+                    userId: 1
+                    bookingId: 6
+                    snapToken: cc2cf122-0abe-458f-a4d1-a7ccec25dafd
+                    orderId: 1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba
+                    status: pending
+                    type: null
+                    amount: 412000
+                    transactionId: null
+                    transactionTime: null
+        '409':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 409
+                  message: Duplicate field, constraint violation
+      parameters: []
+      security:
+        - bearerAuth: []
+  /payment/webhook:
+    post:
+      tags:
+        - Payment
+      summary: webhook
+      description: cuma buat backend
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                snapToken: 7cc7dba5-3ebd-49ab-88ec-651daba0c0e5
+                paymentStatus: settlement
+                paymentType: credit_card
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+      parameters: []
       security:
         - bearerAuth: []
   /notifications:
@@ -5018,17 +5086,16 @@ paths:
                   statusCode: 200
                   message: user deleted successfully
                 data:
-                  user:
-                    id: 2
-                    firstName: Viery
-                    lastName: Nugroho
-                    email: Junior@gmail.com
-                    phone: '628123456789'
-                    password: password
-                    secretKey: ''
-                    otpToken: ''
-                    status: VERIFIED
-                    role: BUYER
+                  id: 2
+                  firstName: Viery
+                  lastName: Nugroho
+                  email: Junior@gmail.com
+                  phone: '628123456789'
+                  password: password
+                  secretKey: ''
+                  otpToken: ''
+                  status: VERIFIED
+                  role: BUYER
         '401':
           description: Response
           content:
@@ -5127,20 +5194,19 @@ paths:
                   statusCode: 200
                   message: Airport updated successfully
                 data:
-                  airport:
-                    id: 10
-                    code: update
-                    name: update
-                    city: DKI Jakarta
-                    state: Asia Tenggara
-                    country: '1'
-                    timezone: Asia/Jakarta
-                    latitude: '1'
-                    longitude: '1'
-                    elevation: '1'
-                    imageUrl: https://ik.imagekit.io/vieryn/airports/image-1733116450427_BuOgrRSzM.jpeg
-                    imageId: 674d4224e375273f60e58702
-                    createdAt: '2024-12-02T05:14:14.443Z'
+                  id: 10
+                  code: update
+                  name: update
+                  city: DKI Jakarta
+                  state: Asia Tenggara
+                  country: '1'
+                  timezone: Asia/Jakarta
+                  latitude: '1'
+                  longitude: '1'
+                  elevation: '1'
+                  imageUrl: https://ik.imagekit.io/vieryn/airports/image-1733116450427_BuOgrRSzM.jpeg
+                  imageId: 674d4224e375273f60e58702
+                  createdAt: '2024-12-02T05:14:14.443Z'
         '400':
           description: Response
           content:
@@ -5196,20 +5262,19 @@ paths:
                   statusCode: 200
                   message: Airport deleted successfully
                 data:
-                  airport:
-                    id: 2
-                    code: CGK
-                    name: Updated Airport Name
-                    city: Jakarta
-                    state: Asia Tenggara
-                    country: Indonesia
-                    timezone: Asia/Jakarta
-                    latitude: '-6.121111'
-                    longitude: '106.661111'
-                    elevation: '35'
-                    imageUrl: ''
-                    imageId: ''
-                    createdAt: '2024-11-25T04:27:02.136Z'
+                  id: 2
+                  code: CGK
+                  name: Updated Airport Name
+                  city: Jakarta
+                  state: Asia Tenggara
+                  country: Indonesia
+                  timezone: Asia/Jakarta
+                  latitude: '-6.121111'
+                  longitude: '106.661111'
+                  elevation: '35'
+                  imageUrl: ''
+                  imageId: ''
+                  createdAt: '2024-11-25T04:27:02.136Z'
         '401':
           description: Response
           content:
@@ -5811,13 +5876,12 @@ paths:
                   statusCode: 200
                   message: seat updated successfully
                 data:
-                  seat:
-                    id: 1
-                    flightId: 1
-                    seatNumber: B3
-                    status: LOCKED
-                    departureTime: '2024-01-01T00:00:00.000Z'
-                    arrivalTime: '2024-01-02T00:00:00.000Z'
+                  id: 1
+                  flightId: 1
+                  seatNumber: B3
+                  status: LOCKED
+                  departureTime: '2024-01-01T00:00:00.000Z'
+                  arrivalTime: '2024-01-02T00:00:00.000Z'
         '403':
           description: Response
           content:
@@ -5886,11 +5950,10 @@ paths:
                   statusCode: 200
                   message: seat deleted successfully
                 data:
-                  seat:
-                    id: 1
-                    flightId: 1
-                    seatNumber: B3
-                    status: UNAVAILABLE
+                  id: 1
+                  flightId: 1
+                  seatNumber: B3
+                  status: UNAVAILABLE
         '403':
           description: Response
           content:
@@ -6283,6 +6346,91 @@ paths:
                   details: jwt expired
       security:
         - bearerAuth: []
+  /payment/{paymentID}:
+    get:
+      tags:
+        - Payment
+      summary: get by ID
+      parameters:
+        - name: ''
+          in: query
+          schema:
+            type: string
+        - name: paymentID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: Payment retrieved successfully
+                data:
+                  id: 1
+                  userId: 1
+                  bookingId: 6
+                  snapToken: 73595a2d-ea75-4746-afc4-3185d7ad7976
+                  orderId: order-2411052438-1734062459958
+                  paymentstatus: PENDING
+                  paymentType: null
+                  paymentAmount: 412000
+                  transactionId: null
+                  transactionTime: null
+      security:
+        - bearerAuth: []
+  /payment/{orderId}/cancel:
+    post:
+      tags:
+        - Payment
+      summary: cancel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: Transaction canceled successfully
+                data:
+                  status_code: '200'
+                  status_message: Success, transaction is canceled
+                  transaction_id: d4b475cf-7512-44b9-91b5-028aee6bb07a
+                  order_id: 1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba
+                  merchant_id: G600704758
+                  gross_amount: '412000.00'
+                  currency: IDR
+                  payment_type: qris
+                  transaction_status: cancel
+                  fraud_status: accept
+                  transaction_time: '2024-12-13 17:38:39'
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: Payment not found.
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
   /notifications/{notificationID}:
     get:
       tags:
@@ -6406,14 +6554,13 @@ paths:
                   statusCode: 200
                   message: notification deleted successfully
                 data:
-                  notification:
-                    id: 34
-                    type: PAYMENT
-                    title: Pembayaran Booking
-                    description: Cepet bayar
-                    isRead: false
-                    createdAt: '2024-12-06T06:17:42.903Z'
-                    userId: 1
+                  id: 34
+                  type: PAYMENT
+                  title: Pembayaran Booking
+                  description: Cepet bayar
+                  isRead: false
+                  createdAt: '2024-12-06T06:17:42.903Z'
+                  userId: 1
         '401':
           description: Response
           content:

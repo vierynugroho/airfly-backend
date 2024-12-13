@@ -199,3 +199,19 @@ export const verifyOtpSchema = Joi.object({
 export const resetOtpSchema = Joi.object({
   email: Joi.string().email().required(),
 });
+
+export const transactionSchema = Joi.object({
+  bookingId: Joi.number().required(),
+});
+
+export const webhookSchema = Joi.object({
+  paymentStatus: Joi.string().required(),
+  paymentType: Joi.string().required(),
+  transaction_id: Joi.string().required().messages({
+    'string.empty': 'Transaction ID is required.',
+  }),
+  transactionTime: Joi.string().isoDate().required().messages({
+    'string.empty': 'Transaction time is required.',
+    'string.isoDate': 'Transaction time must be a valid ISO date.',
+  }),
+});

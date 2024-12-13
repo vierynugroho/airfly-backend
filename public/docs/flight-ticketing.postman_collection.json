@@ -240,7 +240,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"firstName\": \"Kaguya\",\r\n    \"lastName\": \"Shinomiya\",\r\n    \"phone\": \"086655446677\",\r\n    \"email\": \"kutakulu@gmail.com\",\r\n    \"password\": \"bakashirogane\"\r\n}",
+              "raw": "{\r\n    \"firstName\": \"Viery\",\r\n    \"lastName\": \"Nugroho\",\r\n    \"phone\": \"086655446677\",\r\n    \"email\": \"viery15102002@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -248,8 +248,8 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}/auth/register",
-              "host": ["{{local_base_url}}"],
+              "raw": "{{prod_base_url}}/auth/register",
+              "host": ["{{prod_base_url}}"],
               "path": ["auth", "register"]
             }
           },
@@ -2126,7 +2126,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"user deleted successfully\"\n    },\n    \"data\": {\n        \"user\": {\n            \"id\": 2,\n            \"firstName\": \"Viery\",\n            \"lastName\": \"Nugroho\",\n            \"email\": \"Junior@gmail.com\",\n            \"phone\": \"628123456789\",\n            \"password\": \"password\",\n            \"secretKey\": \"\",\n            \"otpToken\": \"\",\n            \"status\": \"VERIFIED\",\n            \"role\": \"BUYER\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"user deleted successfully\"\n    },\n    \"data\": {\n            \"id\": 2,\n            \"firstName\": \"Viery\",\n            \"lastName\": \"Nugroho\",\n            \"email\": \"Junior@gmail.com\",\n            \"phone\": \"628123456789\",\n            \"password\": \"password\",\n            \"secretKey\": \"\",\n            \"otpToken\": \"\",\n            \"status\": \"VERIFIED\",\n            \"role\": \"BUYER\"\n    }\n}"
             },
             {
               "name": "unauthorized",
@@ -2360,7 +2360,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"user account deleted successfully\"\n    },\n    \"data\": {\n        \"user\": {\n            \"id\": 4,\n            \"firstName\": \"Test Update\",\n            \"lastName\": \"Shinomiya\",\n            \"email\": \"viery15102002@gmail.com\",\n            \"phone\": \"086655446677\",\n            \"password\": \"$2b$10$yRsvJb7SCEd6UX8Yzd/.aOShOgjQVImFRcRw8ear8wl/IV5/mz9H.\",\n            \"secretKey\": \"\",\n            \"otpToken\": \"\",\n            \"status\": \"VERIFIED\",\n            \"role\": \"BUYER\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"user account deleted successfully\"\n    },\n    \"data\": {\n            \"id\": 4,\n            \"firstName\": \"Test Update\",\n            \"lastName\": \"Shinomiya\",\n            \"email\": \"viery15102002@gmail.com\",\n            \"phone\": \"086655446677\",\n            \"password\": \"$2b$10$yRsvJb7SCEd6UX8Yzd/.aOShOgjQVImFRcRw8ear8wl/IV5/mz9H.\",\n            \"secretKey\": \"\",\n            \"otpToken\": \"\",\n            \"status\": \"VERIFIED\",\n            \"role\": \"BUYER\"\n    }\n}"
             },
             {
               "name": "unauthorized",
@@ -3552,7 +3552,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Airport created successfully\"\n    },\n    \"data\": {\n        \"airport\": {\n            \"id\": 9,\n            \"code\": \"HLP\",\n            \"name\": \"Halim Perdanakusuma International Airport\",\n            \"city\": \"DKI Jakarta\",\n            \"state\": \"Asia Tenggara\",\n            \"country\": \"1\",\n            \"timezone\": \"Asia/Jakarta\",\n            \"latitude\": \"1\",\n            \"longitude\": \"1\",\n            \"elevation\": \"1\",\n            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/image-1733114851306_xJxBmViPM.jpeg\",\n            \"imageId\": \"674d3be7e375273f60c23a27\",\n            \"createdAt\": \"2024-12-02T04:47:37.509Z\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Airport created successfully\"\n    },\n    \"data\": {\n            \"id\": 9,\n            \"code\": \"HLP\",\n            \"name\": \"Halim Perdanakusuma International Airport\",\n            \"city\": \"DKI Jakarta\",\n            \"state\": \"Asia Tenggara\",\n            \"country\": \"1\",\n            \"timezone\": \"Asia/Jakarta\",\n            \"latitude\": \"1\",\n            \"longitude\": \"1\",\n            \"elevation\": \"1\",\n            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/image-1733114851306_xJxBmViPM.jpeg\",\n            \"imageId\": \"674d3be7e375273f60c23a27\",\n            \"createdAt\": \"2024-12-02T04:47:37.509Z\"\n    }\n}"
             },
             {
               "name": "already exist",
@@ -4515,7 +4515,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Airport updated successfully\"\n    },\n    \"data\": {\n        \"airport\": {\n            \"id\": 10,\n            \"code\": \"update\",\n            \"name\": \"update\",\n            \"city\": \"DKI Jakarta\",\n            \"state\": \"Asia Tenggara\",\n            \"country\": \"1\",\n            \"timezone\": \"Asia/Jakarta\",\n            \"latitude\": \"1\",\n            \"longitude\": \"1\",\n            \"elevation\": \"1\",\n            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/image-1733116450427_BuOgrRSzM.jpeg\",\n            \"imageId\": \"674d4224e375273f60e58702\",\n            \"createdAt\": \"2024-12-02T05:14:14.443Z\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Airport updated successfully\"\n    },\n    \"data\": {\n            \"id\": 10,\n            \"code\": \"update\",\n            \"name\": \"update\",\n            \"city\": \"DKI Jakarta\",\n            \"state\": \"Asia Tenggara\",\n            \"country\": \"1\",\n            \"timezone\": \"Asia/Jakarta\",\n            \"latitude\": \"1\",\n            \"longitude\": \"1\",\n            \"elevation\": \"1\",\n            \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/image-1733116450427_BuOgrRSzM.jpeg\",\n            \"imageId\": \"674d4224e375273f60e58702\",\n            \"createdAt\": \"2024-12-02T05:14:14.443Z\"\n    }\n}"
             },
             {
               "name": "unauthorized",
@@ -4927,7 +4927,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Airport deleted successfully\"\n    },\n    \"data\": {\n        \"airport\": {\n            \"id\": 2,\n            \"code\": \"CGK\",\n            \"name\": \"Updated Airport Name\",\n            \"city\": \"Jakarta\",\n            \"state\": \"Asia Tenggara\",\n            \"country\": \"Indonesia\",\n            \"timezone\": \"Asia/Jakarta\",\n            \"latitude\": \"-6.121111\",\n            \"longitude\": \"106.661111\",\n            \"elevation\": \"35\",\n            \"imageUrl\": \"\",\n            \"imageId\": \"\",\n            \"createdAt\": \"2024-11-25T04:27:02.136Z\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Airport deleted successfully\"\n    },\n    \"data\": {\n            \"id\": 2,\n            \"code\": \"CGK\",\n            \"name\": \"Updated Airport Name\",\n            \"city\": \"Jakarta\",\n            \"state\": \"Asia Tenggara\",\n            \"country\": \"Indonesia\",\n            \"timezone\": \"Asia/Jakarta\",\n            \"latitude\": \"-6.121111\",\n            \"longitude\": \"106.661111\",\n            \"elevation\": \"35\",\n            \"imageUrl\": \"\",\n            \"imageId\": \"\",\n            \"createdAt\": \"2024-11-25T04:27:02.136Z\"\n    }\n}"
             },
             {
               "name": "unauthorized",
@@ -6934,19 +6934,21 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/flights?page=1&limit=20&seatClass=PREMIUM_ECONOMY",
+              "raw": "{{local_base_url}}/flights",
               "host": ["{{local_base_url}}"],
               "path": ["flights"],
               "query": [
                 {
                   "key": "page",
                   "value": "1",
-                  "description": "page number"
+                  "description": "page number",
+                  "disabled": true
                 },
                 {
                   "key": "limit",
                   "value": "20",
-                  "description": "page items"
+                  "description": "page items",
+                  "disabled": true
                 },
                 {
                   "key": "isCheapest",
@@ -6956,80 +6958,87 @@
                 },
                 {
                   "key": "flightNumber",
-                  "value": "CH2",
+                  "value": "",
                   "description": "flight Number",
                   "disabled": true
                 },
                 {
                   "key": "priceMin",
-                  "value": "3000",
+                  "value": "",
                   "description": "minimum price",
                   "disabled": true
                 },
                 {
                   "key": "priceMax",
-                  "value": "1000",
+                  "value": "",
                   "description": "maximum price",
                   "disabled": true
                 },
                 {
                   "key": "earliestDeparture",
-                  "value": "true",
+                  "value": "false",
                   "description": "sort - string true or false",
                   "disabled": true
                 },
                 {
                   "key": "latestDeparture",
-                  "value": "true",
+                  "value": "false",
                   "description": "sort - string true or false",
                   "disabled": true
                 },
                 {
                   "key": "earliestArrival",
-                  "value": "true",
+                  "value": "false",
                   "description": "sort - string true or false",
                   "disabled": true
                 },
                 {
                   "key": "latestArrival",
-                  "value": "true",
+                  "value": "false",
                   "description": "sort - string true or false",
                   "disabled": true
                 },
                 {
                   "key": "shortest",
-                  "value": "true",
+                  "value": "false",
                   "description": "sort - string true or false",
                   "disabled": true
                 },
                 {
                   "key": "arrivalAirport",
-                  "value": "1",
+                  "value": "",
                   "description": "filter - integer - airport ID",
                   "disabled": true
                 },
                 {
                   "key": "departureAirport",
-                  "value": "2",
+                  "value": "",
                   "description": "filter - integer - airport ID",
                   "disabled": true
                 },
                 {
                   "key": "returnTime",
-                  "value": "2024-01-01T00:00:00Z",
+                  "value": "",
                   "description": "flight departure time [ISO date] - 2024-01-01T00:00:00Z",
                   "disabled": true
                 },
                 {
                   "key": "departureTime",
-                  "value": "2026-01-01T00:00:00Z",
+                  "value": "",
                   "description": "flight departure time [ISO date] - 2024-01-01T00:00:00Z",
                   "disabled": true
                 },
                 {
                   "key": "seatClass",
-                  "value": "PREMIUM_ECONOMY",
-                  "description": "seat class: ECONOMY, PREMIUM_ECONOMY, FIRST, BUSINESS"
+                  "value": "",
+                  "description": "seat class: ECONOMY, PREMIUM_ECONOMY, FIRST, BUSINESS",
+                  "disabled": true
+                },
+                {
+                  "key": "state",
+                  "value": null,
+                  "description": "valid value: Asia, Africa, America, Australia, Europe ('insensitive')",
+                  "disabled": true
                 }
               ]
             }
@@ -10171,7 +10180,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"seat created successfully\"\n    },\n    \"data\": {\n        \"seat\": {\n            \"id\": 1,\n            \"flightId\": 1,\n            \"seatNumber\": \"B3\",\n            \"status\": \"UNAVAILABLE\",\n            \"departureTime\": \"2024-01-01T00:00:00.000Z\",\n            \"arrivalTime\": \"2024-01-02T00:00:00.000Z\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"seat created successfully\"\n    },\n    \"data\": {\n            \"id\": 1,\n            \"flightId\": 1,\n            \"seatNumber\": \"B3\",\n            \"status\": \"UNAVAILABLE\",\n            \"departureTime\": \"2024-01-01T00:00:00.000Z\",\n            \"arrivalTime\": \"2024-01-02T00:00:00.000Z\"\n    }\n}"
             },
             {
               "name": "already created",
@@ -10841,7 +10850,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"seat updated successfully\"\n    },\n    \"data\": {\n        \"seat\": {\n            \"id\": 1,\n            \"flightId\": 1,\n            \"seatNumber\": \"B3\",\n            \"status\": \"LOCKED\",\n            \"departureTime\": \"2024-01-01T00:00:00.000Z\",\n            \"arrivalTime\": \"2024-01-02T00:00:00.000Z\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"seat updated successfully\"\n    },\n    \"data\": {\n            \"id\": 1,\n            \"flightId\": 1,\n            \"seatNumber\": \"B3\",\n            \"status\": \"LOCKED\",\n            \"departureTime\": \"2024-01-01T00:00:00.000Z\",\n            \"arrivalTime\": \"2024-01-02T00:00:00.000Z\"\n    }\n}"
             },
             {
               "name": "forbidden",
@@ -11091,7 +11100,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"seat deleted successfully\"\n    },\n    \"data\": {\n        \"seat\": {\n            \"id\": 1,\n            \"flightId\": 1,\n            \"seatNumber\": \"B3\",\n            \"status\": \"UNAVAILABLE\"\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"seat deleted successfully\"\n    },\n    \"data\": {\n            \"id\": 1,\n            \"flightId\": 1,\n            \"seatNumber\": \"B3\",\n            \"status\": \"UNAVAILABLE\"\n    }\n}"
             },
             {
               "name": "forbidden",
@@ -11645,7 +11654,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"flightId\": 3,\r\n    \"returnFlightId\": 1,\r\n    \"bookingDate\": \"2024-11-26T00:00:00Z\",\r\n    \"bookingDetail\": [\r\n        {\r\n            \"seatId\": 181,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Orang\",\r\n                \"familyName\": \"Jago\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        },\r\n        {\r\n            \"seatId\": 178,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Naruto\",\r\n                \"familyName\": \"Uzumaki\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n",
+              "raw": "{\r\n    \"flightId\": 3,\r\n    \"returnFlightId\": 1,\r\n    \"bookingDate\": \"2024-11-26T00:00:00Z\",\r\n    \"bookingDetail\": [\r\n        {\r\n            \"seatId\": 182,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Orang\",\r\n                \"familyName\": \"Jago\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        },\r\n        {\r\n            \"seatId\": 178,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Naruto\",\r\n                \"familyName\": \"Uzumaki\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -11737,6 +11746,459 @@
               ],
               "cookie": [],
               "body": "{\n    \"error\": {\n        \"statusCode\": 401,\n        \"message\": \"jwt expired, please re-login\",\n        \"details\": \"jwt expired\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Payment",
+      "item": [
+        {
+          "name": "create snap token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bookingId\": 6\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}/payment",
+              "host": ["{{local_base_url}}"],
+              "path": ["payment"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"bookingId\": 6\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{local_base_url}}/payment",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "242"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"f2-vPxFKkqfMkiO3m5STtpZ6ZYEy+A\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Dec 2024 12:22:13 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 201,\n        \"message\": \"Snap token created successfully\"\n    },\n    \"data\": {\n        \"token\": \"cc2cf122-0abe-458f-a4d1-a7ccec25dafd\",\n        \"redirect_url\": \"https://app.sandbox.midtrans.com/snap/v2/vtweb/cc2cf122-0abe-458f-a4d1-a7ccec25dafd\",\n        \"payment\": {\n            \"id\": 6,\n            \"userId\": 1,\n            \"bookingId\": 6,\n            \"snapToken\": \"cc2cf122-0abe-458f-a4d1-a7ccec25dafd\",\n            \"orderId\": \"1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba\",\n            \"status\": \"pending\",\n            \"type\": null,\n            \"amount\": 412000,\n            \"transactionId\": null,\n            \"transactionTime\": null\n        }\n    }\n}"
+            },
+            {
+              "name": "already create payment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"bookingId\": 6\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{local_base_url}}/payment",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment"]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "78"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"4e-eyoOPQFoQFpUE5WXjQ2psldSBLM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 13 Dec 2024 06:44:55 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 409,\n        \"message\": \"Duplicate field, constraint violation\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "get by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0MDU1OTU1LCJleHAiOjE3MzQxNDIzNTV9.L9laZVigYclAG61_I1KkXg0JYGK_sj6yPQcmSQE-e0A",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local_base_url}}/payment/:paymentID",
+              "host": ["{{local_base_url}}"],
+              "path": ["payment", ":paymentID"],
+              "query": [
+                {
+                  "key": "",
+                  "value": "",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "paymentID",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/payment/:paymentId",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment", ":paymentId"],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": null,
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "paymentId",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "317"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"13d-jO4HR/Gj9ea/iNiDxexAFk231Ls\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 13 Dec 2024 04:01:45 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Payment retrieved successfully\"\n    },\n    \"data\": {\n        \"id\": 1,\n        \"userId\": 1,\n        \"bookingId\": 6,\n        \"snapToken\": \"73595a2d-ea75-4746-afc4-3185d7ad7976\",\n        \"orderId\": \"order-2411052438-1734062459958\",\n        \"paymentstatus\": \"PENDING\",\n        \"paymentType\": null,\n        \"paymentAmount\": 412000,\n        \"transactionId\": null,\n        \"transactionTime\": null\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "webhook",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"snapToken\": \"7cc7dba5-3ebd-49ab-88ec-651daba0c0e5\",\r\n  \"paymentStatus\": \"settlement\",\r\n  \"paymentType\": \"credit_card\" \r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}/payment/webhook",
+              "host": ["{{local_base_url}}"],
+              "path": ["payment", "webhook"]
+            },
+            "description": "cuma buat backend"
+          },
+          "response": []
+        },
+        {
+          "name": "cancel",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}/payment/:orderId/cancel",
+              "host": ["{{local_base_url}}"],
+              "path": ["payment", ":orderId", "cancel"],
+              "variable": [
+                {
+                  "key": "orderId",
+                  "value": "1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "payment not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{local_base_url}}/payment/:orderId/cancel",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment", ":orderId", "cancel"],
+                  "variable": [
+                    {
+                      "key": "orderId",
+                      "value": "1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba--"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "59"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3b-9XZn4GKHJyghFBPqbWqkWiXLiRY\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 13 Dec 2024 10:35:50 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 404,\n        \"message\": \"Payment not found.\"\n    }\n}"
+            },
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{local_base_url}}/payment/:orderId/cancel",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment", ":orderId", "cancel"],
+                  "variable": [
+                    {
+                      "key": "orderId",
+                      "value": "1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "448"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1c0-LGGvvGyf185Ik0m9uDZCdUxyiiM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 13 Dec 2024 10:45:35 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Transaction canceled successfully\"\n    },\n    \"data\": {\n        \"status_code\": \"200\",\n        \"status_message\": \"Success, transaction is canceled\",\n        \"transaction_id\": \"d4b475cf-7512-44b9-91b5-028aee6bb07a\",\n        \"order_id\": \"1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba\",\n        \"merchant_id\": \"G600704758\",\n        \"gross_amount\": \"412000.00\",\n        \"currency\": \"IDR\",\n        \"payment_type\": \"qris\",\n        \"transaction_status\": \"cancel\",\n        \"fraud_status\": \"accept\",\n        \"transaction_time\": \"2024-12-13 17:38:39\"\n    }\n}"
             }
           ]
         }
@@ -13948,7 +14410,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"notification deleted successfully\"\n    },\n    \"data\": {\n        \"notification\": {\n            \"id\": 34,\n            \"type\": \"PAYMENT\",\n            \"title\": \"Pembayaran Booking\",\n            \"description\": \"Cepet bayar\",\n            \"isRead\": false,\n            \"createdAt\": \"2024-12-06T06:17:42.903Z\",\n            \"userId\": 1\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"notification deleted successfully\"\n    },\n    \"data\": {\n            \"id\": 34,\n            \"type\": \"PAYMENT\",\n            \"title\": \"Pembayaran Booking\",\n            \"description\": \"Cepet bayar\",\n            \"isRead\": false,\n            \"createdAt\": \"2024-12-06T06:17:42.903Z\",\n            \"userId\": 1\n    }\n}"
             }
           ]
         }
