@@ -103,7 +103,7 @@ export class PaymentService {
       throw new ErrorHandler(404, 'Payment not found.');
     }
 
-    const booking = await PaymentRepository.getBooking(payment.bookingId);
+    const booking = await BookingRepository.getBooking(payment.bookingId);
 
     if (!booking) {
       throw new ErrorHandler(404, 'Booking is not found');
