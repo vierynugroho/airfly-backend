@@ -72,6 +72,7 @@ export class PaymentService {
     return {
       token: response.token,
       redirect_url: `https://app.sandbox.midtrans.com/snap/v2/vtweb/${response.token}`,
+      payment
     };
   }
 
