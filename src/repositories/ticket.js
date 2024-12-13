@@ -20,7 +20,7 @@ export class TicketRepository {
       where: {
         id: bookingID,
         payment: {
-          paymentStatus: 'PAID',
+          status: 'settlement',
         },
       },
       include: {
