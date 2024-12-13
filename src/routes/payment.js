@@ -2,7 +2,7 @@ import express from 'express';
 import { PaymentController } from '../controllers/payment.js';
 import { authorization } from '../middlewares/authorization.js';
 import validation from '../middlewares/validator.js';
-import { transactionSchema } from '../utils/validationSchema.js';
+import { transactionSchema, webhookSchema } from '../utils/validationSchema.js';
 import { UserRole } from '@prisma/client';
 
 const router = express.Router();
@@ -18,9 +18,17 @@ router
 
 router
   .route('/:id')
-  .get(authorization([UserRole.ADMIN, UserRole.BUYER]), PaymentController.getByID)
+  .get(authorization([UserRole.ADMIN, UserRole.BUYER]), PaymentController.getById)
   .delete(authorization([UserRole.ADMIN]), PaymentController.delete);
 
-router.post('/webhook', PaymentController.handleWebhook);
+router
+  .post('/webhook', 
+  validation(webhookSchema),
+  PaymentController.handleWebhook);
+
+router
+  .post('/:orderId/cancel',
+  authorization([UserRole.ADMIN, UserRole.BUYER]),
+  PaymentController.cancel);
 
 export default router;

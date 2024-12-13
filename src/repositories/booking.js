@@ -1,4 +1,4 @@
-import { SeatStatus } from '@prisma/client';
+import { SeatStatus, PaymentStatus } from '@prisma/client';
 import { prisma } from '../database/db.js';
 import { ErrorHandler } from '../middlewares/error.js';
 import { generateCode } from '../utils/generateCode.js';
@@ -89,6 +89,45 @@ export class BookingRepository {
         status,
       },
     });
+  }
+
+  static async updateSeatStatusOnPayment(paymentstatus, bookingId) {
+    const booking = await prisma.booking.findUnique({
+      where: {
+        id: bookingId,
+      },
+      include: {
+        bookingDetail: {
+          select: {
+            seatId: true,
+          },
+        },
+      },
+    });
+  
+    if (!booking) {
+      throw new ErrorHandler(404, 'Booking not found');
+    }
+  
+    const seatIds = booking.bookingDetail.map(detail => detail.seatId);
+  
+    switch (paymentstatus) {
+      case PaymentStatus.SETTLEMENT:
+        await prisma.seat.updateMany({
+          where: { id: { in: seatIds } },
+          data: { status: SeatStatus.UNAVAILABLE },
+        });
+        break;
+      case PaymentStatus.EXPIRE:
+      case PaymentStatus.CANCEL:
+        await prisma.seat.updateMany({
+          where: { id: { in: seatIds } },
+          data: { status: SeatStatus.AVAILABLE },
+        });
+        break;
+      default:
+        throw new ErrorHandler(400, 'Invalid payment status for seat update.');
+    }
   }
 
   static async findBooking(condition, pagination, orderBy) {
