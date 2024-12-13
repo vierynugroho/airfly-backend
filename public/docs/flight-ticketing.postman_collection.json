@@ -144,7 +144,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\": \"john.doe@example.com\",\r\n    \"password\": \"password\"\r\n}",
+              "raw": "{\r\n    \"email\": \"viery15102002@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -152,8 +152,8 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}/auth/login",
-              "host": ["{{local_base_url}}"],
+              "raw": "{{prod_base_url}}/auth/login",
+              "host": ["{{prod_base_url}}"],
               "path": ["auth", "login"]
             },
             "description": "``` json\n{\n    \"email\": \"jane.smith@example.com\", // admin\n    // \"email\": \"john.doe@example.com\", // buyer\n    \"password\": \"password\"\n}\n ```"
@@ -6934,21 +6934,19 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/flights",
+              "raw": "{{local_base_url}}/flights?page=1&limit=20",
               "host": ["{{local_base_url}}"],
               "path": ["flights"],
               "query": [
                 {
                   "key": "page",
                   "value": "1",
-                  "description": "page number",
-                  "disabled": true
+                  "description": "page number"
                 },
                 {
                   "key": "limit",
                   "value": "20",
-                  "description": "page items",
-                  "disabled": true
+                  "description": "page items"
                 },
                 {
                   "key": "isCheapest",
@@ -7006,7 +7004,7 @@
                 },
                 {
                   "key": "arrivalAirport",
-                  "value": "",
+                  "value": "1",
                   "description": "filter - integer - airport ID",
                   "disabled": true
                 },
@@ -7036,7 +7034,7 @@
                 },
                 {
                   "key": "state",
-                  "value": null,
+                  "value": "",
                   "description": "valid value: Asia, Africa, America, Australia, Europe ('insensitive')",
                   "disabled": true
                 }
@@ -9917,13 +9915,13 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/seats/:seatID",
-              "host": ["{{local_base_url}}"],
+              "raw": "{{prod_base_url}}/seats/:seatID",
+              "host": ["{{prod_base_url}}"],
               "path": ["seats", ":seatID"],
               "variable": [
                 {
                   "key": "seatID",
-                  "value": "1",
+                  "value": "147",
                   "description": "seat ID"
                 }
               ]
@@ -11176,8 +11174,8 @@
               }
             ],
             "url": {
-              "raw": "{{local_base_url}}/booking",
-              "host": ["{{local_base_url}}"],
+              "raw": "{{prod_base_url}}/booking",
+              "host": ["{{prod_base_url}}"],
               "path": ["booking"],
               "query": [
                 {
@@ -11358,7 +11356,7 @@
               "variable": [
                 {
                   "key": "bookingId",
-                  "value": "9",
+                  "value": "29",
                   "description": "booking ID"
                 }
               ]
@@ -11654,7 +11652,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"flightId\": 3,\r\n    \"returnFlightId\": 1,\r\n    \"bookingDate\": \"2024-11-26T00:00:00Z\",\r\n    \"bookingDetail\": [\r\n        {\r\n            \"seatId\": 182,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Orang\",\r\n                \"familyName\": \"Jago\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        },\r\n        {\r\n            \"seatId\": 178,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Naruto\",\r\n                \"familyName\": \"Uzumaki\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n",
+              "raw": "{\r\n    \"flightId\": 3,\r\n    \"returnFlightId\": 1,\r\n    \"bookingDate\": \"2024-11-26T00:00:00Z\",\r\n    \"bookingDetail\": [\r\n        {\r\n            \"seatId\": 147,\r\n            \"price\": 9000,\r\n            \"passenger\": {\r\n                \"name\": \"Orang\",\r\n                \"familyName\": \"Jago\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -11662,8 +11660,8 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}/booking",
-              "host": ["{{local_base_url}}"],
+              "raw": "{{prod_base_url}}/booking",
+              "host": ["{{prod_base_url}}"],
               "path": ["booking"]
             }
           },
@@ -11761,7 +11759,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"bookingId\": 6\r\n}\r\n",
+              "raw": "{\r\n  \"bookingId\": 30\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -11769,8 +11767,8 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}/payment",
-              "host": ["{{local_base_url}}"],
+              "raw": "{{prod_base_url}}/payment",
+              "host": ["{{prod_base_url}}"],
               "path": ["payment"]
             }
           },
@@ -11908,16 +11906,6 @@
         {
           "name": "get by ID",
           "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0MDU1OTU1LCJleHAiOjE3MzQxNDIzNTV9.L9laZVigYclAG61_I1KkXg0JYGK_sj6yPQcmSQE-e0A",
-                  "type": "string"
-                }
-              ]
-            },
             "method": "GET",
             "header": [],
             "url": {
@@ -12017,7 +12005,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"snapToken\": \"7cc7dba5-3ebd-49ab-88ec-651daba0c0e5\",\r\n  \"paymentStatus\": \"settlement\",\r\n  \"paymentType\": \"credit_card\" \r\n}\r\n",
+              "raw": "{\r\n  \"va_numbers\": [\r\n    {\r\n      \"va_number\": \"9880475897224761\",\r\n      \"bank\": \"bni\"\r\n    }\r\n  ],\r\n  \"transaction_time\": \"2024-12-14 02:35:26\",\r\n  \"transaction_status\": \"pending\",\r\n  \"transaction_id\": \"c28e7aff-6317-4538-8bbf-612933a908bf\",\r\n  \"status_message\": \"midtrans payment notification\",\r\n  \"status_code\": \"201\",\r\n  \"signature_key\": \"b84a2ea502941c35c6a9dceb4e9ea7116f17fa909b7638ab5e6dc94f7a98849a7ae2ebb8ccc3e2070505adc8bc9ed056111541d271cea4901b02270218cc9824\",\r\n  \"payment_type\": \"bank_transfer\",\r\n  \"payment_amounts\": [],\r\n  \"order_id\": \"c9c1cdeb-9357-4025-8330-8497a7b9838a\",\r\n  \"merchant_id\": \"G600704758\",\r\n  \"gross_amount\": \"9270.00\",\r\n  \"fraud_status\": \"accept\",\r\n  \"expiry_time\": \"2024-12-15 02:35:26\",\r\n  \"currency\": \"IDR\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -12025,8 +12013,8 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}/payment/webhook",
-              "host": ["{{local_base_url}}"],
+              "raw": "{{prod_base_url}}/payment/webhook",
+              "host": ["{{prod_base_url}}"],
               "path": ["payment", "webhook"]
             },
             "description": "cuma buat backend"
@@ -12048,13 +12036,14 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}/payment/:orderId/cancel",
-              "host": ["{{local_base_url}}"],
+              "raw": "{{prod_base_url}}/payment/:orderId/cancel",
+              "host": ["{{prod_base_url}}"],
               "path": ["payment", ":orderId", "cancel"],
               "variable": [
                 {
                   "key": "orderId",
-                  "value": "1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba"
+                  "value": "c9c1cdeb-9357-4025-8330-8497a7b9838a",
+                  "description": "order id from booking"
                 }
               ]
             }
