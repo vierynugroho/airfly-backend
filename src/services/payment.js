@@ -173,6 +173,7 @@ export class PaymentService {
     const response = await fetch(url, options);
     const transaction = await response.json();
 
+    console.log(transaction);
     if (transaction.status_code === '404') {
       throw new ErrorHandler(422, "Transaction doesn't exist.");
     }
@@ -181,17 +182,17 @@ export class PaymentService {
       throw new ErrorHandler(400, 'orderId must be a string');
     }
 
-    await PaymentRepository.updateStatus(
-      orderId,
-      'cancel',
-      payment.type,
-      payment.id,
-      payment.transactionTime
-    );
-    await BookingRepository.updateSeatStatusOnPayment(
-      'cancel',
-      payment.bookingId
-    );
+    await PaymentRepository.updateStatus(orderId, 'cancel');
+
+    const booking = await BookingRepository.getBooking(payment.bookingId);
+
+    if (!booking) {
+      throw new ErrorHandler(404, 'Booking is not found');
+    }
+
+    const seatIds = booking.bookingDetail.map((detail) => detail.seatId);
+
+    await BookingRepository.updateSeatStatusOnPayment(seatIds, 'AVAILABLE');
 
     return transaction;
   }
