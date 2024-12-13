@@ -90,11 +90,11 @@ export class BookingRepository {
       },
     });
   }
-
-  static async updateSeatStatusOnPayment(paymentstatus, bookingId) {
+  
+  static async getBooking(bookingID) {
     const booking = await prisma.booking.findUnique({
       where: {
-        id: bookingId,
+        id: bookingID,
       },
       include: {
         bookingDetail: {
@@ -105,29 +105,16 @@ export class BookingRepository {
       },
     });
 
-    if (!booking) {
-      throw new ErrorHandler(404, 'Booking not found');
-    }
+    return booking;
+  }
 
-    const seatIds = booking.bookingDetail.map((detail) => detail.seatId);
+  static async updateSeatStatusOnPayment(seatIds, seatStatus) {
+    const update = await prisma.seat.updateMany({
+      where: { id: { in: seatIds } },
+      data: { status: seatStatus },
+    });
 
-    switch (paymentstatus) {
-      case 'settlement':
-        await prisma.seat.updateMany({
-          where: { id: { in: seatIds } },
-          data: { status: SeatStatus.UNAVAILABLE },
-        });
-        break;
-      case 'expired':
-      case 'cancel':
-        await prisma.seat.updateMany({
-          where: { id: { in: seatIds } },
-          data: { status: SeatStatus.AVAILABLE },
-        });
-        break;
-      default:
-        throw new ErrorHandler(400, 'Invalid payment status for seat update.');
-    }
+    return update;
   }
 
   static async findBooking(condition, pagination, orderBy) {

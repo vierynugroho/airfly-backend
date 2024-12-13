@@ -103,6 +103,14 @@ export class PaymentService {
       throw new ErrorHandler(404, 'Payment not found.');
     }
 
+    const booking = await PaymentRepository.getBooking(payment.bookingId);
+
+    if (!booking) {
+      throw new ErrorHandler(404, 'Booking is not found');
+    }
+
+    const seatIds = booking.bookingDetail.map((detail) => detail.seatId);
+
     console.log('payment on webhook');
     console.log(payment);
     console.log('-----------------');
@@ -114,46 +122,26 @@ export class PaymentService {
 
     const { transaction_status, fraud_status, order_id } = paymentData;
 
+    await PaymentRepository.updateStatus(
+      order_id,
+      transaction_status,
+      payment.paymentType,
+      paymentData.transaction_id,
+      paymentData.transaction_time
+    );
+
     if (transaction_status === 'capture' && fraud_status === 'accept') {
-      await PaymentRepository.updateStatus(
-        order_id,
-        'settlement', 
-        payment.paymentType,
-        paymentData.transaction_id,
-        paymentData.transaction_time
-      );
-      await BookingRepository.updateSeatStatusOnPayment('UNAVAILABLE', payment.bookingId);
+      await BookingRepository.updateSeatStatusOnPayment(seatIds, 'UNAVAILABLE');
     } else if (transaction_status === 'settlement') {
-      await PaymentRepository.updateStatus(
-        order_id,
-        'settlement', 
-        payment.paymentType,
-        paymentData.transaction_id,
-        paymentData.transaction_time
-      );
-      await BookingRepository.updateSeatStatusOnPayment('UNAVAILABLE', payment.bookingId);
+      await BookingRepository.updateSeatStatusOnPayment(seatIds, 'UNAVAILABLE');
     } else if (['cancel', 'deny', 'expire'].includes(transaction_status)) {
-      await PaymentRepository.updateStatus(
-        order_id,
-        'cancel',
-        payment.paymentType,
-        paymentData.transaction_id,
-        paymentData.transaction_time
-      );
-      await BookingRepository.updateSeatStatusOnPayment('AVAILABLE', payment.bookingId);
+      await BookingRepository.updateSeatStatusOnPayment(seatIds, 'AVAILABLE');
     } else if (transaction_status === 'pending') {
-      await PaymentRepository.updateStatus(
-        order_id,
-        'pending',
-        payment.paymentType,
-        paymentData.transaction_id,
-        paymentData.transaction_time
-      );
-      await BookingRepository.updateSeatStatusOnPayment('LOCKED', payment.bookingId);
+      await BookingRepository.updateSeatStatusOnPayment(seatIds, 'LOCKED');
     } else {
       throw new ErrorHandler(400, 'Invalid transaction status.');
     }
-  
+
     return payment;
   }
 
