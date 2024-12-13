@@ -1,8 +1,9 @@
 import { prisma } from '../database/db.js';
 
 export class PaymentRepository {
-  static async create(data) {
-    return prisma.payment.create({ data });
+  static async create(paymentData) {
+    return prisma.payment.create({ 
+      data: paymentData, });
   }
 
   static async getByBookingId(bookingId) {
@@ -23,20 +24,26 @@ export class PaymentRepository {
     return { payments, total, page, limit };
   }
 
-  static async getByID(paymentId) {
-    return prisma.payment.findUnique({ where: { id: paymentId } });
+  static async getById(paymentId) {
+    return prisma.payment.findUnique({
+      where: {
+        id: paymentId,
+      },
+    });
   }
 
-  static async findBySnapToken(snapToken) {
-    return prisma.payment.findUnique({ where: { snapToken } });
+  static async findByOrderId(orderId) {
+    return prisma.payment.findUnique({ where: { orderId} });
   }
 
-  static async updateStatus(paymentId, paymentstatus, paymentType) {
+  static async updateStatus(orderId, paymentstatus, paymentType, transactionId, transactionTime) {
     return prisma.payment.update({
-      where: { id: paymentId },
+      where: { orderId: orderId},
       data: { 
         paymentstatus: paymentstatus,
         paymentType: paymentType},
+        transactionId: transactionId,
+        transactionTime: transactionTime,
     });
   }
 

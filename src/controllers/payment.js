@@ -3,10 +3,19 @@ import { PaymentService } from '../services/payment.js';
 export class PaymentController {
   static async create(req, res, next) {
     try {
+      const customerDetails = {
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
+        email: req.user.email,
+        phone: req.user.phone,
+      };
+
       const snapToken = await PaymentService.create({
         id: req.body.bookingId,
         userId: req.user.id,
+        customerDetails,
       });
+
       res.status(201).json({
         meta: {
           statusCode: 201,
@@ -21,12 +30,21 @@ export class PaymentController {
 
   static async handleWebhook(req, res, next) {
     try {
-      const { snapToken, paymentStatus, paymentType } = req.body;
+      console.log(req.body);
+      const {
+        order_id: orderId,
+        transaction_status: paymentstatus,
+        payment_type: paymentType,
+        transaction_id: transactionId,
+        transaction_time: transactionTime,
+      } = req.body;
 
       await PaymentService.processWebhook({
-        snapToken: snapToken,
-        paymentStatus: paymentStatus,
-        paymentType: paymentType,
+        orderId,
+        paymentStatus: paymentstatus.toUpperCase(),
+        paymentType: paymentType.toUpperCase(),
+        transactionId,
+        transactionTime,
       });
 
       res.status(200).send('OK');
@@ -50,15 +68,10 @@ export class PaymentController {
     }
   }
 
-  static async getByID(req, res, next) {
+  static async getById(req, res, next) {
     try {
       const paymentId = parseInt(req.params.id, 10);
-
-      if (isNaN(paymentId)) {
-        throw new ErrorHandler(400, 'Invalid payment ID.');
-      }
-
-      const payment = await PaymentService.getByID(paymentId);
+      const payment = await PaymentService.getById(paymentId);
       res.json({
         meta: {
           statusCode: 200,
@@ -71,6 +84,22 @@ export class PaymentController {
     }
   }
 
+  static async cancel(req, res, next) {
+    try {
+      const { orderId } = req.params;
+      const transaction = await PaymentService.cancel(orderId);
+
+      res.status(200).json({
+        meta: {
+          statusCode: 200,
+          message: 'Transaction canceled successfully',
+        },
+        data: transaction,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 
   static async delete(req, res, next) {
     try {
