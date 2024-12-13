@@ -184,7 +184,9 @@ export class PaymentService {
     await PaymentRepository.updateStatus(
       orderId,
       'cancel',
-      payment.paymentType
+      payment.type,
+      payment.id,
+      payment.transactionTime
     );
     await BookingRepository.updateSeatStatusOnPayment(
       'cancel',
