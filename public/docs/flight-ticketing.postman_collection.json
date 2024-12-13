@@ -240,7 +240,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"firstName\": \"Kaguya\",\r\n    \"lastName\": \"Shinomiya\",\r\n    \"phone\": \"086655446677\",\r\n    \"email\": \"kutakulu@gmail.com\",\r\n    \"password\": \"bakashirogane\"\r\n}",
+              "raw": "{\r\n    \"firstName\": \"Viery\",\r\n    \"lastName\": \"Nugroho\",\r\n    \"phone\": \"086655446677\",\r\n    \"email\": \"viery15102002@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -248,8 +248,8 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}/auth/register",
-              "host": ["{{local_base_url}}"],
+              "raw": "{{prod_base_url}}/auth/register",
+              "host": ["{{prod_base_url}}"],
               "path": ["auth", "register"]
             }
           },
@@ -11654,7 +11654,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"flightId\": 3,\r\n    \"returnFlightId\": 1,\r\n    \"bookingDate\": \"2024-11-26T00:00:00Z\",\r\n    \"bookingDetail\": [\r\n        {\r\n            \"seatId\": 181,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Orang\",\r\n                \"familyName\": \"Jago\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        },\r\n        {\r\n            \"seatId\": 178,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Naruto\",\r\n                \"familyName\": \"Uzumaki\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n",
+              "raw": "{\r\n    \"flightId\": 3,\r\n    \"returnFlightId\": 1,\r\n    \"bookingDate\": \"2024-11-26T00:00:00Z\",\r\n    \"bookingDetail\": [\r\n        {\r\n            \"seatId\": 182,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Orang\",\r\n                \"familyName\": \"Jago\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        },\r\n        {\r\n            \"seatId\": 178,\r\n            \"price\": 200000,\r\n            \"passenger\": {\r\n                \"name\": \"Naruto\",\r\n                \"familyName\": \"Uzumaki\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -11757,21 +11757,11 @@
         {
           "name": "create snap token",
           "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzOTAyNTkyLCJleHAiOjE3MzM5ODg5OTJ9.yFzgJ6t49BSqRKs5HneS9IVl42z1QFUFlKYXjdR24zY",
-                  "type": "string"
-                }
-              ]
-            },
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"bookingId\": 5\r\n}\r\n",
+              "raw": "{\r\n  \"bookingId\": 6\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -11792,7 +11782,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n  \"bookingId\": 5\r\n}\r\n",
+                  "raw": "{\r\n  \"bookingId\": 6\r\n}\r\n",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -11800,11 +11790,9 @@
                   }
                 },
                 "url": {
-                  "raw": "http://localhost:3000/api/v1/payment",
-                  "protocol": "http",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "payment"]
+                  "raw": "{{local_base_url}}/payment",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment"]
                 }
               },
               "status": "Created",
@@ -11829,15 +11817,15 @@
                 },
                 {
                   "key": "Content-Length",
-                  "value": "246"
+                  "value": "242"
                 },
                 {
                   "key": "ETag",
-                  "value": "W/\"f6-zDXPj/V77Ro+Jqe8amDTI+bzVm4\""
+                  "value": "W/\"f2-vPxFKkqfMkiO3m5STtpZ6ZYEy+A\""
                 },
                 {
                   "key": "Date",
-                  "value": "Wed, 11 Dec 2024 09:16:47 GMT"
+                  "value": "Thu, 12 Dec 2024 12:22:13 GMT"
                 },
                 {
                   "key": "Connection",
@@ -11849,24 +11837,104 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 201,\n        \"message\": \"Snap token created successfully\"\n    },\n    \"data\": {\n        \"snapToken\": {\n            \"id\": 5,\n            \"userId\": 1,\n            \"bookingId\": 5,\n            \"snapToken\": \"7cc7dba5-3ebd-49ab-88ec-651daba0c0e5\",\n            \"paymentstatus\": \"PENDING\",\n            \"paymentType\": null,\n            \"paymentAmount\": 3000000\n        }\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 201,\n        \"message\": \"Snap token created successfully\"\n    },\n    \"data\": {\n        \"token\": \"cc2cf122-0abe-458f-a4d1-a7ccec25dafd\",\n        \"redirect_url\": \"https://app.sandbox.midtrans.com/snap/v2/vtweb/cc2cf122-0abe-458f-a4d1-a7ccec25dafd\",\n        \"payment\": {\n            \"id\": 6,\n            \"userId\": 1,\n            \"bookingId\": 6,\n            \"snapToken\": \"cc2cf122-0abe-458f-a4d1-a7ccec25dafd\",\n            \"orderId\": \"1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba\",\n            \"status\": \"pending\",\n            \"type\": null,\n            \"amount\": 412000,\n            \"transactionId\": null,\n            \"transactionTime\": null\n        }\n    }\n}"
+            },
+            {
+              "name": "already create payment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"bookingId\": 6\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{local_base_url}}/payment",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment"]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "78"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"4e-eyoOPQFoQFpUE5WXjQ2psldSBLM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 13 Dec 2024 06:44:55 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 409,\n        \"message\": \"Duplicate field, constraint violation\"\n    }\n}"
             }
           ]
         },
         {
           "name": "get by ID",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0MDU1OTU1LCJleHAiOjE3MzQxNDIzNTV9.L9laZVigYclAG61_I1KkXg0JYGK_sj6yPQcmSQE-e0A",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
               "raw": "{{local_base_url}}/payment/:paymentID",
               "host": ["{{local_base_url}}"],
               "path": ["payment", ":paymentID"],
+              "query": [
+                {
+                  "key": "",
+                  "value": "",
+                  "disabled": true
+                }
+              ],
               "variable": [
                 {
                   "key": "paymentID",
-                  "value": "",
-                  "description": "integer - payment ID"
+                  "value": "1"
                 }
               ]
             }
@@ -11878,11 +11946,22 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:3000/api/v1/payment/4",
-                  "protocol": "http",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "payment", "4"]
+                  "raw": "{{local_base_url}}/payment/:paymentId",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment", ":paymentId"],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": null,
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "paymentId",
+                      "value": "1"
+                    }
+                  ]
                 }
               },
               "status": "OK",
@@ -11907,15 +11986,15 @@
                 },
                 {
                   "key": "Content-Length",
-                  "value": "258"
+                  "value": "317"
                 },
                 {
                   "key": "ETag",
-                  "value": "W/\"102-chqR/HaouMWpEyul/9eiyVrRrqc\""
+                  "value": "W/\"13d-jO4HR/Gj9ea/iNiDxexAFk231Ls\""
                 },
                 {
                   "key": "Date",
-                  "value": "Wed, 11 Dec 2024 09:00:41 GMT"
+                  "value": "Fri, 13 Dec 2024 04:01:45 GMT"
                 },
                 {
                   "key": "Connection",
@@ -11927,7 +12006,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Payment retrieved successfully\"\n    },\n    \"data\": {\n        \"id\": 4,\n        \"userId\": 1,\n        \"bookingId\": 5,\n        \"snapToken\": \"5c788ff0-ad41-4fec-b953-16e31f35edb9\",\n        \"status\": \"PENDING\",\n        \"paymentType\": null,\n        \"orderId\": \"ORDER-5-1733907613455\",\n        \"paymentAmount\": 3000000\n    }\n}"
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Payment retrieved successfully\"\n    },\n    \"data\": {\n        \"id\": 1,\n        \"userId\": 1,\n        \"bookingId\": 6,\n        \"snapToken\": \"73595a2d-ea75-4746-afc4-3185d7ad7976\",\n        \"orderId\": \"order-2411052438-1734062459958\",\n        \"paymentstatus\": \"PENDING\",\n        \"paymentType\": null,\n        \"paymentAmount\": 412000,\n        \"transactionId\": null,\n        \"transactionTime\": null\n    }\n}"
             }
           ]
         },
@@ -11949,17 +12028,46 @@
               "raw": "{{local_base_url}}/payment/webhook",
               "host": ["{{local_base_url}}"],
               "path": ["payment", "webhook"]
+            },
+            "description": "cuma buat backend"
+          },
+          "response": []
+        },
+        {
+          "name": "cancel",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}/payment/:orderId/cancel",
+              "host": ["{{local_base_url}}"],
+              "path": ["payment", ":orderId", "cancel"],
+              "variable": [
+                {
+                  "key": "orderId",
+                  "value": "1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba"
+                }
+              ]
             }
           },
           "response": [
             {
-              "name": "200 ok",
+              "name": "payment not found",
               "originalRequest": {
                 "method": "POST",
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n  \"snapToken\": \"7cc7dba5-3ebd-49ab-88ec-651daba0c0e5\",\r\n  \"paymentStatus\": \"settlement\",\r\n  \"paymentType\": \"credit_card\" \r\n}\r\n",
+                  "raw": "",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -11967,16 +12075,20 @@
                   }
                 },
                 "url": {
-                  "raw": "http://localhost:3000/api/v1/payment/webhook",
-                  "protocol": "http",
-                  "host": ["localhost"],
-                  "port": "3000",
-                  "path": ["api", "v1", "payment", "webhook"]
+                  "raw": "{{local_base_url}}/payment/:orderId/cancel",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment", ":orderId", "cancel"],
+                  "variable": [
+                    {
+                      "key": "orderId",
+                      "value": "1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba--"
+                    }
+                  ]
                 }
               },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "html",
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "X-Powered-By",
@@ -11992,19 +12104,19 @@
                 },
                 {
                   "key": "Content-Type",
-                  "value": "text/html; charset=utf-8"
+                  "value": "application/json; charset=utf-8"
                 },
                 {
                   "key": "Content-Length",
-                  "value": "2"
+                  "value": "59"
                 },
                 {
                   "key": "ETag",
-                  "value": "W/\"2-nOO9QiTIwXgNtWtBJezz8kv3SLc\""
+                  "value": "W/\"3b-9XZn4GKHJyghFBPqbWqkWiXLiRY\""
                 },
                 {
                   "key": "Date",
-                  "value": "Wed, 11 Dec 2024 09:46:25 GMT"
+                  "value": "Fri, 13 Dec 2024 10:35:50 GMT"
                 },
                 {
                   "key": "Connection",
@@ -12016,7 +12128,77 @@
                 }
               ],
               "cookie": [],
-              "body": "OK"
+              "body": "{\n    \"error\": {\n        \"statusCode\": 404,\n        \"message\": \"Payment not found.\"\n    }\n}"
+            },
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{local_base_url}}/payment/:orderId/cancel",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment", ":orderId", "cancel"],
+                  "variable": [
+                    {
+                      "key": "orderId",
+                      "value": "1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "448"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1c0-LGGvvGyf185Ik0m9uDZCdUxyiiM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 13 Dec 2024 10:45:35 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Transaction canceled successfully\"\n    },\n    \"data\": {\n        \"status_code\": \"200\",\n        \"status_message\": \"Success, transaction is canceled\",\n        \"transaction_id\": \"d4b475cf-7512-44b9-91b5-028aee6bb07a\",\n        \"order_id\": \"1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba\",\n        \"merchant_id\": \"G600704758\",\n        \"gross_amount\": \"412000.00\",\n        \"currency\": \"IDR\",\n        \"payment_type\": \"qris\",\n        \"transaction_status\": \"cancel\",\n        \"fraud_status\": \"accept\",\n        \"transaction_time\": \"2024-12-13 17:38:39\"\n    }\n}"
             }
           ]
         }
