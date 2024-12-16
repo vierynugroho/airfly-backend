@@ -91,6 +91,45 @@ export class BookingRepository {
     });
   }
 
+  static async updateSeatStatusOnPayment(paymentstatus, bookingId) {
+    const booking = await prisma.booking.findUnique({
+      where: {
+        id: bookingId,
+      },
+      include: {
+        bookingDetail: {
+          select: {
+            seatId: true,
+          },
+        },
+      },
+    });
+
+    if (!booking) {
+      throw new ErrorHandler(404, 'Booking not found');
+    }
+
+    const seatIds = booking.bookingDetail.map((detail) => detail.seatId);
+
+    switch (paymentstatus) {
+      case 'settlement':
+        await prisma.seat.updateMany({
+          where: { id: { in: seatIds } },
+          data: { status: SeatStatus.UNAVAILABLE },
+        });
+        break;
+      case 'expired':
+      case 'cancel':
+        await prisma.seat.updateMany({
+          where: { id: { in: seatIds } },
+          data: { status: SeatStatus.AVAILABLE },
+        });
+        break;
+      default:
+        throw new ErrorHandler(400, 'Invalid payment status for seat update.');
+    }
+  }
+
   static async findBooking(condition, pagination, orderBy) {
     return await prisma.booking.findMany({
       where: condition,

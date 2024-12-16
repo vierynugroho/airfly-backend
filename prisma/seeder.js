@@ -1817,32 +1817,64 @@ async function main() {
   });
 
   // Seed Booking Details
+  const bookingDetailsData = [];
+  const seatIds = await prisma.seat.findMany({
+    where: { status: 'AVAILABLE' },
+  });
+
+  Array.from({ length: 5 }).forEach((_, index) => {
+    const selectedSeat = seatIds[index];
+    if (selectedSeat) {
+      bookingDetailsData.push({
+        bookingId: index + 1,
+        passengerId: index + 1,
+        seatId: selectedSeat.id,
+        price: 500000 + index * 250000,
+      });
+
+      prisma.seat.update({
+        where: { id: selectedSeat.id },
+        data: { status: 'UNAVAILABLE' },
+      });
+    }
+  });
+
   await prisma.bookingDetail.createMany({
-    data: Array.from({ length: 5 }).map((_, index) => ({
-      bookingId: index + 1,
-      passengerId: index + 1,
-      seatId: index + 1,
-      price: 500000 + index * 250000,
-    })),
+    data: bookingDetailsData,
     skipDuplicates: true,
   });
 
   // Seed Payments
+  const paymentData = [];
+  const bookings = await prisma.booking.findMany();
+
+  bookings.forEach((booking, index) => {
+    const paymentstatus = ['settlement', 'pending', 'cancel', 'expire'][
+      index % 4
+    ];
+
+    const paymentType =
+      index % 4 === 0
+        ? 'credit_card'
+        : index % 4 === 1
+          ? 'bank_transfer'
+          : index % 4 === 2
+            ? 'digital_walet'
+            : 'paypal';
+
+    paymentData.push({
+      orderId: crypto.randomUUID(),
+      bookingId: booking.id,
+      userId: booking.userId,
+      snapToken: `SNAP-${booking.id}-${Date.now()}`,
+      type: paymentType,
+      amount: booking.totalPrice,
+      status: paymentstatus,
+    });
+  });
+
   await prisma.payment.createMany({
-    data: Array.from({ length: 5 }).map((_, index) => ({
-      bookingId: index + 1,
-      paymentMethod:
-        index % 4 === 0
-          ? 'CREDIT_CARD'
-          : index % 4 === 1
-            ? 'BANK_TRANSFER'
-            : index % 4 === 2
-              ? 'DIGITAL_WALLET'
-              : 'PAYPAL',
-      paymentDate: new Date(2024, index, index + 1),
-      paymentAmount: 1000000 + index * 500000,
-      paymentStatus: index % 2 === 0 ? 'PAID' : 'UNPAID',
-    })),
+    data: paymentData,
     skipDuplicates: true,
   });
 
