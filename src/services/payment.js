@@ -13,7 +13,7 @@ export class PaymentService {
     const itemDetails = booking.bookingDetail.map((detail) => {
       return {
         id: booking.id,
-        price: detail.price,
+        price: Math.round(detail.price),
         quantity: 1,
         name: `${booking.code} Seat-${detail.seatId}`,
       };
@@ -25,7 +25,7 @@ export class PaymentService {
     );
 
     const taxRate = 0.03;
-    const tax = totalPriceWithoutTax * taxRate;
+    const tax = Math.round(totalPriceWithoutTax * taxRate);
 
     itemDetails.push({
       id: `Tax- ${booking.id}`,
@@ -34,7 +34,7 @@ export class PaymentService {
       name: 'TAX',
     });
 
-    const totalAmount = totalPriceWithoutTax + tax;
+    const totalAmount = Math.round(totalPriceWithoutTax + tax);
 
     const itemDetailsTotal = itemDetails.reduce(
       (sum, item) => sum + item.price * item.quantity,
