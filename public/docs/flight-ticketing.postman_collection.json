@@ -144,7 +144,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\": \"viery15102002@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+              "raw": "{\r\n    \"email\": \"jane.smith@example.com\",\r\n    \"password\": \"password\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -152,8 +152,8 @@
               }
             },
             "url": {
-              "raw": "{{prod_base_url}}/auth/login",
-              "host": ["{{prod_base_url}}"],
+              "raw": "{{local_base_url}}/auth/login",
+              "host": ["{{local_base_url}}"],
               "path": ["auth", "login"]
             },
             "description": "``` json\n{\n    \"email\": \"jane.smith@example.com\", // admin\n    // \"email\": \"john.doe@example.com\", // buyer\n    \"password\": \"password\"\n}\n ```"
@@ -16211,6 +16211,190 @@
               ],
               "cookie": [],
               "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"QR Ticket generated successfully\"\n    },\n    \"data\": [\n        {\n            \"passenger\": {\n                \"name\": \"Anak\",\n                \"familyName\": \"Jago\",\n                \"type\": \"ADULT\"\n            },\n            \"qrCodeImage\": \"data:image/png;base64,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laniROWkYlKZKiaVk4onVD6p4o2Ltda6Xay11u1irbVuP7yk8pcqpopJZap4o2JSmSpOVKaKNyomlTdUpoqTihOVqWJSeUJlqjhROal4QmWqmFROVKaKk4pJ5aTiky7WWut2sdZat4u11rr98GEVn6RyovJNKlPFpHJSMalMFZPKVDGpTBUnKicVb6g8UXGicqJyUnGiMlVMFZPKGxVPqJxUfNPFWmvdLtZa63ax1lq3H75M5YmKT1L5JJWp4omKJ1SmikllqjhReUNlqjhRmSpOKt5QeUJlqjhROVH5SypTxRsXa611u1hrrdvFWmvdfvgfU/GEylQxqUwVk8pUMalMFU9UTCpTxRsVk8obKlPFpPJJFVPFicpUcVJxovJJFU9UfNLFWmvdLtZa63ax1lq3H/7HqLyh8kkVT1ScVDxRMamcVEwqU8UTKlPFEypTxRMqU8WJyknFScWk8oTKScU3Xay11u1irbVuF2utdfvhyyq+qWJSmSomlU+qOFF5ouJEZaqYVE4qTlROVE4qvknlpOKNikllUpkqJpWTihOVf9LFWmvdLtZa63ax1lo3+8ULKn+pYlJ5o+IJlZOKN1Smim9SOal4Q2WqmFSeqPgklScqTlSmiknlpOJEZar4pIu11rpdrLXW7WKttW72i7XW+nWx1lq3i7XWul2stdbtYq21bhdrrXW7WGut28Vaa90u1lrrdrHWWreLtda6Xay11u1irbVuF2utdbtYa63bxVpr3f4DKpRqGo67LRsAAAAASUVORK5CYII=\",\n            \"booking\": {\n                \"id\": 10,\n                \"code\": \"2411030282\",\n                \"userId\": 1,\n                \"flightId\": 3,\n                \"returnFlightId\": null,\n                \"bookingDate\": \"2024-12-11T11:11:07.245Z\",\n                \"totalPrice\": 200000,\n                \"status\": \"ACTIVE\",\n                \"createdAt\": \"2024-12-11T11:11:07.247Z\",\n                \"updateAt\": \"2024-12-11T11:11:07.247Z\",\n                \"flight\": {\n                    \"id\": 3,\n                    \"flightNumber\": \"AL91\",\n                    \"airlineId\": 1,\n                    \"departureAirport\": 1,\n                    \"arrivalAirport\": 2,\n                    \"departureTime\": \"2024-12-16T08:00:00.000Z\",\n                    \"arrivalTime\": \"2024-12-16T11:00:00.000Z\",\n                    \"terminal\": \"A\",\n                    \"information\": \"Free Wi Fi-Free Inflight Meals\",\n                    \"price\": 550,\n                    \"class\": \"PREMIUM_ECONOMY\",\n                    \"airline\": {\n                        \"id\": 1,\n                        \"name\": \"Garuda Indonesia\",\n                        \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                        \"imageId\": \"garuda-logo\"\n                    },\n                    \"departure\": {\n                        \"id\": 1,\n                        \"code\": \"CGK\",\n                        \"name\": \"Soekarno-Hatta International Airport\",\n                        \"city\": \"Jakarta\",\n                        \"state\": \"Asia\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-6.1255\",\n                        \"longitude\": \"106.6551\",\n                        \"elevation\": \"8\",\n                        \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-12-11T09:03:54.053Z\"\n                    },\n                    \"arrival\": {\n                        \"id\": 2,\n                        \"code\": \"SUB\",\n                        \"name\": \"Juanda International Airport\",\n                        \"city\": \"Surabaya\",\n                        \"state\": \"Asia\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-7.3797\",\n                        \"longitude\": \"112.7876\",\n                        \"elevation\": \"7\",\n                        \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-12-11T09:03:54.053Z\"\n                    }\n                },\n                \"returnFlight\": null\n            }\n        }\n    ]\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Data Counter",
+      "item": [
+        {
+          "name": "get total data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local_base_url}}/admin/count",
+              "host": ["{{local_base_url}}"],
+              "path": ["admin", "count"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/admin/count",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["admin", "count"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "279"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"117-H4KpHD7odhInzrISxK91dnXEl2c\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Dec 2024 12:14:06 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Count fetch success\"\n    },\n    \"data\": {\n        \"totalAirlines\": 8,\n        \"totalAirports\": 17,\n        \"totalFlights\": 147,\n        \"totalUsers\": 5,\n        \"totalTransactions\": 5,\n        \"totalDiscounts\": 5,\n        \"totalNotifications\": 10,\n        \"totalBookings\": 5,\n        \"totalPassengers\": 10,\n        \"totalSeats\": 10584,\n        \"totalTickets\": 5\n    }\n}"
+            },
+            {
+              "name": "unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/admin/count",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["admin", "count"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "53"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"35-JKLf57b4Vl5fiBd/Q+6w6iM8i0M\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Dec 2024 12:14:40 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 401,\n        \"message\": \"unauthorized\"\n    }\n}"
+            },
+            {
+              "name": "forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/admin/count",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["admin", "count"]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "65"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"41-z8nFVUYekvfQenPP9pE/ce2KvuI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Dec 2024 12:15:08 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 403,\n        \"message\": \"forbidden, Go Back ! >:(\"\n    }\n}"
             }
           ]
         }

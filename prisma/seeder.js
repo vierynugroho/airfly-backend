@@ -5,6 +5,8 @@ import { UserRole, UserStatus } from '@prisma/client';
 
 async function main() {
   // seed users
+  console.log('🚀 Seeding Start');
+  console.log('seeding users...');
   const defaultPasswordHash = await Bcrypt.hash('password');
 
   // Seed Users with varied roles and statuses
@@ -92,6 +94,7 @@ async function main() {
   });
 
   // Seed Airlines
+  console.log('seeding airlines...');
   await prisma.airline.createMany({
     data: [
       {
@@ -146,6 +149,7 @@ async function main() {
   });
 
   // Seed Airports
+  console.log('seeding airports...');
   await prisma.airport.createMany({
     data: [
       // Indonesia
@@ -384,6 +388,7 @@ async function main() {
   });
 
   // Seed Flights
+  console.log('seeding flights...');
   const retrievedAirlines = await prisma.airline.findMany();
   const retrievedAirports = await prisma.airport.findMany();
 
@@ -1040,8 +1045,8 @@ async function main() {
         flightNumber: 'AH118',
         airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
           .id,
-        departureAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
-        arrivalAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        departureAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
         departureTime: parseISO('2024-12-20T09:00:00Z'),
         arrivalTime: parseISO('2024-12-20T12:00:00Z'),
         terminal: 'A',
@@ -1053,8 +1058,8 @@ async function main() {
         flightNumber: 'HA113',
         airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
           .id,
-        departureAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
-        arrivalAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        departureAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
         departureTime: parseISO('2024-12-20T08:00:00Z'),
         arrivalTime: parseISO('2024-12-20T11:00:00Z'),
         terminal: 'A',
@@ -1066,10 +1071,10 @@ async function main() {
         flightNumber: 'HA114',
         airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
           .id,
-        departureAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
-        arrivalAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
-        departureTime: parseISO('2024-12-21T09:00:00Z'),
-        arrivalTime: parseISO('2024-12-21T12:00:00Z'),
+        departureAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
+        departureTime: parseISO('2024-12-22T09:00:00Z'),
+        arrivalTime: parseISO('2024-12-22T12:00:00Z'),
         terminal: 'A',
         information: 'Free Wi Fi-Free Inflight Meals',
         price: 550.0,
@@ -1079,10 +1084,10 @@ async function main() {
         flightNumber: 'HA115',
         airlineId: retrievedAirlines.find((a) => a.name === 'Garuda Indonesia')
           .id,
-        departureAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
-        arrivalAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
-        departureTime: parseISO('2024-12-21T09:00:00Z'),
-        arrivalTime: parseISO('2024-12-21T11:00:00Z'),
+        departureAirport: retrievedAirports.find((a) => a.code === 'SUB').id,
+        arrivalAirport: retrievedAirports.find((a) => a.code === 'CGK').id,
+        departureTime: parseISO('2024-12-25T09:00:00Z'),
+        arrivalTime: parseISO('2024-12-25T11:00:00Z'),
         terminal: 'B',
         information: 'Free Wi Fi-Free Inflight Meals',
         price: 950.0,
@@ -2291,6 +2296,7 @@ async function main() {
   const flights = await prisma.flight.findMany();
 
   // Seed Seats
+  console.log('seeding seats...');
   flights.forEach((flight) => {
     const numberOfRows = 12;
     const seatsPerRow = 6;
@@ -2316,6 +2322,7 @@ async function main() {
   });
 
   // Seed Passenger
+  console.log('seeding passengers...');
   await prisma.passenger.createMany({
     data: Array.from({ length: 10 }).map((_, index) => ({
       name: `Passenger ${index + 1}`,
@@ -2333,6 +2340,7 @@ async function main() {
   });
 
   // Seed Booking
+  console.log('seeding bookings...');
   await prisma.booking.createMany({
     data: Array.from({ length: 5 }).map((_, index) => ({
       code: `BK-${index + 1}`,
@@ -2347,6 +2355,7 @@ async function main() {
   });
 
   // Seed Booking Details
+  console.log('seeding booking details...');
   const bookingDetailsData = [];
   const seatIds = await prisma.seat.findMany({
     where: { status: 'AVAILABLE' },
@@ -2375,6 +2384,7 @@ async function main() {
   });
 
   // Seed Payments
+  console.log('seeding payments...');
   const paymentData = [];
   const bookings = await prisma.booking.findMany();
 
@@ -2409,6 +2419,7 @@ async function main() {
   });
 
   // Seed Notifications
+  console.log('seeding notifications...');
   await prisma.notification.createMany({
     data: [
       {
@@ -2489,6 +2500,7 @@ async function main() {
   });
 
   // Seed Discount
+  console.log('seeding discounts...');
   function generateRandomCode(length = 8) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let result = '';
@@ -2560,7 +2572,7 @@ async function main() {
     });
   }
 
-  console.log('Seeding complete');
+  console.log('✅ Seeding complete');
 }
 
 main()
