@@ -7,6 +7,7 @@ import flightRoute from './flight.js';
 import airportRoute from './airport.js';
 import airlineRoute from './airline.js';
 import paymentRoute from './payment.js';
+import adminRoute from './admin.js';
 import discountRoute from './discount.js';
 import * as swaggerUI from 'swagger-ui-express';
 import { bookingRoute } from './booking.js';
@@ -48,5 +49,7 @@ router.use('/api/v1/airlines', airlineRoute);
 router.use('/api/v1/notifications', notificationRoute);
 router.use('/api/v1/payment', paymentRoute);
 router.use('/api/v1/tickets', ticketRouter);
+router.use('/api/v1/admin', adminRoute);
 router.use('/api/v1/discount', discountRoute);
+
 export default router;
