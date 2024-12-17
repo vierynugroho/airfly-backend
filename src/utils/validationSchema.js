@@ -204,14 +204,53 @@ export const transactionSchema = Joi.object({
   bookingId: Joi.number().required(),
 });
 
-export const webhookSchema = Joi.object({
-  paymentStatus: Joi.string().required(),
-  paymentType: Joi.string().required(),
-  transaction_id: Joi.string().required().messages({
-    'string.empty': 'Transaction ID is required.',
+export const discountSchema = Joi.object({
+  name: Joi.string().required().messages({
+    'string.empty': 'Discount name cannot be empty.',
+    'any.required': 'Discount name is required.',
   }),
-  transactionTime: Joi.string().isoDate().required().messages({
-    'string.empty': 'Transaction time is required.',
-    'string.isoDate': 'Transaction time must be a valid ISO date.',
+
+  code: Joi.string().required().messages({
+    'string.empty': 'Discount code cannot be empty.',
+    'any.required': 'Discount code is required.',
+  }),
+
+  description: Joi.string().optional().messages({
+    'string.empty': 'Description cannot be empty.',
+  }),
+
+  type: Joi.string().valid('percentage', 'fixed').required().messages({
+    'any.only': 'Discount type must be either "percentage" or "fixed".',
+    'any.required': 'Discount type is required.',
+  }),
+
+  value: Joi.number().positive().required().messages({
+    'number.base': 'Discount value must be a number.',
+    'number.positive': 'Discount value must be greater than 0.',
+    'any.required': 'Discount value is required.',
+  }),
+
+  startDate: Joi.date().iso().required().messages({
+    'date.base': 'Start date must be a valid date.',
+    'date.format': 'Start date must follow the ISO 8601 format.',
+    'any.required': 'Start date is required.',
+  }),
+
+  endDate: Joi.date().iso().greater(Joi.ref('startDate')).required().messages({
+    'date.base': 'End date must be a valid date.',
+    'date.format': 'End date must follow the ISO 8601 format.',
+    'date.greater': 'End date must be after the start date.',
+    'any.required': 'End date is required.',
+  }),
+
+  minPurchase: Joi.number().positive().required().messages({
+    'number.base': 'Minimum purchase must be a number.',
+    'number.positive': 'Minimum purchase must be greater than 0.',
+    'any.required': 'Minimum purchase is required.',
+  }),
+
+  isActive: Joi.boolean().required().messages({
+    'boolean.base': 'Active status must be either true or false.',
+    'any.required': 'Active status is required.',
   }),
 });

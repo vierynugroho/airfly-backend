@@ -11,15 +11,19 @@ export class PaymentRepository {
     return prisma.payment.findUnique({ where: { bookingId } });
   }
 
-  static async getAll({ page, limit }) {
+  static async getAll({ page, limit, userId }) {
     const offset = (page - 1) * limit;
+
+    const whereClause = userId ? { userId } : {};
+
     const [payments, total] = await prisma.$transaction([
       prisma.payment.findMany({
+        where: whereClause,
         skip: offset,
         take: limit,
         orderBy: { transactionTime: 'desc' },
       }),
-      prisma.payment.count(),
+      prisma.payment.count({ where: whereClause }),
     ]);
 
     return { payments, total, page, limit };
@@ -27,8 +31,15 @@ export class PaymentRepository {
 
   static async getById(paymentId) {
     return prisma.payment.findUnique({
+      where: { id: paymentId },
+    });
+  }
+  
+  static async getByIdForBuyer(paymentId, userId) {
+    return prisma.payment.findUnique({
       where: {
         id: paymentId,
+        userId: userId,
       },
     });
   }
@@ -49,8 +60,8 @@ export class PaymentRepository {
       data: {
         status: paymentstatus,
         type: paymentType,
-        transactionId: transactionId,
-        transactionTime: transactionTime,
+        transactionId,
+        transactionTime,
       },
     });
   }

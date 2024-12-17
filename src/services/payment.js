@@ -1,6 +1,7 @@
 import { ErrorHandler } from '../middlewares/error.js';
 import { PaymentRepository } from '../repositories/payment.js';
 import { BookingRepository } from '../repositories/booking.js';
+import { NotificationService } from './notification.js';
 import { snap } from '../config/midtrans.js';
 
 export class PaymentService {
@@ -12,10 +13,10 @@ export class PaymentService {
 
     const itemDetails = booking.bookingDetail.map((detail) => {
       return {
-        id: `SEAT-${detail.seatId}`,
-        price: detail.price,
+        id: booking.id,
+        price: Math.round(detail.price),
         quantity: 1,
-        name: `Seat ${detail.seatId} ${detail.passenger.name}`,
+        name: `${booking.code} Seat-${detail.seatId}`,
       };
     });
 
@@ -25,16 +26,16 @@ export class PaymentService {
     );
 
     const taxRate = 0.03;
-    const tax = totalPriceWithoutTax * taxRate;
+    const tax = Math.round(totalPriceWithoutTax * taxRate);
 
     itemDetails.push({
-      id: 'TAX',
+      id: `Tax- ${booking.id}`,
       price: tax,
       quantity: 1,
-      name: 'Tax',
+      name: 'TAX',
     });
 
-    const totalAmount = totalPriceWithoutTax + tax;
+    const totalAmount = Math.round(totalPriceWithoutTax + tax);
 
     const itemDetailsTotal = itemDetails.reduce(
       (sum, item) => sum + item.price * item.quantity,
@@ -78,6 +79,16 @@ export class PaymentService {
 
     const payment = await PaymentRepository.create(paymentData);
 
+    const notificationData = {
+      type: 'ACCOUNT',
+      title: 'Transaksi Dibuat',
+      description: `Transaksi untuk ID ${payment.id} telah berhasil dibuat!`,
+      isRead: false,
+      userId: payment.userId,
+    };
+
+    await NotificationService.create(notificationData);
+
     return {
       token: response.token,
       redirect_url: `https://app.sandbox.midtrans.com/snap/v2/vtweb/${response.token}`,
@@ -85,12 +96,23 @@ export class PaymentService {
     };
   }
 
-  static async getAll(query) {
+  static async getAll({ page, limit, user }) {
+    const query = { page: parseInt(page) || 1, limit: parseInt(limit) || 10 };
+
+    if (user.role === 'BUYER') {
+      query.userId = user.id;
+    }
     return PaymentRepository.getAll(query);
   }
 
-  static async getById(paymentId) {
-    const payment = await PaymentRepository.getById(paymentId);
+  static async getById(paymentId, userId, role) {
+    let payment;
+    if (role === 'ADMIN') {
+      payment = await PaymentRepository.getById(paymentId);
+    } else {
+      payment = await PaymentRepository.getByIdForBuyer(paymentId, userId);
+    }
+  
     if (!payment) {
       throw new ErrorHandler(404, 'Payment not found.');
     }
@@ -98,44 +120,60 @@ export class PaymentService {
   }
 
   static async processWebhook(data) {
-    const payment = await PaymentRepository.findByOrderId(orderId);
+    const payment = await PaymentRepository.findByOrderId(data.order_id);
     if (!payment) {
       throw new ErrorHandler(404, 'Payment not found.');
     }
+
+    const booking = await BookingRepository.getBooking(payment.bookingId);
+
+    if (!booking) {
+      throw new ErrorHandler(404, 'Booking is not found');
+    }
+
+    const seatIds = booking.bookingDetail.map((detail) => detail.seatId);
 
     console.log('payment on webhook');
     console.log(payment);
     console.log('-----------------');
 
     const paymentData = await snap.transaction.notification(data);
-
-    // TODO: update payment status
     console.log('paymentData on webhook');
     console.log(paymentData);
     console.log('-----------------');
 
-    // TODO: paymentData.fraud_status == 'accept'
-    // TODO: paymentData.transaction_status == 'settlement'
-    // ? update seat status -> UNAVAILABLE
-
-    // TODO: paymentData.transaction_status == 'pending'
-    // ? update seat status -> LOCKED
-
-    // TODO: paymentData.transaction_status = 'cancel || deny || expire'
-    // ? update seat status -> AVAILABLE
+    const { transaction_status, fraud_status, order_id } = paymentData;
 
     await PaymentRepository.updateStatus(
-      payment.id,
-      data.paymentstatus,
-      data.paymentType,
-      data.transactionId,
-      data.transactionTime
+      order_id,
+      transaction_status,
+      paymentData.payment_type,
+      paymentData.transaction_id,
+      new Date(paymentData.transaction_time).toISOString()
     );
 
-    await BookingRepository.updateSeatStatusOnPayment(
-      paymentstatus,
-      payment.bookingId
-    );
+    console.log({
+      transaction_status: transaction_status,
+      capture: transaction_status === 'capture',
+      accept: transaction_status === 'accept',
+      settlement: transaction_status === 'settlement',
+      cancel: transaction_status === 'cancel',
+      deny: transaction_status === 'deny',
+      expire: transaction_status === 'expire',
+      pending: transaction_status === 'pending',
+    });
+
+    if (transaction_status === 'capture' && fraud_status === 'accept') {
+      await BookingRepository.updateSeatStatusOnPayment(seatIds, 'UNAVAILABLE');
+    } else if (transaction_status === 'settlement') {
+      await BookingRepository.updateSeatStatusOnPayment(seatIds, 'UNAVAILABLE');
+    } else if (['cancel', 'deny', 'expire'].includes(transaction_status)) {
+      await BookingRepository.updateSeatStatusOnPayment(seatIds, 'AVAILABLE');
+    } else if (transaction_status === 'pending') {
+      await BookingRepository.updateSeatStatusOnPayment(seatIds, 'LOCKED');
+    } else {
+      throw new ErrorHandler(400, 'Invalid transaction status.');
+    }
 
     return payment;
   }
@@ -168,6 +206,8 @@ export class PaymentService {
     const response = await fetch(url, options);
     const transaction = await response.json();
 
+    console.log('response cancel');
+    console.log(transaction);
     if (transaction.status_code === '404') {
       throw new ErrorHandler(422, "Transaction doesn't exist.");
     }
@@ -176,26 +216,29 @@ export class PaymentService {
       throw new ErrorHandler(400, 'orderId must be a string');
     }
 
-    await PaymentRepository.updateStatus(
-      orderId,
-      'cancel',
-      payment.paymentType
-    );
-    await BookingRepository.updateSeatStatusOnPayment(
-      'cancel',
-      payment.bookingId
-    );
+    await PaymentRepository.updateStatus(orderId, 'cancel');
+
+    const booking = await BookingRepository.getBooking(payment.bookingId);
+
+    if (!booking) {
+      throw new ErrorHandler(404, 'Booking is not found');
+    }
+
+    const seatIds = booking.bookingDetail.map((detail) => detail.seatId);
+
+    await BookingRepository.updateSeatStatusOnPayment(seatIds, 'AVAILABLE');
 
     return transaction;
   }
 
-  static async delete(paymentId) {
-    const payment = await prisma.payment.findUnique({
-      where: { id: paymentId },
-    });
+  static async delete(paymentId, user) {
+    if (user.role !== 'ADMIN') {
+      throw new ErrorHandler(403, 'You are not authorized to perform this action.');
+    }  
+    const payment = await PaymentRepository.getById(paymentId);
     if (!payment) {
       throw new ErrorHandler(404, 'Payment not found.');
     }
-    return prisma.payment.delete({ where: { id: paymentId } });
+    return PaymentRepository.delete(paymentId);
   }
 }
