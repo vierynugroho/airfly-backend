@@ -39,6 +39,7 @@ tags:
   - name: Airlines
   - name: Flights
   - name: Seats
+  - name: Discount
   - name: Booking
   - name: Payment
   - name: Notifications
@@ -3591,6 +3592,124 @@ paths:
       parameters: []
       security:
         - bearerAuth: []
+  /discount:
+    get:
+      tags:
+        - Discount
+      summary: get all
+      parameters:
+        - name: startDate
+          in: query
+          schema:
+            type: string
+          example: '2024-10-01'
+        - name: endDate
+          in: query
+          schema:
+            type: string
+          example: '2024-12-31'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: Discounts retrieved successfully
+                  pagination:
+                    totalPage: 1
+                    currentPage: 1
+                    pageItems: 2
+                data:
+                  - id: '1'
+                    name: FLASH SALE 12.12
+                    code: 12.12 2024
+                    description: Diskon musiman untuk bulan Desember 2024
+                    type: percentage
+                    value: 20
+                    startDate: '2024-12-01T00:00:00.000Z'
+                    endDate: '2024-12-31T23:59:59.999Z'
+                    minPurchase: 50
+                    isActive: true
+                    createdAt: '2024-12-16T19:48:44.383Z'
+                    updatedAt: '2024-12-16T19:48:44.383Z'
+                  - id: '2'
+                    name: FLASH SALE 12.12
+                    code: '12345'
+                    description: Diskon musiman untuk bulan Desember 2024
+                    type: percentage
+                    value: 20
+                    startDate: '2024-12-01T00:00:00.000Z'
+                    endDate: '2024-12-31T23:59:59.999Z'
+                    minPurchase: 50
+                    isActive: true
+                    createdAt: '2024-12-16T19:53:35.272Z'
+                    updatedAt: '2024-12-16T19:53:35.272Z'
+    post:
+      tags:
+        - Discount
+      summary: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: FLASH SALE 12.12
+                code: '12345'
+                type: percentage
+                value: 20
+                startDate: '2024-12-01T00:00:00.000Z'
+                endDate: '2024-12-31T23:59:59.999Z'
+                minPurchase: 50
+                isActive: true
+                description: Diskon musiman untuk bulan Desember 2024
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+        '201':
+          description: Response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 201
+                  message: Discount created successfully
+                data:
+                  id: 1
+                  name: GRATISAN SIR VIERY
+                  type: percentage
+                  value: 20
+                  startDate: '2024-12-01T00:00:00.000Z'
+                  endDate: '2024-12-31T23:59:59.999Z'
+                  minPurchase: 50
+                  isActive: true
+                  createdAt: '2024-12-16T14:03:02.088Z'
+                  updatedAt: '2024-12-16T14:03:02.088Z'
+                  code: '1234'
+                  description: Diskon musiman untuk bulan Desember 2024
+        '409':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 409
+                  message: Discount code already exists
+        '422':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 422
+                  message: Start date must follow the ISO 8601 format.
+      parameters: []
+      security:
+        - bearerAuth: []
   /booking:
     get:
       tags:
@@ -5982,6 +6101,154 @@ paths:
                   message: seat ID is not a number
       parameters:
         - name: seatID
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+  /discount/{discountID}:
+    get:
+      tags:
+        - Discount
+      summary: get by ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: Discount retrieved successfully
+                data:
+                  id: '1'
+                  name: FLASH SALE 12.12
+                  code: 12.12 2024
+                  description: Diskon musiman untuk bulan Desember 2024
+                  type: percentage
+                  value: 20
+                  startDate: '2024-12-01T00:00:00.000Z'
+                  endDate: '2024-12-31T23:59:59.999Z'
+                  minPurchase: 50
+                  isActive: true
+                  createdAt: '2024-12-16T19:48:44.383Z'
+                  updatedAt: '2024-12-16T19:48:44.383Z'
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: Discount not found
+      parameters:
+        - name: discountID
+          in: path
+          required: true
+          schema:
+            type: string
+    put:
+      tags:
+        - Discount
+      summary: update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Summer Discount!
+                code: HOLIDAY
+                description: discount ticket up to 50000, member only
+                type: fixed
+                value: 50000
+                startDate: '2024-12-01T00:00:00.000Z'
+                endDate: '2024-12-31T23:59:59.999Z'
+                minPurchase: 1000
+                isActive: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: Discount updated successfully
+                data:
+                  id: '2'
+                  name: Summer Discount!
+                  type: fixed
+                  value: 50000
+                  startDate: '2024-12-01T00:00:00.000Z'
+                  endDate: '2024-12-31T23:59:59.999Z'
+                  minPurchase: 1000
+                  isActive: true
+                  createdAt: '2024-12-16T19:53:35.272Z'
+                  updatedAt: '2024-12-16T19:58:05.720Z'
+                  code: HOLIDAY
+                  description: discount ticket up to 50000, member only
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: Discount not found
+        '422':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 422
+                  message: Discount value must be a number.
+      parameters:
+        - name: discountID
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - Discount
+      summary: delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: Discount deleted successfully
+                data:
+                  id: '2'
+                  name: Summer Discount!
+                  type: fixed
+                  value: 50000
+                  startDate: '2024-12-01T00:00:00.000Z'
+                  endDate: '2024-12-31T23:59:59.999Z'
+                  minPurchase: 1000
+                  isActive: true
+                  createdAt: '2024-12-16T19:53:35.272Z'
+                  updatedAt: '2024-12-16T19:58:05.720Z'
+                  code: HOLIDAY
+                  description: discount ticket up to 50000, member only
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: Discount not found
+      parameters:
+        - name: discountID
           in: path
           required: true
           schema:

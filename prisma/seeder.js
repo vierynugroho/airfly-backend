@@ -1958,6 +1958,67 @@ async function main() {
     ],
   });
 
+  // Seed Discount
+  const discountData = [
+    {
+      name: 'New Year Sale',
+      type: 'percentage',
+      value: 20,
+      minPurchase: 100,
+      isActive: true,
+      description: 'Celebrate the New Year with a 20% discount on all items!',
+    },
+    {
+      name: 'Black Friday Deal',
+      type: 'percentage',
+      value: 50,
+      minPurchase: 500,
+      isActive: true,
+      description: 'Black Friday Deal with 50% off!',
+    },
+    {
+      name: 'Free Shipping',
+      type: 'fixed',
+      value: 0.0,
+      minPurchase: 30,
+      isActive: true,
+      description: 'Get free shipping for orders above $30!',
+    },
+    {
+      name: 'Holiday Special',
+      type: 'fixed',
+      value: 10,
+      minPurchase: 400,
+      isActive: true,
+      description: 'Enjoy a $10 discount for the holiday season!',
+    },
+    {
+      name: 'Flash Sale',
+      type: 'percentage',
+      value: 15,
+      minPurchase: null,
+      isActive: true,
+      description: 'One-day flash sale with 15% off on all items!',
+    },
+  ];
+
+  for (const discount of discountData) {
+    const startDate = new Date();
+    const endDate = new Date(startDate);
+    endDate.setMonth(endDate.getMonth() + 1);
+
+    const discountWithDates = {
+      ...discount,
+      startDate: startDate,
+      endDate: endDate,
+      code: generateRandomCode(8),
+    };
+
+    await prisma.discount.create({
+      data: discountWithDates,
+    });
+  }
+
   console.log('Seeding complete');
 }
 
