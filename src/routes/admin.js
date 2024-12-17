@@ -3,6 +3,6 @@ import { AdminController } from '../controllers/admin.js';
 
 const router = express.Router();
 
-router.get('/count', AdminController.count);
+router.get('/count', authorization([UserRole.ADMIN]), AdminController.count);
 
 export default router;
