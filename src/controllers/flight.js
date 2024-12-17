@@ -65,15 +65,32 @@ export class FlightController {
         condition.price.gte = parseFloat(priceMin);
       }
       if (departureTime) {
+        const startOfDay = new Date(departureTime);
+        startOfDay.setUTCHours(0, 0, 0, 0);
+
+        const endOfDay = new Date(departureTime);
+        endOfDay.setUTCHours(23, 59, 59, 999);
+
+        console.log({ departureTime, startOfDay, endOfDay });
         condition.departureTime = {
-          gte: new Date(departureTime),
+          gte: startOfDay,
+          lte: endOfDay,
         };
       }
+
       if (returnTime) {
+        const startOfDay = new Date(returnTime);
+        startOfDay.setUTCHours(0, 0, 0, 0);
+
+        const endOfDay = new Date(returnTime);
+        endOfDay.setUTCHours(23, 59, 59, 999);
+
         condition.departureTime = {
-          gte: new Date(returnTime),
+          gte: startOfDay,
+          lte: endOfDay,
         };
       }
+
       if (departureAirport) {
         condition.departureAirport = departureAirport;
       }
