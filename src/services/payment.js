@@ -1,6 +1,7 @@
 import { ErrorHandler } from '../middlewares/error.js';
 import { PaymentRepository } from '../repositories/payment.js';
 import { BookingRepository } from '../repositories/booking.js';
+import { NotificationService } from './notification.js';
 import { snap } from '../config/midtrans.js';
 
 export class PaymentService {
@@ -78,6 +79,16 @@ export class PaymentService {
 
     const payment = await PaymentRepository.create(paymentData);
 
+    const notificationData = {
+      type: 'ACCOUNT',
+      title: 'Transaksi Dibuat',
+      description: `Transaksi untuk ID ${payment.id} telah berhasil dibuat!`,
+      isRead: false,
+      userId: payment.userId,
+    };
+
+    await NotificationService.create(notificationData);
+
     return {
       token: response.token,
       redirect_url: `https://app.sandbox.midtrans.com/snap/v2/vtweb/${response.token}`,
@@ -85,12 +96,23 @@ export class PaymentService {
     };
   }
 
-  static async getAll(query) {
+  static async getAll({ page, limit, user }) {
+    const query = { page: parseInt(page) || 1, limit: parseInt(limit) || 10 };
+
+    if (user.role === 'BUYER') {
+      query.userId = user.id;
+    }
     return PaymentRepository.getAll(query);
   }
 
-  static async getById(paymentId) {
-    const payment = await PaymentRepository.getById(paymentId);
+  static async getById(paymentId, userId, role) {
+    let payment;
+    if (role === 'ADMIN') {
+      payment = await PaymentRepository.getById(paymentId);
+    } else {
+      payment = await PaymentRepository.getByIdForBuyer(paymentId, userId);
+    }
+  
     if (!payment) {
       throw new ErrorHandler(404, 'Payment not found.');
     }
@@ -209,13 +231,14 @@ export class PaymentService {
     return transaction;
   }
 
-  static async delete(paymentId) {
-    const payment = await prisma.payment.findUnique({
-      where: { id: paymentId },
-    });
+  static async delete(paymentId, user) {
+    if (user.role !== 'ADMIN') {
+      throw new ErrorHandler(403, 'You are not authorized to perform this action.');
+    }  
+    const payment = await PaymentRepository.getById(paymentId);
     if (!payment) {
       throw new ErrorHandler(404, 'Payment not found.');
     }
-    return prisma.payment.delete({ where: { id: paymentId } });
+    return PaymentRepository.delete(paymentId);
   }
 }

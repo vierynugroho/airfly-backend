@@ -45,7 +45,12 @@ export class PaymentController {
 
   static async getAll(req, res, next) {
     try {
-      const payment = await PaymentService.getAll(req.query);
+      const { page, limit } = req.query;
+      const payment = await PaymentService.getAll({
+        page,
+        limit,
+        user: req.user,
+      });
       res.json({
         meta: {
           statusCode: 200,
@@ -61,7 +66,9 @@ export class PaymentController {
   static async getById(req, res, next) {
     try {
       const paymentId = parseInt(req.params.id, 10);
-      const payment = await PaymentService.getById(paymentId);
+      const userId = req.user.id;
+      const role = req.user.role;
+      const payment = await PaymentService.getById(paymentId, userId, role);
       res.json({
         meta: {
           statusCode: 200,
@@ -94,7 +101,8 @@ export class PaymentController {
 
   static async delete(req, res, next) {
     try {
-      await PaymentService.delete(req.params.id);
+      const paymentId = parseInt(req.params.id, 10);
+      await PaymentService.delete(paymentId, req.user);
       res.json({
         meta: {
           statusCode: 200,
