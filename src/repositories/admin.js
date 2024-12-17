@@ -3,24 +3,21 @@ import { prisma } from '../database/db.js';
 
 export class AdminRepository {
   static async count() {
-    const totalAirlines = await prisma.airline.aggregate({
-      _count: true,
-    });
-    const totalAirports = await prisma.airport.aggregate({
-      _count: true,
-    });
-    const totalFlights = await prisma.flight.aggregate({
-      _count: true,
-    });
-    const totalUsers = await prisma.user.aggregate({
-      _count: true,
+    const totalAirlines = await prisma.airline.count();
+    const totalAirports = await prisma.airport.count();
+    const totalFlights = await prisma.flight.count();
+    const totalUsers = await prisma.user.count({
       where: {
         role: UserRole.BUYER,
       },
     });
-    const totalTransactions = await prisma.payment.aggregate({
-      _count: true,
-    });
+    const totalTransactions = await prisma.payment.count();
+    const totalDiscounts = await prisma.discount.count();
+    const totalNotifications = await prisma.notification.count();
+    const totalBookings = await prisma.booking.count();
+    const totalPassengers = await prisma.passenger.count();
+    const totalSeats = await prisma.seat.count();
+    const totalTickets = await prisma.bookingDetail.count();
 
     return {
       totalAirlines,
@@ -28,6 +25,12 @@ export class AdminRepository {
       totalFlights,
       totalUsers,
       totalTransactions,
+      totalDiscounts,
+      totalNotifications,
+      totalBookings,
+      totalPassengers,
+      totalSeats,
+      totalTickets,
     };
   }
 }

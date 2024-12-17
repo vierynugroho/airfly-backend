@@ -144,7 +144,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\": \"viery15102002@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+              "raw": "{\r\n    \"email\": \"jane.smith@example.com\",\r\n    \"password\": \"password\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -152,8 +152,8 @@
               }
             },
             "url": {
-              "raw": "{{prod_base_url}}/auth/login",
-              "host": ["{{prod_base_url}}"],
+              "raw": "{{local_base_url}}/auth/login",
+              "host": ["{{local_base_url}}"],
               "path": ["auth", "login"]
             },
             "description": "``` json\n{\n    \"email\": \"jane.smith@example.com\", // admin\n    // \"email\": \"john.doe@example.com\", // buyer\n    \"password\": \"password\"\n}\n ```"
@@ -11160,6 +11160,1092 @@
       ]
     },
     {
+      "name": "Discount",
+      "item": [
+        {
+          "name": "get all",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local_base_url}}/discount?startDate=2024-10-01&endDate=2024-12-31",
+              "host": ["{{local_base_url}}"],
+              "path": ["discount"],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2024-10-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{URL}}/discount",
+                  "host": ["{{URL}}"],
+                  "path": ["discount"],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2024-01-01",
+                      "disabled": true
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2024-12-31",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Mon, 16 Dec 2024 19:53:45 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"31f-HAoqLVFh9gafEJ9HlC+MTv8KuZY\""
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "Report-To",
+                  "value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=ra0UCxkLEP%2FJv%2FC%2FzPk9Vz4hvBWAPgGL%2BcMsndfY63aRoKRoHedGv%2BlnwjCOf3oMuXf59J53cT2d7j%2BsAr3b8WIgUUFsLZZ%2FST9rHcaPgH%2Femyv7oZSpk8FOYNwQi05%2BVNG7cUSr0zc%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "NEL",
+                  "value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "8f3138ac98479cee-SIN"
+                },
+                {
+                  "key": "Content-Encoding",
+                  "value": "br"
+                },
+                {
+                  "key": "alt-svc",
+                  "value": "h3=\":443\"; ma=86400"
+                },
+                {
+                  "key": "server-timing",
+                  "value": "cfL4;desc=\"?proto=TCP&rtt=44018&min_rtt=28863&rtt_var=20577&sent=33&recv=32&lost=0&retrans=0&sent_bytes=6937&recv_bytes=2586&delivery_rate=101167&cwnd=256&unsent_bytes=0&cid=6819e7e7311df467&ts=24976&x=0\""
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Discounts retrieved successfully\",\n        \"pagination\": {\n            \"totalPage\": 1,\n            \"currentPage\": 1,\n            \"pageItems\": 2\n        }\n    },\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"name\": \"FLASH SALE 12.12\",\n            \"code\": \"12.12 2024\",\n            \"description\": \"Diskon musiman untuk bulan Desember 2024\",\n            \"type\": \"percentage\",\n            \"value\": 20,\n            \"startDate\": \"2024-12-01T00:00:00.000Z\",\n            \"endDate\": \"2024-12-31T23:59:59.999Z\",\n            \"minPurchase\": 50,\n            \"isActive\": true,\n            \"createdAt\": \"2024-12-16T19:48:44.383Z\",\n            \"updatedAt\": \"2024-12-16T19:48:44.383Z\"\n        },\n        {\n            \"id\": \"2\",\n            \"name\": \"FLASH SALE 12.12\",\n            \"code\": \"12345\",\n            \"description\": \"Diskon musiman untuk bulan Desember 2024\",\n            \"type\": \"percentage\",\n            \"value\": 20,\n            \"startDate\": \"2024-12-01T00:00:00.000Z\",\n            \"endDate\": \"2024-12-31T23:59:59.999Z\",\n            \"minPurchase\": 50,\n            \"isActive\": true,\n            \"createdAt\": \"2024-12-16T19:53:35.272Z\",\n            \"updatedAt\": \"2024-12-16T19:53:35.272Z\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "get by ID",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local_base_url}}/discount/:discountID",
+              "host": ["{{local_base_url}}"],
+              "path": ["discount", ":discountID"],
+              "variable": [
+                {
+                  "key": "discountID",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{URL}}/discount/1",
+                  "host": ["{{URL}}"],
+                  "path": ["discount", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Mon, 16 Dec 2024 19:56:07 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"19a-XGEPGvF61qwiLMy4KWyKBesfYF4\""
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "Report-To",
+                  "value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=9hYvZAy9x7Br3OHMzVTFkWC4DiGzZ6XmBl9wmowOl5k896bXmrl50LWS8kDTCk27wCM7SuRwQut3kdJzXtn8BMaL1axli0EpcjD8A7e7R%2FZTWoM%2Fvk3aES06PGimB2hAJrxO6%2BIovUo%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "NEL",
+                  "value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "8f313c245f91cde2-SIN"
+                },
+                {
+                  "key": "Content-Encoding",
+                  "value": "br"
+                },
+                {
+                  "key": "alt-svc",
+                  "value": "h3=\":443\"; ma=86400"
+                },
+                {
+                  "key": "server-timing",
+                  "value": "cfL4;desc=\"?proto=TCP&rtt=46525&min_rtt=37117&rtt_var=20639&sent=4&recv=5&lost=0&retrans=0&sent_bytes=2820&recv_bytes=828&delivery_rate=78670&cwnd=251&unsent_bytes=0&cid=e5bc408d24147e83&ts=104&x=0\""
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Discount retrieved successfully\"\n    },\n    \"data\": {\n        \"id\": \"1\",\n        \"name\": \"FLASH SALE 12.12\",\n        \"code\": \"12.12 2024\",\n        \"description\": \"Diskon musiman untuk bulan Desember 2024\",\n        \"type\": \"percentage\",\n        \"value\": 20,\n        \"startDate\": \"2024-12-01T00:00:00.000Z\",\n        \"endDate\": \"2024-12-31T23:59:59.999Z\",\n        \"minPurchase\": 50,\n        \"isActive\": true,\n        \"createdAt\": \"2024-12-16T19:48:44.383Z\",\n        \"updatedAt\": \"2024-12-16T19:48:44.383Z\"\n    }\n}"
+            },
+            {
+              "name": "not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{URL}}/discount/10",
+                  "host": ["{{URL}}"],
+                  "path": ["discount", "10"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Mon, 16 Dec 2024 19:56:23 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3b-4a9GEpIlVJLu9OzTj0fTAdfQVIg\""
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "Report-To",
+                  "value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=N1QxtETrcyRFLdohgi4S5i9CdCpbK6OnqyWVjtm%2FfCgCWZBkZg6cEpcLaaReWU4i5KzB06Hb9kIuXePviw3BOGlwX4Z2aS%2FqiJvuQGGaxJj48Szhh%2Fe%2BIpQWhxmQeu%2BGOK4h0LRH%2FLs%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "NEL",
+                  "value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "8f313c889821cde2-SIN"
+                },
+                {
+                  "key": "Content-Encoding",
+                  "value": "br"
+                },
+                {
+                  "key": "alt-svc",
+                  "value": "h3=\":443\"; ma=86400"
+                },
+                {
+                  "key": "server-timing",
+                  "value": "cfL4;desc=\"?proto=TCP&rtt=49161&min_rtt=28018&rtt_var=24978&sent=23&recv=23&lost=0&retrans=0&sent_bytes=4592&recv_bytes=1076&delivery_rate=104218&cwnd=254&unsent_bytes=0&cid=e5bc408d24147e83&ts=16116&x=0\""
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 404,\n        \"message\": \"Discount not found\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [""],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"FLASH SALE 12.12\",\r\n  \"code\": \"12345\", \r\n  \"type\": \"percentage\",\r\n  \"value\": 20,\r\n  \"startDate\": \"2024-12-01T00:00:00.000Z\",\r\n  \"endDate\": \"2024-12-31T23:59:59.999Z\",\r\n  \"minPurchase\": 50,\r\n  \"isActive\": true,\r\n  \"description\": \"Diskon musiman untuk bulan Desember 2024\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}/discount",
+              "host": ["{{local_base_url}}"],
+              "path": ["discount"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"GRATISAN SIR VIERY\",\r\n  \"code\": \"1234\", \r\n  \"type\": \"percentage\",\r\n  \"value\": 20,\r\n  \"startDate\": \"2024-12-01T00:00:00.000Z\",\r\n  \"endDate\": \"2024-12-31T23:59:59.999Z\",\r\n  \"minPurchase\": 50,\r\n  \"isActive\": true,\r\n  \"description\": \"Diskon musiman untuk bulan Desember 2024\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}/api/v1/discount",
+                  "host": ["{{URL}}"],
+                  "path": ["api", "v1", "discount"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "402"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"192-frmRrpf8EYY7skg0efY+7aQ1vDE\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 16 Dec 2024 14:03:02 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 201,\n        \"message\": \"Discount created successfully\"\n    },\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"GRATISAN SIR VIERY\",\n        \"type\": \"percentage\",\n        \"value\": 20,\n        \"startDate\": \"2024-12-01T00:00:00.000Z\",\n        \"endDate\": \"2024-12-31T23:59:59.999Z\",\n        \"minPurchase\": 50,\n        \"isActive\": true,\n        \"createdAt\": \"2024-12-16T14:03:02.088Z\",\n        \"updatedAt\": \"2024-12-16T14:03:02.088Z\",\n        \"code\": \"1234\",\n        \"description\": \"Diskon musiman untuk bulan Desember 2024\"\n    }\n}"
+            },
+            {
+              "name": "already exist",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"FLASH SALE 12.12\",\r\n  \"code\": \"12.12 2024\", \r\n  \"type\": \"percentage\",\r\n  \"value\": 20,\r\n  \"startDate\": \"2024-12-01T00:00:00.000Z\",\r\n  \"endDate\": \"2024-12-31T23:59:59.999Z\",\r\n  \"minPurchase\": 50,\r\n  \"isActive\": true,\r\n  \"description\": \"Diskon musiman untuk bulan Desember 2024\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}/discount",
+                  "host": ["{{URL}}"],
+                  "path": ["discount"]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Mon, 16 Dec 2024 19:49:25 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "69"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"45-GuQjLJ5IBUp9Avy9/0CpCXSCgOY\""
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "Report-To",
+                  "value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=kHPIJnGPByDtQSSKDs0KtKKQqzg30sEwhgZwNG%2F9lx1Go6zLvvUm3DRms1u80EvNgnGPyTJk5U8%2FJTNbifjbolyrzq7NNi4txOpB8vN2DytlTfoRLHuJjEXxuIUfCjhMNUI1TYktTLY%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "NEL",
+                  "value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "8f3132507c60ce37-SIN"
+                },
+                {
+                  "key": "alt-svc",
+                  "value": "h3=\":443\"; ma=86400"
+                },
+                {
+                  "key": "server-timing",
+                  "value": "cfL4;desc=\"?proto=TCP&rtt=42051&min_rtt=29467&rtt_var=15187&sent=76&recv=73&lost=0&retrans=0&sent_bytes=7092&recv_bytes=2966&delivery_rate=134384&cwnd=256&unsent_bytes=0&cid=ec51a06a29fc4a68&ts=68185&x=0\""
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 409,\n        \"message\": \"Discount code already exists\"\n    }\n}"
+            },
+            {
+              "name": "Invalid date format",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"FLASH SALE 12.12\",\r\n  \"code\": \"12.12 2024\", \r\n  \"type\": \"percentage\",\r\n  \"value\": 20,\r\n  \"startDate\": \"01-12-2024\",\r\n  \"endDate\": \"2024-12-31T23:59:59.999Z\",\r\n  \"minPurchase\": 50,\r\n  \"isActive\": true,\r\n  \"description\": \"Diskon musiman untuk bulan Desember 2024\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}/discount",
+                  "host": ["{{URL}}"],
+                  "path": ["discount"]
+                }
+              },
+              "status": "Unprocessable Entity",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Mon, 16 Dec 2024 19:51:08 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "84"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"54-DCwVdrGtg353L5c6BzgWoylc7YY\""
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "Report-To",
+                  "value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=VbIRptPpqefCDY2nne5mtPIJd1HMbiBl%2FBtn35TyVYSmFq6T669aK5Rdjy44jXTZlEPculHPFXBpu1TR8uI7EvKCEyaoI1WzxRoMSdfwkxflhL%2B%2BKB%2FUy9BoZk%2BWHKX5QoqGc%2FYohfc%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "NEL",
+                  "value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "8f3134d73a63ce37-SIN"
+                },
+                {
+                  "key": "alt-svc",
+                  "value": "h3=\":443\"; ma=86400"
+                },
+                {
+                  "key": "server-timing",
+                  "value": "cfL4;desc=\"?proto=TCP&rtt=53411&min_rtt=29467&rtt_var=23560&sent=178&recv=175&lost=0&retrans=0&sent_bytes=10432&recv_bytes=4689&delivery_rate=134384&cwnd=256&unsent_bytes=0&cid=ec51a06a29fc4a68&ts=171665&x=0\""
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 422,\n        \"message\": \"Start date must follow the ISO 8601 format.\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "update",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Summer Discount!\",\r\n  \"code\": \"HOLIDAY\", \r\n  \"description\": \"discount ticket up to 50000, member only\",\r\n  \"type\": \"fixed\",\r\n  \"value\": 50000,\r\n  \"startDate\": \"2024-12-01T00:00:00.000Z\",\r\n  \"endDate\": \"2024-12-31T23:59:59.999Z\",\r\n  \"minPurchase\": 1000,\r\n  \"isActive\": true\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}/discount/:discountID",
+              "host": ["{{local_base_url}}"],
+              "path": ["discount", ":discountID"],
+              "variable": [
+                {
+                  "key": "discountID",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Summer Discount!\",\r\n  \"code\": \"HOLIDAY\", \r\n  \"description\": \"discount ticket up to 50000, member only\",\r\n  \"type\": \"fixed\",\r\n  \"value\": 50000,\r\n  \"startDate\": \"2024-12-01T00:00:00.000Z\",\r\n  \"endDate\": \"2024-12-31T23:59:59.999Z\",\r\n  \"minPurchase\": 1000,\r\n  \"isActive\": true\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}/discount/2",
+                  "host": ["{{URL}}"],
+                  "path": ["discount", "2"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Mon, 16 Dec 2024 19:58:05 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"195-fPbFpLyfLpF8PIxa1Xtr6+V2tV0\""
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "Report-To",
+                  "value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=m5CsJN2J0sAmJm4r7uPf5L%2B3FoJJVCheGmCsbY4SgDxv4v%2Bc%2BJ9nixTwpLk5gW9RpwWbxBpKH%2BciSfsAx3mbN8MLzxAvd3mhzsx8s3bZgpMCkK%2FTTCJW14RHojV%2B%2BcPEOZhIEuV7KCY%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "NEL",
+                  "value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "8f313f057e14401d-SIN"
+                },
+                {
+                  "key": "Content-Encoding",
+                  "value": "br"
+                },
+                {
+                  "key": "alt-svc",
+                  "value": "h3=\":443\"; ma=86400"
+                },
+                {
+                  "key": "server-timing",
+                  "value": "cfL4;desc=\"?proto=TCP&rtt=37384&min_rtt=32279&rtt_var=15751&sent=4&recv=5&lost=0&retrans=0&sent_bytes=2821&recv_bytes=1333&delivery_rate=90461&cwnd=251&unsent_bytes=0&cid=17f127ae1b9a55ee&ts=111&x=0\""
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Discount updated successfully\"\n    },\n    \"data\": {\n        \"id\": \"2\",\n        \"name\": \"Summer Discount!\",\n        \"type\": \"fixed\",\n        \"value\": 50000,\n        \"startDate\": \"2024-12-01T00:00:00.000Z\",\n        \"endDate\": \"2024-12-31T23:59:59.999Z\",\n        \"minPurchase\": 1000,\n        \"isActive\": true,\n        \"createdAt\": \"2024-12-16T19:53:35.272Z\",\n        \"updatedAt\": \"2024-12-16T19:58:05.720Z\",\n        \"code\": \"HOLIDAY\",\n        \"description\": \"discount ticket up to 50000, member only\"\n    }\n}"
+            },
+            {
+              "name": "not found",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Summer Discount!\",\r\n  \"code\": \"HOLIDAY\", \r\n  \"description\": \"discount ticket up to 50000, member only\",\r\n  \"type\": \"fixed\",\r\n  \"value\": 50000,\r\n  \"startDate\": \"2024-12-01T00:00:00.000Z\",\r\n  \"endDate\": \"2024-12-31T23:59:59.999Z\",\r\n  \"minPurchase\": 1000,\r\n  \"isActive\": true\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}/discount/20",
+                  "host": ["{{URL}}"],
+                  "path": ["discount", "20"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Mon, 16 Dec 2024 19:58:18 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3b-4a9GEpIlVJLu9OzTj0fTAdfQVIg\""
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "Report-To",
+                  "value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=qxlp0y9TmAjQvjdtEZ2hOumfnp503PFJTZyQt7TkHA7WS7MMo1sH%2BNBmRoLMhOHiF310xYZ89dkLjeA%2BN7GwYFc37QC89KqN2Mi7WYOVJl7iPT5HabSBeqwAUseMbWRwic6bKhcoMX0%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "NEL",
+                  "value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "8f313f56998b401d-SIN"
+                },
+                {
+                  "key": "Content-Encoding",
+                  "value": "br"
+                },
+                {
+                  "key": "alt-svc",
+                  "value": "h3=\":443\"; ma=86400"
+                },
+                {
+                  "key": "server-timing",
+                  "value": "cfL4;desc=\"?proto=TCP&rtt=43279&min_rtt=28433&rtt_var=24566&sent=20&recv=20&lost=0&retrans=0&sent_bytes=4606&recv_bytes=2086&delivery_rate=102697&cwnd=254&unsent_bytes=0&cid=17f127ae1b9a55ee&ts=13066&x=0\""
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 404,\n        \"message\": \"Discount not found\"\n    }\n}"
+            },
+            {
+              "name": "invalid value",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Summer Discount!\",\r\n  \"code\": \"HOLIDAY\", \r\n  \"description\": \"discount ticket up to 50000, member only\",\r\n  \"type\": \"fixed\",\r\n  \"value\": \"\",\r\n  \"startDate\": \"2024-12-01T00:00:00.000Z\",\r\n  \"endDate\": \"2024-12-31T23:59:59.999Z\",\r\n  \"minPurchase\": 1000,\r\n  \"isActive\": true\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}/discount/20",
+                  "host": ["{{URL}}"],
+                  "path": ["discount", "20"]
+                }
+              },
+              "status": "Unprocessable Entity",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Mon, 16 Dec 2024 19:58:45 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "73"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"49-352hLqrxJyGhnLQGJwY+GHcaiUc\""
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "Report-To",
+                  "value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=Hga9WGqyk24JQYWYpw6jIZl7Jt9F6JGQ%2BX4BnlWUJLjrANVc3DaXZVQNWNRLiuw2sevdxd2vM1VZyeaZjETFNXHLMue2RwGqmwPAEPRyGJbX74cqbhRzBhltb44kL3kQrNQsIL9TJIo%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "NEL",
+                  "value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "8f313ffd6832401d-SIN"
+                },
+                {
+                  "key": "alt-svc",
+                  "value": "h3=\":443\"; ma=86400"
+                },
+                {
+                  "key": "server-timing",
+                  "value": "cfL4;desc=\"?proto=TCP&rtt=44127&min_rtt=28433&rtt_var=20119&sent=48&recv=47&lost=0&retrans=0&sent_bytes=5762&recv_bytes=2836&delivery_rate=102697&cwnd=256&unsent_bytes=0&cid=17f127ae1b9a55ee&ts=39753&x=0\""
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 422,\n        \"message\": \"Discount value must be a number.\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{local_base_url}}/discount/:discountID",
+              "host": ["{{local_base_url}}"],
+              "path": ["discount", ":discountID"],
+              "variable": [
+                {
+                  "key": "discountID",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "not found",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{URL}}/discount/3",
+                  "host": ["{{URL}}"],
+                  "path": ["discount", "3"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Mon, 16 Dec 2024 19:59:46 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3b-4a9GEpIlVJLu9OzTj0fTAdfQVIg\""
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "Report-To",
+                  "value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=LX1JPBG2N0%2Bwk5mMc2Q6%2FdzJu46Dv6dMhuE7E0jyr7zsSQr8oiYJ6BxKYHEgkKWBLdvNuT9KnMDyhGApBSlQ4y7HZB8IEQeI2v4k6XZ%2Bknc6mhn0ryFzk0PzYrhoUwBZp865ZcdOc%2FI%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "NEL",
+                  "value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "8f31417d9c9dfd67-SIN"
+                },
+                {
+                  "key": "Content-Encoding",
+                  "value": "br"
+                },
+                {
+                  "key": "alt-svc",
+                  "value": "h3=\":443\"; ma=86400"
+                },
+                {
+                  "key": "server-timing",
+                  "value": "cfL4;desc=\"?proto=TCP&rtt=38642&min_rtt=29410&rtt_var=17623&sent=4&recv=5&lost=0&retrans=0&sent_bytes=2822&recv_bytes=992&delivery_rate=99285&cwnd=251&unsent_bytes=0&cid=1fcdd7ccdf8950bc&ts=133&x=0\""
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 404,\n        \"message\": \"Discount not found\"\n    }\n}"
+            },
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{URL}}/discount/2",
+                  "host": ["{{URL}}"],
+                  "path": ["discount", "2"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Mon, 16 Dec 2024 20:00:02 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"195-V827RaqA6AH9dYfAOUj+iGhxmG8\""
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "Report-To",
+                  "value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=BROE1%2F8y0U2JvzCv9lV9Y%2F9wuOY33zRRTRvTOgw%2ByH4j3ZB43MPZ2ElzwZ%2FkAHaT%2Bd9yOai94ySSVT%2FA1%2FzxZj3TzdBK8FU9va2tHngXOEl0UoIjjW472nPolsEyyj%2BP9TdL2lAEJbc%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "NEL",
+                  "value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "8f3141ddddaffd67-SIN"
+                },
+                {
+                  "key": "Content-Encoding",
+                  "value": "br"
+                },
+                {
+                  "key": "alt-svc",
+                  "value": "h3=\":443\"; ma=86400"
+                },
+                {
+                  "key": "server-timing",
+                  "value": "cfL4;desc=\"?proto=TCP&rtt=44935&min_rtt=27116&rtt_var=27542&sent=21&recv=21&lost=0&retrans=0&sent_bytes=4394&recv_bytes=1403&delivery_rate=107685&cwnd=254&unsent_bytes=0&cid=1fcdd7ccdf8950bc&ts=15482&x=0\""
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Discount deleted successfully\"\n    },\n    \"data\": {\n        \"id\": \"2\",\n        \"name\": \"Summer Discount!\",\n        \"type\": \"fixed\",\n        \"value\": 50000,\n        \"startDate\": \"2024-12-01T00:00:00.000Z\",\n        \"endDate\": \"2024-12-31T23:59:59.999Z\",\n        \"minPurchase\": 1000,\n        \"isActive\": true,\n        \"createdAt\": \"2024-12-16T19:53:35.272Z\",\n        \"updatedAt\": \"2024-12-16T19:58:05.720Z\",\n        \"code\": \"HOLIDAY\",\n        \"description\": \"discount ticket up to 50000, member only\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "Booking",
       "item": [
         {
@@ -11995,6 +13081,74 @@
               ],
               "cookie": [],
               "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Payment retrieved successfully\"\n    },\n    \"data\": {\n        \"id\": 1,\n        \"userId\": 1,\n        \"bookingId\": 6,\n        \"snapToken\": \"73595a2d-ea75-4746-afc4-3185d7ad7976\",\n        \"orderId\": \"order-2411052438-1734062459958\",\n        \"paymentstatus\": \"PENDING\",\n        \"paymentType\": null,\n        \"paymentAmount\": 412000,\n        \"transactionId\": null,\n        \"transactionTime\": null\n    }\n}"
+            },
+            {
+              "name": "not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/payment/:paymentID",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment", ":paymentID"],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "paymentID",
+                      "value": "9"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "59"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3b-9XZn4GKHJyghFBPqbWqkWiXLiRY\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Dec 2024 08:08:30 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 404,\n        \"message\": \"Payment not found.\"\n    }\n}"
             }
           ]
         },
@@ -12188,6 +13342,237 @@
               ],
               "cookie": [],
               "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Transaction canceled successfully\"\n    },\n    \"data\": {\n        \"status_code\": \"200\",\n        \"status_message\": \"Success, transaction is canceled\",\n        \"transaction_id\": \"d4b475cf-7512-44b9-91b5-028aee6bb07a\",\n        \"order_id\": \"1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba\",\n        \"merchant_id\": \"G600704758\",\n        \"gross_amount\": \"412000.00\",\n        \"currency\": \"IDR\",\n        \"payment_type\": \"qris\",\n        \"transaction_status\": \"cancel\",\n        \"fraud_status\": \"accept\",\n        \"transaction_time\": \"2024-12-13 17:38:39\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "get All",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0NDIwNDMyLCJleHAiOjE3MzQ1MDY4MzJ9.We9a-3V4HQWM8K7PxbPCz0jP8O7DJTLmcNBgT4ByL5g",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local_base_url}}/payment",
+              "host": ["{{local_base_url}}"],
+              "path": ["payment"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/payment",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "346"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"15a-Xblyh3P5Jz8qV6fA/KgGtqQboDU\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Dec 2024 07:36:34 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Payments retrieved successfully\"\n    },\n    \"data\": {\n        \"payments\": [\n            {\n                \"id\": 6,\n                \"userId\": 1,\n                \"bookingId\": 8,\n                \"snapToken\": \"8742cac9-648b-4faf-b8d1-e26cb86eef68\",\n                \"orderId\": \"7f2c2f03-658b-4115-9359-bf787f6537d8\",\n                \"status\": \"pending\",\n                \"type\": null,\n                \"amount\": 9270,\n                \"transactionId\": null,\n                \"transactionTime\": null\n            }\n        ],\n        \"total\": 1,\n        \"page\": 1,\n        \"limit\": 10\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "delete",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzM0NDIxMDI4LCJleHAiOjE3MzQ1MDc0Mjh9.DESiuA0dhnVtnXMe5P8W_VncxKqlgl2HMTfrnB_KJ_0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{local_base_url}}/payment/:paymentID",
+              "host": ["{{local_base_url}}"],
+              "path": ["payment", ":paymentID"],
+              "variable": [
+                {
+                  "key": "paymentID",
+                  "value": "6"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/payment/:paymentID",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment", ":paymentID"],
+                  "variable": [
+                    {
+                      "key": "paymentID",
+                      "value": "6"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "68"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"44-FKwzWdQ5h24Cb8mecHwg4EH5oQ8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Dec 2024 07:48:33 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Payment deleted successfully\"\n    }\n}"
+            },
+            {
+              "name": "not found",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/payment/:paymentID",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment", ":paymentID"],
+                  "variable": [
+                    {
+                      "key": "paymentID",
+                      "value": "2"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "59"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3b-9XZn4GKHJyghFBPqbWqkWiXLiRY\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Dec 2024 08:09:02 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 404,\n        \"message\": \"Payment not found.\"\n    }\n}"
             }
           ]
         }
@@ -14826,6 +16211,190 @@
               ],
               "cookie": [],
               "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"QR Ticket generated successfully\"\n    },\n    \"data\": [\n        {\n            \"passenger\": {\n                \"name\": \"Anak\",\n                \"familyName\": \"Jago\",\n                \"type\": \"ADULT\"\n            },\n            \"qrCodeImage\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQQAAAEECAYAAADOCEoKAAAAAklEQVR4AewaftIAABAUSURBVO3BQW7EyBEAwUxC//9yWgce6tQAwRnt2q4I+8Vaa/26WGut28Vaa90u1lrrdrHWWreLtda6Xay11u1irbVuF2utdbtYa63bxVpr3S7WWut2sdZat4u11rpdrLXW7WKttW4/vKTylypOVN6omFSmiknliYpJ5YmKSeWkYlKZKiaVk4pJ5aTiRGWqmFSmihOVJyomlScqTlT+UsUbF2utdbtYa63bxVpr3X74sIpPUnmiYlKZKiaVk4pJZaqYVL5JZaqYVN6oeKJiUnlDZaqYVE4qnlCZKk5U3qj4JJVPulhrrdvFWmvdLtZa6/bDl6k8UfGEylQxVTyh8oTKVHGiclIxqUwVJxWTyonKVDGpnFScqDxRMamcVDyh8oTKN6k8UfFNF2utdbtYa63bxVpr3X74H6dyUjGpPFExqTxRMalMFU+onFS8UXFSMalMFZPKpDJVvKEyVZyoTBWTyv+yi7XWul2stdbtYq21bj/8n6l4o2JSmSomlanipOIJlaliUplU3lCZKk4qvknlpGJSmSqmiv9nF2utdbtYa63bxVpr3X74sop/UsWk8kTFScVJxYnKScVJxaRyUvGEylTxTRWTyknFicpU8YTKVPFJFf8mF2utdbtYa63bxVpr3X74MJV/E5WpYlKZKiaVqWJSmSomlanipGJSmSomlaliUjlRmSqeUJkqJpWp4o2KSWWqeEJlqnhCZao4Ufk3u1hrrdvFWmvdLtZa62a/+C+mMlVMKicVT6hMFX9JZaqYVE4qnlA5qZhUpoonVKaKN1SeqPh/drHWWreLtda6Xay11u2Hl1SmiknlkyqmiicqTlSmijdU3qiYKt5QeaPipGJSmSomlSdUpopJ5aRiUjlRmSomlaliUvmkim+6WGut28Vaa90u1lrr9sMfqzhRmSqeUPmmiknlpOKTVE4qTlROKk5UpopPqnij4kRlqjipmFTeqJhUpopJ5URlqnjjYq21bhdrrXW7WGut2w8fpjJVnKicqEwVk8pUcaLySRWTyonKVHGiclIxqUwVJxWTylQxVZyonKg8ofKGylQxqZxUTBUnKlPFpDJVPKEyVXzSxVpr3S7WWut2sdZatx9eqjhROal4o+JE5Q2VqeIJlaliUnlDZaqYVKaKk4pJZap4omJSOVGZKiaVSWWqeKJiUnlCZaqYVP6bXKy11u1irbVuF2utdbNf/CGVk4pJ5aRiUjmpmFQ+qeJEZao4UZkqJpWTikllqphUpooTlScqJpWp4g2VqWJS+UsVJypTxRMqU8UbF2utdbtYa63bxVpr3ewXL6icVEwqU8UbKk9UTCrfVHGiclIxqUwVk8pJxRMqb1RMKk9UTCpTxYnKScUTKlPFicpJxYnKExVvXKy11u1irbVuF2utdfvhpYpPUnmjYlL5SxWTyknFpDKpTBUnFZPKpDJVPFHxhMpUcaIyqUwVJyonFZPKExVvVJyoPFHxSRdrrXW7WGut28Vaa91+eEnlpGKqeKLijYpJZaqYVKaKJ1SmiknliYpJZaqYVP6SylQxVUwqU8VUMalMKicVk8pJxaQyVUwqn6QyVTyhMlW8cbHWWreLtda6Xay11s1+8UEq31QxqZxUTCpPVEwqU8WkclLxhMpU8YbKJ1VMKt9U8YTKJ1WcqJxUPKEyVXzTxVpr3S7WWut2sdZatx8+rGJSeaPiiYqTikllqnhC5aRiUnmiYlJ5o+JEZar4pooTlUllqniiYlKZKiaVE5WTiknlpOKfdLHWWreLtda6Xay11u2HD1P5JJWp4kRlqphUpopPqphU/lLFpDKpnFRMKlPFExUnKlPFVHGiMlVMFZPKExVPVEwqU8WkMqlMFZPKScUbF2utdbtYa63bxVpr3ewXL6icVEwqT1RMKk9UvKHyRMWk8kTFGypTxaTyRMWk8kTFGypTxaRyUnGi8kbFpDJVTConFZPKScUnXay11u1irbVuF2utdbNfvKByUnGi8kTFEyonFZPKVHGi8kTFpPJExaQyVZyoTBVPqEwVk8pJxaTySRUnKlPFicpUcaIyVXyTylTxxsVaa90u1lrrdrHWWrcfvkxlqjipOFGZKk4q/k1UpoonVE5UTiomlZOKqWJSeULlpOINlSdUTiomlU9SmSpOVKaKT7pYa63bxVpr3S7WWutmv/gilZOKSeWbKk5UpopJ5Y2KSeWJihOVqWJSOamYVKaKE5WTiknlkyqeUHmi4gmVqWJSOamYVE4q3rhYa63bxVpr3S7WWuv2w0sq31QxqTxRMak8ofJJKlPFpPKEyonKVHGi8k0qU8WkMlWcqDyh8obKVDGpTBWTylRxonJS8UkXa611u1hrrdvFWmvd7BdfpDJVPKHyRsUbKlPFpDJVTCpPVJyonFRMKn+pYlKZKiaVJyr+TVSmiidUpop/0sVaa90u1lrrdrHWWrcfXlKZKqaKJ1SmikllqphUnlCZKp6omFROKiaVSeWTKp5QOamYVCaVqeKNihOVJyomlTcqJpWTiqliUjmp+KaLtda6Xay11u1irbVu9osvUvknVUwqU8WkMlWcqEwVJypTxaQyVZyo/DepmFSmiknliYpJZaqYVKaKSeUvVUwqU8U3Xay11u1irbVuF2utdfvhw1SmihOVqeIJlU+qmFSmiqliUvlLFZPKScUTKicVk8onVUwqb6hMFZPKScWkMlU8ofJvcrHWWreLtda6Xay11u2HP6byhMpUcVIxqUwVJyp/SeWTKiaVE5Wp4gmVk4pJ5QmVk4pJ5aTipOKTVKaKJypOVKaKNy7WWut2sdZat4u11rr98GUqU8WkclLxT6o4UZkqTlSmihOVJyqeqHijYlL5pIpJ5Q2Vk4oTlScq3lCZKqaKT7pYa63bxVpr3S7WWutmv/gglaniROWTKk5UpoonVJ6o+CSVf1LFicpU8YTKScUnqZxUnKh8UsWJylTxSRdrrXW7WGut28Vaa91++DKVqeKJim9SmSpOKk5UnlB5ouIJlaniRGWqmFSmihOVk4qpYlI5UZkqJpWpYqqYVE5UnqiYVKaKSeWk4psu1lrrdrHWWreLtda62S8+SGWqmFSmiknlpGJSmSpOVKaKSWWqmFSmihOVqWJSmSpOVJ6oOFGZKt5QOan4JpWTiknljYoTlaniCZWTik+6WGut28Vaa90u1lrrZr/4IpWTiidUnqg4UfmkikllqvgklaliUpkq3lCZKiaVqWJSOamYVKaKN1SmiidUPqni3+RirbVuF2utdbtYa62b/eKDVKaKSWWqOFE5qThRmSpOVKaKN1ROKiaVNyr+TVSmijdUpooTlaniROWJik9SeaLiky7WWut2sdZat4u11rr98JLKVDGpPKEyVUwqJyqfpPJExVTxRMWkMlVMKicqU8UTKicVk8pU8YbKicpJxaQyVUwVk8pU8YTKScVU8U+6WGut28Vaa90u1lrr9sOXVZyoTBWTylQxqUwVJypTxSepnFT8pYpJZao4qXhDZao4UTmpeELlROWkYlI5qZgqJpUTlaniL12stdbtYq21bhdrrXX74aWKE5WpYqo4qfgmlaniROWk4gmVqeKJihOVqWJSOak4UZkqJpUnKiaVSeWk4qRiUpkqJpWTiknlpOKk4gmVqeKNi7XWul2stdbtYq21bvaLF1SmikllqphUpopJZao4UTmpOFGZKp5QeaJiUnmj4kTlpOJEZao4UZkqnlCZKt5QmSomlaliUjmpOFGZKiaVk4pvulhrrdvFWmvdLtZa6/bDH1OZKk4q3qiYVE4qTlTeqDipmFSmiknlRGWqmFQmlZOKSeWbKk5UnqiYVD5JZao4UXlC5aTijYu11rpdrLXW7WKttW72i38RlZOKSeWkYlKZKiaVqeIJlaliUjmpOFH5pIoTlaniDZWpYlL5pIpJZap4Q2WqmFSeqHhCZap442KttW4Xa611u1hrrZv94gWVk4oTlZOKJ1Smin8TlaliUpkqvknliYoTlaniRGWqeEPlkyqeUDmpeELlpOKTLtZa63ax1lq3i7XWuv3wYRUnKk+ofJLKVDGpTBUnKk9UTCpTxaRyUjGpnFRMFZPKVDGpnFR8k8pUMVVMKk9UnKg8UTGpnFRMFX/pYq21bhdrrXW7WGut2w9fpnJS8YTKVPFExaRyojJVfFLFpHJS8UTFpHJSMamcVEwqJxVTxYnKiconqUwVJxUnKk+oPFHxSRdrrXW7WGut28Vaa91++GMVJypPqEwVJypTxaQyVUwqb6hMFd+kMlW8UXFSMamcqEwVU8WkclIxqUwVb1ScqLxR8U+6WGut28Vaa90u1lrrZr/4IJUnKiaVqWJSOak4UTmp+CaVJypOVKaKSeWbKj5JZao4UXmiYlJ5omJSmSo+SWWq+KaLtda6Xay11u1irbVu9osXVKaKSWWqOFE5qXhCZaqYVE4qnlA5qZhUpooTlaniDZWpYlKZKp5QmSomlTcqJpWp4gmVqWJSeaJiUjmpeEJlqnjjYq21bhdrrXW7WGut2w8fpnKiclJxovJExaTyhspJxYnKVDGpnFScqEwVk8qJyonKVPFJFZPKExWTylQxqUwVT1ScqJxUnKhMFVPFJ12stdbtYq21bhdrrXWzX/yLqUwVk8pJxYnKExUnKicVf0nlkypOVN6omFSmihOVJyomlaniROWbKv7SxVpr3S7WWut2sdZaN/vFfzGVqWJSOamYVN6o+CSVT6p4QuWk4kRlqphUpooTlaniROWkYlKZKiaVk4onVD6p4o2Ltda6Xay11u1irbVuP7yk8pcqpopJZap4o2JSmSpOVKaKNyomlTdUpoqTihOVqWJSeUJlqjhROal4QmWqmFROVKaKk4pJ5aTiky7WWut2sdZat4u11rr98GEVn6RyovJNKlPFpHJSMalMFZPKVDGpTBUnKicVb6g8UXGicqJyUnGiMlVMFZPKGxVPqJxUfNPFWmvdLtZa63ax1lq3H75M5YmKT1L5JJWp4omKJ1SmikllqjhReUNlqjhRmSpOKt5QeUJlqjhROVH5SypTxRsXa611u1hrrdvFWmvdfvgfU/GEylQxqUwVk8pUMalMFU9UTCpTxRsVk8obKlPFpPJJFVPFicpUcVJxovJJFU9UfNLFWmvdLtZa63ax1lq3H/7HqLyh8kkVT1ScVDxRMamcVEwqU8UTKlPFEypTxRMqU8WJyknFScWk8oTKScU3Xay11u1irbVuF2utdfvhyyq+qWJSmSomlU+qOFF5ouJEZaqYVE4qTlROVE4qvknlpOKNikllUpkqJpWTihOVf9LFWmvdLtZa63ax1lo3+8ULKn+pYlJ5o+IJlZOKN1Smim9SOal4Q2WqmFSeqPgklScqTlSmiknlpOJEZar4pIu11rpdrLXW7WKttW72i7XW+nWx1lq3i7XWul2stdbtYq21bhdrrXW7WGut28Vaa90u1lrrdrHWWreLtda6Xay11u1irbVuF2utdbtYa63bxVpr3f4DKpRqGo67LRsAAAAASUVORK5CYII=\",\n            \"booking\": {\n                \"id\": 10,\n                \"code\": \"2411030282\",\n                \"userId\": 1,\n                \"flightId\": 3,\n                \"returnFlightId\": null,\n                \"bookingDate\": \"2024-12-11T11:11:07.245Z\",\n                \"totalPrice\": 200000,\n                \"status\": \"ACTIVE\",\n                \"createdAt\": \"2024-12-11T11:11:07.247Z\",\n                \"updateAt\": \"2024-12-11T11:11:07.247Z\",\n                \"flight\": {\n                    \"id\": 3,\n                    \"flightNumber\": \"AL91\",\n                    \"airlineId\": 1,\n                    \"departureAirport\": 1,\n                    \"arrivalAirport\": 2,\n                    \"departureTime\": \"2024-12-16T08:00:00.000Z\",\n                    \"arrivalTime\": \"2024-12-16T11:00:00.000Z\",\n                    \"terminal\": \"A\",\n                    \"information\": \"Free Wi Fi-Free Inflight Meals\",\n                    \"price\": 550,\n                    \"class\": \"PREMIUM_ECONOMY\",\n                    \"airline\": {\n                        \"id\": 1,\n                        \"name\": \"Garuda Indonesia\",\n                        \"imageUrl\": \"https://ik.imagekit.io/vieryn/airlines/Garuda-Indonesia.jpg?updatedAt=1733030015025\",\n                        \"imageId\": \"garuda-logo\"\n                    },\n                    \"departure\": {\n                        \"id\": 1,\n                        \"code\": \"CGK\",\n                        \"name\": \"Soekarno-Hatta International Airport\",\n                        \"city\": \"Jakarta\",\n                        \"state\": \"Asia\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-6.1255\",\n                        \"longitude\": \"106.6551\",\n                        \"elevation\": \"8\",\n                        \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-12-11T09:03:54.053Z\"\n                    },\n                    \"arrival\": {\n                        \"id\": 2,\n                        \"code\": \"SUB\",\n                        \"name\": \"Juanda International Airport\",\n                        \"city\": \"Surabaya\",\n                        \"state\": \"Asia\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-7.3797\",\n                        \"longitude\": \"112.7876\",\n                        \"elevation\": \"7\",\n                        \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-12-11T09:03:54.053Z\"\n                    }\n                },\n                \"returnFlight\": null\n            }\n        }\n    ]\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Data Counter",
+      "item": [
+        {
+          "name": "get total data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local_base_url}}/admin/count",
+              "host": ["{{local_base_url}}"],
+              "path": ["admin", "count"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/admin/count",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["admin", "count"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "279"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"117-H4KpHD7odhInzrISxK91dnXEl2c\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Dec 2024 12:14:06 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Count fetch success\"\n    },\n    \"data\": {\n        \"totalAirlines\": 8,\n        \"totalAirports\": 17,\n        \"totalFlights\": 147,\n        \"totalUsers\": 5,\n        \"totalTransactions\": 5,\n        \"totalDiscounts\": 5,\n        \"totalNotifications\": 10,\n        \"totalBookings\": 5,\n        \"totalPassengers\": 10,\n        \"totalSeats\": 10584,\n        \"totalTickets\": 5\n    }\n}"
+            },
+            {
+              "name": "unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/admin/count",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["admin", "count"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "53"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"35-JKLf57b4Vl5fiBd/Q+6w6iM8i0M\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Dec 2024 12:14:40 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 401,\n        \"message\": \"unauthorized\"\n    }\n}"
+            },
+            {
+              "name": "forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/admin/count",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["admin", "count"]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "65"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"41-z8nFVUYekvfQenPP9pE/ce2KvuI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Dec 2024 12:15:08 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 403,\n        \"message\": \"forbidden, Go Back ! >:(\"\n    }\n}"
             }
           ]
         }
