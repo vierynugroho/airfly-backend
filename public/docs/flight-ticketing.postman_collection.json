@@ -13081,6 +13081,74 @@
               ],
               "cookie": [],
               "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Payment retrieved successfully\"\n    },\n    \"data\": {\n        \"id\": 1,\n        \"userId\": 1,\n        \"bookingId\": 6,\n        \"snapToken\": \"73595a2d-ea75-4746-afc4-3185d7ad7976\",\n        \"orderId\": \"order-2411052438-1734062459958\",\n        \"paymentstatus\": \"PENDING\",\n        \"paymentType\": null,\n        \"paymentAmount\": 412000,\n        \"transactionId\": null,\n        \"transactionTime\": null\n    }\n}"
+            },
+            {
+              "name": "not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/payment/:paymentID",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment", ":paymentID"],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "paymentID",
+                      "value": "9"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "59"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3b-9XZn4GKHJyghFBPqbWqkWiXLiRY\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Dec 2024 08:08:30 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 404,\n        \"message\": \"Payment not found.\"\n    }\n}"
             }
           ]
         },
@@ -13274,6 +13342,237 @@
               ],
               "cookie": [],
               "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Transaction canceled successfully\"\n    },\n    \"data\": {\n        \"status_code\": \"200\",\n        \"status_message\": \"Success, transaction is canceled\",\n        \"transaction_id\": \"d4b475cf-7512-44b9-91b5-028aee6bb07a\",\n        \"order_id\": \"1d4e5f80-8b28-4ab9-940a-7bc4f304c0ba\",\n        \"merchant_id\": \"G600704758\",\n        \"gross_amount\": \"412000.00\",\n        \"currency\": \"IDR\",\n        \"payment_type\": \"qris\",\n        \"transaction_status\": \"cancel\",\n        \"fraud_status\": \"accept\",\n        \"transaction_time\": \"2024-12-13 17:38:39\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "get All",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0NDIwNDMyLCJleHAiOjE3MzQ1MDY4MzJ9.We9a-3V4HQWM8K7PxbPCz0jP8O7DJTLmcNBgT4ByL5g",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local_base_url}}/payment",
+              "host": ["{{local_base_url}}"],
+              "path": ["payment"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/payment",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "346"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"15a-Xblyh3P5Jz8qV6fA/KgGtqQboDU\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Dec 2024 07:36:34 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Payments retrieved successfully\"\n    },\n    \"data\": {\n        \"payments\": [\n            {\n                \"id\": 6,\n                \"userId\": 1,\n                \"bookingId\": 8,\n                \"snapToken\": \"8742cac9-648b-4faf-b8d1-e26cb86eef68\",\n                \"orderId\": \"7f2c2f03-658b-4115-9359-bf787f6537d8\",\n                \"status\": \"pending\",\n                \"type\": null,\n                \"amount\": 9270,\n                \"transactionId\": null,\n                \"transactionTime\": null\n            }\n        ],\n        \"total\": 1,\n        \"page\": 1,\n        \"limit\": 10\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "delete",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzM0NDIxMDI4LCJleHAiOjE3MzQ1MDc0Mjh9.DESiuA0dhnVtnXMe5P8W_VncxKqlgl2HMTfrnB_KJ_0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{local_base_url}}/payment/:paymentID",
+              "host": ["{{local_base_url}}"],
+              "path": ["payment", ":paymentID"],
+              "variable": [
+                {
+                  "key": "paymentID",
+                  "value": "6"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/payment/:paymentID",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment", ":paymentID"],
+                  "variable": [
+                    {
+                      "key": "paymentID",
+                      "value": "6"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "68"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"44-FKwzWdQ5h24Cb8mecHwg4EH5oQ8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Dec 2024 07:48:33 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"statusCode\": 200,\n        \"message\": \"Payment deleted successfully\"\n    }\n}"
+            },
+            {
+              "name": "not found",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{local_base_url}}/payment/:paymentID",
+                  "host": ["{{local_base_url}}"],
+                  "path": ["payment", ":paymentID"],
+                  "variable": [
+                    {
+                      "key": "paymentID",
+                      "value": "2"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "59"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3b-9XZn4GKHJyghFBPqbWqkWiXLiRY\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Dec 2024 08:09:02 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"statusCode\": 404,\n        \"message\": \"Payment not found.\"\n    }\n}"
             }
           ]
         }

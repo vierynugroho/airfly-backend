@@ -4468,6 +4468,37 @@ paths:
       parameters: []
       security:
         - bearerAuth: []
+    get:
+      tags:
+        - Payment
+      summary: get All
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: Payments retrieved successfully
+                data:
+                  payments:
+                    - id: 6
+                      userId: 1
+                      bookingId: 8
+                      snapToken: 8742cac9-648b-4faf-b8d1-e26cb86eef68
+                      orderId: 7f2c2f03-658b-4115-9359-bf787f6537d8
+                      status: pending
+                      type: null
+                      amount: 9270
+                      transactionId: null
+                      transactionTime: null
+                  total: 1
+                  page: 1
+                  limit: 10
+      parameters: []
+      security:
+        - bearerAuth: []
   /payment/webhook:
     post:
       tags:
@@ -6650,6 +6681,43 @@ paths:
                   paymentAmount: 412000
                   transactionId: null
                   transactionTime: null
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: Payment not found.
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - Payment
+      summary: delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                meta:
+                  statusCode: 200
+                  message: Payment deleted successfully
+        '404':
+          description: Response
+          content:
+            application/json:
+              example:
+                error:
+                  statusCode: 404
+                  message: Payment not found.
+      parameters:
+        - name: paymentID
+          in: path
+          required: true
+          schema:
+            type: string
       security:
         - bearerAuth: []
   /payment/{orderId}/cancel:
