@@ -1676,6 +1676,12 @@ paths:
           schema:
             type: string
           description: "valid value: Asia, Africa, America, Australia, Europe ('insensitive')"
+        - name: startDeparture
+          in: query
+          schema:
+            type: string
+          description: flight departure time [ISO date] - 2024-01-01T00:00:00Z
+          example: '2024-12-27T00:00:00Z'
       responses:
         '200':
           description: Successful response

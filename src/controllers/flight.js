@@ -7,6 +7,7 @@ export class FlightController {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || null;
 
+      const startDeparture = req.query.startDeparture;
       const departureTime = req.query.departureTime;
       const returnTime = req.query.returnTime;
       const departureAirport = req.query.departureAirport
@@ -100,6 +101,13 @@ export class FlightController {
       if (seatClass) {
         condition.class = seatClass.toUpperCase() || {};
       }
+
+      if (startDeparture) {
+        condition.departureTime = {
+          gte: new Date(startDeparture),
+        };
+      }
+
       if (state) {
         condition.arrival = {
           state: {

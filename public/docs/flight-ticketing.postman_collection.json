@@ -6934,7 +6934,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/flights?page=1&limit=20",
+              "raw": "{{local_base_url}}/flights?page=1&limit=20&startDeparture=2024-12-27T00:00:00Z",
               "host": ["{{local_base_url}}"],
               "path": ["flights"],
               "query": [
@@ -7037,6 +7037,11 @@
                   "value": "",
                   "description": "valid value: Asia, Africa, America, Australia, Europe ('insensitive')",
                   "disabled": true
+                },
+                {
+                  "key": "startDeparture",
+                  "value": "2024-12-27T00:00:00Z",
+                  "description": "flight departure time [ISO date] - 2024-01-01T00:00:00Z"
                 }
               ]
             }
