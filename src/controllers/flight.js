@@ -72,7 +72,6 @@ export class FlightController {
         const endOfDay = new Date(departureTime);
         endOfDay.setUTCHours(23, 59, 59, 999);
 
-        console.log({ departureTime, startOfDay, endOfDay });
         condition.departureTime = {
           gte: startOfDay,
           lte: endOfDay,

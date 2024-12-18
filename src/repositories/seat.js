@@ -32,8 +32,6 @@ export class SeatRepository {
   }
 
   static async findMany(pagination, where) {
-    console.log(where);
-    console.log(where.departureTime);
     const seats = await prisma.seat.findMany({
       skip: pagination.offset,
       take: pagination.limit,
