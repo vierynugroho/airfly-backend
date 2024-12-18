@@ -1,3 +1,4 @@
+import { UserRole } from '@prisma/client';
 import { BookingService } from '../services/booking.js';
 
 export class BookingController {
@@ -44,7 +45,7 @@ export class BookingController {
         page,
         limit,
         sort,
-        userId,
+        userId: req.user.role != UserRole.ADMIN ? userId : undefined,
       });
 
       return res.json({
@@ -111,7 +112,7 @@ export class BookingController {
           page,
           limit,
           sort,
-          userId,
+          userId: req.user.role != UserRole.ADMIN ? userId : undefined,
         });
 
       return res.json({
