@@ -1,4 +1,5 @@
 import {} from 'dotenv/config';
+import './config/sentry.js';
 import cors from 'cors';
 import express from 'express';
 import router from './routes/index.js';
@@ -7,6 +8,7 @@ import { errorMiddleware } from './middlewares/error.js';
 import logger_format from './config/logger.js';
 import { Server } from 'socket.io';
 import { createServer } from 'node:http';
+import * as Sentry from '@sentry/node';
 
 const app = express();
 const server = createServer(app);
@@ -50,6 +52,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(router);
+
+app.get('/debug-sentry', function mainHandler() {
+  throw new Error(500, 'My Awesome Sentry error!');
+});
+
+// sentry
+Sentry.setupExpressErrorHandler(app);
 
 app.use(errorMiddleware);
 

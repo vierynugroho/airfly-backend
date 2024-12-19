@@ -1,4 +1,5 @@
 import { DiscountService } from '../services/discount.js';
+import { ErrorHandler } from '../middlewares/error.js';
 
 export class DiscountController {
   static async create(req, res, next) {
