@@ -115,9 +115,6 @@ export class BookingRepository {
         data: { status: seatStatus },
       });
 
-      console.log('update seat status on payment');
-      console.log(update);
-
       return update;
     } catch (error) {
       console.error('Error updating seat status on payment:', error);

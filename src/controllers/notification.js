@@ -96,9 +96,13 @@ export class NotificationController {
       let condition = {};
 
       if (userRole === 'BUYER') {
-        console.log(true);
         condition = {
-          userId: userID,
+          OR: [
+            { userId: userID },
+            {
+              userId: null,
+            },
+          ],
         };
       }
 

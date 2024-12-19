@@ -46,8 +46,6 @@ export class FlightRepository {
 
     const haveSorting = sorter && Object.keys(sorter).length > 0;
     const haveFiltering = filter && Object.keys(filter).length > 0;
-    const haveSortFilter = !haveSorting && !haveFiltering;
-    console.log({ haveSorting, haveFiltering, haveSortFilter });
 
     if (!haveSorting && !haveFiltering) {
       const sortedFlights = flights.sort((a, b) => {
