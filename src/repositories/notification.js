@@ -43,7 +43,6 @@ export class NotificationRepository {
   }
 
   static async update(notificationID, data) {
-    console.log({ notificationID, data });
     const updatedNotification = await prisma.notification.update({
       where: {
         id: notificationID,

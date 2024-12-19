@@ -2,7 +2,6 @@ import { io } from '../index.js';
 
 export class SocketIO {
   static async pushSingleNotification(userID, data) {
-    console.log('single notify user');
     io.to(userID).emit('notification:user', data);
   }
 
