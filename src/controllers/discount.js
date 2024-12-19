@@ -14,7 +14,6 @@ export class DiscountController {
       }
 
       const discount = await DiscountService.create(data);
-      console.log(discount);
 
       res.status(201).json({
         meta: { statusCode: 201, message: 'Discount created successfully' },
