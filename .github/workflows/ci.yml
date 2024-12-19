@@ -1,7 +1,7 @@
 name: CI TiketKu
 on:
   pull_request:
-    branches: ['stagging', 'main']
+    branches: ['staging', 'release']
 
 jobs:
   build:
