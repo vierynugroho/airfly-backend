@@ -1,4 +1,5 @@
 import { DiscountService } from '../services/discount.js';
+import { ErrorHandler } from '../middlewares/error.js';
 
 export class DiscountController {
   static async create(req, res, next) {
@@ -13,7 +14,6 @@ export class DiscountController {
       }
 
       const discount = await DiscountService.create(data);
-      console.log(discount);
 
       res.status(201).json({
         meta: { statusCode: 201, message: 'Discount created successfully' },
