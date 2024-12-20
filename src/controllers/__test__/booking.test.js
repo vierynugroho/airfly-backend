@@ -56,7 +56,10 @@ describe('BookingController', () => {
 
   describe('getAll', () => {
     it('should return all bookings with pagination', async () => {
-      const req = mockRequest({ id: 1, role: UserRole.USER }, { page: '1', limit: '5', sort: 'asc' });
+      const req = mockRequest(
+        { id: 1, role: UserRole.USER },
+        { page: '1', limit: '5', sort: 'asc' }
+      );
       const res = mockResponse();
       const mockResponseData = { bookings: [], totalBooking: 0 };
       BookingService.findBooking.mockResolvedValue(mockResponseData);
@@ -120,9 +123,16 @@ describe('BookingController', () => {
 
   describe('getGroupedBy', () => {
     it('should return grouped bookings with pagination', async () => {
-      const req = mockRequest({ id: 1, role: UserRole.USER }, { page: '1', limit: '5', sort: 'desc' });
+      const req = mockRequest(
+        { id: 1, role: UserRole.USER },
+        { page: '1', limit: '5', sort: 'desc' }
+      );
       const res = mockResponse();
-      const mockResponseData = { groupedBookings: [], totalBooking: 0, totalItems: 0 };
+      const mockResponseData = {
+        groupedBookings: [],
+        totalBooking: 0,
+        totalItems: 0,
+      };
       BookingService.findGrouped.mockResolvedValue(mockResponseData);
 
       await BookingController.getGroupedBy(req, res, mockNext);

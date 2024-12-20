@@ -94,3 +94,7 @@ Thank you for choosing **AirFly** for your flight booking needs. Fly smart, fly 
     <img width="100%" height="100%" src="./public/images/erd_bejs_km7.png" alt="ERD" title="ERD"> 
 </div>
 <br>
+
+### CODECOV
+
+[![codecov](https://codecov.io/gh/TIM1-FSW-BE-BINAR/Backend/branch/staging/graph/badge.svg)](https://codecov.io/gh/TIM1-FSW-BE-BINAR/Backend)

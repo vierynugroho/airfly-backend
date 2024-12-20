@@ -16,7 +16,7 @@
     "prisma:seed": "node ./prisma/seeder.js",
     "prisma:studio": "npx prisma studio",
     "prisma:refresh": "npm run prisma:reset && npm run prisma:migrate && npx prisma generate && npm run prisma:seed",
-    "test": "jest --runInBand --detectOpenHandles --forceExit"
+    "test": "jest --runInBand --detectOpenHandles --forceExit --coverage"
   },
   "keywords": [],
   "author": "",
