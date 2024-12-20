@@ -129,12 +129,15 @@ describe('UserRepository', () => {
       const userID = 1;
       const mockDeletedUser = { id: 1, firstName: 'John', lastName: 'Doe' };
 
-      prisma.user.delete.mockResolvedValue(mockDeletedUser);
+      prisma.user.update.mockResolvedValue(mockDeletedUser);
 
       const result = await UserRepository.delete(userID);
 
-      expect(prisma.user.delete).toHaveBeenCalledWith({
+      expect(prisma.user.update).toHaveBeenCalledWith({
         where: { id: userID },
+        data: {
+          status: 'UNVERIFIED',
+        },
       });
       expect(result).toEqual(mockDeletedUser);
     });

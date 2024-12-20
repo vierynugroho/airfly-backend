@@ -1,3 +1,4 @@
+import { UserStatus } from '@prisma/client';
 import { prisma } from '../database/db.js';
 
 export class UserRepository {
@@ -60,9 +61,12 @@ export class UserRepository {
   }
 
   static async delete(userID) {
-    const deletedUser = await prisma.user.delete({
+    const deletedUser = await prisma.user.update({
       where: {
         id: userID,
+      },
+      data: {
+        status: UserStatus.UNVERIFIED,
       },
     });
 
