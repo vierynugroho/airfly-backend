@@ -91,10 +91,55 @@ export class BookingRepository {
     });
   }
 
+  static async getBooking(bookingID) {
+    const booking = await prisma.booking.findUnique({
+      where: {
+        id: bookingID,
+      },
+      include: {
+        bookingDetail: {
+          select: {
+            seatId: true,
+          },
+        },
+      },
+    });
+
+    return booking;
+  }
+
+  static async updateSeatStatusOnPayment(seatIds, seatStatus) {
+    try {
+      const update = await prisma.seat.updateMany({
+        where: { id: { in: seatIds } },
+        data: { status: seatStatus },
+      });
+
+      return update;
+    } catch (error) {
+      console.error('Error updating seat status on payment:', error);
+      throw Error(error.message);
+    }
+  }
+
   static async findBooking(condition, pagination, orderBy) {
     return await prisma.booking.findMany({
       where: condition,
       orderBy,
+      include: {
+        flight: {
+          include: {
+            departure: true,
+            arrival: true,
+          },
+        },
+        returnFlight: {
+          include: {
+            departure: true,
+            arrival: true,
+          },
+        },
+      },
       skip: pagination.offset,
       take: pagination.limit,
     });
@@ -119,8 +164,20 @@ export class BookingRepository {
             seat: true,
           },
         },
-        flight: true,
-        returnFlight: true,
+        flight: {
+          include: {
+            departure: true,
+            arrival: true,
+            airline: true,
+          },
+        },
+        returnFlight: {
+          include: {
+            departure: true,
+            arrival: true,
+            airline: true,
+          },
+        },
       },
     });
   }
@@ -137,8 +194,18 @@ export class BookingRepository {
             seat: true,
           },
         },
-        flight: true,
-        returnFlight: true,
+        flight: {
+          include: {
+            departure: true,
+            arrival: true,
+          },
+        },
+        returnFlight: {
+          include: {
+            departure: true,
+            arrival: true,
+          },
+        },
       },
     });
   }

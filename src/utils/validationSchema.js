@@ -65,7 +65,9 @@ export const seatSchema = Joi.object({
 
 export const flightSchema = Joi.object({
   price: Joi.number().min(0).required(),
-  class: Joi.string().valid('ECONOMY', 'FIRST', 'BUSINESS').required(),
+  class: Joi.string()
+    .valid('ECONOMY', 'FIRST', 'BUSINESS', 'PREMIUM_ECONOMY')
+    .required(),
   flightNumber: Joi.string().required(),
   airlineId: Joi.number().positive().required(),
   departureAirport: Joi.number().positive().required(),
@@ -162,4 +164,93 @@ export const airlineSchema = Joi.object({
       'binary.base': 'Image must be a file.',
       'any.noFileSelected': 'No file selected.',
     }),
+});
+
+export const notificationSchema = Joi.object({
+  type: Joi.string()
+    .valid('INFO', 'DISCOUNT', 'ACCOUNT', 'EVENT', 'PAYMENT')
+    .required(),
+  title: Joi.string().required(),
+  description: Joi.string().required(),
+  isRead: Joi.boolean().required(),
+  userId: Joi.number().optional(),
+});
+
+export const readNotificationSchema = Joi.object({
+  notificationID: Joi.number().required(),
+  isRead: Joi.boolean().required(),
+});
+
+export const QRCodeSchema = Joi.object({
+  QRCodeData: Joi.object().required(),
+});
+
+export const resetPasswordSchema = Joi.object({
+  email: Joi.string().email().required(),
+  otp: Joi.string().min(6),
+  password: Joi.string().min(8),
+});
+
+export const verifyOtpSchema = Joi.object({
+  email: Joi.string().email().required(),
+  otp: Joi.string().min(6),
+});
+
+export const resetOtpSchema = Joi.object({
+  email: Joi.string().email().required(),
+});
+
+export const transactionSchema = Joi.object({
+  bookingId: Joi.number().required(),
+});
+
+export const discountSchema = Joi.object({
+  name: Joi.string().required().messages({
+    'string.empty': 'Discount name cannot be empty.',
+    'any.required': 'Discount name is required.',
+  }),
+
+  code: Joi.string().required().messages({
+    'string.empty': 'Discount code cannot be empty.',
+    'any.required': 'Discount code is required.',
+  }),
+
+  description: Joi.string().optional().messages({
+    'string.empty': 'Description cannot be empty.',
+  }),
+
+  type: Joi.string().valid('percentage', 'fixed').required().messages({
+    'any.only': 'Discount type must be either "percentage" or "fixed".',
+    'any.required': 'Discount type is required.',
+  }),
+
+  value: Joi.number().positive().required().messages({
+    'number.base': 'Discount value must be a number.',
+    'number.positive': 'Discount value must be greater than 0.',
+    'any.required': 'Discount value is required.',
+  }),
+
+  startDate: Joi.date().iso().required().messages({
+    'date.base': 'Start date must be a valid date.',
+    'date.format': 'Start date must follow the ISO 8601 format.',
+    'any.required': 'Start date is required.',
+  }),
+
+  endDate: Joi.date().iso().greater(Joi.ref('startDate')).required().messages({
+    'date.base': 'End date must be a valid date.',
+    'date.format': 'End date must follow the ISO 8601 format.',
+    'date.greater': 'End date must be after the start date.',
+    'any.required': 'End date is required.',
+  }),
+
+  minPurchase: Joi.number().positive().required().messages({
+    'number.base': 'Minimum purchase must be a number.',
+    'number.positive': 'Minimum purchase must be greater than 0.',
+    'any.required': 'Minimum purchase is required.',
+  }),
+
+  isActive: Joi.boolean().required().messages({
+    'boolean.base': 'Active status must be either true or false.',
+    'any.required': 'Active status is required.',
+  }),
 });

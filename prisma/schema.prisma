@@ -26,6 +26,7 @@ model User {
   role         UserRole       @default(BUYER)
   booking      Booking[]
   Notification Notification[]
+  payments     Payment[]
 
   @@map("users")
 }
@@ -103,7 +104,7 @@ model Seat {
 
 model Booking {
   id             Int           @id @default(autoincrement())
-  code    String        @unique
+  code           String        @unique
   user           User          @relation(fields: [userId], references: [id])
   userId         Int           @map("user_id")
   flightId       Int           @map("flight_id")
@@ -128,6 +129,8 @@ model BookingDetail {
   passengerId Int      @unique @map("passenger_id")
   seatId      Int      @map("seat_id")
   price       Float
+  qrCodeImage String?
+  qrToken     String?
   createdAt   DateTime @default(now()) @map("createdAt")
   updateAt    DateTime @default(now()) @updatedAt
 
@@ -139,16 +142,23 @@ model BookingDetail {
 }
 
 model Payment {
-  id            Int           @id @default(autoincrement())
-  bookingId     Int           @unique @map("booking_id")
-  paymentMethod String        @map("payment_method")
-  paymentDate   DateTime      @map("payment_date")
-  paymentAmount Float         @map("payment_amount")
-  paymentStatus PaymentStatus @default(UNPAID) @map("payment_status")
+  id              Int       @id @default(autoincrement())
+  userId          Int       @map("user_id")
+  bookingId       Int       @unique @map("booking_id")
+  snapToken       String    @unique @map("snap_token")
+  orderId         String    @unique @map("order_id")
+  status          String    @default("pending") @map("status")
+  type            String?   @map("type")
+  amount          Float     @map("amount")
+  transactionId   String?   @map("transaction_id")
+  transactionTime DateTime? @map("transaction_time")
 
+  user    User    @relation(fields: [userId], references: [id])
   booking Booking @relation(fields: [bookingId], references: [id])
 
-  @@map("payments")
+  @@index([userId])
+  @@index([bookingId])
+  @@map("payment")
 }
 
 model Passenger {
@@ -158,10 +168,10 @@ model Passenger {
   gender         Gender         @default(MALE)
   identityNumber String         @map("identity_number")
   citizenship    String
-  countryOfIssue String         @map("country_of_issue")
+  countryOfIssue String?        @map("country_of_issue")
   title          PassengerTitle @default(Mr)
   dob            DateTime
-  expiredDate    DateTime       @map("expired_Date")
+  expiredDate    DateTime?      @map("expired_Date")
   type           PassengerType  @default(ADULT)
 
   bookingDetail BookingDetail?
@@ -174,8 +184,10 @@ model Notification {
   type        NotificationType @default(INFO)
   title       String
   description String
-  user        User             @relation(fields: [userId], references: [id])
-  userId      Int              @map("user_id")
+  isRead      Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+  user        User?            @relation(fields: [userId], references: [id])
+  userId      Int?             @map("user_id")
 }
 
 enum UserStatus {
@@ -185,11 +197,10 @@ enum UserStatus {
 
 enum NotificationType {
   INFO
+  ACCOUNT
   DISCOUNT
-  PROMO
   EVENT
-  TRAVEL
-  BOOKING
+  PAYMENT
 }
 
 enum UserRole {
@@ -205,6 +216,7 @@ enum SeatStatus {
 
 enum SeatClass {
   ECONOMY
+  PREMIUM_ECONOMY
   FIRST
   BUSINESS
 }
@@ -213,11 +225,6 @@ enum BookingStatus {
   ACTIVE
   CANCELED
   EXPIRED
-}
-
-enum PaymentStatus {
-  PAID
-  UNPAID
 }
 
 enum Gender {
@@ -234,4 +241,19 @@ enum PassengerType {
   BABY
   CHILD
   ADULT
+}
+
+model Discount {
+  id          Int              @id @default(autoincrement())
+  name        String
+  type        String    // 'percentage' or 'fixed'
+  value       Float
+  startDate   DateTime
+  endDate     DateTime
+  minPurchase Float?
+  isActive    Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  code        String?  
+  description String? 
 }

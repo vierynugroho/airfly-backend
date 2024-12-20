@@ -1,0 +1,9 @@
+coverage:
+  status:
+    project:
+      default:
+        target: 80% # Minimum coverage yang diharapkan
+        threshold: 1% # Toleransi perubahan coverage
+    patch:
+      default:
+        target: 80%

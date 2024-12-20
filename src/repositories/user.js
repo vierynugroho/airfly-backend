@@ -1,3 +1,4 @@
+import { UserStatus } from '@prisma/client';
 import { prisma } from '../database/db.js';
 
 export class UserRepository {
@@ -10,8 +11,6 @@ export class UserRepository {
         _count: true,
         booking: {
           include: {
-            flight: true,
-            passenger: true,
             _count: true,
           },
         },
@@ -20,6 +19,16 @@ export class UserRepository {
     });
 
     return users;
+  }
+
+  static async getUsersID() {
+    const usersID = await prisma.user.findMany({
+      select: {
+        id: true,
+      },
+    });
+
+    return usersID;
   }
 
   static async findByID(userID) {
@@ -52,9 +61,12 @@ export class UserRepository {
   }
 
   static async delete(userID) {
-    const deletedUser = await prisma.user.delete({
+    const deletedUser = await prisma.user.update({
       where: {
         id: userID,
+      },
+      data: {
+        status: UserStatus.UNVERIFIED,
       },
     });
 

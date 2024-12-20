@@ -13,9 +13,7 @@ export class SeatController {
           statusCode: 200,
           message: 'seat created successfully',
         },
-        data: {
-          seat,
-        },
+        data: seat,
       });
     } catch (e) {
       next(e);
@@ -38,9 +36,7 @@ export class SeatController {
           statusCode: 200,
           message: 'seat updated successfully',
         },
-        data: {
-          seat,
-        },
+        data: seat,
       });
     } catch (e) {
       next(e);
@@ -62,9 +58,7 @@ export class SeatController {
           statusCode: 200,
           message: 'seat deleted successfully',
         },
-        data: {
-          seat,
-        },
+        data: seat,
       });
     } catch (e) {
       next(e);
@@ -77,9 +71,7 @@ export class SeatController {
       const limit = parseInt(req.query.limit) || null;
       const { flightId } = req.query;
 
-      const departureTime = req.query.departureTime;
-      const arrivalTime = req.query.arrivalTime;
-      const seatStatus = req.query.seatStatus;
+      const { seatClass, departureTime, arrivalTime, seatStatus } = req.query;
 
       let condition = {};
       const pagination = {};
@@ -103,6 +95,10 @@ export class SeatController {
 
       if (seatStatus) {
         condition.status = seatStatus;
+      }
+
+      if (seatClass) {
+        condition.class = seatClass.toUpperCase() || {};
       }
 
       const { seats, totalSeats } = await SeatService.findMany(

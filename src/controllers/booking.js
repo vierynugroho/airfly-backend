@@ -1,3 +1,4 @@
+import { UserRole } from '@prisma/client';
 import { BookingService } from '../services/booking.js';
 
 export class BookingController {
@@ -9,7 +10,7 @@ export class BookingController {
    */
   static async createBooking(req, res, next) {
     try {
-      await BookingService.createBooking({
+      const bookingId = await BookingService.createBooking({
         ...req.body,
         userId: req.user.id,
       });
@@ -18,6 +19,9 @@ export class BookingController {
         meta: {
           statusCode: 201,
           message: 'booking created',
+        },
+        data: {
+          bookingId,
         },
       });
     } catch (err) {
@@ -41,7 +45,7 @@ export class BookingController {
         page,
         limit,
         sort,
-        userId,
+        userId: req.user.role != UserRole.ADMIN ? userId : undefined,
       });
 
       return res.json({
@@ -53,7 +57,7 @@ export class BookingController {
               ? {
                   totalPage: Math.ceil(totalBooking / limit),
                   currentPage: page,
-                  pageItems: booking.length,
+                  pageItems: bookings.length,
                   nextPage:
                     page < Math.ceil(totalBooking / limit) ? page + 1 : null,
                   prevPage: page > 1 ? page - 1 : null,
@@ -108,7 +112,7 @@ export class BookingController {
           page,
           limit,
           sort,
-          userId,
+          userId: req.user.role != UserRole.ADMIN ? userId : undefined,
         });
 
       return res.json({

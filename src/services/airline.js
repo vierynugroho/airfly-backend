@@ -23,25 +23,6 @@ export class AirlineService {
 
     fileUploaded = await UploadService.upload(files, 'airlines', ['airline']);
 
-    /*
-    console.log(fileUploaded);
-    {
-      image: {
-        fileId: '674be24ce375273f60c4b254',
-        name: 'image-1733026377745_gR9y6Ro7F.jpg',
-        size: 9170,
-        versionInfo: { id: '674be24ce375273f60c4b254', name: 'Version 1' },
-        filePath: '/airlines/image-1733026377745_gR9y6Ro7F.jpg',
-        url: 'https://ik.imagekit.io/vieryn/airlines/image-1733026377745_gR9y6Ro7F.jpg',
-        fileType: 'image',
-        height: 612,
-        width: 612,
-        thumbnailUrl: 'https://ik.imagekit.io/vieryn/tr:n-ik_ml_thumbnail/airlines/image-1733026377745_gR9y6Ro7F.jpg',
-        AITags: null
-      }
-    }
-    */
-
     data.imageUrl = fileUploaded.image.url;
     data.imageId = fileUploaded.image.fileId;
 

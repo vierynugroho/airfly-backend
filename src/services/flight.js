@@ -6,9 +6,10 @@ import { AirlineRepository } from '../repositories/airline.js';
 import { calculateDuration } from '../utils/calculateDuration.js';
 
 export class FlightService {
-  static async getAll(pagination, filter, sorter) {
+  static async getAll(pagination, filter, sorter, duration) {
     if (filter.class) {
       const seatClassEnum = await SeatRepository.getClassEnum();
+
       const upperCaseClass = filter.class.trim().toUpperCase();
 
       if (!Object.keys(seatClassEnum).includes(upperCaseClass)) {
@@ -19,7 +20,6 @@ export class FlightService {
       }
     }
 
-    console.log(filter);
     const flights = await FlightRepository.findMany(pagination, filter, sorter);
     const flightsWithDuration = flights.map((flight) => {
       const duration = calculateDuration(
@@ -31,6 +31,21 @@ export class FlightService {
         ...flight,
       };
     });
+
+    if (duration && duration.sort) {
+      flightsWithDuration.sort((a, b) => {
+        const [aDays, aHours, aMinutes] = a.duration.match(/\d+/g).map(Number);
+        const [bDays, bHours, bMinutes] = b.duration.match(/\d+/g).map(Number);
+
+        const aTotalMinutes = aDays * 24 * 60 + aHours * 60 + aMinutes;
+        const bTotalMinutes = bDays * 24 * 60 + bHours * 60 + bMinutes;
+
+        if (duration.sort === 'asc') {
+          return aTotalMinutes - bTotalMinutes;
+        }
+      });
+    }
+
     const totalFlights = await FlightRepository.count(filter);
 
     return { flights: flightsWithDuration, totalFlights };
@@ -41,6 +56,12 @@ export class FlightService {
 
     if (!flight) {
       throw new ErrorHandler(404, 'flight is not found');
+    }
+
+    const flightSoldOut = await FlightRepository.flightTicketsSoldOut(flightID);
+
+    if (flightSoldOut) {
+      throw new ErrorHandler(400, 'Flight Tickets Sold Out');
     }
 
     return flight;

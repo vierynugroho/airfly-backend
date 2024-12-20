@@ -77,7 +77,9 @@ export class SeatService {
   static async findMany(pagination, filter) {
     if (filter.class) {
       const seatClassEnum = await SeatRepository.getClassEnum();
+
       const upperCaseClass = filter.class.trim().toUpperCase();
+
       if (!Object.keys(seatClassEnum).includes(upperCaseClass)) {
         throw new ErrorHandler(
           422,
@@ -100,29 +102,5 @@ export class SeatService {
     }
 
     return seat;
-  }
-
-  static async findByFlight(flightID) {
-    const seats = await SeatRepository.findByFlight(flightID);
-
-    return seats;
-  }
-
-  static async findBySeatNumber(seatNumber) {
-    const seats = await SeatRepository.findBySeatNumber(seatNumber);
-
-    return seats;
-  }
-
-  static async findByClass(seatClass) {
-    const seats = await SeatRepository.findByClass(seatClass);
-
-    return seats;
-  }
-
-  static async findByStatus(seatStatus) {
-    const seats = await SeatRepository.findByStatus(seatStatus);
-
-    return seats;
   }
 }

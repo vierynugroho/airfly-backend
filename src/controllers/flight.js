@@ -7,7 +7,9 @@ export class FlightController {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || null;
 
-      const departureDate = req.query.departureDate;
+      const startDeparture = req.query.startDeparture;
+      const departureTime = req.query.departureTime;
+      const returnTime = req.query.returnTime;
       const departureAirport = req.query.departureAirport
         ? parseInt(req.query.departureAirport)
         : null;
@@ -29,10 +31,11 @@ export class FlightController {
       const earliestArrival = req.query.earliestArrival || 'false';
       const latestArrival = req.query.latestArrival || 'false';
 
-      const { priceMin, priceMax, flightNumber, seatClass } = req.query;
+      const { priceMin, priceMax, flightNumber, seatClass, state } = req.query;
 
       let sort = {};
       let condition = {};
+      let duration = {};
       const pagination = {};
 
       if (page && limit) {
@@ -44,7 +47,7 @@ export class FlightController {
         sort = { price: 'asc' };
       }
       if (shortest === 'true') {
-        sort = { duration: 'asc' };
+        duration = { sort: 'asc' };
       }
       if (earliestDeparture === 'true') {
         sort = { departureTime: 'asc' };
@@ -62,11 +65,32 @@ export class FlightController {
         condition.price = condition.price || {};
         condition.price.gte = parseFloat(priceMin);
       }
-      if (departureDate) {
+      if (departureTime) {
+        const startOfDay = new Date(departureTime);
+        startOfDay.setUTCHours(0, 0, 0, 0);
+
+        const endOfDay = new Date(departureTime);
+        endOfDay.setUTCHours(23, 59, 59, 999);
+
         condition.departureTime = {
-          gte: new Date(departureDate),
+          gte: startOfDay,
+          lte: endOfDay,
         };
       }
+
+      if (returnTime) {
+        const startOfDay = new Date(returnTime);
+        startOfDay.setUTCHours(0, 0, 0, 0);
+
+        const endOfDay = new Date(returnTime);
+        endOfDay.setUTCHours(23, 59, 59, 999);
+
+        condition.departureTime = {
+          gte: startOfDay,
+          lte: endOfDay,
+        };
+      }
+
       if (departureAirport) {
         condition.departureAirport = departureAirport;
       }
@@ -75,6 +99,21 @@ export class FlightController {
       }
       if (seatClass) {
         condition.class = seatClass.toUpperCase() || {};
+      }
+
+      if (startDeparture) {
+        condition.departureTime = {
+          gte: new Date(startDeparture),
+        };
+      }
+
+      if (state) {
+        condition.arrival = {
+          state: {
+            contains: state,
+            mode: 'insensitive',
+          },
+        };
       }
       if (priceMax) {
         condition.price = condition.price || {};
@@ -87,7 +126,8 @@ export class FlightController {
       const { flights, totalFlights } = await FlightService.getAll(
         pagination,
         condition,
-        sort
+        sort,
+        duration
       );
 
       res.json({
@@ -146,9 +186,7 @@ export class FlightController {
           statusCode: 200,
           message: 'flight created successfully',
         },
-        data: {
-          flight,
-        },
+        data: flight,
       });
     } catch (e) {
       next(e);
@@ -171,9 +209,7 @@ export class FlightController {
           statusCode: 200,
           message: 'flight updated successfully',
         },
-        data: {
-          flight,
-        },
+        data: flight,
       });
     } catch (e) {
       next(e);
@@ -195,9 +231,7 @@ export class FlightController {
           statusCode: 200,
           message: 'flight deleted successfully',
         },
-        data: {
-          flight,
-        },
+        data: flight,
       });
     } catch (e) {
       next(e);

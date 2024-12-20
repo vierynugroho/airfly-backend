@@ -32,8 +32,6 @@ export class SeatRepository {
   }
 
   static async findMany(pagination, where) {
-    console.log(where);
-    console.log(where.departureTime);
     const seats = await prisma.seat.findMany({
       skip: pagination.offset,
       take: pagination.limit,
@@ -73,25 +71,6 @@ export class SeatRepository {
     return seat;
   }
 
-  static async findByFlight(flightID) {
-    const seats = await prisma.seat.findMany({
-      where: {
-        flightId: flightID,
-      },
-      include: {
-        flight: {
-          include: {
-            airline: true,
-            arrival: true,
-            departure: true,
-          },
-        },
-      },
-    });
-
-    return seats;
-  }
-
   static async findBySeatNumber(seatNumber) {
     const seats = await prisma.seat.findMany({
       where: {
@@ -119,25 +98,5 @@ export class SeatRepository {
       },
     });
     return !!seat;
-  }
-
-  static async findByClass(seatClass) {
-    const seats = await prisma.seat.findFirst({
-      where: {
-        class: seatClass,
-      },
-    });
-
-    return seats;
-  }
-
-  static async findByStatus(seatStatus) {
-    const seats = await prisma.seat.findFirst({
-      where: {
-        status: seatStatus,
-      },
-    });
-
-    return seats;
   }
 }

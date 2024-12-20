@@ -93,6 +93,8 @@ export class BookingService {
 
     await BookingRepository.createPassengers(payload);
     await BookingRepository.setSeatStatus(seatsId, SeatStatus.LOCKED);
+
+    return bookingCreated.id;
   }
 
   /**
