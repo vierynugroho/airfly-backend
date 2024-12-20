@@ -97,4 +97,4 @@ Thank you for choosing **AirFly** for your flight booking needs. Fly smart, fly 
 
 ### CODECOV
 
-[![codecov](https://codecov.io/gh/ORGANIZATION_NAME/REPO_NAME/branch/main/graph/badge.svg)](https://codecov.io/gh/TIM1-FSW-BE-BINAR/Backend)
+[![codecov](https://codecov.io/gh/TIM1-FSW-BE-BINAR/Backend/branch/staging/graph/badge.svg)](https://codecov.io/gh/TIM1-FSW-BE-BINAR/Backend)
