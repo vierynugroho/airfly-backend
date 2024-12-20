@@ -1675,7 +1675,7 @@ paths:
           in: query
           schema:
             type: string
-          description: "valid value: Asia, Africa, America, Australia, Europe ('insensitive')"
+          description: 'valid value: Asia, Africa, America, Australia, Europe (''insensitive'')'
         - name: startDeparture
           in: query
           schema:
@@ -4168,12 +4168,6 @@ paths:
                       dob: '1985-05-15T00:00:00Z'
                       expiredDate: '2030-05-15T23:59:59Z'
                       type: ADULT
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer {{token}}
       responses:
         '200':
           description: Successful response
@@ -4192,6 +4186,7 @@ paths:
                   statusCode: 401
                   message: jwt expired, please re-login
                   details: jwt expired
+      parameters: []
       security:
         - bearerAuth: []
   /booking/group:
@@ -4488,21 +4483,61 @@ paths:
                 meta:
                   statusCode: 200
                   message: Payments retrieved successfully
+                  pagination:
+                    total: 9
+                    page: 1
+                    limit: 5
                 data:
-                  payments:
-                    - id: 6
-                      userId: 1
-                      bookingId: 8
-                      snapToken: 8742cac9-648b-4faf-b8d1-e26cb86eef68
-                      orderId: 7f2c2f03-658b-4115-9359-bf787f6537d8
-                      status: pending
-                      type: null
-                      amount: 9270
-                      transactionId: null
-                      transactionTime: null
-                  total: 1
-                  page: 1
-                  limit: 10
+                  - id: 8
+                    userId: 1
+                    bookingId: 1
+                    snapToken: SNAP-1-1734697385208
+                    orderId: aaed0f49-1349-4279-a259-8148e5768fd6
+                    status: settlement
+                    type: credit_card
+                    amount: 1000000
+                    transactionId: null
+                    transactionTime: null
+                  - id: 9
+                    userId: 1
+                    bookingId: 2
+                    snapToken: SNAP-2-1734697385208
+                    orderId: 20cf82a6-2855-404c-affd-0c236f5de2a8
+                    status: pending
+                    type: bank_transfer
+                    amount: 1500000
+                    transactionId: null
+                    transactionTime: null
+                  - id: 10
+                    userId: 1
+                    bookingId: 3
+                    snapToken: SNAP-3-1734697385208
+                    orderId: 4c312879-906c-45af-b205-1a3d684dd923
+                    status: cancel
+                    type: digital_walet
+                    amount: 2000000
+                    transactionId: null
+                    transactionTime: null
+                  - id: 11
+                    userId: 1
+                    bookingId: 4
+                    snapToken: SNAP-4-1734697385208
+                    orderId: 12798d97-0f21-4065-b1b3-01ce388623fe
+                    status: expire
+                    type: paypal
+                    amount: 2500000
+                    transactionId: null
+                    transactionTime: null
+                  - id: 12
+                    userId: 1
+                    bookingId: 5
+                    snapToken: SNAP-5-1734697385208
+                    orderId: 8b238fa6-9551-4dbd-8dd2-e02232d96a81
+                    status: settlement
+                    type: credit_card
+                    amount: 3000000
+                    transactionId: null
+                    transactionTime: null
       parameters: []
       security:
         - bearerAuth: []
