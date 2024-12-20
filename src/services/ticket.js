@@ -55,8 +55,6 @@ export class TicketService {
   }
 
   static async validate(QRCodeData) {
-    console.log('=== QR Code Data ===');
-    console.log(QRCodeData);
     const bookingDetailID = QRCodeData.QRCodeData.bookingDetailID;
     const bookingID = QRCodeData.QRCodeData.bookingID;
     const QRToken = QRCodeData.QRCodeData.uniqueToken;

@@ -1,13 +1,18 @@
 import { Router } from 'express';
 import { UserRole } from '@prisma/client';
+import validation from '../middlewares/validator.js';
 import { authorization } from '../middlewares/authorization.js';
 import { BookingController } from '../controllers/booking.js';
+import { bookingValidationSchema } from '../utils/validationSchema.js';
 
 export const bookingRoute = Router();
 
 bookingRoute
   .route('/')
-  .post(authorization([UserRole.BUYER]), BookingController.createBooking)
+  .post(
+    authorization([UserRole.BUYER]), 
+    validation(bookingValidationSchema),
+    BookingController.createBooking)
   .get(
     authorization([UserRole.BUYER, UserRole.ADMIN]),
     BookingController.getAll
