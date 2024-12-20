@@ -80,9 +80,9 @@ export class PaymentService {
     const payment = await PaymentRepository.create(paymentData);
 
     const notificationData = {
-      type: 'ACCOUNT',
-      title: 'Transaksi Dibuat',
-      description: `Transaksi untuk ID ${payment.id} telah berhasil dibuat!`,
+      type: 'PAYMENT',
+      title: 'Transaction Created',
+      description: `Transaction for ID ${payment.id} has been successfully created!`,
       isRead: false,
       userId: payment.userId,
     };
