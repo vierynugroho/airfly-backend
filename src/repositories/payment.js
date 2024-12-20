@@ -36,7 +36,7 @@ export class PaymentRepository {
   }
   
   static async getByIdForBuyer(paymentId, userId) {
-    return prisma.payment.findUnique({
+    return prisma.payment.findFirst({
       where: {
         id: paymentId,
         userId: userId,

@@ -7,6 +7,7 @@ jest.mock('../../database/db.js', () => ({
       create: jest.fn(),
       findUnique: jest.fn(),
       findMany: jest.fn(),
+      findFirst: jest.fn(),
       count: jest.fn(),
       update: jest.fn(),
       delete: jest.fn(),
@@ -97,11 +98,11 @@ describe('PaymentRepository', () => {
       const mockUserId = 2;
       const mockResponse = { id: mockPaymentId, userId: mockUserId };
 
-      prisma.payment.findUnique.mockResolvedValue(mockResponse);
+      prisma.payment.findFirst.mockResolvedValue(mockResponse);
 
       const result = await PaymentRepository.getByIdForBuyer(mockPaymentId, mockUserId);
 
-      expect(prisma.payment.findUnique).toHaveBeenCalledWith({
+      expect(prisma.payment.findFirst).toHaveBeenCalledWith({
         where: { id: mockPaymentId, userId: mockUserId },
       });
       expect(result).toEqual(mockResponse);
