@@ -12734,13 +12734,7 @@
           "name": "create",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "body": {
               "mode": "raw",
               "raw": "{\r\n    \"flightId\": 3,\r\n    \"returnFlightId\": 1,\r\n    \"bookingDate\": \"2024-11-26T00:00:00Z\",\r\n    \"bookingDetail\": [\r\n        {\r\n            \"seatId\": 147,\r\n            \"price\": 9000,\r\n            \"passenger\": {\r\n                \"name\": \"Orang\",\r\n                \"familyName\": \"Jago\",\r\n                \"gender\": \"MALE\",\r\n                \"identityNumber\": \"123456\",\r\n                \"citizenship\": \"Indonesia\",\r\n                \"countryOfIssue\": \"Indonesia\",\r\n                \"title\": \"Mr\",\r\n                \"dob\": \"1985-05-15T00:00:00Z\",\r\n                \"expiredDate\": \"2030-05-15T23:59:59Z\",\r\n                \"type\": \"ADULT\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n",
@@ -13353,22 +13347,24 @@
         {
           "name": "get All",
           "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0NDIwNDMyLCJleHAiOjE3MzQ1MDY4MzJ9.We9a-3V4HQWM8K7PxbPCz0jP8O7DJTLmcNBgT4ByL5g",
-                  "type": "string"
-                }
-              ]
-            },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{local_base_url}}/payment",
-              "host": ["{{local_base_url}}"],
-              "path": ["payment"]
+              "raw": "{{prod_base_url}}/payment?page=1&limit=1000",
+              "host": ["{{prod_base_url}}"],
+              "path": ["payment"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "page number"
+                },
+                {
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "total item per page"
+                }
+              ]
             }
           },
           "response": [
