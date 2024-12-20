@@ -75,8 +75,11 @@ app.use((req, res) => {
   });
 });
 
-server.listen(PORT, () => {
-  console.log('----------------------------------------------');
-  console.log(`Server is running on http://localhost:${PORT}`);
-  console.log('----------------------------------------------');
-});
+if (process.env.NODE_ENV !== 'test') {
+  server.listen(PORT, () => {
+    console.log('----------------------------------------------');
+    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log('----------------------------------------------');
+  });
+}
+
