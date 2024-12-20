@@ -102,7 +102,12 @@ export class PaymentService {
     if (user.role === 'BUYER') {
       query.userId = user.id;
     }
-    return PaymentRepository.getAll(query);
+    const { payments, total } = await PaymentRepository.getAll(query);
+
+    return {
+      payments,
+      total,
+    };
   }
 
   static async getById(paymentId, userId, role) {

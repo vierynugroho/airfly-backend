@@ -26,7 +26,7 @@ export class PaymentRepository {
       prisma.payment.count({ where: whereClause }),
     ]);
 
-    return { payments, total, page, limit };
+    return { payments, total };
   }
 
   static async getById(paymentId) {
