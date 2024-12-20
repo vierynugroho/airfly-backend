@@ -254,3 +254,104 @@ export const discountSchema = Joi.object({
     'any.required': 'Active status is required.',
   }),
 });
+
+export const bookingSchema = Joi.object({
+  userId: Joi.number().positive().required().messages({
+    'number.base': 'User ID must be a number.',
+    'number.positive': 'User ID must be a positive number.',
+    'any.required': 'User ID is required.',
+  }),
+  flightId: Joi.number().positive().required().messages({
+    'number.base': 'Flight ID must be a number.',
+    'number.positive': 'Flight ID must be a positive number.',
+    'any.required': 'Flight ID is required.',
+  }),
+  returnFlightId: Joi.number().positive().allow(null).messages({
+    'number.base': 'Return Flight ID must be a number.',
+    'number.positive': 'Return Flight ID must be a positive number.',
+  }),
+  bookingDate: Joi.date().iso().optional().messages({
+    'date.base': 'Booking Date must be a valid date.',
+    'date.iso': 'Booking Date must follow the ISO 8601 format.',
+  }),
+  bookingDetail: Joi.array()
+    .items(
+      Joi.object({
+        seatId: Joi.number().positive().required().messages({
+          'number.base': 'Seat ID must be a number.',
+          'number.positive': 'Seat ID must be a positive number.',
+          'any.required': 'Seat ID is required.',
+        }),
+        price: Joi.number().positive().required().messages({
+          'number.base': 'Price must be a number.',
+          'number.positive': 'Price must be greater than 0.',
+          'any.required': 'Price is required.',
+        }),
+        passenger: Joi.object({
+          name: Joi.string().required().messages({
+            'string.base': 'Name must be a string.',
+            'any.required': 'Name is required.',
+          }),
+          familyName: Joi.string().required().messages({
+            'string.base': 'Family Name must be a string.',
+            'any.required': 'Family Name is required.',
+          }),
+          gender: Joi.string().valid('MALE', 'FEMALE').required().messages({
+            'string.base': 'Gender must be a string.',
+            'any.only': 'Gender must be either "MALE" or "FEMALE".',
+            'any.required': 'Gender is required.',
+          }),
+          identityNumber: Joi.string()
+            .length(16)
+            .required()
+            .messages({
+              'string.base': 'Identity Number must be a string.',
+              'string.length': 'Identity Number must be exactly 16 characters long.',
+              'any.required': 'Identity Number is required.',
+            }),
+          citizenship: Joi.string()
+            .valid('Indonesia')
+            .required()
+            .messages({
+              'string.base': 'Citizenship must be a string.',
+              'any.only': 'Citizenship must be "Indonesia".',
+              'any.required': 'Citizenship is required.',
+            }),
+          countryOfIssue: Joi.string().required().messages({
+            'string.base': 'Country of Issue must be a string.',
+            'any.required': 'Country of Issue is required.',
+          }),
+          title: Joi.string().valid('Mr', 'Mrs').required().messages({
+            'string.base': 'Title must be a string.',
+            'any.only': 'Title must be either "Mr" or "Mrs".',
+            'any.required': 'Title is required.',
+          }),
+          dob: Joi.date().iso().required().messages({
+            'date.base': 'Date of Birth must be a valid date.',
+            'date.iso': 'Date of Birth must follow the ISO 8601 format.',
+            'any.required': 'Date of Birth is required.',
+          }),
+          expiredDate: Joi.date().iso().required().messages({
+            'date.base': 'Expired Date must be a valid date.',
+            'date.iso': 'Expired Date must follow the ISO 8601 format.',
+            'any.required': 'Expired Date is required.',
+          }),
+          type: Joi.string()
+            .valid('BABY', 'CHILD', 'ADULT')
+            .required()
+            .messages({
+              'string.base': 'Passenger Type must be a string.',
+              'any.only': 'Passenger Type must be one of "BABY", "CHILD", or "ADULT".',
+              'any.required': 'Passenger Type is required.',
+            }),
+        }).required(),
+      })
+    )
+    .min(1)
+    .required()
+    .messages({
+      'array.base': 'Booking Details must be an array.',
+      'array.min': 'Booking Details must have at least one item.',
+      'any.required': 'Booking Details are required.',
+    }),
+  });
