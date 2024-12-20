@@ -2,7 +2,6 @@ import { Router } from 'express';
 import { UserRole } from '@prisma/client';
 import { authorization } from '../middlewares/authorization.js';
 import { BookingController } from '../controllers/booking.js';
-import { bookingValidationSchema } from '../utils/validationSchema.js';
 
 export const bookingRoute = Router();
 
