@@ -1,0 +1,26 @@
+name: CI TiketKu
+on:
+  pull_request:
+    branches: ['staging', 'release']
+
+jobs:
+  build:
+    name: 'Lint'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - run: |
+          echo '${{secrets.ENV}}' > .env
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test
+
+      - name: Upload result to codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: TIM1-FSW-BE-BINAR/Backend

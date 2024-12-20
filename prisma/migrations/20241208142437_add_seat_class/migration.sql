@@ -1,0 +1,2 @@
+-- AlterEnum
+ALTER TYPE "SeatClass" ADD VALUE 'PREMIUM_ECONOMY';

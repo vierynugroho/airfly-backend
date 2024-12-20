@@ -14,26 +14,28 @@ datasource db {
 }
 
 model User {
-  id            Int        @id @default(autoincrement())
-  firstName     String     @map("first_name")
-  lastName      String     @map("last_name")
-  email         String
-  phone         String
-  password      String
-  secretKey     String     @map("secret_key")
-  otpToken      String     @map("otp_token")
-  otpExpiration DateTime   @map("otp_expiration")
-  status        UserStatus
-  role          UserRole
-  booking       Booking[]
+  id           Int            @id @default(autoincrement())
+  firstName    String         @map("first_name")
+  lastName     String         @map("last_name")
+  email        String
+  phone        String
+  password     String
+  secretKey    String         @default("") @map("secret_key")
+  otpToken     String         @default("") @map("otp_token")
+  status       UserStatus     @default(UNVERIFIED)
+  role         UserRole       @default(BUYER)
+  booking      Booking[]
+  Notification Notification[]
+  payments     Payment[]
 
   @@map("users")
 }
 
 model Airline {
-  id    Int    @id @default(autoincrement())
-  name  String
-  image String @default("")
+  id       Int    @id @default(autoincrement())
+  name     String
+  imageUrl String @default("")
+  imageId  String @default("")
 
   flight Flight[]
 
@@ -48,10 +50,12 @@ model Airport {
   state     String
   country   String
   timezone  String
-  latitude  Int
-  longitude Int
-  elevation Int
-  createdAt DateTime @map("created_at")
+  latitude  String
+  longitude String
+  elevation String
+  imageUrl  String   @default("")
+  imageId   String   @default("")
+  createdAt DateTime @default(now()) @map("created_at")
 
   departure Flight[] @relation("departure")
   arrival   Flight[] @relation("arrival")
@@ -67,85 +71,136 @@ model Flight {
   arrivalAirport   Int      @map("arrival_airport")
   departureTime    DateTime @map("departure_time")
   arrivalTime      DateTime @map("arrival_time")
-  price            Int
+  terminal         String
+  information      String
 
   airline   Airline @relation(fields: [airlineId], references: [id])
   departure Airport @relation(fields: [departureAirport], references: [id], name: "departure")
   arrival   Airport @relation(fields: [arrivalAirport], references: [id], name: "arrival")
 
-  seat    Seat[]
-  booking Booking[]
+  price Float
+  class SeatClass @default(ECONOMY)
+
+  seat          Seat[]
+  booking       Booking[] @relation("flight")
+  returnBooking Booking[] @relation("ReturnFlight")
 
   @@map("flights")
 }
 
 model Seat {
-  id         Int        @id @default(autoincrement())
-  flightId   Int        @map("flight_id")
-  seatNumber Int        @map("seat_number")
-  status     SeatStatus
+  id            Int        @id @default(autoincrement())
+  flightId      Int        @map("flight_id")
+  seatNumber    String     @map("seat_number")
+  status        SeatStatus @default(AVAILABLE)
+  departureTime DateTime?  @default(now())
+  arrivalTime   DateTime?  @default(now())
 
-  flight    Flight      @relation(fields: [flightId], references: [id])
-  passenger Passenger[]
+  flight        Flight          @relation(fields: [flightId], references: [id])
+  bookingDetail BookingDetail[]
 
   @@map("seats")
 }
 
 model Booking {
-  id          Int           @id @default(autoincrement())
-  user        User          @relation(fields: [userId], references: [id])
-  userId      Int           @map("user_id")
-  flightId    Int           @map("flight_id")
-  bookingDate DateTime      @map("booking_date")
-  totalPrice  Decimal       @map("total_price")
-  status      BookingStatus
-  createdAt   DateTime      @map("created_at")
-  updateAt    DateTime      @map("update_at")
+  id             Int           @id @default(autoincrement())
+  code           String        @unique
+  user           User          @relation(fields: [userId], references: [id])
+  userId         Int           @map("user_id")
+  flightId       Int           @map("flight_id")
+  returnFlightId Int?          @map("return_flight_id")
+  bookingDate    DateTime      @map("booking_date")
+  totalPrice     Float         @map("total_price")
+  status         BookingStatus @default(ACTIVE)
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updateAt       DateTime      @updatedAt @map("update_at")
 
-  flight    Flight      @relation(fields: [flightId], references: [id])
-  payment   Payment?
-  passenger Passenger[]
+  flight        Flight          @relation("flight", fields: [flightId], references: [id])
+  returnFlight  Flight?         @relation("ReturnFlight", fields: [returnFlightId], references: [id])
+  payment       Payment?
+  bookingDetail BookingDetail[]
 
   @@map("bookings")
 }
 
-model Payment {
-  id            Int           @id @default(autoincrement())
-  bookingId     Int           @unique @map("booking_id")
-  paymentMethod PaymenMethod  @map("payment_method")
-  paymentDate   DateTime      @map("payment_date")
-  paymentAmount Decimal       @map("payment_amount")
-  paymentStatus PaymentStatus @map("payment_status")
+model BookingDetail {
+  id          Int      @id @default(autoincrement())
+  bookingId   Int      @map("booking_id")
+  passengerId Int      @unique @map("passenger_id")
+  seatId      Int      @map("seat_id")
+  price       Float
+  qrCodeImage String?
+  qrToken     String?
+  createdAt   DateTime @default(now()) @map("createdAt")
+  updateAt    DateTime @default(now()) @updatedAt
 
+  booking   Booking   @relation(fields: [bookingId], references: [id])
+  passenger Passenger @relation(fields: [passengerId], references: [id])
+  seat      Seat      @relation(fields: [seatId], references: [id])
+
+  @@map("booking_details")
+}
+
+model Payment {
+  id              Int       @id @default(autoincrement())
+  userId          Int       @map("user_id")
+  bookingId       Int       @unique @map("booking_id")
+  snapToken       String    @unique @map("snap_token")
+  orderId         String    @unique @map("order_id")
+  status          String    @default("pending") @map("status")
+  type            String?   @map("type")
+  amount          Float     @map("amount")
+  transactionId   String?   @map("transaction_id")
+  transactionTime DateTime? @map("transaction_time")
+
+  user    User    @relation(fields: [userId], references: [id])
   booking Booking @relation(fields: [bookingId], references: [id])
 
-  @@map("payments")
+  @@index([userId])
+  @@index([bookingId])
+  @@map("payment")
 }
 
 model Passenger {
   id             Int            @id @default(autoincrement())
-  bookingId      Int            @map("booking_id")
   name           String
   familyName     String         @map("family_name")
-  gender         Gender
+  gender         Gender         @default(MALE)
   identityNumber String         @map("identity_number")
   citizenship    String
-  countryOfIssue String         @map("country_of_issue")
-  title          PassengerTitle
+  countryOfIssue String?        @map("country_of_issue")
+  title          PassengerTitle @default(Mr)
   dob            DateTime
-  expiredDate    DateTime       @map("expired_Date")
-  type           PassengerType
-  seatId         Int            @map("seat_id")
+  expiredDate    DateTime?      @map("expired_Date")
+  type           PassengerType  @default(ADULT)
 
-  booking Booking @relation(fields: [bookingId], references: [id])
-  seat    Seat    @relation(fields: [seatId], references: [id])
+  bookingDetail BookingDetail?
 
   @@map("passengers")
+}
+
+model Notification {
+  id          Int              @id @default(autoincrement())
+  type        NotificationType @default(INFO)
+  title       String
+  description String
+  isRead      Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+  user        User?            @relation(fields: [userId], references: [id])
+  userId      Int?             @map("user_id")
 }
 
 enum UserStatus {
   VERIFIED
   UNVERIFIED
+}
+
+enum NotificationType {
+  INFO
+  ACCOUNT
+  DISCOUNT
+  EVENT
+  PAYMENT
 }
 
 enum UserRole {
@@ -159,22 +214,17 @@ enum SeatStatus {
   LOCKED
 }
 
+enum SeatClass {
+  ECONOMY
+  PREMIUM_ECONOMY
+  FIRST
+  BUSINESS
+}
+
 enum BookingStatus {
   ACTIVE
   CANCELED
   EXPIRED
-}
-
-enum PaymenMethod {
-  QRIS
-  VIRTUAL_ACCOUNT
-  CREDIT_CARD
-  E_WALLET
-}
-
-enum PaymentStatus {
-  PAID
-  UNPAID
 }
 
 enum Gender {
@@ -191,4 +241,19 @@ enum PassengerType {
   BABY
   CHILD
   ADULT
+}
+
+model Discount {
+  id          Int              @id @default(autoincrement())
+  name        String
+  type        String    // 'percentage' or 'fixed'
+  value       Float
+  startDate   DateTime
+  endDate     DateTime
+  minPurchase Float?
+  isActive    Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  code        String?  
+  description String? 
 }
