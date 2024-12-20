@@ -2424,75 +2424,75 @@ async function main() {
     data: [
       {
         type: 'INFO',
-        title: 'Selamat Datang di Layanan Pemesanan Tiket Kami!',
+        title: 'Welcome to Our Ticket Booking Service!',
         description:
-          'Terima kasih telah bergabung. Dapatkan info terbaru dan promo menarik dari kami.',
+          'Thank you for joining us. Get the latest updates and exciting promotions.',
         isRead: false,
       },
       {
         type: 'ACCOUNT',
-        title: 'Verifikasi Akun Berhasil!',
+        title: 'Account Verification Successful!',
         description:
-          'Selamat, akun anda berhasil terverifikasi!. Nikmati penerbangan penuh adrenalin bersama kami.',
+          'Congratulations, your account has been successfully verified! Enjoy thrilling flights with us.',
         isRead: false,
         userId: 1,
       },
       {
         type: 'DISCOUNT',
-        title: 'Promo Spesial untuk Anda!',
+        title: 'Special Promo for You!',
         description:
-          'Dapatkan diskon 20% untuk pemesanan tiket berikutnya. Berlaku untuk waktu terbatas.',
+          'Get a 20% discount on your next ticket booking. Offer valid for a limited time.',
         isRead: false,
       },
       {
         type: 'EVENT',
-        title: 'Pemberitahuan Perubahan Jadwal Penerbangan',
+        title: 'Flight Schedule Change Notification',
         description:
-          'Perhatikan perubahan jadwal penerbangan terbaru Anda. Periksa detailnya di sini.',
+          'Please take note of the latest changes to your flight schedule. Check the details here.',
         isRead: false,
       },
       {
         type: 'PAYMENT',
-        title: 'Notifikasi Pembayaran Palsu',
+        title: 'Payment Notification',
         description:
-          'Pembayaran Anda telah berhasil diproses. Terima kasih telah memesan tiket dengan kami.',
+          'Your payment has been successfully processed. Thank you for booking tickets with us.',
         isRead: true,
         userId: 1,
       },
       {
         type: 'INFO',
-        title: 'Fitur Baru Telah Diluncurkan!',
+        title: 'New Feature Released!',
         description:
-          'Nikmati fitur pencarian penerbangan yang lebih cepat dan mudah. Coba sekarang!',
+          'Enjoy faster and easier flight search features. Try it now!',
         isRead: false,
       },
       {
         type: 'DISCOUNT',
-        title: 'Flash Sale: Diskon Tiket Terbatas!',
+        title: 'Flash Sale: Limited-Time Ticket Discounts!',
         description:
-          'Pesan tiket penerbangan favorit Anda dengan harga diskon. Penawaran terbatas!',
+          'Book your favorite flights at discounted prices. Limited-time offer!',
         isRead: false,
       },
       {
         type: 'ACCOUNT',
-        title: 'Perubahan Kata Sandi Berhasil',
+        title: 'Password Change Successful',
         description:
-          'Anda telah berhasil mengubah kata sandi akun pemesanan tiket Anda.',
+          'You have successfully updated your ticket booking account password.',
         isRead: true,
         userId: 2,
       },
       {
         type: 'EVENT',
-        title: 'Pengumuman: Penundaan Penerbangan',
+        title: 'Announcement: Flight Delay',
         description:
-          'Penerbangan Anda mengalami penundaan. Periksa pembaruan terbaru di aplikasi kami.',
+          'Your flight has been delayed. Check the latest updates in our app.',
         isRead: false,
       },
       {
         type: 'PAYMENT',
-        title: 'Notifikasi Pembayaran Palsu',
+        title: 'Payment Notification',
         description:
-          'Pembayaran Anda telah berhasil diproses. Terima kasih telah memesan tiket dengan kami.',
+          'Your payment has been successfully processed. Thank you for booking tickets with us.',
         isRead: true,
         userId: 2,
       },

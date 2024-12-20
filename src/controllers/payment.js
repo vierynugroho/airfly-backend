@@ -30,9 +30,6 @@ export class PaymentController {
 
   static async handleWebhook(req, res, next) {
     try {
-      console.log('req body weebhook:');
-      console.log(req.body);
-      console.log('-----------------');
       const data = req.body;
 
       await PaymentService.processWebhook(data);
