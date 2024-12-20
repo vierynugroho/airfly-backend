@@ -275,7 +275,6 @@ export const bookingDetailSchema = Joi.object({
 });
 
 export const bookingValidationSchema = Joi.object({
-  userId: Joi.number().required(),
   flightId: Joi.number().required(),
   returnFlightId: Joi.number().optional(),
   bookingDate: Joi.date().iso().required(),
