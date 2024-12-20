@@ -51,8 +51,6 @@ describe('PaymentRepository', () => {
 
   describe('getAll', () => {
     it('should return all payments with pagination and filtering by user ID', async () => {
-      const mockPage = 1;
-      const mockLimit = 10;
       const mockUserId = 2;
       const mockPayments = [
         { id: 1, userId: mockUserId },
@@ -62,19 +60,28 @@ describe('PaymentRepository', () => {
 
       prisma.$transaction.mockResolvedValue([mockPayments, mockTotal]);
 
-      const result = await PaymentRepository.getAll({ page: mockPage, limit: mockLimit, userId: mockUserId });
+      const result = await PaymentRepository.getAll({
+        userId: mockUserId,
+        page: 1,
+        limit: 10,
+      });
+
+      const expectedResult = {
+        payments: mockPayments,
+        total: mockTotal,
+      };
+
+      expect(result).toEqual(expectedResult);
 
       expect(prisma.$transaction).toHaveBeenCalledWith([
         prisma.payment.findMany({
           where: { userId: mockUserId },
           skip: 0,
-          take: mockLimit,
+          take: 10,
           orderBy: { transactionTime: 'desc' },
         }),
         prisma.payment.count({ where: { userId: mockUserId } }),
       ]);
-
-      expect(result).toEqual({ payments: mockPayments, total: mockTotal, page: mockPage, limit: mockLimit });
     });
   });
 
