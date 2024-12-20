@@ -34,7 +34,7 @@ export class PaymentRepository {
       where: { id: paymentId },
     });
   }
-  
+
   static async getByIdForBuyer(paymentId, userId) {
     return prisma.payment.findFirst({
       where: {

@@ -30,7 +30,9 @@ describe('PaymentRepository', () => {
 
       const result = await PaymentRepository.create(mockPaymentData);
 
-      expect(prisma.payment.create).toHaveBeenCalledWith({ data: mockPaymentData });
+      expect(prisma.payment.create).toHaveBeenCalledWith({
+        data: mockPaymentData,
+      });
       expect(result).toEqual(mockResponse);
     });
   });
@@ -44,7 +46,9 @@ describe('PaymentRepository', () => {
 
       const result = await PaymentRepository.getByBookingId(mockBookingId);
 
-      expect(prisma.payment.findUnique).toHaveBeenCalledWith({ where: { bookingId: mockBookingId } });
+      expect(prisma.payment.findUnique).toHaveBeenCalledWith({
+        where: { bookingId: mockBookingId },
+      });
       expect(result).toEqual(mockResponse);
     });
   });
@@ -62,7 +66,11 @@ describe('PaymentRepository', () => {
 
       prisma.$transaction.mockResolvedValue([mockPayments, mockTotal]);
 
-      const result = await PaymentRepository.getAll({ page: mockPage, limit: mockLimit, userId: mockUserId });
+      const result = await PaymentRepository.getAll({
+        page: mockPage,
+        limit: mockLimit,
+        userId: mockUserId,
+      });
 
       expect(prisma.$transaction).toHaveBeenCalledWith([
         prisma.payment.findMany({
@@ -74,7 +82,12 @@ describe('PaymentRepository', () => {
         prisma.payment.count({ where: { userId: mockUserId } }),
       ]);
 
-      expect(result).toEqual({ payments: mockPayments, total: mockTotal, page: mockPage, limit: mockLimit });
+      expect(result).toEqual({
+        payments: mockPayments,
+        total: mockTotal,
+        page: mockPage,
+        limit: mockLimit,
+      });
     });
   });
 
@@ -87,7 +100,9 @@ describe('PaymentRepository', () => {
 
       const result = await PaymentRepository.getById(mockPaymentId);
 
-      expect(prisma.payment.findUnique).toHaveBeenCalledWith({ where: { id: mockPaymentId } });
+      expect(prisma.payment.findUnique).toHaveBeenCalledWith({
+        where: { id: mockPaymentId },
+      });
       expect(result).toEqual(mockResponse);
     });
   });
@@ -100,7 +115,10 @@ describe('PaymentRepository', () => {
 
       prisma.payment.findFirst.mockResolvedValue(mockResponse);
 
-      const result = await PaymentRepository.getByIdForBuyer(mockPaymentId, mockUserId);
+      const result = await PaymentRepository.getByIdForBuyer(
+        mockPaymentId,
+        mockUserId
+      );
 
       expect(prisma.payment.findFirst).toHaveBeenCalledWith({
         where: { id: mockPaymentId, userId: mockUserId },
@@ -118,7 +136,9 @@ describe('PaymentRepository', () => {
 
       const result = await PaymentRepository.findByOrderId(mockOrderId);
 
-      expect(prisma.payment.findUnique).toHaveBeenCalledWith({ where: { orderId: mockOrderId } });
+      expect(prisma.payment.findUnique).toHaveBeenCalledWith({
+        where: { orderId: mockOrderId },
+      });
       expect(result).toEqual(mockResponse);
     });
   });
@@ -161,7 +181,9 @@ describe('PaymentRepository', () => {
 
       const result = await PaymentRepository.delete(mockPaymentId);
 
-      expect(prisma.payment.delete).toHaveBeenCalledWith({ where: { id: mockPaymentId } });
+      expect(prisma.payment.delete).toHaveBeenCalledWith({
+        where: { id: mockPaymentId },
+      });
       expect(result).toEqual(mockResponse);
     });
   });
