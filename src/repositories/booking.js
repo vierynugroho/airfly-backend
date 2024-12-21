@@ -133,6 +133,7 @@ export class BookingRepository {
             arrival: true,
           },
         },
+        payment: true,
         returnFlight: {
           include: {
             departure: true,
