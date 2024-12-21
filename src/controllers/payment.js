@@ -43,7 +43,7 @@ export class PaymentController {
   static async getAll(req, res, next) {
     try {
       const { page, limit } = req.query;
-      const payment = await PaymentService.getAll({
+      const { payments, total } = await PaymentService.getAll({
         page,
         limit,
         user: req.user,
@@ -52,8 +52,13 @@ export class PaymentController {
         meta: {
           statusCode: 200,
           message: 'Payments retrieved successfully',
+          pagination: {
+            total,
+            page: parseInt(page) || 1,
+            limit: parseInt(limit) || 10,
+          },
         },
-        data: payment,
+        data: payments,
       });
     } catch (e) {
       next(e);
