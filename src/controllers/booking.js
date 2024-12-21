@@ -38,6 +38,7 @@ export class BookingController {
     try {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || null;
+      const status = req.query.status;
       const sort = req.query.sort?.toLowerCase() || null;
       const userId = req.user.id;
 
@@ -45,6 +46,7 @@ export class BookingController {
         page,
         limit,
         sort,
+        status,
         userId: req.user.role != UserRole.ADMIN ? userId : undefined,
       });
 
