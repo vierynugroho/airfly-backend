@@ -104,6 +104,7 @@ export class BookingService {
    * @property { number } id
    * @property { number } userId
    * @property { string } sort
+   * @property { string } status
    *
    * @param {CriteriaBooking} criteria
    */
@@ -119,6 +120,12 @@ export class BookingService {
 
     if (criteria.sort) {
       orderBy.bookingDate = criteria.sort == 'asc' ? 'asc' : 'desc';
+    }
+
+    if (criteria.status) {
+      condition.payment = {
+        status: criteria.status,
+      };
     }
 
     condition.userId = criteria.userId;
