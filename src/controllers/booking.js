@@ -107,12 +107,14 @@ export class BookingController {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || null;
       const sort = req.query.sort?.toLowerCase() || null;
+      const status = req.query.status;
       const userId = req.user.id;
 
       const { groupedBookings, totalBooking, totalItems } =
         await BookingService.findGrouped({
           page,
           limit,
+          status,
           sort,
           userId: req.user.role != UserRole.ADMIN ? userId : undefined,
         });
