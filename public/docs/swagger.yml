@@ -3723,11 +3723,6 @@ paths:
         - Booking
       summary: find
       parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzNTYzNDUxLCJleHAiOjE3MzM2NDk4NTF9.G3FV_E6c2ZKwo4S2SLFOFVDhJ1QO1iWlCg5Tdb5K0uc
         - name: page
           in: query
           schema:
@@ -4168,12 +4163,6 @@ paths:
                       dob: '1985-05-15T00:00:00Z'
                       expiredDate: '2030-05-15T23:59:59Z'
                       type: ADULT
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer {{token}}
       responses:
         '200':
           description: Successful response
@@ -4192,6 +4181,7 @@ paths:
                   statusCode: 401
                   message: jwt expired, please re-login
                   details: jwt expired
+      parameters: []
       security:
         - bearerAuth: []
   /booking/group:
@@ -4200,11 +4190,6 @@ paths:
         - Booking
       summary: grouped booking
       parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer {{token}}
         - name: page
           in: query
           schema:
@@ -4217,6 +4202,12 @@ paths:
             type: integer
           description: total item per page
           example: '2'
+        - name: status
+          in: query
+          schema:
+            type: string
+          description: settlement, expire, cancel, pending
+          example: cancel
       responses:
         '200':
           description: Successful response
@@ -4227,193 +4218,216 @@ paths:
                   status: 200
                   message: success
                   pagination:
-                    totalPage: 1
+                    totalPage: 6
                     currentPage: 1
                     pageItems: 2
-                    nextPage: null
+                    nextPage: 2
                     prevPage: null
                 data:
+                  Maret:
+                    - id: 3
+                      code: BK-3
+                      userId: 1
+                      flightId: 1
+                      returnFlightId: 2
+                      bookingDate: '2024-03-03T00:00:00.000Z'
+                      totalPrice: 2000000
+                      status: ACTIVE
+                      createdAt: '2024-12-13T10:01:52.401Z'
+                      updateAt: '2024-12-13T10:01:52.401Z'
+                      flight:
+                        id: 1
+                        flightNumber: AH100
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-12-14T08:00:00.000Z'
+                        arrivalTime: '2024-12-14T11:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 450
+                        class: ECONOMY
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-13T10:01:51.602Z'
+                        arrival:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-13T10:01:51.602Z'
+                      payment:
+                        id: 3
+                        userId: 1
+                        bookingId: 3
+                        snapToken: SNAP-3-1734084112544
+                        orderId: e9e782a7-a3c7-4849-965a-475857160b03
+                        status: cancel
+                        type: digital_walet
+                        amount: 2000000
+                        transactionId: null
+                        transactionTime: null
+                      returnFlight:
+                        id: 2
+                        flightNumber: AH91
+                        airlineId: 1
+                        departureAirport: 1
+                        arrivalAirport: 2
+                        departureTime: '2024-12-15T08:00:00.000Z'
+                        arrivalTime: '2024-12-15T11:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 550
+                        class: PREMIUM_ECONOMY
+                        departure:
+                          id: 1
+                          code: CGK
+                          name: Soekarno-Hatta International Airport
+                          city: Jakarta
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
+                          imageId: ''
+                          createdAt: '2024-12-13T10:01:51.602Z'
+                        arrival:
+                          id: 2
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
+                          country: Indonesia
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
+                          imageId: ''
+                          createdAt: '2024-12-13T10:01:51.602Z'
                   Desember:
-                    - id: 16
-                      code: ''
-                      userId: 1
+                    - id: 19
+                      code: '2411057947'
+                      userId: 8
                       flightId: 3
                       returnFlightId: 1
-                      bookingDate: '2024-12-03T13:37:05.394Z'
-                      totalPrice: 400000
+                      bookingDate: '2024-12-13T17:35:55.199Z'
+                      totalPrice: 1000
                       status: ACTIVE
-                      createdAt: '2024-12-03T13:37:05.424Z'
-                      updateAt: '2024-12-03T13:37:05.424Z'
+                      createdAt: '2024-12-13T17:35:55.200Z'
+                      updateAt: '2024-12-13T17:35:55.200Z'
                       flight:
                         id: 3
-                        flightNumber: LA789
-                        airlineId: 3
-                        departureAirport: 3
-                        arrivalAirport: 1
-                        departureTime: '2024-12-03T18:00:00.000Z'
-                        arrivalTime: '2024-12-03T21:00:00.000Z'
-                        terminal: T2
-                        information: Delayed flight
-                        price: 100
-                        class: ECONOMY
-                        departure:
-                          id: 3
-                          code: SUB
-                          name: Juanda International Airport
-                          city: Surabaya
-                          state: East Java
-                          country: Indonesia
-                          timezone: Asia/Jakarta
-                          latitude: '-7.3798'
-                          longitude: '112.7873'
-                          elevation: 3 m
-                          imageUrl: ''
-                          imageId: ''
-                          createdAt: '2024-11-29T08:37:00.345Z'
-                        arrival:
-                          id: 1
-                          code: CGK
-                          name: Soekarno-Hatta International Airport
-                          city: Jakarta
-                          state: DKI Jakarta
-                          country: Indonesia
-                          timezone: Asia/Jakarta
-                          latitude: '-6.1256'
-                          longitude: '106.6559'
-                          elevation: 10 m
-                          imageUrl: ''
-                          imageId: ''
-                          createdAt: '2024-11-29T08:37:00.345Z'
-                      returnFlight:
-                        id: 1
-                        flightNumber: GA123
+                        flightNumber: AL91
                         airlineId: 1
                         departureAirport: 1
                         arrivalAirport: 2
-                        departureTime: '2024-12-01T08:00:00.000Z'
-                        arrivalTime: '2024-12-01T11:00:00.000Z'
-                        terminal: T3
-                        information: Non-stop flight
-                        price: 150
-                        class: ECONOMY
+                        departureTime: '2024-12-16T08:00:00.000Z'
+                        arrivalTime: '2024-12-16T11:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 550
+                        class: PREMIUM_ECONOMY
                         departure:
                           id: 1
                           code: CGK
                           name: Soekarno-Hatta International Airport
                           city: Jakarta
-                          state: DKI Jakarta
+                          state: Asia
                           country: Indonesia
                           timezone: Asia/Jakarta
-                          latitude: '-6.1256'
-                          longitude: '106.6559'
-                          elevation: 10 m
-                          imageUrl: ''
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
                           imageId: ''
-                          createdAt: '2024-11-29T08:37:00.345Z'
+                          createdAt: '2024-12-13T10:01:51.602Z'
                         arrival:
                           id: 2
-                          code: DPS
-                          name: Ngurah Rai International Airport
-                          city: Denpasar
-                          state: Bali
-                          country: Indonesia
-                          timezone: Asia/Makassar
-                          latitude: '-8.7482'
-                          longitude: '115.1675'
-                          elevation: 4 m
-                          imageUrl: ''
-                          imageId: ''
-                          createdAt: '2024-11-29T08:37:00.345Z'
-                    - id: 17
-                      code: 24110652FD
-                      userId: 1
-                      flightId: 3
-                      returnFlightId: 1
-                      bookingDate: '2024-12-07T09:34:11.064Z'
-                      totalPrice: 400000
-                      status: ACTIVE
-                      createdAt: '2024-12-07T09:34:11.067Z'
-                      updateAt: '2024-12-07T09:34:11.067Z'
-                      flight:
-                        id: 3
-                        flightNumber: LA789
-                        airlineId: 3
-                        departureAirport: 3
-                        arrivalAirport: 1
-                        departureTime: '2024-12-03T18:00:00.000Z'
-                        arrivalTime: '2024-12-03T21:00:00.000Z'
-                        terminal: T2
-                        information: Delayed flight
-                        price: 100
-                        class: ECONOMY
-                        departure:
-                          id: 3
                           code: SUB
                           name: Juanda International Airport
                           city: Surabaya
-                          state: East Java
+                          state: Asia
                           country: Indonesia
                           timezone: Asia/Jakarta
-                          latitude: '-7.3798'
-                          longitude: '112.7873'
-                          elevation: 3 m
-                          imageUrl: ''
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
                           imageId: ''
-                          createdAt: '2024-11-29T08:37:00.345Z'
-                        arrival:
-                          id: 1
-                          code: CGK
-                          name: Soekarno-Hatta International Airport
-                          city: Jakarta
-                          state: DKI Jakarta
-                          country: Indonesia
-                          timezone: Asia/Jakarta
-                          latitude: '-6.1256'
-                          longitude: '106.6559'
-                          elevation: 10 m
-                          imageUrl: ''
-                          imageId: ''
-                          createdAt: '2024-11-29T08:37:00.345Z'
+                          createdAt: '2024-12-13T10:01:51.602Z'
+                      payment:
+                        id: 14
+                        userId: 8
+                        bookingId: 19
+                        snapToken: 19362a17-b90e-417e-9bfb-e6bd5116d1fd
+                        orderId: 75ecbb7a-1b4a-4a29-96ce-1ab5a162aaa9
+                        status: cancel
+                        type: null
+                        amount: 1030
+                        transactionId: 27c224e7-6f1d-4e00-8cba-02c2ad913fc8
+                        transactionTime: '2024-12-14T00:36:13.000Z'
                       returnFlight:
                         id: 1
-                        flightNumber: GA123
+                        flightNumber: AH100
                         airlineId: 1
                         departureAirport: 1
                         arrivalAirport: 2
-                        departureTime: '2024-12-01T08:00:00.000Z'
-                        arrivalTime: '2024-12-01T11:00:00.000Z'
-                        terminal: T3
-                        information: Non-stop flight
-                        price: 150
+                        departureTime: '2024-12-14T08:00:00.000Z'
+                        arrivalTime: '2024-12-14T11:00:00.000Z'
+                        terminal: A
+                        information: Free Wi Fi-Free Inflight Meals
+                        price: 450
                         class: ECONOMY
                         departure:
                           id: 1
                           code: CGK
                           name: Soekarno-Hatta International Airport
                           city: Jakarta
-                          state: DKI Jakarta
+                          state: Asia
                           country: Indonesia
                           timezone: Asia/Jakarta
-                          latitude: '-6.1256'
-                          longitude: '106.6559'
-                          elevation: 10 m
-                          imageUrl: ''
+                          latitude: '-6.1255'
+                          longitude: '106.6551'
+                          elevation: '8'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527
                           imageId: ''
-                          createdAt: '2024-11-29T08:37:00.345Z'
+                          createdAt: '2024-12-13T10:01:51.602Z'
                         arrival:
                           id: 2
-                          code: DPS
-                          name: Ngurah Rai International Airport
-                          city: Denpasar
-                          state: Bali
+                          code: SUB
+                          name: Juanda International Airport
+                          city: Surabaya
+                          state: Asia
                           country: Indonesia
-                          timezone: Asia/Makassar
-                          latitude: '-8.7482'
-                          longitude: '115.1675'
-                          elevation: 4 m
-                          imageUrl: ''
+                          timezone: Asia/Jakarta
+                          latitude: '-7.3797'
+                          longitude: '112.7876'
+                          elevation: '7'
+                          imageUrl: https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180
                           imageId: ''
-                          createdAt: '2024-11-29T08:37:00.345Z'
+                          createdAt: '2024-12-13T10:01:51.602Z'
         '401':
           description: Response
           content:
@@ -4479,6 +4493,19 @@ paths:
       tags:
         - Payment
       summary: get All
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: page number
+          example: '1'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: total item per page
+          example: '1'
       responses:
         '200':
           description: Successful response
@@ -4503,7 +4530,6 @@ paths:
                   total: 1
                   page: 1
                   limit: 10
-      parameters: []
       security:
         - bearerAuth: []
   /payment/webhook:
@@ -6343,17 +6369,6 @@ paths:
       tags:
         - Booking
       summary: booking by id
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer {{token}}
-        - name: bookingId
-          in: path
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: Successful response
@@ -6516,6 +6531,12 @@ paths:
                   statusCode: 401
                   message: jwt expired, please re-login
                   details: jwt expired
+      parameters:
+        - name: bookingId
+          in: path
+          required: true
+          schema:
+            type: string
       security:
         - bearerAuth: []
   /booking/code/{bookingCode}:
@@ -6523,17 +6544,6 @@ paths:
       tags:
         - Booking
       summary: booking by code
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer {{token}}
-        - name: bookingCode
-          in: path
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: Successful response
@@ -6696,6 +6706,12 @@ paths:
                   statusCode: 401
                   message: jwt expired, please re-login
                   details: jwt expired
+      parameters:
+        - name: bookingCode
+          in: path
+          required: true
+          schema:
+            type: string
       security:
         - bearerAuth: []
   /payment/{paymentID}:

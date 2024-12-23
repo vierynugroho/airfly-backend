@@ -107,14 +107,23 @@ describe('PaymentController', () => {
 
   describe('getAll', () => {
     it('should return all payments with status 200', async () => {
-      const mockPayments = [
-        { id: 1, amount: 100 },
-        { id: 2, amount: 200 },
-      ];
-      mockRequest.query = { page: 1, limit: 10 };
-      mockRequest.user = { id: 1 };
+      const mockUser = { id: 1 };
+      const mockRequest = {
+        user: mockUser,
+        query: { page: '1', limit: '10' },
+      };
+      const mockResponse = {
+        json: jest.fn(),
+      };
+      const mockNext = jest.fn();
+      const mockPayments = {
+        payments: [{ id: 1, userId: mockUser.id }],
+        total: 1,
+        page: 1,
+        limit: 10,
+      };
 
-      PaymentService.getAll.mockResolvedValue(mockPayments);
+      jest.spyOn(PaymentService, 'getAll').mockResolvedValue(mockPayments);
 
       await PaymentController.getAll(mockRequest, mockResponse, mockNext);
 
@@ -122,8 +131,19 @@ describe('PaymentController', () => {
         meta: {
           statusCode: 200,
           message: 'Payments retrieved successfully',
+          pagination: {
+            total: 1,
+            page: 1,
+            limit: 10,
+          },
         },
-        data: mockPayments,
+        data: mockPayments.payments,
+      });
+
+      expect(PaymentService.getAll).toHaveBeenCalledWith({
+        page: '1',
+        limit: '10',
+        user: mockUser,
       });
     });
 
