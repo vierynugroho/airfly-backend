@@ -102,7 +102,12 @@ export class PaymentService {
     if (user.role === 'BUYER') {
       query.userId = user.id;
     }
-    return PaymentRepository.getAll(query);
+    const { payments, total } = await PaymentRepository.getAll(query);
+
+    return {
+      payments,
+      total,
+    };
   }
 
   static async getById(paymentId, userId, role) {
@@ -133,35 +138,15 @@ export class PaymentService {
 
     const seatIds = booking.bookingDetail.map((detail) => detail.seatId);
 
-    console.log('payment on webhook');
-    console.log(payment);
-    console.log('-----------------');
-
-    const paymentData = await snap.transaction.notification(data);
-    console.log('paymentData on webhook');
-    console.log(paymentData);
-    console.log('-----------------');
-
-    const { transaction_status, fraud_status, order_id } = paymentData;
+    const { transaction_status, fraud_status, order_id } = data;
 
     await PaymentRepository.updateStatus(
       order_id,
       transaction_status,
-      paymentData.payment_type,
-      paymentData.transaction_id,
-      new Date(paymentData.transaction_time).toISOString()
+      data.payment_type,
+      data.transaction_id,
+      new Date(data.transaction_time).toISOString()
     );
-
-    console.log({
-      transaction_status: transaction_status,
-      capture: transaction_status === 'capture',
-      accept: transaction_status === 'accept',
-      settlement: transaction_status === 'settlement',
-      cancel: transaction_status === 'cancel',
-      deny: transaction_status === 'deny',
-      expire: transaction_status === 'expire',
-      pending: transaction_status === 'pending',
-    });
 
     if (transaction_status === 'capture' && fraud_status === 'accept') {
       await BookingRepository.updateSeatStatusOnPayment(seatIds, 'UNAVAILABLE');
@@ -206,8 +191,6 @@ export class PaymentService {
     const response = await fetch(url, options);
     const transaction = await response.json();
 
-    console.log('response cancel');
-    console.log(transaction);
     if (transaction.status_code === '404') {
       throw new ErrorHandler(422, "Transaction doesn't exist.");
     }

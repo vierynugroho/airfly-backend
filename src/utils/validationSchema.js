@@ -254,3 +254,29 @@ export const discountSchema = Joi.object({
     'any.required': 'Active status is required.',
   }),
 });
+
+export const passengerSchema = Joi.object({
+  name: Joi.string().required(),
+  familyName: Joi.string().required(),
+  gender: Joi.valid('MALE', 'FEMALE').required(),
+  identityNumber: Joi.string().length(16).pattern(/^[0-9]+$/).required(),
+  citizenship: Joi.string().valid('Indonesia').required(),
+  countryOfIssue: Joi.string().valid('Indonesia').required(),
+  title: Joi.valid('Mr', 'Mrs').required(),
+  dob: Joi.date().iso().required(),
+  expiredDate: Joi.date().iso().greater(Joi.ref('dob')).required(),
+  type: Joi.valid('BABY', 'CHILD', 'ADULT').required(),
+});
+
+export const bookingDetailSchema = Joi.object({
+  seatId: Joi.number().required(),
+  price: Joi.number().required(),
+  passenger: passengerSchema.required(),
+});
+
+export const bookingValidationSchema = Joi.object({
+  flightId: Joi.number().required(),
+  returnFlightId: Joi.number().optional(),
+  bookingDate: Joi.date().iso().required(),
+  bookingDetail: Joi.array().items(bookingDetailSchema).min(1).required(),
+});

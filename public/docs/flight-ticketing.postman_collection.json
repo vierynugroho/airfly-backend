@@ -152,8 +152,8 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}/auth/login",
-              "host": ["{{local_base_url}}"],
+              "raw": "{{prod_base_url}}/auth/login",
+              "host": ["{{prod_base_url}}"],
               "path": ["auth", "login"]
             },
             "description": "``` json\n{\n    \"email\": \"jane.smith@example.com\", // admin\n    // \"email\": \"john.doe@example.com\", // buyer\n    \"password\": \"password\"\n}\n ```"
@@ -12257,13 +12257,7 @@
           "name": "find",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzNTYzNDUxLCJleHAiOjE3MzM2NDk4NTF9.G3FV_E6c2ZKwo4S2SLFOFVDhJ1QO1iWlCg5Tdb5K0uc",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "url": {
               "raw": "{{prod_base_url}}/booking",
               "host": ["{{prod_base_url}}"],
@@ -12433,13 +12427,7 @@
           "name": "booking by id",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "url": {
               "raw": "{{local_base_url}}/booking/id/:bookingId",
               "host": ["{{local_base_url}}"],
@@ -12447,7 +12435,7 @@
               "variable": [
                 {
                   "key": "bookingId",
-                  "value": "29",
+                  "value": "",
                   "description": "booking ID"
                 }
               ]
@@ -12529,13 +12517,7 @@
           "name": "booking by code",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "url": {
               "raw": "{{local_base_url}}/booking/code/:bookingCode",
               "host": ["{{local_base_url}}"],
@@ -12618,16 +12600,10 @@
           "name": "grouped booking",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "url": {
-              "raw": "{{local_base_url}}/booking/group?page=1&limit=2",
-              "host": ["{{local_base_url}}"],
+              "raw": "{{prod_base_url}}/booking/group?page=1&limit=2&status=cancel",
+              "host": ["{{prod_base_url}}"],
               "path": ["booking", "group"],
               "query": [
                 {
@@ -12639,52 +12615,16 @@
                   "key": "limit",
                   "value": "2",
                   "description": "total item per page"
+                },
+                {
+                  "key": "status",
+                  "value": "cancel",
+                  "description": "settlement, expire, cancel, pending"
                 }
               ]
             }
           },
           "response": [
-            {
-              "name": "ok",
-              "originalRequest": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzNDg2NzMyLCJleHAiOjE3MzM1NzMxMzJ9.7SXuzqRHG6cN69WwL4NyNbYeuH3LhlzqAa0DYQbuqpM",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{local_base_url}}/booking/group?page=1&limit=2",
-                  "host": ["{{local_base_url}}"],
-                  "path": ["booking", "group"],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "1",
-                      "description": "page number"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "2",
-                      "description": "total item per page"
-                    }
-                  ]
-                }
-              },
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json",
-                  "description": "",
-                  "type": "text"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"success\",\n        \"pagination\": {\n            \"totalPage\": 1,\n            \"currentPage\": 1,\n            \"pageItems\": 2,\n            \"nextPage\": null,\n            \"prevPage\": null\n        }\n    },\n    \"data\": {\n        \"Desember\": [\n            {\n                \"id\": 16,\n                \"code\": \"\",\n                \"userId\": 1,\n                \"flightId\": 3,\n                \"returnFlightId\": 1,\n                \"bookingDate\": \"2024-12-03T13:37:05.394Z\",\n                \"totalPrice\": 400000,\n                \"status\": \"ACTIVE\",\n                \"createdAt\": \"2024-12-03T13:37:05.424Z\",\n                \"updateAt\": \"2024-12-03T13:37:05.424Z\",\n                \"flight\": {\n                    \"id\": 3,\n                    \"flightNumber\": \"LA789\",\n                    \"airlineId\": 3,\n                    \"departureAirport\": 3,\n                    \"arrivalAirport\": 1,\n                    \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n                    \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n                    \"terminal\": \"T2\",\n                    \"information\": \"Delayed flight\",\n                    \"price\": 100,\n                    \"class\": \"ECONOMY\",\n                    \"departure\": {\n                        \"id\": 3,\n                        \"code\": \"SUB\",\n                        \"name\": \"Juanda International Airport\",\n                        \"city\": \"Surabaya\",\n                        \"state\": \"East Java\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-7.3798\",\n                        \"longitude\": \"112.7873\",\n                        \"elevation\": \"3 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    },\n                    \"arrival\": {\n                        \"id\": 1,\n                        \"code\": \"CGK\",\n                        \"name\": \"Soekarno-Hatta International Airport\",\n                        \"city\": \"Jakarta\",\n                        \"state\": \"DKI Jakarta\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-6.1256\",\n                        \"longitude\": \"106.6559\",\n                        \"elevation\": \"10 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    }\n                },\n                \"returnFlight\": {\n                    \"id\": 1,\n                    \"flightNumber\": \"GA123\",\n                    \"airlineId\": 1,\n                    \"departureAirport\": 1,\n                    \"arrivalAirport\": 2,\n                    \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n                    \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n                    \"terminal\": \"T3\",\n                    \"information\": \"Non-stop flight\",\n                    \"price\": 150,\n                    \"class\": \"ECONOMY\",\n                    \"departure\": {\n                        \"id\": 1,\n                        \"code\": \"CGK\",\n                        \"name\": \"Soekarno-Hatta International Airport\",\n                        \"city\": \"Jakarta\",\n                        \"state\": \"DKI Jakarta\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-6.1256\",\n                        \"longitude\": \"106.6559\",\n                        \"elevation\": \"10 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    },\n                    \"arrival\": {\n                        \"id\": 2,\n                        \"code\": \"DPS\",\n                        \"name\": \"Ngurah Rai International Airport\",\n                        \"city\": \"Denpasar\",\n                        \"state\": \"Bali\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Makassar\",\n                        \"latitude\": \"-8.7482\",\n                        \"longitude\": \"115.1675\",\n                        \"elevation\": \"4 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    }\n                }\n            },\n            {\n                \"id\": 17,\n                \"code\": \"24110652FD\",\n                \"userId\": 1,\n                \"flightId\": 3,\n                \"returnFlightId\": 1,\n                \"bookingDate\": \"2024-12-07T09:34:11.064Z\",\n                \"totalPrice\": 400000,\n                \"status\": \"ACTIVE\",\n                \"createdAt\": \"2024-12-07T09:34:11.067Z\",\n                \"updateAt\": \"2024-12-07T09:34:11.067Z\",\n                \"flight\": {\n                    \"id\": 3,\n                    \"flightNumber\": \"LA789\",\n                    \"airlineId\": 3,\n                    \"departureAirport\": 3,\n                    \"arrivalAirport\": 1,\n                    \"departureTime\": \"2024-12-03T18:00:00.000Z\",\n                    \"arrivalTime\": \"2024-12-03T21:00:00.000Z\",\n                    \"terminal\": \"T2\",\n                    \"information\": \"Delayed flight\",\n                    \"price\": 100,\n                    \"class\": \"ECONOMY\",\n                    \"departure\": {\n                        \"id\": 3,\n                        \"code\": \"SUB\",\n                        \"name\": \"Juanda International Airport\",\n                        \"city\": \"Surabaya\",\n                        \"state\": \"East Java\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-7.3798\",\n                        \"longitude\": \"112.7873\",\n                        \"elevation\": \"3 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    },\n                    \"arrival\": {\n                        \"id\": 1,\n                        \"code\": \"CGK\",\n                        \"name\": \"Soekarno-Hatta International Airport\",\n                        \"city\": \"Jakarta\",\n                        \"state\": \"DKI Jakarta\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-6.1256\",\n                        \"longitude\": \"106.6559\",\n                        \"elevation\": \"10 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    }\n                },\n                \"returnFlight\": {\n                    \"id\": 1,\n                    \"flightNumber\": \"GA123\",\n                    \"airlineId\": 1,\n                    \"departureAirport\": 1,\n                    \"arrivalAirport\": 2,\n                    \"departureTime\": \"2024-12-01T08:00:00.000Z\",\n                    \"arrivalTime\": \"2024-12-01T11:00:00.000Z\",\n                    \"terminal\": \"T3\",\n                    \"information\": \"Non-stop flight\",\n                    \"price\": 150,\n                    \"class\": \"ECONOMY\",\n                    \"departure\": {\n                        \"id\": 1,\n                        \"code\": \"CGK\",\n                        \"name\": \"Soekarno-Hatta International Airport\",\n                        \"city\": \"Jakarta\",\n                        \"state\": \"DKI Jakarta\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-6.1256\",\n                        \"longitude\": \"106.6559\",\n                        \"elevation\": \"10 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    },\n                    \"arrival\": {\n                        \"id\": 2,\n                        \"code\": \"DPS\",\n                        \"name\": \"Ngurah Rai International Airport\",\n                        \"city\": \"Denpasar\",\n                        \"state\": \"Bali\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Makassar\",\n                        \"latitude\": \"-8.7482\",\n                        \"longitude\": \"115.1675\",\n                        \"elevation\": \"4 m\",\n                        \"imageUrl\": \"\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-11-29T08:37:00.345Z\"\n                    }\n                }\n            }\n        ]\n    }\n}"
-            },
             {
               "name": "error",
               "originalRequest": {
@@ -12727,6 +12667,112 @@
               ],
               "cookie": [],
               "body": "{\n    \"error\": {\n        \"statusCode\": 401,\n        \"message\": \"jwt expired, please re-login\",\n        \"details\": \"jwt expired\"\n    }\n}"
+            },
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{prod_base_url}}/booking/group?page=1&limit=2&status=cancel",
+                  "host": ["{{prod_base_url}}"],
+                  "path": ["booking", "group"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": "page number"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2",
+                      "description": "total item per page"
+                    },
+                    {
+                      "key": "status",
+                      "value": "cancel",
+                      "description": "settlement, expire, cancel, pending"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Dec 2024 07:52:15 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "Content-Type, Authorization, Accept, Accept-Language, Accept-Encoding"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"13e3-8EFMI3yqLD6QqnZzlMHUU3RBMiE\""
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "Report-To",
+                  "value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=fOgkHIj8nXAAE0AMLsjk%2FwiQMRN6xZLVLJaUEZr4yZmJ6CKWixL6u4U7nMYLGyJhYh3mV8NljGI%2BUsYp5v0gDyTD%2BpQKNpSB%2B0ZtblsShoWNWM%2BirTPCbpg%2Bcs7%2BiwLqyVgC10gE6sw%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "NEL",
+                  "value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "8f66c567dcc9fda4-SIN"
+                },
+                {
+                  "key": "Content-Encoding",
+                  "value": "br"
+                },
+                {
+                  "key": "alt-svc",
+                  "value": "h3=\":443\"; ma=86400"
+                },
+                {
+                  "key": "server-timing",
+                  "value": "cfL4;desc=\"?proto=TCP&rtt=40130&min_rtt=28630&rtt_var=17568&sent=163&recv=147&lost=0&retrans=0&sent_bytes=37435&recv_bytes=4125&delivery_rate=821767&cwnd=250&unsent_bytes=0&cid=b8ad6c917760f72c&ts=111102&x=0\""
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"success\",\n        \"pagination\": {\n            \"totalPage\": 6,\n            \"currentPage\": 1,\n            \"pageItems\": 2,\n            \"nextPage\": 2,\n            \"prevPage\": null\n        }\n    },\n    \"data\": {\n        \"Maret\": [\n            {\n                \"id\": 3,\n                \"code\": \"BK-3\",\n                \"userId\": 1,\n                \"flightId\": 1,\n                \"returnFlightId\": 2,\n                \"bookingDate\": \"2024-03-03T00:00:00.000Z\",\n                \"totalPrice\": 2000000,\n                \"status\": \"ACTIVE\",\n                \"createdAt\": \"2024-12-13T10:01:52.401Z\",\n                \"updateAt\": \"2024-12-13T10:01:52.401Z\",\n                \"flight\": {\n                    \"id\": 1,\n                    \"flightNumber\": \"AH100\",\n                    \"airlineId\": 1,\n                    \"departureAirport\": 1,\n                    \"arrivalAirport\": 2,\n                    \"departureTime\": \"2024-12-14T08:00:00.000Z\",\n                    \"arrivalTime\": \"2024-12-14T11:00:00.000Z\",\n                    \"terminal\": \"A\",\n                    \"information\": \"Free Wi Fi-Free Inflight Meals\",\n                    \"price\": 450,\n                    \"class\": \"ECONOMY\",\n                    \"departure\": {\n                        \"id\": 1,\n                        \"code\": \"CGK\",\n                        \"name\": \"Soekarno-Hatta International Airport\",\n                        \"city\": \"Jakarta\",\n                        \"state\": \"Asia\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-6.1255\",\n                        \"longitude\": \"106.6551\",\n                        \"elevation\": \"8\",\n                        \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-12-13T10:01:51.602Z\"\n                    },\n                    \"arrival\": {\n                        \"id\": 2,\n                        \"code\": \"SUB\",\n                        \"name\": \"Juanda International Airport\",\n                        \"city\": \"Surabaya\",\n                        \"state\": \"Asia\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-7.3797\",\n                        \"longitude\": \"112.7876\",\n                        \"elevation\": \"7\",\n                        \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-12-13T10:01:51.602Z\"\n                    }\n                },\n                \"payment\": {\n                    \"id\": 3,\n                    \"userId\": 1,\n                    \"bookingId\": 3,\n                    \"snapToken\": \"SNAP-3-1734084112544\",\n                    \"orderId\": \"e9e782a7-a3c7-4849-965a-475857160b03\",\n                    \"status\": \"cancel\",\n                    \"type\": \"digital_walet\",\n                    \"amount\": 2000000,\n                    \"transactionId\": null,\n                    \"transactionTime\": null\n                },\n                \"returnFlight\": {\n                    \"id\": 2,\n                    \"flightNumber\": \"AH91\",\n                    \"airlineId\": 1,\n                    \"departureAirport\": 1,\n                    \"arrivalAirport\": 2,\n                    \"departureTime\": \"2024-12-15T08:00:00.000Z\",\n                    \"arrivalTime\": \"2024-12-15T11:00:00.000Z\",\n                    \"terminal\": \"A\",\n                    \"information\": \"Free Wi Fi-Free Inflight Meals\",\n                    \"price\": 550,\n                    \"class\": \"PREMIUM_ECONOMY\",\n                    \"departure\": {\n                        \"id\": 1,\n                        \"code\": \"CGK\",\n                        \"name\": \"Soekarno-Hatta International Airport\",\n                        \"city\": \"Jakarta\",\n                        \"state\": \"Asia\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-6.1255\",\n                        \"longitude\": \"106.6551\",\n                        \"elevation\": \"8\",\n                        \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-12-13T10:01:51.602Z\"\n                    },\n                    \"arrival\": {\n                        \"id\": 2,\n                        \"code\": \"SUB\",\n                        \"name\": \"Juanda International Airport\",\n                        \"city\": \"Surabaya\",\n                        \"state\": \"Asia\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-7.3797\",\n                        \"longitude\": \"112.7876\",\n                        \"elevation\": \"7\",\n                        \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-12-13T10:01:51.602Z\"\n                    }\n                }\n            }\n        ],\n        \"Desember\": [\n            {\n                \"id\": 19,\n                \"code\": \"2411057947\",\n                \"userId\": 8,\n                \"flightId\": 3,\n                \"returnFlightId\": 1,\n                \"bookingDate\": \"2024-12-13T17:35:55.199Z\",\n                \"totalPrice\": 1000,\n                \"status\": \"ACTIVE\",\n                \"createdAt\": \"2024-12-13T17:35:55.200Z\",\n                \"updateAt\": \"2024-12-13T17:35:55.200Z\",\n                \"flight\": {\n                    \"id\": 3,\n                    \"flightNumber\": \"AL91\",\n                    \"airlineId\": 1,\n                    \"departureAirport\": 1,\n                    \"arrivalAirport\": 2,\n                    \"departureTime\": \"2024-12-16T08:00:00.000Z\",\n                    \"arrivalTime\": \"2024-12-16T11:00:00.000Z\",\n                    \"terminal\": \"A\",\n                    \"information\": \"Free Wi Fi-Free Inflight Meals\",\n                    \"price\": 550,\n                    \"class\": \"PREMIUM_ECONOMY\",\n                    \"departure\": {\n                        \"id\": 1,\n                        \"code\": \"CGK\",\n                        \"name\": \"Soekarno-Hatta International Airport\",\n                        \"city\": \"Jakarta\",\n                        \"state\": \"Asia\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-6.1255\",\n                        \"longitude\": \"106.6551\",\n                        \"elevation\": \"8\",\n                        \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-12-13T10:01:51.602Z\"\n                    },\n                    \"arrival\": {\n                        \"id\": 2,\n                        \"code\": \"SUB\",\n                        \"name\": \"Juanda International Airport\",\n                        \"city\": \"Surabaya\",\n                        \"state\": \"Asia\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-7.3797\",\n                        \"longitude\": \"112.7876\",\n                        \"elevation\": \"7\",\n                        \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-12-13T10:01:51.602Z\"\n                    }\n                },\n                \"payment\": {\n                    \"id\": 14,\n                    \"userId\": 8,\n                    \"bookingId\": 19,\n                    \"snapToken\": \"19362a17-b90e-417e-9bfb-e6bd5116d1fd\",\n                    \"orderId\": \"75ecbb7a-1b4a-4a29-96ce-1ab5a162aaa9\",\n                    \"status\": \"cancel\",\n                    \"type\": null,\n                    \"amount\": 1030,\n                    \"transactionId\": \"27c224e7-6f1d-4e00-8cba-02c2ad913fc8\",\n                    \"transactionTime\": \"2024-12-14T00:36:13.000Z\"\n                },\n                \"returnFlight\": {\n                    \"id\": 1,\n                    \"flightNumber\": \"AH100\",\n                    \"airlineId\": 1,\n                    \"departureAirport\": 1,\n                    \"arrivalAirport\": 2,\n                    \"departureTime\": \"2024-12-14T08:00:00.000Z\",\n                    \"arrivalTime\": \"2024-12-14T11:00:00.000Z\",\n                    \"terminal\": \"A\",\n                    \"information\": \"Free Wi Fi-Free Inflight Meals\",\n                    \"price\": 450,\n                    \"class\": \"ECONOMY\",\n                    \"departure\": {\n                        \"id\": 1,\n                        \"code\": \"CGK\",\n                        \"name\": \"Soekarno-Hatta International Airport\",\n                        \"city\": \"Jakarta\",\n                        \"state\": \"Asia\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-6.1255\",\n                        \"longitude\": \"106.6551\",\n                        \"elevation\": \"8\",\n                        \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/jakarta.jpg?updatedAt=1733579567527\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-12-13T10:01:51.602Z\"\n                    },\n                    \"arrival\": {\n                        \"id\": 2,\n                        \"code\": \"SUB\",\n                        \"name\": \"Juanda International Airport\",\n                        \"city\": \"Surabaya\",\n                        \"state\": \"Asia\",\n                        \"country\": \"Indonesia\",\n                        \"timezone\": \"Asia/Jakarta\",\n                        \"latitude\": \"-7.3797\",\n                        \"longitude\": \"112.7876\",\n                        \"elevation\": \"7\",\n                        \"imageUrl\": \"https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180\",\n                        \"imageId\": \"\",\n                        \"createdAt\": \"2024-12-13T10:01:51.602Z\"\n                    }\n                }\n            }\n        ]\n    }\n}"
             }
           ]
         },
@@ -13350,7 +13396,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{prod_base_url}}/payment?page=1&limit=1000",
+              "raw": "{{prod_base_url}}/payment?page=1&limit=1",
               "host": ["{{prod_base_url}}"],
               "path": ["payment"],
               "query": [
@@ -13361,7 +13407,7 @@
                 },
                 {
                   "key": "limit",
-                  "value": "1000",
+                  "value": "1",
                   "description": "total item per page"
                 }
               ]
