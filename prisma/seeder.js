@@ -200,19 +200,6 @@ async function main() {
         imageUrl:
           'https://ik.imagekit.io/vieryn/airports/surabaya.jpg?updatedAt=1733579567180',
       },
-      {
-        code: 'DPS',
-        name: 'Ngurah Rai International Airport',
-        city: 'Denpasar',
-        state: 'Asia',
-        country: 'Indonesia',
-        timezone: 'Asia/Makassar',
-        latitude: '-8.7487',
-        longitude: '115.1670',
-        elevation: '4',
-        imageUrl:
-          'https://ik.imagekit.io/vieryn/airports/bali.jpg?updatedAt=1733579567375',
-      },
       // International Airports
       {
         code: 'SIN',
@@ -241,19 +228,6 @@ async function main() {
           'https://ik.imagekit.io/vieryn/airports/doha.jpg?updatedAt=1733579567564',
       },
       {
-        code: 'HKG',
-        name: 'Hong Kong International Airport',
-        city: 'Chek Lap Kok',
-        state: 'Asia',
-        country: 'Hong Kong',
-        timezone: 'Asia/Hong_Kong',
-        latitude: '22.308046',
-        longitude: '113.918480',
-        elevation: '5',
-        imageUrl:
-          'https://ik.imagekit.io/vieryn/airports/hongkong.jpg?updatedAt=1733579787581',
-      },
-      {
         code: 'JED',
         name: 'King Abdulaziz International Airport',
         city: 'Jeddah',
@@ -265,19 +239,6 @@ async function main() {
         elevation: '5',
         imageUrl:
           'https://ik.imagekit.io/vieryn/airports/jeddah.jpg?updatedAt=1733579567636',
-      },
-      {
-        code: 'DXB',
-        name: 'Dubai International Airport',
-        city: 'Dubai',
-        state: 'Asia',
-        country: 'United Arab Emirates',
-        timezone: 'Asia/Dubai',
-        latitude: '25.276987',
-        longitude: '55.296249',
-        elevation: '2',
-        imageUrl:
-          'https://ik.imagekit.io/vieryn/airports/dubai.jpg?updatedAt=1733579787752',
       },
       {
         code: 'LAX',
@@ -293,19 +254,6 @@ async function main() {
           'https://ik.imagekit.io/vieryn/airports/los%20angeles.jpg?updatedAt=1733579570744',
       },
       {
-        code: 'JFK',
-        name: 'John F. Kennedy International Airport',
-        city: 'New York',
-        state: 'America',
-        country: 'United States',
-        timezone: 'America/Los_Angeles',
-        latitude: '40.6446',
-        longitude: '-73.780968',
-        elevation: '38',
-        imageUrl:
-          'https://ik.imagekit.io/vieryn/airports/new%20york.jpg?updatedAt=1733579787735',
-      },
-      {
         code: 'SYD',
         name: 'Sydney Kingsford Smith Airport',
         city: 'Sydney',
@@ -317,20 +265,6 @@ async function main() {
         elevation: '6',
         imageUrl:
           'https://ik.imagekit.io/vieryn/airports/sidney.jpg?updatedAt=1733579567038',
-      },
-      {
-        code: 'LHR',
-        name: 'London Heathrow Airport',
-        city: 'London',
-        state: 'Europe',
-        country: 'United Kingdom',
-        timezone: 'Europe/London',
-        latitude: '51.4700',
-        longitude: '-0.4543',
-        elevation: '83 ft',
-        imageUrl:
-          'https://ik.imagekit.io/vieryn/airports/london.jpg?updatedAt=1733579570646',
-        imageId: 'lhr123',
       },
       {
         code: 'CDG',
@@ -347,35 +281,6 @@ async function main() {
         imageId: 'cdg123',
       },
       {
-        code: 'FRA',
-        name: 'Frankfurt Airport',
-        city: 'Frankfurt',
-        state: 'Europe',
-        country: 'Germany',
-        timezone: 'Europe/Berlin',
-        latitude: '50.0379',
-        longitude: '8.5622',
-        elevation: '364 ft',
-        imageUrl:
-          'https://ik.imagekit.io/vieryn/airports/frankfurt.jpg?updatedAt=1733579567397',
-        imageId: 'fra123',
-      },
-      {
-        code: 'JNB',
-        name: 'O. R. Tambo International Airport',
-        city: 'Johannesburg',
-        state: 'Africa',
-        country: 'South Africa',
-        timezone: 'Africa/Johannesburg',
-        latitude: '-26.1419',
-        longitude: '28.2421',
-        elevation: '1677',
-        imageUrl:
-          'https://ik.imagekit.io/vieryn/airports/johannesburg.jpg?updatedAt=1733579570067',
-        imageId: '',
-        createdAt: new Date(),
-      },
-      {
         code: 'CAI',
         name: 'Cairo International Airport',
         city: 'Cairo',
@@ -390,27 +295,12 @@ async function main() {
         imageId: '',
         createdAt: new Date(),
       },
-      {
-        code: 'LOS',
-        name: 'Murtala Muhammed International Airport',
-        city: 'Lagos',
-        state: 'Africa',
-        country: 'Nigeria',
-        timezone: 'Africa/Lagos',
-        latitude: '6.5775',
-        longitude: '3.3213',
-        elevation: '35',
-        imageUrl:
-          'https://ik.imagekit.io/vieryn/airports/lagos.jpg?updatedAt=1733579570200',
-        imageId: '',
-        createdAt: new Date(),
-      },
     ],
   });
 
   // Seed Flights
   console.log('seeding flights...');
-  const BATCH_SIZE = 10000;
+  const BATCH_SIZE = 1000;
   const airlines = await prisma.airline.findMany();
   const airports = await prisma.airport.findMany();
 
@@ -457,50 +347,9 @@ async function main() {
     // Generate flights from 00:00 to 23:59
     // More flights during peak hours (morning and evening)
 
-    // Early morning flights (00:00 - 06:00)
-    for (let hour = 0; hour < 6; hour++) {
-      if (Math.random() < 0.3) {
-        // 30% chance for flights in early morning
-        times.push(
-          new Date(date.setHours(hour, Math.floor(Math.random() * 60)))
-        );
-      }
-    }
-
-    // Morning peak (06:00 - 10:00) - more frequent flights
-    for (let hour = 6; hour < 10; hour++) {
-      const flightsPerHour = Math.floor(Math.random() * 3) + 2; // 2-4 flights per hour
+    for (let hour = 9; hour < 10; hour++) {
+      const flightsPerHour = Math.floor(Math.random() * 1) + 1;
       for (let i = 0; i < flightsPerHour; i++) {
-        times.push(
-          new Date(date.setHours(hour, Math.floor(Math.random() * 60)))
-        );
-      }
-    }
-
-    // Mid-day flights (10:00 - 16:00)
-    for (let hour = 10; hour < 16; hour++) {
-      const flightsPerHour = Math.floor(Math.random() * 2) + 1; // 1-2 flights per hour
-      for (let i = 0; i < flightsPerHour; i++) {
-        times.push(
-          new Date(date.setHours(hour, Math.floor(Math.random() * 60)))
-        );
-      }
-    }
-
-    // Evening peak (16:00 - 22:00) - more frequent flights
-    for (let hour = 16; hour < 22; hour++) {
-      const flightsPerHour = Math.floor(Math.random() * 3) + 2; // 2-4 flights per hour
-      for (let i = 0; i < flightsPerHour; i++) {
-        times.push(
-          new Date(date.setHours(hour, Math.floor(Math.random() * 60)))
-        );
-      }
-    }
-
-    // Late night flights (22:00 - 23:59)
-    for (let hour = 22; hour < 24; hour++) {
-      if (Math.random() < 0.4) {
-        // 40% chance for late night flights
         times.push(
           new Date(date.setHours(hour, Math.floor(Math.random() * 60)))
         );
@@ -657,23 +506,23 @@ async function main() {
     seatData.length = 0;
   }
 
-  // Seed Passenger
-  console.log('seeding passengers...');
-  await prisma.passenger.createMany({
-    data: Array.from({ length: 10 }).map((_, index) => ({
-      name: `Passenger ${index + 1}`,
-      familyName: `Passenger Family ${index + 1}`,
-      gender: index % 2 === 0 ? 'MALE' : 'FEMALE',
-      identityNumber: `${1000000000000 + index}`,
-      citizenship: 'Indonesia',
-      countryOfIssue: 'Indonesia',
-      title: index % 3 === 0 ? 'Mr' : 'Mrs',
-      dob: new Date(1970 + Math.floor(index / 2), index % 12, index + 1),
-      expiredDate: new Date(2030, index % 12, index + 1),
-      type: 'ADULT',
-    })),
-    skipDuplicates: true,
-  });
+  //  // Seed Passenger
+  // console.log('seeding passengers...');
+  // await prisma.passenger.createMany({
+  //   data: Array.from({ length: 10 }).map((_, index) => ({
+  //     name: `Passenger ${index + 1}`,
+  //     familyName: `Passenger Family ${index + 1}`,
+  //     gender: index % 2 === 0 ? 'MALE' : 'FEMALE',
+  //     identityNumber: `${1000000000000 + index}`,
+  //     citizenship: 'Indonesia',
+  //     countryOfIssue: 'Indonesia',
+  //     title: index % 3 === 0 ? 'Mr' : 'Mrs',
+  //     dob: new Date(1970 + Math.floor(index / 2), index % 12, index + 1),
+  //     expiredDate: new Date(2030, index % 12, index + 1),
+  //     type: 'ADULT',
+  //   })),
+  //   skipDuplicates: true,
+  // });
 
   // // Seed Booking
   // console.log('seeding bookings...');

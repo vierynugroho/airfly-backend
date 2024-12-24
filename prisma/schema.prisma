@@ -85,6 +85,20 @@ model Flight {
   booking       Booking[] @relation("flight")
   returnBooking Booking[] @relation("ReturnFlight")
 
+  @@index([flightNumber])
+  @@index([airlineId])
+  @@index([arrivalAirport])
+  @@index([departureAirport])
+  @@index([departureTime])
+  @@index([arrivalTime])
+  @@index([class])
+  @@index([departureTime, class])
+  @@index([id, departureTime, class])
+  @@index([departureTime, arrivalTime])
+  @@index([departureTime, arrivalTime, class])
+  @@index([airlineId, class])
+  @@index([price])
+  @@index([id])
   @@map("flights")
 }
 
@@ -99,6 +113,16 @@ model Seat {
   flight        Flight          @relation(fields: [flightId], references: [id])
   bookingDetail BookingDetail[]
 
+  @@unique([flightId, seatNumber])
+  @@index([flightId])
+  @@index([status])
+  @@index([seatNumber])
+  @@index([departureTime])
+  @@index([arrivalTime])
+  @@index([flightId, status])
+  @@index([flightId, seatNumber])
+  @@index([departureTime, status])
+  @@index([flightId, departureTime, status])
   @@map("seats")
 }
 
@@ -120,6 +144,23 @@ model Booking {
   payment       Payment?
   bookingDetail BookingDetail[]
 
+  // Single-field indexes for common lookups
+  @@index([code])
+  @@index([userId])
+  @@index([flightId])
+  @@index([returnFlightId])
+  @@index([status])
+  @@index([bookingDate])
+  @@index([totalPrice])
+  // Compound indexes for common query combinations
+  @@index([userId, status]) // For user's booking status queries
+  @@index([userId, bookingDate]) // For user's booking history
+  @@index([flightId, status]) // For flight booking status
+  @@index([bookingDate, status]) // For booking reports and analytics
+  @@index([createdAt, status]) // For recent bookings monitoring
+  // Index for price-based queries and reporting
+  @@index([totalPrice, status])
+  @@index([bookingDate, totalPrice]) // For revenue analysis
   @@map("bookings")
 }
 
@@ -244,9 +285,9 @@ enum PassengerType {
 }
 
 model Discount {
-  id          Int              @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
-  type        String    // 'percentage' or 'fixed'
+  type        String // 'percentage' or 'fixed'
   value       Float
   startDate   DateTime
   endDate     DateTime
@@ -254,6 +295,6 @@ model Discount {
   isActive    Boolean
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  code        String?  
-  description String? 
+  code        String?
+  description String?
 }
