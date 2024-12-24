@@ -22,7 +22,11 @@ describe('DiscountRepository', () => {
 
   describe('create', () => {
     it('should create a discount and return it', async () => {
-      const mockDiscount = { id: 1, name: 'Holiday Discount', code: 'HOLIDAY2024' };
+      const mockDiscount = {
+        id: 1,
+        name: 'Holiday Discount',
+        code: 'HOLIDAY2024',
+      };
       const data = { name: 'Holiday Discount', code: 'HOLIDAY2024' };
 
       prisma.discount.create.mockResolvedValue(mockDiscount);
@@ -36,7 +40,11 @@ describe('DiscountRepository', () => {
 
   describe('update', () => {
     it('should update a discount and return the updated discount', async () => {
-      const mockUpdatedDiscount = { id: 1, name: 'Updated Discount', code: 'HOLIDAY2024' };
+      const mockUpdatedDiscount = {
+        id: 1,
+        name: 'Updated Discount',
+        code: 'HOLIDAY2024',
+      };
       const discountID = 1;
       const data = { name: 'Updated Discount' };
 
@@ -54,14 +62,20 @@ describe('DiscountRepository', () => {
 
   describe('delete', () => {
     it('should delete a discount and return the deleted discount', async () => {
-      const mockDeletedDiscount = { id: 1, name: 'Holiday Discount', code: 'HOLIDAY2024' };
+      const mockDeletedDiscount = {
+        id: 1,
+        name: 'Holiday Discount',
+        code: 'HOLIDAY2024',
+      };
       const discountID = 1;
 
       prisma.discount.delete.mockResolvedValue(mockDeletedDiscount);
 
       const result = await DiscountRepository.delete(discountID);
 
-      expect(prisma.discount.delete).toHaveBeenCalledWith({ where: { id: discountID } });
+      expect(prisma.discount.delete).toHaveBeenCalledWith({
+        where: { id: discountID },
+      });
       expect(result).toEqual(mockDeletedDiscount);
     });
   });
@@ -78,7 +92,11 @@ describe('DiscountRepository', () => {
 
       prisma.discount.findMany.mockResolvedValue(mockDiscounts);
 
-      const result = await DiscountRepository.findMany(pagination, filter, sorter);
+      const result = await DiscountRepository.findMany(
+        pagination,
+        filter,
+        sorter
+      );
 
       expect(prisma.discount.findMany).toHaveBeenCalledWith({
         skip: pagination.offset,
@@ -106,7 +124,11 @@ describe('DiscountRepository', () => {
 
   describe('findByID', () => {
     it('should return a discount by its ID', async () => {
-      const mockDiscount = { id: 1, name: 'Holiday Discount', code: 'HOLIDAY2024' };
+      const mockDiscount = {
+        id: 1,
+        name: 'Holiday Discount',
+        code: 'HOLIDAY2024',
+      };
       const discountID = 1;
 
       prisma.discount.findUnique.mockResolvedValue(mockDiscount);
@@ -150,7 +172,11 @@ describe('DiscountRepository', () => {
 
   describe('findByCode', () => {
     it('should return a discount by its code', async () => {
-      const mockDiscount = { id: 1, name: 'Holiday Discount', code: 'HOLIDAY2024' };
+      const mockDiscount = {
+        id: 1,
+        name: 'Holiday Discount',
+        code: 'HOLIDAY2024',
+      };
       const code = 'HOLIDAY2024';
 
       prisma.discount.findFirst.mockResolvedValue(mockDiscount);

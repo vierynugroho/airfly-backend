@@ -259,7 +259,10 @@ export const passengerSchema = Joi.object({
   name: Joi.string().required(),
   familyName: Joi.string().required(),
   gender: Joi.valid('MALE', 'FEMALE').required(),
-  identityNumber: Joi.string().length(16).pattern(/^[0-9]+$/).required(),
+  identityNumber: Joi.string()
+    .length(16)
+    .pattern(/^[0-9]+$/)
+    .required(),
   citizenship: Joi.string().valid('Indonesia').required(),
   countryOfIssue: Joi.string().valid('Indonesia').required(),
   title: Joi.valid('Mr', 'Mrs').required(),

@@ -11,7 +11,13 @@ describe('PaymentController', () => {
       body: {},
       params: {},
       query: {},
-      user: { id: 1, firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', phone: '1234567890' },
+      user: {
+        id: 1,
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john.doe@example.com',
+        phone: '1234567890',
+      },
     };
     mockResponse = {
       json: jest.fn().mockReturnThis(),
@@ -72,9 +78,15 @@ describe('PaymentController', () => {
 
       mockRequest.body = mockWebhookData;
 
-      await PaymentController.handleWebhook(mockRequest, mockResponse, mockNext);
+      await PaymentController.handleWebhook(
+        mockRequest,
+        mockResponse,
+        mockNext
+      );
 
-      expect(PaymentService.processWebhook).toHaveBeenCalledWith(mockWebhookData);
+      expect(PaymentService.processWebhook).toHaveBeenCalledWith(
+        mockWebhookData
+      );
       expect(mockResponse.status).toHaveBeenCalledWith(200);
       expect(mockResponse.send).toHaveBeenCalledWith('OK');
     });
@@ -83,7 +95,11 @@ describe('PaymentController', () => {
       const error = new Error('Error processing webhook');
       PaymentService.processWebhook.mockRejectedValue(error);
 
-      await PaymentController.handleWebhook(mockRequest, mockResponse, mockNext);
+      await PaymentController.handleWebhook(
+        mockRequest,
+        mockResponse,
+        mockNext
+      );
 
       expect(mockNext).toHaveBeenCalledWith(error);
     });

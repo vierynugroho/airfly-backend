@@ -117,7 +117,7 @@ export class PaymentService {
     } else {
       payment = await PaymentRepository.getByIdForBuyer(paymentId, userId);
     }
-  
+
     if (!payment) {
       throw new ErrorHandler(404, 'Payment not found.');
     }
@@ -216,8 +216,11 @@ export class PaymentService {
 
   static async delete(paymentId, user) {
     if (user.role !== 'ADMIN') {
-      throw new ErrorHandler(403, 'You are not authorized to perform this action.');
-    }  
+      throw new ErrorHandler(
+        403,
+        'You are not authorized to perform this action.'
+      );
+    }
     const payment = await PaymentRepository.getById(paymentId);
     if (!payment) {
       throw new ErrorHandler(404, 'Payment not found.');

@@ -2,18 +2,18 @@ import { AirlineRepository } from '../airline.js';
 import { prisma } from '../../database/db.js';
 
 jest.mock('../../database/db.js', () => ({
-    prisma: {
-      airline: {
-        create: jest.fn(),
-        update: jest.fn(),
-        delete: jest.fn(),
-        findMany: jest.fn(),
-        findUnique: jest.fn(),
-        count: jest.fn(),
-        findFirst: jest.fn(),
-      },
+  prisma: {
+    airline: {
+      create: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      findMany: jest.fn(),
+      findUnique: jest.fn(),
+      count: jest.fn(),
+      findFirst: jest.fn(),
     },
-  }));
+  },
+}));
 
 describe('AirlineRepository', () => {
   afterEach(() => {

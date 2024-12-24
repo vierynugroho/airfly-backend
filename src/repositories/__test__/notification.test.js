@@ -19,7 +19,7 @@ describe('NotificationRepository', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  
+
   describe('findMany', () => {
     it('should return notifications with pagination and filter', async () => {
       const mockNotifications = [{ id: 1, message: 'Test notification' }];
