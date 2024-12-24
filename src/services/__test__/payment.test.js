@@ -76,7 +76,10 @@ describe('PaymentService', () => {
   describe('getAll', () => {
     it('should get all payments for ADMIN', async () => {
       const mockPayments = [{ id: 1 }, { id: 2 }];
-      PaymentRepository.getAll.mockResolvedValue({ payments: mockPayments, total: 2 });
+      PaymentRepository.getAll.mockResolvedValue({
+        payments: mockPayments,
+        total: 2,
+      });
 
       const result = await PaymentService.getAll({
         page: 1,
@@ -93,7 +96,10 @@ describe('PaymentService', () => {
 
     it('should get user payments for BUYER', async () => {
       const mockPayments = [{ id: 1 }];
-      PaymentRepository.getAll.mockResolvedValue({ payments: mockPayments, total: 1 });
+      PaymentRepository.getAll.mockResolvedValue({
+        payments: mockPayments,
+        total: 1,
+      });
 
       const result = await PaymentService.getAll({
         page: 1,
@@ -147,22 +153,22 @@ describe('PaymentService', () => {
       transaction_id: 'trans-123',
       transaction_time: '2024-01-01T10:00:00Z',
     };
-  
+
     const mockPayment = {
       id: 1,
       bookingId: 1,
     };
-  
+
     const mockBooking = {
       bookingDetail: [{ seatId: 'A1' }, { seatId: 'A2' }],
     };
-  
+
     beforeEach(() => {
       jest.clearAllMocks();
     });
-  
+
     it('should process settlement webhook successfully', async () => {
-      PaymentRepository.findByOrderId.mockResolvedValue(mockPayment); 
+      PaymentRepository.findByOrderId.mockResolvedValue(mockPayment);
       BookingRepository.getBooking.mockResolvedValue(mockBooking);
       snap.transaction.notification.mockResolvedValue(mockWebhookData);
 
@@ -175,13 +181,13 @@ describe('PaymentService', () => {
 
       expect(PaymentRepository.updateStatus).toHaveBeenCalledWith(
         'order-123',
-        'settlement', 
-        'credit_card', 
+        'settlement',
+        'credit_card',
         'trans-123',
         '2024-01-01T10:00:00.000Z'
       );
     });
-  
+
     it('should process cancel webhook successfully', async () => {
       const cancelWebhookData = {
         ...mockWebhookData,
@@ -189,57 +195,57 @@ describe('PaymentService', () => {
         transaction_time: new Date().toISOString(),
       };
 
-      PaymentRepository.findByOrderId.mockResolvedValue(mockPayment); 
+      PaymentRepository.findByOrderId.mockResolvedValue(mockPayment);
       BookingRepository.getBooking.mockResolvedValue(mockBooking);
-      snap.transaction.notification.mockResolvedValue(cancelWebhookData); 
+      snap.transaction.notification.mockResolvedValue(cancelWebhookData);
 
       await PaymentService.processWebhook(cancelWebhookData);
-  
+
       expect(BookingRepository.updateSeatStatusOnPayment).toHaveBeenCalledWith(
         ['A1', 'A2'],
         'AVAILABLE'
       );
 
       expect(PaymentRepository.updateStatus).toHaveBeenCalledWith(
-        'order-123', 
+        'order-123',
         'cancel',
         'credit_card',
-        'trans-123', 
+        'trans-123',
         cancelWebhookData.transaction_time
       );
     });
-  
+
     it('should throw error if payment not found', async () => {
       PaymentRepository.findByOrderId.mockResolvedValue(null);
-  
-      await expect(PaymentService.processWebhook(mockWebhookData)).rejects.toThrow(
-        new ErrorHandler(404, 'Payment not found.')
-      );
+
+      await expect(
+        PaymentService.processWebhook(mockWebhookData)
+      ).rejects.toThrow(new ErrorHandler(404, 'Payment not found.'));
     });
-  
+
     it('should throw error if booking not found', async () => {
-      PaymentRepository.findByOrderId.mockResolvedValue(mockPayment); 
+      PaymentRepository.findByOrderId.mockResolvedValue(mockPayment);
       BookingRepository.getBooking.mockResolvedValue(null);
-  
-      await expect(PaymentService.processWebhook(mockWebhookData)).rejects.toThrow(
-        new ErrorHandler(404, 'Booking is not found')
-      );
+
+      await expect(
+        PaymentService.processWebhook(mockWebhookData)
+      ).rejects.toThrow(new ErrorHandler(404, 'Booking is not found'));
     });
-  
+
     it('should throw error for invalid transaction status', async () => {
       const invalidWebhookData = {
         ...mockWebhookData,
         transaction_status: 'invalid',
       };
-  
+
       PaymentRepository.findByOrderId.mockResolvedValue(mockPayment);
       BookingRepository.getBooking.mockResolvedValue(mockBooking);
-  
-      await expect(PaymentService.processWebhook(invalidWebhookData)).rejects.toThrow(
-        new ErrorHandler(400, 'Invalid transaction status.')
-      );
+
+      await expect(
+        PaymentService.processWebhook(invalidWebhookData)
+      ).rejects.toThrow(new ErrorHandler(400, 'Invalid transaction status.'));
     });
-  });  
+  });
 
   describe('cancel', () => {
     const mockPayment = {

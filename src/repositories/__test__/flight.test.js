@@ -61,7 +61,9 @@ describe('FlightRepository', () => {
 
       const result = await FlightRepository.delete(mockFlightID);
 
-      expect(prisma.flight.delete).toHaveBeenCalledWith({ where: { id: mockFlightID } });
+      expect(prisma.flight.delete).toHaveBeenCalledWith({
+        where: { id: mockFlightID },
+      });
       expect(result).toEqual(mockResponse);
     });
   });
@@ -71,11 +73,18 @@ describe('FlightRepository', () => {
       const mockPagination = { offset: 0, limit: 10 };
       const mockFilter = { destination: 'City A' };
       const mockSorter = { departureTime: 'asc' };
-      const mockFlights = [{ id: 1, flightNumber: 'FL123' }, { id: 2, flightNumber: 'FL456' }];
+      const mockFlights = [
+        { id: 1, flightNumber: 'FL123' },
+        { id: 2, flightNumber: 'FL456' },
+      ];
 
       prisma.flight.findMany.mockResolvedValue(mockFlights);
 
-      const result = await FlightRepository.findMany(mockPagination, mockFilter, mockSorter);
+      const result = await FlightRepository.findMany(
+        mockPagination,
+        mockFilter,
+        mockSorter
+      );
 
       expect(prisma.flight.findMany).toHaveBeenCalledWith({
         skip: mockPagination.offset,
@@ -93,36 +102,40 @@ describe('FlightRepository', () => {
     });
 
     it('should return flights sorted by total bookings if no sorting and filtering are provided', async () => {
-        const mockPagination = { offset: 0, limit: 10 };
-        const mockFlights = [
-          { id: 1, _count: { booking: 5, returnBooking: 3 } },
-          { id: 2, _count: { booking: 2, returnBooking: 1 } },
-          { id: 3, _count: { booking: 4, returnBooking: 6 } },
-        ];
-    
-        prisma.flight.findMany.mockResolvedValue(mockFlights);
-    
-        const result = await FlightRepository.findMany(mockPagination, null, null);
-    
-        expect(prisma.flight.findMany).toHaveBeenCalledWith({
-          skip: mockPagination.offset,
-          take: mockPagination.limit,
-          where: null,
-          orderBy: null,
-          include: {
-            _count: true,
-            airline: true,
-            arrival: true,
-            departure: true,
-          },
-        });
-    
-        expect(result).toEqual([
-          { id: 3, _count: { booking: 4, returnBooking: 6 } },
-          { id: 1, _count: { booking: 5, returnBooking: 3 } },
-          { id: 2, _count: { booking: 2, returnBooking: 1 } },
-        ]);
+      const mockPagination = { offset: 0, limit: 10 };
+      const mockFlights = [
+        { id: 1, _count: { booking: 5, returnBooking: 3 } },
+        { id: 2, _count: { booking: 2, returnBooking: 1 } },
+        { id: 3, _count: { booking: 4, returnBooking: 6 } },
+      ];
+
+      prisma.flight.findMany.mockResolvedValue(mockFlights);
+
+      const result = await FlightRepository.findMany(
+        mockPagination,
+        null,
+        null
+      );
+
+      expect(prisma.flight.findMany).toHaveBeenCalledWith({
+        skip: mockPagination.offset,
+        take: mockPagination.limit,
+        where: null,
+        orderBy: null,
+        include: {
+          _count: true,
+          airline: true,
+          arrival: true,
+          departure: true,
+        },
       });
+
+      expect(result).toEqual([
+        { id: 3, _count: { booking: 4, returnBooking: 6 } },
+        { id: 1, _count: { booking: 5, returnBooking: 3 } },
+        { id: 2, _count: { booking: 2, returnBooking: 1 } },
+      ]);
+    });
   });
 
   describe('findByID', () => {
@@ -169,9 +182,12 @@ describe('FlightRepository', () => {
 
       prisma.flight.findFirst.mockResolvedValue(mockResponse);
 
-      const result = await FlightRepository.findByFlightNumber(mockFlightNumber);
+      const result =
+        await FlightRepository.findByFlightNumber(mockFlightNumber);
 
-      expect(prisma.flight.findFirst).toHaveBeenCalledWith({ where: { flightNumber: mockFlightNumber } });
+      expect(prisma.flight.findFirst).toHaveBeenCalledWith({
+        where: { flightNumber: mockFlightNumber },
+      });
       expect(result).toBe(true);
     });
 
@@ -180,9 +196,12 @@ describe('FlightRepository', () => {
 
       prisma.flight.findFirst.mockResolvedValue(null);
 
-      const result = await FlightRepository.findByFlightNumber(mockFlightNumber);
+      const result =
+        await FlightRepository.findByFlightNumber(mockFlightNumber);
 
-      expect(prisma.flight.findFirst).toHaveBeenCalledWith({ where: { flightNumber: mockFlightNumber } });
+      expect(prisma.flight.findFirst).toHaveBeenCalledWith({
+        where: { flightNumber: mockFlightNumber },
+      });
       expect(result).toBe(false);
     });
   });
@@ -208,7 +227,10 @@ describe('FlightRepository', () => {
       const mockFlightID = 1;
       const mockSeats = [{ id: 1, status: 'AVAILABLE' }];
 
-      prisma.flight.findFirst.mockResolvedValue({ id: mockFlightID, seat: mockSeats });
+      prisma.flight.findFirst.mockResolvedValue({
+        id: mockFlightID,
+        seat: mockSeats,
+      });
 
       const result = await FlightRepository.flightTicketsSoldOut(mockFlightID);
 
