@@ -14,7 +14,10 @@ router
     validation(transactionSchema),
     PaymentController.create
   )
-  .get(authorization([UserRole.ADMIN, UserRole.BUYER]), PaymentController.getAll);
+  .get(
+    authorization([UserRole.ADMIN, UserRole.BUYER]),
+    PaymentController.getAll
+  );
 
 router
   .route('/:id')

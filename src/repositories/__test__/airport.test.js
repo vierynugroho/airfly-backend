@@ -76,9 +76,13 @@ describe('AirportRepository', () => {
       const filter = { name: 'Airport' };
       const sorter = [{ name: 'asc' }];
       prisma.airport.findMany.mockResolvedValue(mockAirports);
-  
-      const airports = await AirportRepository.findMany(pagination, filter, sorter);
-  
+
+      const airports = await AirportRepository.findMany(
+        pagination,
+        filter,
+        sorter
+      );
+
       expect(prisma.airport.findMany).toHaveBeenCalledWith({
         skip: pagination.offset,
         take: pagination.limit,
@@ -91,7 +95,7 @@ describe('AirportRepository', () => {
       });
       expect(airports).toEqual(mockAirports);
     });
-  
+
     it('should find many airports with pagination, filter, and sorter as a single object', async () => {
       const mockAirports = [
         { id: 1, name: 'Airport 1', code: 'A1' },
@@ -101,9 +105,13 @@ describe('AirportRepository', () => {
       const filter = { name: 'Airport' };
       const sorter = { name: 'asc' };
       prisma.airport.findMany.mockResolvedValue(mockAirports);
-  
-      const airports = await AirportRepository.findMany(pagination, filter, sorter);
-  
+
+      const airports = await AirportRepository.findMany(
+        pagination,
+        filter,
+        sorter
+      );
+
       expect(prisma.airport.findMany).toHaveBeenCalledWith({
         skip: pagination.offset,
         take: pagination.limit,
@@ -117,7 +125,6 @@ describe('AirportRepository', () => {
       expect(airports).toEqual(mockAirports);
     });
   });
-  
 
   describe('findByID', () => {
     it('should find an airport by ID', async () => {

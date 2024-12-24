@@ -76,8 +76,12 @@ describe('TicketRepository', () => {
         include: {
           bookingDetail: { include: { passenger: true, seat: true } },
           payment: true,
-          flight: { include: { airline: true, departure: true, arrival: true } },
-          returnFlight: { include: { airline: true, departure: true, arrival: true } },
+          flight: {
+            include: { airline: true, departure: true, arrival: true },
+          },
+          returnFlight: {
+            include: { airline: true, departure: true, arrival: true },
+          },
         },
       });
       expect(result).toEqual(mockBooking);
@@ -94,8 +98,12 @@ describe('TicketRepository', () => {
         include: {
           bookingDetail: { include: { passenger: true, seat: true } },
           payment: true,
-          flight: { include: { airline: true, departure: true, arrival: true } },
-          returnFlight: { include: { airline: true, departure: true, arrival: true } },
+          flight: {
+            include: { airline: true, departure: true, arrival: true },
+          },
+          returnFlight: {
+            include: { airline: true, departure: true, arrival: true },
+          },
         },
       });
       expect(result).toBeNull();
@@ -109,8 +117,16 @@ describe('TicketRepository', () => {
         qrToken: 'token123',
         passenger: { name: 'John Doe', familyName: 'Doe', type: 'Adult' },
         booking: {
-          flight: { airline: { name: 'Airline1' }, departure: { airport: 'JFK' }, arrival: { airport: 'LAX' } },
-          returnFlight: { airline: { name: 'Airline2' }, departure: { airport: 'LAX' }, arrival: { airport: 'JFK' } },
+          flight: {
+            airline: { name: 'Airline1' },
+            departure: { airport: 'JFK' },
+            arrival: { airport: 'LAX' },
+          },
+          returnFlight: {
+            airline: { name: 'Airline2' },
+            departure: { airport: 'LAX' },
+            arrival: { airport: 'JFK' },
+          },
         },
       };
       const bookingID = 1;
@@ -120,7 +136,12 @@ describe('TicketRepository', () => {
 
       prisma.bookingDetail.update.mockResolvedValue(mockUpdatedDetail);
 
-      const result = await TicketRepository.updateQRCode(bookingID, detailBookingID, qrCodeImage, qrToken);
+      const result = await TicketRepository.updateQRCode(
+        bookingID,
+        detailBookingID,
+        qrCodeImage,
+        qrToken
+      );
 
       expect(prisma.bookingDetail.update).toHaveBeenCalledWith({
         where: { bookingId: bookingID, id: detailBookingID },
@@ -128,7 +149,16 @@ describe('TicketRepository', () => {
         select: {
           passenger: { select: { name: true, familyName: true, type: true } },
           qrCodeImage: true,
-          booking: { include: { flight: { include: { airline: true, departure: true, arrival: true } }, returnFlight: { include: { airline: true, departure: true, arrival: true } } } },
+          booking: {
+            include: {
+              flight: {
+                include: { airline: true, departure: true, arrival: true },
+              },
+              returnFlight: {
+                include: { airline: true, departure: true, arrival: true },
+              },
+            },
+          },
         },
       });
       expect(result).toEqual(mockUpdatedDetail);
@@ -150,7 +180,11 @@ describe('TicketRepository', () => {
 
       prisma.bookingDetail.findUnique.mockResolvedValue(mockBookingDetail);
 
-      const result = await TicketRepository.validateQRCode(bookingID, bookingDetailID, QRToken);
+      const result = await TicketRepository.validateQRCode(
+        bookingID,
+        bookingDetailID,
+        QRToken
+      );
 
       expect(prisma.bookingDetail.findUnique).toHaveBeenCalledWith({
         where: { bookingId: bookingID, id: bookingDetailID, qrToken: QRToken },
@@ -166,7 +200,11 @@ describe('TicketRepository', () => {
 
       prisma.bookingDetail.findUnique.mockResolvedValue(null);
 
-      const result = await TicketRepository.validateQRCode(bookingID, bookingDetailID, QRToken);
+      const result = await TicketRepository.validateQRCode(
+        bookingID,
+        bookingDetailID,
+        QRToken
+      );
 
       expect(prisma.bookingDetail.findUnique).toHaveBeenCalledWith({
         where: { bookingId: bookingID, id: bookingDetailID, qrToken: QRToken },

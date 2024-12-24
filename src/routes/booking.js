@@ -7,9 +7,7 @@ export const bookingRoute = Router();
 
 bookingRoute
   .route('/')
-  .post(
-    authorization([UserRole.BUYER]),
-    BookingController.createBooking)
+  .post(authorization([UserRole.BUYER]), BookingController.createBooking)
   .get(
     authorization([UserRole.BUYER, UserRole.ADMIN]),
     BookingController.getAll
