@@ -1,5 +1,6 @@
 import {} from 'dotenv/config';
 import './config/sentry.js';
+import compression from 'compression';
 import cors from 'cors';
 import express from 'express';
 import router from './routes/index.js';
@@ -13,6 +14,7 @@ import * as Sentry from '@sentry/node';
 const app = express();
 const server = createServer(app);
 export const io = new Server(server);
+app.use(compression());
 
 io.on('connection', (socket) => {
   console.log('socket connected');
@@ -82,4 +84,3 @@ if (process.env.NODE_ENV !== 'test') {
     console.log('----------------------------------------------');
   });
 }
-
